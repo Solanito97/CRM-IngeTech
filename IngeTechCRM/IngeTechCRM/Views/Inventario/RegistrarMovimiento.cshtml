@@ -1,0 +1,220 @@
+﻿@model IngeTechCRM.Models.MovimientoInventario
+@{
+    ViewData["Title"] = "Registrar Movimiento de Inventario";
+    // Usar este cast directamente
+    var productos = (List<SelectListItem>)ViewBag.Productos;
+    var almacenes = (List<SelectListItem>)ViewBag.Almacenes;
+    var tiposMovimiento = (List<SelectListItem>)ViewBag.TiposMovimiento;
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Registrar Movimiento de Inventario</h1>
+        <div class="flex space-x-2">
+            <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-200">
+                <i class="fas fa-arrow-left mr-2"></i> Volver
+            </a>
+            <a href="@Url.Action("Movimientos")" class="flex items-center rounded-lg bg-blue-100 px-4 py-2 font-medium text-blue-700 transition hover:bg-blue-200">
+                <i class="fas fa-history mr-2"></i> Ver Historial
+            </a>
+        </div>
+    </div>
+
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-exchange-alt mr-2"></i> Formulario de Movimiento
+            </h2>
+        </div>
+        <div class="p-6">
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="mb-4 rounded-lg bg-red-100 p-4 text-red-700">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm">@ViewBag.Message</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <form asp-action="RegistrarMovimiento" method="post">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="mb-4 rounded-lg bg-red-100 p-4 text-red-700"></div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div class="space-y-4">
+                        <div>
+                            <label asp-for="ID_PRODUCTO" class="mb-1 block text-sm font-medium text-gray-700">Producto</label>
+                            <select asp-for="ID_PRODUCTO"
+                                    asp-items="productos"
+                                    class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                    id="productoSelect">
+                                <option value="">Seleccione un producto</option>
+                            </select>
+                            <span asp-validation-for="ID_PRODUCTO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label asp-for="ID_ALMACEN" class="mb-1 block text-sm font-medium text-gray-700">Almacén</label>
+                            <select asp-for="ID_ALMACEN"
+                                    asp-items="almacenes"
+                                    class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                    id="almacenSelect">
+                                <option value="">Seleccione un almacén</option>
+                            </select>
+                            <span asp-validation-for="ID_ALMACEN" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label asp-for="TIPO_MOVIMIENTO" class="mb-1 block text-sm font-medium text-gray-700">Tipo de Movimiento</label>
+                            <select asp-for="TIPO_MOVIMIENTO"
+                                    asp-items="tiposMovimiento"
+                                    class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                    id="tipoMovimientoSelect">
+                                <option value="">Seleccione un tipo</option>
+                            </select>
+                            <span asp-validation-for="TIPO_MOVIMIENTO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label asp-for="CANTIDAD" class="mb-1 block text-sm font-medium text-gray-700">Cantidad</label>
+                            <input asp-for="CANTIDAD"
+                                   type="number"
+                                   min="1"
+                                   value="1"
+                                   class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                   id="cantidadInput">
+                            <span asp-validation-for="CANTIDAD" class="mt-1 text-sm text-red-600"></span>
+                            <div id="stockActualContainer" class="mt-1 hidden">
+                                <span class="text-xs text-gray-500">Stock actual: <span id="stockActual" class="font-medium">0</span> unidades</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label asp-for="OBSERVACION" class="mb-1 block text-sm font-medium text-gray-700">Observación</label>
+                            <textarea asp-for="OBSERVACION"
+                                      rows="3"
+                                      class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                      placeholder="Ingrese una descripción breve del motivo del movimiento"></textarea>
+                            <span asp-validation-for="OBSERVACION" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información Según Tipo de Movimiento -->
+                <div class="mt-6 hidden rounded-lg border border-gray-200 bg-gray-50 p-4" id="entradaInfo">
+                    <h3 class="text-sm font-medium text-gray-800">Información de Entrada de Stock</h3>
+                    <p class="mt-1 text-sm text-gray-600">
+                        Este movimiento agregará unidades al inventario. Si no existe un registro de inventario para este producto en este almacén, se creará uno nuevo automáticamente.
+                    </p>
+                </div>
+
+                <div class="mt-6 hidden rounded-lg border border-gray-200 bg-gray-50 p-4" id="salidaInfo">
+                    <h3 class="text-sm font-medium text-gray-800">Información de Salida de Stock</h3>
+                    <p class="mt-1 text-sm text-gray-600">
+                        Este movimiento reducirá unidades del inventario. Debe existir un registro de inventario previo con suficiente stock disponible.
+                    </p>
+                </div>
+
+                <div class="mt-6 hidden rounded-lg border border-gray-200 bg-gray-50 p-4" id="ajusteInfo">
+                    <h3 class="text-sm font-medium text-gray-800">Información de Ajuste de Stock</h3>
+                    <p class="mt-1 text-sm text-gray-600">
+                        Este tipo de movimiento permite realizar ajustes positivos o negativos en el inventario. Para reducir stock, ingrese un valor negativo en la cantidad.
+                    </p>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-3">
+                    <a href="@Url.Action("Index")" class="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+                        Cancelar
+                    </a>
+                    <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700">
+                        Registrar Movimiento
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function() {
+            // Manejar cambio de tipo de movimiento
+            $('#tipoMovimientoSelect').change(function() {
+                var tipo = $(this).val();
+
+                // Ocultar todos los paneles de información
+                $('#entradaInfo, #salidaInfo, #ajusteInfo').addClass('hidden');
+
+                // Mostrar panel según tipo seleccionado
+                if (tipo === 'ENTRADA') {
+                    $('#entradaInfo').removeClass('hidden');
+                    $('#cantidadInput').attr('min', '1');
+                } else if (tipo === 'SALIDA') {
+                    $('#salidaInfo').removeClass('hidden');
+                    $('#cantidadInput').attr('min', '1');
+                } else if (tipo === 'AJUSTE') {
+                    $('#ajusteInfo').removeClass('hidden');
+                    $('#cantidadInput').attr('min', null); // Permitir valores negativos para ajustes
+                }
+            });
+
+            // Verificar stock al seleccionar producto y almacén
+            function verificarStock() {
+                var productoId = $('#productoSelect').val();
+                var almacenId = $('#almacenSelect').val();
+
+                if (productoId && almacenId) {
+                    $.ajax({
+                        url: '@Url.Action("ObtenerStockActual", "Inventario")',
+                        type: 'GET',
+                        data: { productoId: productoId, almacenId: almacenId },
+                        success: function(response) {
+                            if (response.success) {
+                                $('#stockActual').text(response.stock);
+                                $('#stockActualContainer').removeClass('hidden');
+                            } else {
+                                $('#stockActual').text('0');
+                                $('#stockActualContainer').removeClass('hidden');
+                            }
+                        }
+                    });
+                } else {
+                    $('#stockActualContainer').addClass('hidden');
+                }
+            }
+
+            $('#productoSelect, #almacenSelect').change(verificarStock);
+
+            // Validación adicional antes de enviar
+            $('form').submit(function(e) {
+                var tipo = $('#tipoMovimientoSelect').val();
+                var cantidad = parseInt($('#cantidadInput').val());
+                var stockActual = parseInt($('#stockActual').text());
+
+                if (tipo === 'SALIDA' && cantidad > stockActual) {
+                    e.preventDefault();
+                    alert('No hay suficiente stock disponible para realizar esta salida.');
+                    return false;
+                }
+
+                if (tipo === 'AJUSTE' && cantidad < 0 && Math.abs(cantidad) > stockActual) {
+                    e.preventDefault();
+                    alert('El ajuste negativo excede el stock disponible.');
+                    return false;
+                }
+
+                return true;
+            });
+        });
+    </script>
+}

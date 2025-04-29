@@ -1,0 +1,126 @@
+﻿@model IngeTechCRM.Models.Inventario
+@{
+    ViewData["Title"] = "Crear Inventario";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Crear Nuevo Inventario</h1>
+        <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-200">
+            <i class="fas fa-arrow-left mr-2"></i> Volver
+        </a>
+    </div>
+
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-plus-circle mr-2"></i> Formulario de Inventario
+            </h2>
+        </div>
+        <div class="p-6">
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="mb-4 rounded-lg bg-red-100 p-4 text-red-700">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm">@ViewBag.Message</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <form asp-action="Crear" method="post">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="mb-4 rounded-lg bg-red-100 p-4 text-red-700"></div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div class="space-y-4">
+                        <div>
+                            <label asp-for="ID_PRODUCTO" class="mb-1 block text-sm font-medium text-gray-700">Producto</label>
+                            <select asp-for="ID_PRODUCTO" class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                                <option value="">Seleccione un producto</option>
+                                @foreach (var item in ViewBag.ProductosList)
+                                {
+                                    <option value="@item.ID_PRODUCTO">@item.NOMBRE</option>
+                                }
+                            </select>
+                            <span asp-validation-for="ID_PRODUCTO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label asp-for="ID_ALMACEN" class="mb-1 block text-sm font-medium text-gray-700">Almacén</label>
+                            <select asp-for="ID_ALMACEN" class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                                <option value="">Seleccione un almacén</option>
+                                @foreach (var item in ViewBag.AlmacenesList)
+                                {
+                                    <option value="@item.ID_ALMACEN">@item.NOMBRE</option>
+                                }
+                            </select>
+                            <span asp-validation-for="ID_ALMACEN" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label asp-for="CANTIDAD" class="mb-1 block text-sm font-medium text-gray-700">Cantidad</label>
+                            <input asp-for="CANTIDAD"
+                                   type="number"
+                                   min="0"
+                                   class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                            <span asp-validation-for="CANTIDAD" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label asp-for="CANTIDAD_MINIMA" class="mb-1 block text-sm font-medium text-gray-700">Cantidad Mínima</label>
+                            <input asp-for="CANTIDAD_MINIMA"
+                                   type="number"
+                                   min="1"
+                                   value="5"
+                                   class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                            <span class="mt-1 text-xs text-gray-500">Cantidad mínima recomendada para generar alertas de stock bajo</span>
+                            <span asp-validation-for="CANTIDAD_MINIMA" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <div class="rounded-lg bg-yellow-50 p-4 text-yellow-700">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium">Importante</h3>
+                                <div class="mt-2 text-sm">
+                                    <p>Al crear un nuevo inventario:</p>
+                                    <ul class="ml-4 mt-1 list-disc">
+                                        <li>Se registrará automáticamente un movimiento de entrada inicial.</li>
+                                        <li>Cada producto solo puede asociarse una vez a cada almacén.</li>
+                                        <li>Si el stock es menor o igual a la cantidad mínima, se generará una alerta.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-3">
+                    <a href="@Url.Action("Index")" class="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+                        Cancelar
+                    </a>
+                    <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

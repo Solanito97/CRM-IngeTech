@@ -1,0 +1,159 @@
+﻿@model IngeTechCRM.Models.Usuario
+@{
+    ViewData["Title"] = "Eliminar Usuario";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Index", "Usuario")" class="text-gray-600 hover:text-indigo-600">Gestión de Usuarios</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">Eliminar Usuario</span>
+    </nav>
+
+    <!-- Encabezado -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Eliminar Usuario</h1>
+        <p class="mt-2 text-gray-600">¿Está seguro que desea eliminar este usuario?</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <!-- Panel de confirmación -->
+        <div class="lg:col-span-2">
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="border-b border-gray-200 bg-red-600 p-6 text-white">
+                    <div class="flex items-center">
+                        <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-white bg-opacity-20 text-xl">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h2 class="text-xl font-bold">Confirmar eliminación</h2>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    <div class="mb-6 rounded-lg bg-red-50 p-4 text-red-700">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-red-800">¡Advertencia!</h3>
+                                <div class="mt-2 text-sm text-red-700">
+                                    <p>Esta acción eliminará permanentemente al usuario del sistema y no se puede deshacer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información del usuario -->
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div class="rounded-lg bg-gray-50 p-4">
+                            <p class="text-sm font-medium text-gray-500">Identificación</p>
+                            <p class="font-medium text-gray-800">@Model.IDENTIFICACION</p>
+                        </div>
+
+                        <div class="rounded-lg bg-gray-50 p-4">
+                            <p class="text-sm font-medium text-gray-500">Nombre Completo</p>
+                            <p class="font-medium text-gray-800">@Model.NOMBRE_COMPLETO</p>
+                        </div>
+
+                        <div class="rounded-lg bg-gray-50 p-4">
+                            <p class="text-sm font-medium text-gray-500">Nombre de Usuario</p>
+                            <p class="font-medium text-gray-800">@Model.NOMBRE_USUARIO</p>
+                        </div>
+
+                        <div class="rounded-lg bg-gray-50 p-4">
+                            <p class="text-sm font-medium text-gray-500">Correo Electrónico</p>
+                            <p class="font-medium text-gray-800">@Model.CORREO_ELECTRONICO</p>
+                        </div>
+
+                        <div class="rounded-lg bg-gray-50 p-4">
+                            <p class="text-sm font-medium text-gray-500">Tipo de Usuario</p>
+                            <p class="font-medium text-gray-800">@Model.TipoUsuario.DESCRIPCION</p>
+                        </div>
+
+                        <div class="rounded-lg bg-gray-50 p-4">
+                            <p class="text-sm font-medium text-gray-500">Provincia</p>
+                            <p class="font-medium text-gray-800">@Model.Provincia.NOMBRE</p>
+                        </div>
+                    </div>
+
+                    <form asp-action="Eliminar" method="post" class="mt-8">
+                        <input type="hidden" name="id" value="@Model.IDENTIFICACION" />
+                        <div class="flex justify-end space-x-3">
+                            <a href="@Url.Action("Index")" class="rounded-lg border border-gray-300 px-5 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2">
+                                Cancelar
+                            </a>
+                            <button type="submit" class="rounded-lg bg-red-600 px-5 py-2 font-medium text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                                Eliminar Usuario
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel lateral -->
+        <div class="space-y-6">
+            <!-- Información de eliminación -->
+            <div class="rounded-xl bg-white p-6 shadow-lg">
+                <h3 class="mb-4 text-lg font-semibold text-gray-800">Información importante</h3>
+                <div class="space-y-4 text-sm text-gray-600">
+                    <div class="flex">
+                        <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-100 text-red-600">
+                            <i class="fas fa-trash"></i>
+                        </div>
+                        <div>
+                            <p>La eliminación de un usuario es <strong>permanente</strong> y no se puede deshacer.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-100 text-red-600">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div>
+                            <p>No se pueden eliminar usuarios que tengan <strong>pedidos asociados</strong>.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-100 text-red-600">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <p>No puede eliminar su <strong>propio usuario</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones alternativas -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="border-b border-gray-200 bg-gray-50 p-6">
+                    <h3 class="text-lg font-semibold text-gray-800">Alternativas</h3>
+                </div>
+                <div class="divide-y divide-gray-100">
+                    <a href="@Url.Action("Editar", new { id = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50">
+                        <div class="flex items-center">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <span class="font-medium">Editar usuario</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </a>
+                    <a href="@Url.Action("Detalles", new { id = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50">
+                        <div class="flex items-center">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <span class="font-medium">Ver detalles</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

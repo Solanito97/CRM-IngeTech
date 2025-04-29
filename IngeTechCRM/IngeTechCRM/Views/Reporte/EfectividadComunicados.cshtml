@@ -1,0 +1,236 @@
+﻿
+@model List<IngeTechCRM.Models.ComunicadoEfectividadViewModel>
+@{
+    ViewData["Title"] = "Efectividad de Comunicados";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Efectividad de Comunicados</h1>
+        <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-200">
+            <i class="fas fa-arrow-left mr-2"></i> Volver al Panel
+        </a>
+    </div>
+    
+    <!-- Resumen general -->
+    <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-red-500 to-pink-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Total de Comunicados</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                <div class="rounded-full bg-red-100 p-4">
+                    <i class="fas fa-envelope-open-text text-4xl text-red-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@Model.Count</span>
+                    <span class="text-sm text-gray-500">Comunicados enviados</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Total de Envíos</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                <div class="rounded-full bg-indigo-100 p-4">
+                    <i class="fas fa-paper-plane text-4xl text-indigo-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@Model.Sum(c => c.TOTAL_ENVIOS)</span>
+                    <span class="text-sm text-gray-500">Destinatarios totales</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Promedio por Comunicado</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                @{
+                    var promedio = Model.Count > 0 ? Model.Average(c => c.TOTAL_ENVIOS) : 0;
+                }
+                <div class="rounded-full bg-green-100 p-4">
+                    <i class="fas fa-chart-line text-4xl text-green-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@promedio.ToString("0")</span>
+                    <span class="text-sm text-gray-500">Destinatarios promedio</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tabla de comunicados -->
+    <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gray-50 px-6 py-4">
+            <h2 class="font-bold text-gray-800">
+                Historial de Comunicados Enviados
+            </h2>
+        </div>
+        <div class="p-6">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Título
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Fecha Creación
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Fecha Envío
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Total Envíos
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                        @foreach (var comunicado in Model.OrderByDescending(c => c.FECHA_ENVIO))
+                        {
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 text-sm font-medium text-gray-800">
+                                    @comunicado.TITULO
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    @comunicado.FECHA_CREACION.ToString("dd/MM/yyyy HH:mm")
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    @comunicado.FECHA_ENVIO.ToString("dd/MM/yyyy HH:mm")
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-800">
+                                    @comunicado.TOTAL_ENVIOS
+                                </td>
+                                <td class="px-6 py-4 text-center text-sm font-medium">
+                                    <a href="@Url.Action("DetalleEfectividadComunicado", new { id = comunicado.ID_COMUNICADO })" 
+                                       class="rounded bg-blue-100 p-1.5 text-blue-600 transition hover:bg-blue-200"
+                                       title="Ver detalle">
+                                        <i class="fas fa-search"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gráficos -->
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <!-- Comunicados por mes -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-red-500 to-pink-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Comunicados por Mes</h2>
+            </div>
+            <div class="p-6">
+                <div class="h-64">
+                    <!-- Representación visual de comunicados por mes -->
+                    @{
+                        var comunicadosPorMes = Model
+                            .GroupBy(c => new { c.FECHA_ENVIO.Year, c.FECHA_ENVIO.Month })
+                            .Select(g => new {
+                                YearMonth = $"{g.Key.Year}-{g.Key.Month:D2}",
+                                YearMonthText = $"{g.Key.Month:D2}/{g.Key.Year}",
+                                Count = g.Count()
+                            })
+                            .OrderBy(x => x.YearMonth)
+                            .Take(12)
+                            .ToList();
+                        
+                        var maxComunicadosMes = comunicadosPorMes.Any() ? comunicadosPorMes.Max(c => c.Count) : 1;
+                    }
+                    
+                    @if (comunicadosPorMes.Any())
+                    {
+                        <div class="flex h-48 items-end space-x-2">
+                            @foreach (var mes in comunicadosPorMes)
+                            {
+                                var altura = (int)(mes.Count * 100 / maxComunicadosMes);
+                                altura = Math.Max(altura, 5); // Mínimo 5% para que se vea
+                                <div class="flex flex-1 flex-col items-center">
+                                    <div class="w-full bg-red-500" style="height: @altura%"></div>
+                                    <div class="mt-2 text-xs text-gray-500">@mes.YearMonthText</div>
+                                </div>
+                            }
+                        </div>
+                        <div class="mt-4 text-center text-sm text-gray-500">
+                            Distribución mensual de comunicados enviados
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="flex h-full items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                No hay suficientes datos para mostrar la distribución por mes
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <!-- Comunicados por total de envíos -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Comunicados por Alcance</h2>
+            </div>
+            <div class="p-6">
+                <div class="h-64">
+                    <!-- Representación visual de comunicados por total de envíos -->
+                    @{
+                        var comunicadosPorEnvios = Model
+                            .OrderByDescending(c => c.TOTAL_ENVIOS)
+                            .Take(5)
+                            .ToList();
+                        
+                        var maxEnvios = comunicadosPorEnvios.Any() ? comunicadosPorEnvios.Max(c => c.TOTAL_ENVIOS) : 1;
+                    }
+                    
+                    @if (comunicadosPorEnvios.Any())
+                    {
+                        foreach (var comunicado in comunicadosPorEnvios)
+                        {
+                            var porcentaje = (int)(comunicado.TOTAL_ENVIOS * 100 / maxEnvios);
+                            var tituloCorto = comunicado.TITULO.Length > 30 
+                                ? comunicado.TITULO.Substring(0, 30) + "..." 
+                                : comunicado.TITULO;
+                            
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-gray-600">@tituloCorto</span>
+                                    <span class="text-sm font-medium text-gray-800">@comunicado.TOTAL_ENVIOS envíos</span>
+                                </div>
+                                <div class="mt-1 h-4 w-full overflow-hidden rounded-full bg-gray-200">
+                                    <div class="h-full bg-indigo-500" style="width: @porcentaje%"></div>
+                                </div>
+                                <div class="mt-1 text-xs text-gray-500">
+                                    @comunicado.FECHA_ENVIO.ToString("dd/MM/yyyy")
+                                </div>
+                            </div>
+                        }
+                        
+                        <div class="mt-2 text-center text-sm text-gray-500">
+                            Comunicados con mayor alcance
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="flex h-full items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                No hay suficientes datos para mostrar los comunicados por alcance
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

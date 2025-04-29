@@ -1,0 +1,148 @@
+﻿@model IEnumerable<IngeTechCRM.Models.Usuario>
+@{
+    ViewData["Title"] = "Gestión de Usuarios";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">Gestión de Usuarios</span>
+    </nav>
+
+    <!-- Encabezado -->
+    <div class="mb-8 flex flex-wrap items-center justify-between">
+        <h1 class="text-3xl font-bold text-gray-800">Gestión de Usuarios</h1>
+        <a href="@Url.Action("Crear")" class="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow transition hover:bg-indigo-700">
+            <i class="fas fa-user-plus mr-2"></i> Nuevo Usuario
+        </a>
+    </div>
+
+    <!-- Mensajes de notificación -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="mb-6 rounded-lg bg-green-100 p-4 text-green-700">
+            <div class="flex items-center">
+                <i class="fas fa-check-circle mr-2"></i>
+                <span>@TempData["Message"]</span>
+            </div>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="mb-6 rounded-lg bg-red-100 p-4 text-red-700">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                <span>@TempData["Error"]</span>
+            </div>
+        </div>
+    }
+
+    <!-- Filtros de búsqueda -->
+    <div class="mb-8 rounded-xl bg-white p-6 shadow-lg">
+        <h2 class="mb-4 text-xl font-semibold text-gray-800">Filtros de búsqueda</h2>
+        <form action="@Url.Action("Index")" method="get" class="grid grid-cols-1 gap-6 md:grid-cols-4">
+            <div>
+                <label for="buscar" class="mb-2 block text-sm font-medium text-gray-700">Buscar por nombre, usuario, correo o ID</label>
+                <input type="text" id="buscar" name="buscar" value="@ViewBag.Buscar"
+                       class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            <div>
+                <label for="provinciaId" class="mb-2 block text-sm font-medium text-gray-700">Provincia</label>
+                <select id="provinciaId" name="provinciaId"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">Todas las provincias</option>
+                    @if (ViewBag.Provincias != null)
+                    {
+                        @Html.Raw(ViewBag.Provincias.ToString())
+                    }
+                </select>
+            </div>
+            <div>
+                <label for="tipoUsuarioId" class="mb-2 block text-sm font-medium text-gray-700">Tipo de Usuario</label>
+                <select id="tipoUsuarioId" name="tipoUsuarioId"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">Todos los tipos</option>
+                    @if (ViewBag.TiposUsuario != null)
+                    {
+                        @Html.Raw(ViewBag.TiposUsuario.ToString())
+                    }
+                </select>
+            </div>
+            <div class="flex items-end">
+                <button type="submit" class="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow transition hover:bg-indigo-700">
+                    <i class="fas fa-search mr-2"></i> Filtrar
+                </button>
+                <a href="@Url.Action("Index")" class="ml-2 flex items-center rounded-lg border border-gray-300 px-4 py-2 font-medium text-gray-700 shadow transition hover:bg-gray-50">
+                    <i class="fas fa-times mr-2"></i> Limpiar
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabla de Usuarios -->
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Identificación</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Nombre Completo</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Usuario</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Correo Electrónico</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Tipo</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Provincia</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr class="hover:bg-gray-50">
+                                <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">@item.IDENTIFICACION</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@item.NOMBRE_COMPLETO</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@item.NOMBRE_USUARIO</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@item.CORREO_ELECTRONICO</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                    <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-800">
+                                        @(item.TipoUsuario != null ? item.TipoUsuario.DESCRIPCION : "")
+                                    </span>
+                                </td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@(item.Provincia != null ? item.Provincia.NOMBRE : "")</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
+                                    <div class="flex space-x-2">
+                                        <a href="@Url.Action("Detalles", new { id = item.IDENTIFICACION })" class="rounded-full bg-blue-100 p-2 text-blue-600 transition hover:bg-blue-200" title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="@Url.Action("Editar", new { id = item.IDENTIFICACION })" class="rounded-full bg-green-100 p-2 text-green-600 transition hover:bg-green-200" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="@Url.Action("Eliminar", new { id = item.IDENTIFICACION })" class="rounded-full bg-red-100 p-2 text-red-600 transition hover:bg-red-200" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="py-10 text-center text-gray-500">
+                                <div class="flex flex-col items-center justify-center">
+                                    <i class="fas fa-users text-4xl text-gray-300 mb-3"></i>
+                                    <p>No se encontraron usuarios con los criterios de búsqueda especificados.</p>
+                                    <a href="@Url.Action("Index")" class="mt-2 text-indigo-600 hover:underline">Mostrar todos los usuarios</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

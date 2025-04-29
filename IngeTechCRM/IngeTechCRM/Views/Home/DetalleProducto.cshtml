@@ -1,0 +1,406 @@
+﻿@using System.Linq;
+@model IngeTechCRM.Models.Producto
+@{
+    ViewData["Title"] = Model.NOMBRE;
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs / Migas de pan -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Catalogo", "Home")" class="text-gray-600 hover:text-indigo-600">Catálogo</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Catalogo", "Home", new { categoriaId = Model.ID_CATEGORIA })" class="text-gray-600 hover:text-indigo-600">@Model.Categoria.NOMBRE</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">@Model.NOMBRE</span>
+    </nav>
+
+    <div class="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <!-- Galería de imágenes -->
+        <div>
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                @{
+                    var imagenPrincipal = Model.Imagenes != null && Model.Imagenes.Count > 0
+                    ? Model.Imagenes.First().RUTA_IMAGEN
+                    : "/images/productos/default.png";
+                }
+                <div class="relative h-96 w-full bg-gray-50 p-6">
+                    <img src="@imagenPrincipal" id="imagenPrincipal" alt="@Model.NOMBRE" class="h-full w-full object-contain transition-transform duration-300 hover:scale-105">
+                </div>
+
+                @if (Model.Imagenes != null && Model.Imagenes.Count > 1)
+                {
+                    <div class="grid grid-cols-4 gap-2 p-4">
+                        @foreach (var imagen in Model.Imagenes)
+                        {
+                            <div class="cursor-pointer overflow-hidden rounded-lg border-2 border-transparent hover:border-indigo-500"
+                                 onclick="cambiarImagen('@imagen.RUTA_IMAGEN')">
+                                <img src="@imagen.RUTA_IMAGEN"
+                                     alt="@Model.NOMBRE"
+                                     class="h-16 w-full object-contain">
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Información del producto -->
+        <div class="space-y-6">
+            <!-- Encabezado del producto -->
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">@Model.NOMBRE</h1>
+                <div class="mt-2 flex flex-wrap gap-2">
+                    <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-800">
+                        <i class="fas fa-tag mr-1"></i> @Model.Categoria.NOMBRE
+                    </span>
+                    <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-800">
+                        <i class="fas fa-copyright mr-1"></i> @Model.Marca.NOMBRE
+                    </span>
+                    <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800">
+                        <i class="fas fa-barcode mr-1"></i> Código: @Model.CODIGO
+                    </span>
+                </div>
+            </div>
+
+            <!-- Precio -->
+            <div class="flex items-center gap-4">
+                <span class="text-3xl font-bold text-indigo-600">@Model.PRECIO.ToString("C2")</span>
+                <!-- Puedes agregar aquí más información como precio anterior, descuentos, etc. -->
+            </div>
+
+            <!-- Descripción -->
+            <div>
+                <h2 class="mb-2 text-lg font-semibold text-gray-800">Descripción</h2>
+                <div class="rounded-lg bg-gray-50 p-4 text-gray-700">
+                    @Html.Raw(Model.DESCRIPCION?.Replace("\n", "<br>"))
+                </div>
+            </div>
+
+            <!-- Disponibilidad -->
+            <div>
+                <h2 class="mb-2 text-lg font-semibold text-gray-800">Disponibilidad por provincia</h2>
+                <div class="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Provincia</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Disponibilidad</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            @if (ViewBag.DisponibilidadPorProvincia != null && ViewBag.DisponibilidadPorProvincia.Count > 0)
+                            {
+                                foreach (var disponibilidad in ViewBag.DisponibilidadPorProvincia)
+                                {
+                                    var estado = disponibilidad.CantidadTotal > 0 ? "Disponible" : "Agotado";
+                                    var bgColor = disponibilidad.CantidadTotal > 0 ? "bg-green-100" : "bg-red-100";
+                                    var textColor = disponibilidad.CantidadTotal > 0 ? "text-green-800" : "text-red-800";
+
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 text-sm text-gray-700">@disponibilidad.ProvinciaNombre</td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-sm text-gray-700">@disponibilidad.CantidadTotal unidades</td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-sm">
+                                            <span class="inline-flex rounded-full @bgColor @textColor px-2 py-1 text-xs font-semibold">
+                                                @estado
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3" class="py-4 text-center text-sm text-gray-500">No hay información de disponibilidad</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Agregar al carrito -->
+            @{
+                var totalDisponible = 0;
+                if (ViewBag.DisponibilidadPorProvincia != null)
+                {
+                    var disponibilidadPorProvincia = ViewBag.DisponibilidadPorProvincia as IEnumerable<dynamic>;
+                    if (disponibilidadPorProvincia != null)
+                    {
+                        foreach (var disponibilidad in disponibilidadPorProvincia)
+                        {
+                            totalDisponible += disponibilidad.CantidadTotal;
+                        }
+                    }
+                }
+            }
+
+            <div class="pt-2">
+                @if (totalDisponible > 0)
+                {
+                    <form action="@Url.Action("AgregarAlCarrito")" method="get" class="flex flex-wrap items-center gap-4">
+                        <input type="hidden" name="idProducto" value="@Model.ID_PRODUCTO">
+                        <div>
+                            <label for="cantidad" class="mb-2 block text-sm font-medium text-gray-700">Cantidad:</label>
+                            <select class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                    id="cantidad"
+                                    name="cantidad">
+                                @for (int i = 1; i <= Math.Min(totalDisponible, 10); i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                        </div>
+                        <button type="submit"
+                                class="flex items-center rounded-lg bg-gradient-to-r from-indigo-600 to-blue-500 px-6 py-2 font-medium text-white shadow-md transition hover:from-indigo-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            <i class="fas fa-cart-plus mr-2"></i> Agregar al carrito
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <div class="mb-4 rounded-lg bg-yellow-50 p-4 text-yellow-800">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2 text-yellow-600"></i>
+                            <span class="font-medium">Producto actualmente agotado</span>
+                        </div>
+                        <p class="mt-1 text-sm">Este producto se encuentra temporalmente sin stock. Te sugerimos revisar más tarde o explorar productos similares.</p>
+                    </div>
+
+                    <button class="flex cursor-not-allowed items-center rounded-lg bg-gray-400 px-6 py-2 font-medium text-white opacity-70"
+                            disabled>
+                        <i class="fas fa-cart-plus mr-2"></i> Agregar al carrito
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Información adicional con tabs -->
+    <div class="mb-12">
+        <div class="rounded-xl bg-white shadow-lg">
+            <div class="border-b border-gray-200">
+                <ul class="flex flex-wrap -mb-px" id="infoTabs" role="tablist">
+                    <li class="mr-2" role="presentation">
+                        <button class="active inline-block rounded-t-lg border-b-2 border-indigo-600 py-4 px-6 text-indigo-600 hover:text-indigo-800 focus:outline-none"
+                                id="specs-tab"
+                                data-tabs-target="#specs"
+                                type="button"
+                                role="tab"
+                                aria-controls="specs"
+                                aria-selected="true">
+                            <i class="fas fa-clipboard-list mr-2"></i> Especificaciones
+                        </button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block rounded-t-lg border-b-2 border-transparent py-4 px-6 text-gray-500 hover:text-gray-600 focus:outline-none"
+                                id="garantia-tab"
+                                data-tabs-target="#garantia"
+                                type="button"
+                                role="tab"
+                                aria-controls="garantia"
+                                aria-selected="false">
+                            <i class="fas fa-shield-alt mr-2"></i> Garantía
+                        </button>
+                    </li>
+                    <li role="presentation">
+                        <button class="inline-block rounded-t-lg border-b-2 border-transparent py-4 px-6 text-gray-500 hover:text-gray-600 focus:outline-none"
+                                id="envio-tab"
+                                data-tabs-target="#envio"
+                                type="button"
+                                role="tab"
+                                aria-controls="envio"
+                                aria-selected="false">
+                            <i class="fas fa-truck mr-2"></i> Envío
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div id="infoTabsContent">
+                <div class="block p-6" id="specs" role="tabpanel" aria-labelledby="specs-tab">
+                    <h3 class="mb-4 text-lg font-semibold text-gray-800">Especificaciones técnicas de @Model.NOMBRE:</h3>
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                        <div class="space-y-4">
+                            <div class="flex flex-col space-y-2 rounded-lg bg-gray-50 p-4">
+                                <span class="text-sm font-medium text-gray-500">Código</span>
+                                <span class="font-medium text-gray-800">@Model.CODIGO</span>
+                            </div>
+                            <div class="flex flex-col space-y-2 rounded-lg bg-gray-50 p-4">
+                                <span class="text-sm font-medium text-gray-500">Marca</span>
+                                <span class="font-medium text-gray-800">@Model.Marca.NOMBRE</span>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-col space-y-2 rounded-lg bg-gray-50 p-4">
+                                <span class="text-sm font-medium text-gray-500">Categoría</span>
+                                <span class="font-medium text-gray-800">@Model.Categoria.NOMBRE</span>
+                            </div>
+                            <div class="flex flex-col space-y-2 rounded-lg bg-gray-50 p-4">
+                                <span class="text-sm font-medium text-gray-500">Proveedor</span>
+                                <span class="font-medium text-gray-800">@Model.Proveedor.NOMBRE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden p-6" id="garantia" role="tabpanel" aria-labelledby="garantia-tab">
+                    <h3 class="mb-4 text-lg font-semibold text-gray-800">Garantía del producto</h3>
+                    <div class="rounded-lg bg-gray-50 p-4">
+                        <p class="mb-4">Este producto cuenta con garantía del fabricante contra defectos de fabricación.</p>
+                        <ul class="ml-5 list-disc space-y-2 text-gray-700">
+                            <li>La garantía es de 12 meses a partir de la fecha de compra.</li>
+                            <li>Para hacer efectiva la garantía, es necesario presentar la factura de compra.</li>
+                            <li>La garantía no cubre daños causados por uso indebido, maltrato o accidentes.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hidden p-6" id="envio" role="tabpanel" aria-labelledby="envio-tab">
+                    <h3 class="mb-4 text-lg font-semibold text-gray-800">Información sobre envíos</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start rounded-lg bg-gray-50 p-4">
+                            <div class="mr-4 mt-1 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-medium text-gray-800">Cobertura</h4>
+                                <p class="text-gray-600">Envíos a todo Costa Rica</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start rounded-lg bg-gray-50 p-4">
+                            <div class="mr-4 mt-1 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-medium text-gray-800">Tiempo de entrega</h4>
+                                <p class="text-gray-600">1-3 días hábiles (San José) y 3-5 días hábiles (resto del país)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start rounded-lg bg-gray-50 p-4">
+                            <div class="mr-4 mt-1 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-medium text-gray-800">Costo de envío</h4>
+                                <p class="text-gray-600">Varía según la ubicación y se calcula al finalizar la compra</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start rounded-lg bg-gray-50 p-4">
+                            <div class="mr-4 mt-1 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-medium text-gray-800">Retiro en tienda</h4>
+                                <p class="text-gray-600">Posibilidad de retiro en cualquiera de nuestras tiendas sin costo adicional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Productos relacionados -->
+    @if (ViewBag.ProductosRelacionados != null && ViewBag.ProductosRelacionados.Count > 0)
+    {
+        <div class="mb-10">
+            <h2 class="mb-6 text-2xl font-bold text-gray-800">Productos relacionados</h2>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                @foreach (var productoRelacionado in ViewBag.ProductosRelacionados)
+                {
+                    var imagenRelacionada = "/images/productos/default.png";
+                    if (productoRelacionado.Imagenes != null && productoRelacionado.Imagenes.Count > 0)
+                    {
+                        foreach (var img in productoRelacionado.Imagenes)
+                        {
+                            imagenRelacionada = img.RUTA_IMAGEN;
+                            break;  // Solo tomamos la primera imagen
+                        }
+                    }
+
+                    <div class="group overflow-hidden rounded-xl bg-white shadow-md transition-shadow hover:shadow-xl">
+                        <div class="relative h-40 overflow-hidden bg-gray-100">
+                            <img class="h-full w-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                                 src="@imagenRelacionada"
+                                 alt="@productoRelacionado.NOMBRE">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="mb-1 text-lg font-semibold text-gray-800 line-clamp-1">@productoRelacionado.NOMBRE</h3>
+                            <p class="mb-2 text-sm text-gray-500">@productoRelacionado.Marca.NOMBRE</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-bold text-indigo-600">@productoRelacionado.PRECIO.ToString("C2")</span>
+                                <a href="@Url.Action("DetalleProducto", new { id = productoRelacionado.ID_PRODUCTO })"
+                                   class="rounded-full bg-indigo-50 p-2 text-indigo-600 transition-colors hover:bg-indigo-100"
+                                   title="Ver detalles">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function cambiarImagen(rutaImagen) {
+            $('#imagenPrincipal').attr('src', rutaImagen);
+        }
+
+        $(document).ready(function () {
+            // Configurar las pestañas
+            const tabElements = [
+                {
+                    id: 'specs-tab',
+                    triggerEl: document.getElementById('specs-tab'),
+                    targetEl: document.getElementById('specs')
+                },
+                {
+                    id: 'garantia-tab',
+                    triggerEl: document.getElementById('garantia-tab'),
+                    targetEl: document.getElementById('garantia')
+                },
+                {
+                    id: 'envio-tab',
+                    triggerEl: document.getElementById('envio-tab'),
+                    targetEl: document.getElementById('envio')
+                }
+            ];
+
+            // Funciones para manejar los tabs manualmente
+            function hideAllTabs() {
+                tabElements.forEach(tab => {
+                    tab.targetEl.classList.add('hidden');
+                    tab.targetEl.classList.remove('block');
+                    tab.triggerEl.classList.remove('text-indigo-600', 'border-indigo-600');
+                    tab.triggerEl.classList.add('text-gray-500', 'border-transparent');
+                    tab.triggerEl.setAttribute('aria-selected', 'false');
+                });
+            }
+
+            function showTab(tabId) {
+                const tab = tabElements.find(t => t.id === tabId);
+                if (tab) {
+                    hideAllTabs();
+                    tab.targetEl.classList.remove('hidden');
+                    tab.targetEl.classList.add('block');
+                    tab.triggerEl.classList.remove('text-gray-500', 'border-transparent');
+                    tab.triggerEl.classList.add('text-indigo-600', 'border-indigo-600');
+                    tab.triggerEl.setAttribute('aria-selected', 'true');
+                }
+            }
+
+            // Configurar los event listeners
+            tabElements.forEach(tab => {
+                tab.triggerEl.addEventListener('click', () => {
+                    showTab(tab.id);
+                });
+            });
+
+            // Mostrar el primer tab por defecto
+            showTab('specs-tab');
+        });
+    </script>
+}

@@ -1,0 +1,311 @@
+﻿
+@model IngeTechCRM.Models.Pedido
+@{
+    ViewData["Title"] = "Detalle de Pedido";
+
+    var estadoClass = Model.ESTADO switch
+    {
+        "PENDIENTE" => "bg-yellow-100 text-yellow-800",
+        "PROCESANDO" => "bg-blue-100 text-blue-800",
+        "ENVIADO" => "bg-indigo-100 text-indigo-800",
+        "ENTREGADO" => "bg-green-100 text-green-800",
+        "CANCELADO" => "bg-red-100 text-red-800",
+        _ => "bg-gray-100 text-gray-800"
+    };
+
+    var esAdministrador = Context.Session.GetInt32("TipoUsuarioId") == 1;
+    var puedeActualizar = esAdministrador && Model.ESTADO != "CANCELADO" && Model.ESTADO != "ENTREGADO";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">
+                Pedido #@Model.ID_PEDIDO
+            </h1>
+            <p class="mt-1 text-gray-600">@Model.FECHA_PEDIDO.ToString("dd/MM/yyyy HH:mm")</p>
+        </div>
+        <div class="mt-4 flex space-x-2 sm:mt-0">
+            @if (esAdministrador)
+            {
+                <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-200">
+                    <i class="fas fa-arrow-left mr-2"></i> Volver
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("MisPedidos")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-200">
+                    <i class="fas fa-arrow-left mr-2"></i> Volver
+                </a>
+            }
+            <button onclick="window.print()" class="flex items-center rounded-lg bg-indigo-100 px-4 py-2 font-medium text-indigo-700 shadow-sm transition hover:bg-indigo-200">
+                <i class="fas fa-print mr-2"></i> Imprimir
+            </button>
+        </div>
+    </div>
+
+    <!-- Estado actual y acciones -->
+    <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h2 class="font-bold">Estado del Pedido</h2>
+        </div>
+        <div class="p-6">
+            <div class="flex flex-col items-start justify-between space-y-4 md:flex-row md:items-center md:space-y-0">
+                <div class="flex items-center">
+                    <span class="mr-3 inline-flex rounded-full @estadoClass px-3 py-1 text-sm font-semibold">
+                        @Model.ESTADO
+                    </span>
+                    <span class="text-gray-600">
+                        Última actualización: @Model.FECHA_PEDIDO.ToString("dd/MM/yyyy HH:mm")
+                    </span>
+                </div>
+
+                @if (puedeActualizar)
+                {
+                    <form asp-action="ActualizarEstado" method="post" class="flex flex-wrap gap-2">
+                        <input type="hidden" name="id" value="@Model.ID_PEDIDO" />
+
+                        @if (Model.ESTADO != "PENDIENTE")
+                        {
+                            <button type="submit" name="nuevoEstado" value="PENDIENTE" class="flex items-center rounded-lg border border-yellow-500 bg-white px-3 py-1 text-sm font-medium text-yellow-700 transition hover:bg-yellow-50">
+                                <i class="fas fa-clock mr-1"></i> Pendiente
+                            </button>
+                        }
+
+                        @if (Model.ESTADO != "PROCESANDO")
+                        {
+                            <button type="submit" name="nuevoEstado" value="PROCESANDO" class="flex items-center rounded-lg border border-blue-500 bg-white px-3 py-1 text-sm font-medium text-blue-700 transition hover:bg-blue-50">
+                                <i class="fas fa-cogs mr-1"></i> Procesando
+                            </button>
+                        }
+
+                        @if (Model.ESTADO != "ENVIADO")
+                        {
+                            <button type="submit" name="nuevoEstado" value="ENVIADO" class="flex items-center rounded-lg border border-indigo-500 bg-white px-3 py-1 text-sm font-medium text-indigo-700 transition hover:bg-indigo-50">
+                                <i class="fas fa-truck mr-1"></i> Enviado
+                            </button>
+                        }
+
+                        @if (Model.ESTADO != "ENTREGADO")
+                        {
+                            <button type="submit" name="nuevoEstado" value="ENTREGADO" class="flex items-center rounded-lg border border-green-500 bg-white px-3 py-1 text-sm font-medium text-green-700 transition hover:bg-green-50">
+                                <i class="fas fa-check-circle mr-1"></i> Entregado
+                            </button>
+                        }
+
+                        @if (Model.ESTADO != "CANCELADO")
+                        {
+                            <button type="submit" name="nuevoEstado" value="CANCELADO" class="flex items-center rounded-lg border border-red-500 bg-white px-3 py-1 text-sm font-medium text-red-700 transition hover:bg-red-50">
+                                <i class="fas fa-times-circle mr-1"></i> Cancelado
+                            </button>
+                        }
+                    </form>
+                }
+            </div>
+
+            <div class="mt-6">
+                <div class="relative">
+                    <!-- Línea de progreso -->
+                    <div class="absolute top-1/2 left-0 h-1 w-full -translate-y-1/2 transform bg-gray-200"></div>
+
+                    <!-- Estados -->
+                    <div class="relative flex justify-between">
+                        <div class="flex flex-col items-center">
+                            <div class="@(Model.ESTADO != "CANCELADO" ? "bg-indigo-500" : "bg-gray-300") z-10 flex h-8 w-8 items-center justify-center rounded-full text-white">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="mt-2 text-xs font-medium text-gray-500">Pendiente</div>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                            <div class="@(Model.ESTADO == "PROCESANDO" || Model.ESTADO == "ENVIADO" || Model.ESTADO == "ENTREGADO" ? "bg-indigo-500" : "bg-gray-300") z-10 flex h-8 w-8 items-center justify-center rounded-full text-white">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="mt-2 text-xs font-medium text-gray-500">Procesando</div>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                            <div class="@(Model.ESTADO == "ENVIADO" || Model.ESTADO == "ENTREGADO" ? "bg-indigo-500" : "bg-gray-300") z-10 flex h-8 w-8 items-center justify-center rounded-full text-white">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="mt-2 text-xs font-medium text-gray-500">Enviado</div>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                            <div class="@(Model.ESTADO == "ENTREGADO" ? "bg-indigo-500" : "bg-gray-300") z-10 flex h-8 w-8 items-center justify-center rounded-full text-white">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="mt-2 text-xs font-medium text-gray-500">Entregado</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido en dos columnas -->
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <!-- Información del cliente y envío -->
+        <div class="md:col-span-1">
+            <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-500 px-4 py-3 text-white">
+                    <h2 class="font-bold">Información del Cliente</h2>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4 flex items-center">
+                        <div class="mr-3 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                            <i class="fas fa-user text-indigo-500"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">@Model.Usuario.NOMBRE_COMPLETO</div>
+                            <div class="text-sm text-gray-500">Cliente</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 text-sm">
+                        <div class="flex">
+                            <i class="fas fa-envelope text-indigo-500 w-5 mr-2 text-center"></i>
+                            <span class="text-gray-600">@Model.Usuario.CORREO_ELECTRONICO</span>
+                        </div>
+                        <div class="flex">
+                            <i class="fas fa-phone text-indigo-500 w-5 mr-2 text-center"></i>
+                            <span class="text-gray-600">@Model.Usuario.TELEFONO</span>
+                        </div>
+                        <div class="flex">
+                            <i class="fas fa-id-card text-indigo-500 w-5 mr-2 text-center"></i>
+                            <span class="text-gray-600">@Model.Usuario.IDENTIFICACION</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white">
+                    <h2 class="font-bold">Información de Envío</h2>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-3 text-sm">
+                        <div class="flex">
+                            <i class="fas fa-map-marker-alt text-green-500 w-5 mr-2 text-center"></i>
+                            <span class="text-gray-600">@Model.DIRECCION_ENVIO</span>
+                        </div>
+                        <div class="flex">
+                            <i class="fas fa-city text-green-500 w-5 mr-2 text-center"></i>
+                            <span class="text-gray-600">@Model.Provincia.NOMBRE</span>
+                        </div>
+                        @if (!string.IsNullOrEmpty(Model.NOTAS))
+                        {
+                            <div class="mt-4 rounded-lg bg-gray-50 p-3">
+                                <div class="font-medium text-gray-700">Notas:</div>
+                                <p class="mt-1 text-gray-600">@Model.NOTAS</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="mt-4 rounded-lg bg-gray-50 p-3">
+                                <div class="font-medium text-gray-700">Notas:</div>
+                                <p class="mt-1 text-gray-600">No hay notas para este pedido.</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detalles del pedido -->
+        <div class="md:col-span-2">
+            <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-purple-600 to-indigo-500 px-4 py-3 text-white">
+                    <h2 class="font-bold">Detalle de Productos</h2>
+                </div>
+                <div class="p-6">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                        Producto
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                        Precio Unit.
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                        Cantidad
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                        Subtotal
+                                    </th>
+                                    @if (esAdministrador)
+                                    {
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                            Almacén
+                                        </th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-white">
+                                @foreach (var detalle in Model.Detalles)
+                                {
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-sm">
+                                            <div class="font-medium text-gray-800">@detalle.Producto.NOMBRE</div>
+                                            <div class="text-xs text-gray-500">
+                                                @detalle.Producto.Categoria.NOMBRE / @detalle.Producto.Marca.NOMBRE
+                                            </div>
+                                            <div class="text-xs text-gray-500">SKU: @detalle.Producto.CODIGO</div>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            @detalle.PRECIO_UNITARIO.ToString("C")
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            @detalle.CANTIDAD
+                                        </td>
+                                        <td class="px-6 py-4 text-sm font-medium text-gray-800">
+                                            @((detalle.CANTIDAD * detalle.PRECIO_UNITARIO).ToString("C"))
+                                        </td>
+                                        @if (esAdministrador)
+                                        {
+                                            <td class="px-6 py-4 text-sm text-gray-500">
+                                                @detalle.AlmacenOrigen.NOMBRE
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot class="bg-gray-50">
+                                <tr>
+                                    <td colspan="@(esAdministrador ? "3" : "2")" class="border-t border-gray-200 px-6 py-4 text-right text-sm font-medium text-gray-500">
+                                        Total
+                                    </td>
+                                    <td colspan="@(esAdministrador ? "2" : "1")" class="border-t border-gray-200 px-6 py-4 text-sm font-bold text-gray-900">
+                                        @Model.TOTAL.ToString("C")
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones adicionales -->
+            @if (!esAdministrador && (Model.ESTADO == "PENDIENTE" || Model.ESTADO == "PROCESANDO"))
+            {
+                <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                    <div class="bg-gradient-to-r from-red-600 to-pink-500 px-4 py-3 text-white">
+                        <h2 class="font-bold">Acciones</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-end">
+                            <form asp-action="CancelarPedido" method="post" onsubmit="return confirm('¿Está seguro que desea cancelar este pedido?');">
+                                <input type="hidden" name="id" value="@Model.ID_PEDIDO" />
+                                <button type="submit" class="flex items-center rounded-lg bg-red-100 px-4 py-2 font-medium text-red-700 shadow-sm transition hover:bg-red-200">
+                                    <i class="fas fa-times-circle mr-2"></i> Cancelar Pedido
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

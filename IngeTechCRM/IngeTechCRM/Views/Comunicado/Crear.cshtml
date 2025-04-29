@@ -1,0 +1,219 @@
+﻿@model IngeTechCRM.Models.Comunicado
+@{
+    ViewData["Title"] = "Crear Comunicado";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Index", "Comunicado")" class="text-gray-600 hover:text-indigo-600">Gestión de Comunicados</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">Crear Comunicado</span>
+    </nav>
+
+    <!-- Encabezado -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Crear Nuevo Comunicado</h1>
+        <p class="mt-2 text-gray-600">Complete el formulario para crear un nuevo comunicado que se enviará a los usuarios seleccionados.</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <!-- Formulario de creación -->
+        <div class="lg:col-span-2">
+            <form asp-action="Crear" method="post" class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="border-b border-gray-200 bg-indigo-600 p-6 text-white">
+                    <div class="flex items-center">
+                        <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-white bg-opacity-20 text-xl">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h2 class="text-xl font-bold">Información del Comunicado</h2>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="mb-6 rounded-lg bg-red-50 p-4 text-red-700">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-medium text-red-800">Hay errores en el formulario</h3>
+                                    <div class="mt-2 text-sm text-red-700">
+                                        <ul class="list-disc space-y-1 pl-5">
+                                            @foreach (var modelState in ViewData.ModelState.Values)
+                                            {
+                                                foreach (var error in modelState.Errors)
+                                                {
+                                                    <li>@error.ErrorMessage</li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Campos del formulario -->
+                    <div class="space-y-6">
+                        <!-- Título -->
+                        <div>
+                            <label asp-for="TITULO" class="mb-2 block text-sm font-medium text-gray-700">Título del Comunicado</label>
+                            <input asp-for="TITULO" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <span asp-validation-for="TITULO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Mensaje -->
+                        <div>
+                            <label asp-for="MENSAJE" class="mb-2 block text-sm font-medium text-gray-700">Mensaje</label>
+                            <textarea asp-for="MENSAJE" rows="6" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+                            <span asp-validation-for="MENSAJE" class="mt-1 text-sm text-red-600"></span>
+                            <p class="mt-1 text-xs text-gray-500">Puede utilizar formato HTML básico para dar formato al mensaje.</p>
+                        </div>
+
+                        <!-- Fecha de envío programado -->
+                        <div>
+                            <label asp-for="FECHA_ENVIO_PROGRAMADO" class="mb-2 block text-sm font-medium text-gray-700">Fecha de Envío Programado</label>
+                            <input asp-for="FECHA_ENVIO_PROGRAMADO" type="datetime-local" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <span asp-validation-for="FECHA_ENVIO_PROGRAMADO" class="mt-1 text-sm text-red-600"></span>
+                            <p class="mt-1 text-xs text-gray-500">Deje en blanco si no desea programar el envío.</p>
+                        </div>
+
+                        <!-- Segmentación de usuarios -->
+                        <div class="rounded-lg border border-gray-200 p-4">
+                            <h3 class="mb-4 font-semibold text-gray-800">Segmentación de Destinatarios</h3>
+
+                            <p class="mb-4 text-sm text-gray-600">Seleccione los filtros para determinar quiénes recibirán este comunicado. Si no selecciona ningún filtro, el comunicado se enviará a todos los clientes.</p>
+
+                            <!-- Selección de provincias -->
+                            <div class="mb-4">
+                                <label class="mb-2 block text-sm font-medium text-gray-700">Provincias</label>
+                                <div class="grid grid-cols-2 gap-2 md:grid-cols-4">
+                                    @foreach (var provincia in ViewBag.Provincias)
+                                    {
+                                        <div class="flex items-center">
+                                            <input type="checkbox" name="provinciasSeleccionadas" value="@provincia.ID_PROVINCIA" id="provincia_@provincia.ID_PROVINCIA" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                            <label for="provincia_@provincia.ID_PROVINCIA" class="ml-2 text-sm text-gray-700">@provincia.NOMBRE</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Selección de tipos de usuario -->
+                            <div>
+                                <label class="mb-2 block text-sm font-medium text-gray-700">Tipos de Usuario</label>
+                                <div class="grid grid-cols-2 gap-2 md:grid-cols-3">
+                                    @foreach (var tipoUsuario in ViewBag.TiposUsuario)
+                                    {
+                                        <div class="flex items-center">
+                                            <input type="checkbox" name="tiposUsuarioSeleccionados" value="@tipoUsuario.ID_TIPO_USUARIO" id="tipo_@tipoUsuario.ID_TIPO_USUARIO" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                            <label for="tipo_@tipoUsuario.ID_TIPO_USUARIO" class="ml-2 text-sm text-gray-700">@tipoUsuario.DESCRIPCION</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Canales de envío -->
+                        <div class="rounded-lg border border-gray-200 p-4">
+                            <h3 class="mb-4 font-semibold text-gray-800">Canales de Envío</h3>
+                            <p class="mb-4 text-sm text-gray-600">Seleccione los canales a través de los cuales desea enviar este comunicado.</p>
+
+                            <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+                                <div class="flex items-center rounded-lg bg-blue-50 p-3">
+                                    <input type="checkbox" name="enviarPorCorreo" id="enviarPorCorreo" checked value="true" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <label for="enviarPorCorreo" class="ml-2 text-blue-800">
+                                        <span class="flex items-center">
+                                            <i class="fas fa-envelope mr-2"></i>
+                                            Enviar por correo electrónico
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center rounded-lg bg-green-50 p-3">
+                                    <input type="checkbox" name="enviarPorWhatsApp" id="enviarPorWhatsApp" checked value="true" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <label for="enviarPorWhatsApp" class="ml-2 text-green-800">
+                                        <span class="flex items-center">
+                                            <i class="fab fa-whatsapp mr-2"></i>
+                                            Enviar por WhatsApp
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Opciones de envío -->
+                        <div class="flex items-center rounded-lg bg-indigo-50 p-4">
+                            <input type="checkbox" name="enviarInmediatamente" id="enviarInmediatamente" value="true" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                            <label for="enviarInmediatamente" class="ml-2 text-indigo-800">Enviar inmediatamente después de crear</label>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-8 flex justify-end space-x-3">
+                        <a href="@Url.Action("Index")" class="rounded-lg border border-gray-300 px-5 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2">
+                            Cancelar
+                        </a>
+                        <button type="submit" class="rounded-lg bg-indigo-600 px-5 py-2 font-medium text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            Guardar Comunicado
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Panel lateral -->
+        <div class="space-y-6">
+            <!-- Información de ayuda -->
+            <div class="rounded-xl bg-white p-6 shadow-lg">
+                <h3 class="mb-4 text-lg font-semibold text-gray-800">Información del Comunicado</h3>
+                <div class="space-y-4 text-sm text-gray-600">
+                    <div class="flex">
+                        <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <i class="fas fa-info"></i>
+                        </div>
+                        <div>
+                            <p>El <strong>título</strong> debe ser claro y conciso para que los destinatarios identifiquen fácilmente el tema del comunicado.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <p>La <strong>segmentación</strong> permite enviar el comunicado solo a los usuarios que cumplan con los filtros seleccionados.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <p>Si programa una <strong>fecha de envío</strong>, el comunicado se enviará automáticamente en esa fecha y hora.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notas -->
+            <div class="rounded-xl bg-yellow-50 p-6 shadow-lg">
+                <div class="flex items-center">
+                    <div class="mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-yellow-800">Notas importantes</h3>
+                </div>
+                <ul class="mt-4 space-y-2 pl-12 text-sm text-yellow-700">
+                    <li class="list-disc">Los comunicados se pueden enviar a través de correo electrónico y/o WhatsApp según los canales seleccionados.</li>
+                    <li class="list-disc">Los destinatarios recibirán el comunicado solo si tienen registrado un correo electrónico o número de teléfono válido según el canal seleccionado.</li>
+                    <li class="list-disc">Si no selecciona ningún filtro, el comunicado se enviará a todos los clientes registrados en el sistema.</li>
+                    <li class="list-disc">Una vez enviado, no podrá editar el contenido del comunicado.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Olvidó su Contraseña";
+}
+
+<div class="flex min-h-[80vh] items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md space-y-8">
+        <!-- Logo y encabezado -->
+        <div class="text-center">
+            <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-blue-500 text-white">
+                <i class="fas fa-key text-3xl"></i>
+            </div>
+            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">¿Olvidó su contraseña?</h2>
+            <p class="mt-2 text-sm text-gray-600">
+                Ingrese su correo electrónico y le enviaremos un enlace para restablecer su contraseña
+            </p>
+        </div>
+
+        <!-- Formulario con efecto de tarjeta flotante -->
+        <div class="rounded-xl bg-white p-8 shadow-xl ring-1 ring-gray-200">
+            @if (ViewBag.Error != null)
+            {
+                <div class="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-600">
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-circle mr-2 text-lg text-red-500"></i>
+                        <span>@ViewBag.Error</span>
+                    </div>
+                </div>
+            }
+
+            @if (ViewBag.Message != null)
+            {
+                <div class="mb-6 rounded-lg bg-green-50 p-4 text-sm text-green-600">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2 text-lg text-green-500"></i>
+                        <span>@ViewBag.Message</span>
+                    </div>
+                </div>
+            }
+
+            <form method="post" action="@Url.Action("OlvidarContrasena", "Account")" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700" for="correo">
+                        Correo electrónico
+                    </label>
+                    <div class="relative mt-1 rounded-md shadow-sm">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="fas fa-envelope text-gray-400"></i>
+                        </div>
+                        <input id="correo"
+                               name="correo"
+                               type="email"
+                               required
+                               autocomplete="email"
+                               placeholder="Ingrese su correo electrónico"
+                               class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50" />
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                            class="group relative flex w-full justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-blue-500 py-3 px-4 text-sm font-medium text-white shadow-lg transition duration-300 hover:from-indigo-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="fas fa-paper-plane"></i>
+                        </span>
+                        Enviar Enlace de Recuperación
+                    </button>
+                </div>
+            </form>
+
+            <!-- Enlace para volver al login -->
+            <div class="mt-6 text-center">
+                <a href="@Url.Action("Login", "Account")" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                    <i class="fas fa-arrow-left mr-1"></i> Volver a Iniciar Sesión
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Opcional: Decoraciones visuales para el fondo -->
+<div class="absolute top-0 right-0 hidden h-64 w-64 transform translate-x-1/4 -translate-y-1/4 rounded-full bg-indigo-500 opacity-10 blur-3xl lg:block"></div>
+<div class="absolute bottom-0 left-0 hidden h-64 w-64 transform -translate-x-1/4 translate-y-1/4 rounded-full bg-blue-500 opacity-10 blur-3xl lg:block"></div>

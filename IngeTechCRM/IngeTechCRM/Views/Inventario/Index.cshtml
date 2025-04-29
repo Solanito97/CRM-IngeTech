@@ -1,0 +1,634 @@
+﻿@model List<IngeTechCRM.Models.Inventario>
+@{
+    ViewData["Title"] = "Gestión de Inventario";
+    var almaceness = ViewBag.Almacenes as List<SelectListItem>;
+    var categoriass = ViewBag.Categorias as List<SelectListItem>;
+    var selectedAlmacenId = ViewBag.AlmacenId;
+    var selectedCategoriaId = ViewBag.CategoriaId;
+}
+
+<div class="container mx-auto px-4 py-6">
+    <h1 class="mb-6 text-2xl font-bold text-gray-800 md:text-3xl">Gestión de Inventario</h1>
+    
+    <!-- Filtros y botones de acción -->
+    <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-filter mr-2"></i> Filtros y Acciones
+            </h2>
+        </div>
+        <div class="p-6">
+            <div class="flex flex-col space-y-4 lg:flex-row lg:items-center lg:justify-between lg:space-y-0">
+                <div class="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0 lg:w-2/3">
+                    <div class="w-full md:w-auto">
+                        <select asp-for="@selectedAlmacenId"
+                                asp-items="@almaceness"
+                                class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                id="almacenId"
+                                name="almacenId">
+                            
+                        </select>
+                    </div>
+                    
+                    <div class="w-full md:w-auto">
+                        <select asp-for="@selectedCategoriaId"
+                                asp-items="@categoriass"
+                                class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                id="categoriaId"
+                                name="categoriaId">
+                            
+                        </select>
+                    </div>
+                    
+                    <div class="flex flex-1">
+                        <input 
+                            type="text" 
+                            class="block w-full rounded-l-lg border border-gray-300 py-2 pl-3 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                            placeholder="Buscar producto..." 
+                            id="buscarInventario" 
+                            value="@ViewBag.Buscar"
+                        >
+                        <button id="btnBuscar" class="rounded-r-lg border-y border-r border-gray-300 bg-white px-4 py-2 text-gray-600 hover:bg-gray-50" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <button id="btnLimpiar" type="button" class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+                        <i class="fas fa-times mr-2 text-red-500"></i> Limpiar
+                    </button>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-2">
+                    <a href="@Url.Action("Crear")" class="flex items-center rounded-lg bg-green-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-green-700">
+                        <i class="fas fa-plus-circle mr-2"></i> Nuevo Inventario
+                    </a>
+                    <a href="@Url.Action("RegistrarMovimiento")" class="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-indigo-700">
+                        <i class="fas fa-exchange-alt mr-2"></i> Movimiento
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tabla de inventario -->
+    <div class="mb-8 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="border-b border-gray-200 bg-gray-50 px-6 py-4">
+            <div class="flex flex-col items-start space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+                <h2 class="font-bold text-gray-800">
+                    Inventario Actual <span class="ml-1 rounded-full bg-indigo-100 px-2 py-1 text-sm text-indigo-800" id="contadorInventario">@Model.Count</span>
+                </h2>
+                <div class="flex space-x-2">
+                    <a href="@Url.Action("Alertas")" class="inline-flex items-center rounded-lg bg-yellow-500 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-yellow-600">
+                        <i class="fas fa-exclamation-triangle mr-1.5"></i> Alertas
+                        <span class="ml-1.5 rounded-full bg-white px-1.5 py-0.5 text-xs font-bold text-yellow-700">@(ViewBag.TotalAlertas ?? 0)</span>
+                    </a>
+                    <a href="@Url.Action("Movimientos")" class="inline-flex items-center rounded-lg bg-blue-500 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-blue-600">
+                        <i class="fas fa-history mr-1.5"></i> Historial
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-6">
+            @if (Model.Count == 0)
+            {
+                <div class="rounded-lg bg-blue-50 p-4 text-blue-800">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium">
+                                No se encontraron registros de inventario con los criterios de búsqueda especificados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200" id="tablaInventario">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Producto
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Categoría
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Marca
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Almacén
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Cantidad
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Mínimo
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Estado
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Última Actualización
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            @foreach (var inventario in Model)
+                            {
+                                var estadoStock = inventario.CANTIDAD <= inventario.CANTIDAD_MINIMA 
+                                    ? "bajo" 
+                                    : (inventario.CANTIDAD <= inventario.CANTIDAD_MINIMA * 1.5 ? "medio" : "optimo");
+                                
+                                var bgColor = estadoStock == "bajo" 
+                                    ? "bg-red-100 text-red-800" 
+                                    : (estadoStock == "medio" ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800");
+                                
+                                var textoEstado = estadoStock == "bajo" 
+                                    ? "Stock Bajo" 
+                                    : (estadoStock == "medio" ? "Stock Medio" : "Stock Óptimo");
+                                
+                                <tr class="hover:bg-gray-50 fila-inventario">
+                                    <td class="px-6 py-4 text-sm">
+                                        <a href="@Url.Action("Detalles", "Producto", new { id = inventario.ID_PRODUCTO })" class="font-medium text-indigo-600 hover:text-indigo-900">
+                                            @inventario.Producto.NOMBRE
+                                        </a>
+                                        <span class="block text-xs text-gray-500">@inventario.Producto.CODIGO</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @inventario.Producto.Categoria.NOMBRE
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @inventario.Producto.Marca.NOMBRE
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                        <span class="block text-gray-700">@inventario.Almacen.NOMBRE</span>
+                                        <span class="text-xs text-gray-500">@inventario.Almacen.Provincia.NOMBRE</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                                        @inventario.CANTIDAD
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @inventario.CANTIDAD_MINIMA
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                        <span class="inline-flex rounded-full @bgColor px-2 py-1 text-xs font-semibold">
+                                            @textoEstado
+                                        </span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                        @inventario.FECHA_ACTUALIZACION.ToString("dd/MM/yyyy HH:mm")
+                                    </td>
+                                    <td class="px-6 py-4 text-center text-sm font-medium">
+                                        <div class="flex justify-center space-x-1">
+                                            <a href="@Url.Action("Detalles", new { id = inventario.ID_INVENTARIO })" 
+                                               class="rounded bg-blue-100 p-1.5 text-blue-600 transition hover:bg-blue-200"
+                                               title="Ver detalles">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="@Url.Action("Editar", new { id = inventario.ID_INVENTARIO })" 
+                                               class="rounded bg-indigo-100 p-1.5 text-indigo-600 transition hover:bg-indigo-200"
+                                               title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button type="button" 
+                                                    class="btn-movimiento-stock rounded bg-green-100 p-1.5 text-green-600 transition hover:bg-green-200"
+                                                    title="Agregar stock"
+                                                    data-producto="@inventario.ID_PRODUCTO" 
+                                                    data-almacen="@inventario.ID_ALMACEN" 
+                                                    data-tipo="ENTRADA">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                            <button type="button" 
+                                                    class="btn-movimiento-stock rounded bg-red-100 p-1.5 text-red-600 transition hover:bg-red-200"
+                                                    title="Reducir stock"
+                                                    data-producto="@inventario.ID_PRODUCTO" 
+                                                    data-almacen="@inventario.ID_ALMACEN" 
+                                                    data-tipo="SALIDA">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Mensaje para cuando no hay resultados después del filtrado -->
+                <div id="noResultados" class="mt-4 hidden rounded-lg bg-blue-50 p-4 text-blue-800">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium">
+                                No se encontraron registros de inventario con los criterios de búsqueda especificados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    
+    <!-- Resumen de inventario -->
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <!-- Resumen de Inventario -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Resumen de Inventario</h2>
+            </div>
+            <div class="p-6">
+                <div class="mb-6 grid grid-cols-2 gap-4">
+                    <div class="rounded-lg bg-gray-50 p-4 text-center">
+                        <h3 class="mb-1 text-sm font-medium text-gray-500">Total Productos</h3>
+                        <p class="text-2xl font-bold text-gray-800">@Model.Select(i => i.ID_PRODUCTO).Distinct().Count()</p>
+                    </div>
+                    <div class="rounded-lg bg-gray-50 p-4 text-center">
+                        <h3 class="mb-1 text-sm font-medium text-gray-500">Total Unidades</h3>
+                        <p class="text-2xl font-bold text-gray-800">@Model.Sum(i => i.CANTIDAD)</p>
+                    </div>
+                </div>
+                
+                <div class="mb-3 h-px w-full bg-gray-200"></div>
+                
+                <h3 class="mb-4 text-base font-medium text-gray-700">Estado del Inventario</h3>
+                
+                @{
+                    var stockBajo = Model.Count(i => i.CANTIDAD <= i.CANTIDAD_MINIMA);
+                    var stockMedio = Model.Count(i => i.CANTIDAD > i.CANTIDAD_MINIMA && i.CANTIDAD <= i.CANTIDAD_MINIMA * 1.5);
+                    var stockOptimo = Model.Count(i => i.CANTIDAD > i.CANTIDAD_MINIMA * 1.5);
+                    
+                    var porcBajo = Model.Count > 0 ? (int)(stockBajo * 100.0 / Model.Count) : 0;
+                    var porcMedio = Model.Count > 0 ? (int)(stockMedio * 100.0 / Model.Count) : 0;
+                    var porcOptimo = Model.Count > 0 ? (int)(stockOptimo * 100.0 / Model.Count) : 0;
+                }
+                
+                <div class="mb-4 h-2.5 w-full overflow-hidden rounded-full bg-gray-200">
+                    <div class="flex h-full">
+                        <div class="h-full bg-red-500" style="width: @porcBajo%"></div>
+                        <div class="h-full bg-yellow-500" style="width: @porcMedio%"></div>
+                        <div class="h-full bg-green-500" style="width: @porcOptimo%"></div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-2 text-sm">
+                    <div class="flex items-center">
+                        <div class="mr-2 h-3 w-3 rounded-full bg-red-500"></div>
+                        <span>Bajo: <span class="font-medium">@stockBajo</span></span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="mr-2 h-3 w-3 rounded-full bg-yellow-500"></div>
+                        <span>Medio: <span class="font-medium">@stockMedio</span></span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="mr-2 h-3 w-3 rounded-full bg-green-500"></div>
+                        <span>Óptimo: <span class="font-medium">@stockOptimo</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Distribución por Almacén -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg lg:col-span-2">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Distribución por Almacén</h2>
+            </div>
+            <div class="p-6">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Almacén
+                                </th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Provincia
+                                </th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Productos
+                                </th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Unidades
+                                </th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Stock Bajo
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            @{
+                                var almacenes = Model
+                                    .GroupBy(i => new { i.ID_ALMACEN, i.Almacen.NOMBRE, })
+                                    .Select(g => new {
+                                        IdAlmacen = g.Key.ID_ALMACEN,
+                                        Nombre = g.Key.NOMBRE,
+                                        Provincia = g.Key.NOMBRE,
+                                        Productos = g.Count(),
+                                        Unidades = g.Sum(i => i.CANTIDAD),
+                                        StockBajo = g.Count(i => i.CANTIDAD <= i.CANTIDAD_MINIMA)
+                                    })
+                                    .OrderBy(a => a.Nombre)
+                                    .ToList();
+                            }
+                            
+                            @foreach (var almacen in almacenes)
+                            {
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-4 py-2 text-sm font-medium text-gray-800">
+                                        @almacen.Nombre
+                                    </td>
+                                    <td class="px-4 py-2 text-sm text-gray-500">
+                                        @almacen.Provincia
+                                    </td>
+                                    <td class="px-4 py-2 text-sm text-gray-800">
+                                        @almacen.Productos
+                                    </td>
+                                    <td class="px-4 py-2 text-sm font-medium text-gray-800">
+                                        @almacen.Unidades
+                                    </td>
+                                    <td class="px-4 py-2 text-sm">
+                                        @if (almacen.StockBajo > 0)
+                                        {
+                                            <span class="inline-flex rounded-full bg-red-100 px-2 py-1 text-xs font-semibold text-red-800">
+                                                @almacen.StockBajo
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800">
+                                                0
+                                            </span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para registrar movimiento rápido -->
+<div class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black bg-opacity-50" id="movimientoRapidoModal">
+    <div class="w-full max-w-md overflow-hidden rounded-lg bg-white shadow-xl">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h3 class="font-bold" id="movimientoRapidoModalLabel">Registrar Movimiento</h3>
+        </div>
+        <div class="p-6">
+            <form id="movimientoRapidoForm">
+                <input type="hidden" id="modalProductoId" name="ID_PRODUCTO">
+                <input type="hidden" id="modalAlmacenId" name="ID_ALMACEN">
+                <input type="hidden" id="modalTipoMovimiento" name="TIPO_MOVIMIENTO">
+                
+                <div class="mb-4">
+                    <label for="modalCantidad" class="mb-2 block text-sm font-medium text-gray-700">Cantidad</label>
+                    <input 
+                        type="number" 
+                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500" 
+                        id="modalCantidad" 
+                        name="CANTIDAD" 
+                        min="1" 
+                        required
+                    >
+                </div>
+                
+                <div class="mb-4">
+                    <label for="modalObservacion" class="mb-2 block text-sm font-medium text-gray-700">Observación (opcional)</label>
+                    <textarea 
+                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500" 
+                        id="modalObservacion" 
+                        name="OBSERVACION" 
+                        rows="2"
+                    ></textarea>
+                </div>
+                
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button 
+                        type="button" 
+                        class="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-50" 
+                        id="cancelarMovimientoBtn"
+                    >
+                        Cancelar
+                    </button>
+                    <button 
+                        type="button" 
+                        class="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-indigo-700" 
+                        id="confirmarMovimientoBtn"
+                    >
+                        Confirmar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Formulario oculto para el token antifalsificación -->
+<form id="antiForgeryForm" class="hidden">
+    @Html.AntiForgeryToken()
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Delegación de eventos para botones de movimiento de stock
+            $(document).on('click', '.btn-movimiento-stock', function() {
+                var productoId = $(this).data('producto');
+                var almacenId = $(this).data('almacen');
+                var tipoMovimiento = $(this).data('tipo');
+                
+                // Configurar modal
+                $('#modalProductoId').val(productoId);
+                $('#modalAlmacenId').val(almacenId);
+                $('#modalTipoMovimiento').val(tipoMovimiento);
+
+                // Ajustar título y colores según tipo de movimiento
+                if (tipoMovimiento === 'ENTRADA') {
+                    $('#movimientoRapidoModalLabel').text('Agregar Stock');
+                    $('#confirmarMovimientoBtn').removeClass('bg-red-600 hover:bg-red-700').addClass('bg-green-600 hover:bg-green-700');
+                } else {
+                    $('#movimientoRapidoModalLabel').text('Reducir Stock');
+                    $('#confirmarMovimientoBtn').removeClass('bg-green-600 hover:bg-green-700').addClass('bg-red-600 hover:bg-red-700');
+                }
+
+                // Mostrar modal
+                $('#movimientoRapidoModal').removeClass('hidden');
+                $('#modalCantidad').val('1').focus();
+                $('#modalObservacion').val('');
+            });
+
+            // Filtro de búsqueda en tiempo real
+            $('#buscarInventario').on('input', function() {
+                filtrarInventario();
+            });
+
+            // Enviar formulario al cambiar los selectores
+            $('#almacenId, #categoriaId').change(function() {
+                aplicarFiltrosServidor();
+            });
+
+            // Botón de buscar
+            $('#btnBuscar').click(function() {
+                aplicarFiltrosServidor();
+            });
+
+            // Botón de limpiar
+            $('#btnLimpiar').click(function() {
+                $('#almacenId').val('');
+                $('#categoriaId').val('');
+                $('#buscarInventario').val('');
+
+                // Decidir si quieres filtrar en cliente o recargar la página
+                if ($('.fila-inventario').length > 0) {
+                    filtrarInventario(); // Filtrado en cliente
+                } else {
+                    window.location.href = '@Url.Action("Index")'; // Recargar página
+                }
+            });
+
+            // Filtrar inventario en el cliente
+            function filtrarInventario() {
+                var textoBusqueda = $('#buscarInventario').val().toLowerCase();
+                var filasVisibles = 0;
+
+                $('.fila-inventario').each(function() {
+                    var $fila = $(this);
+                    var contenidoFila = $fila.text().toLowerCase();
+
+                    if (contenidoFila.includes(textoBusqueda)) {
+                        $fila.removeClass('hidden');
+                        filasVisibles++;
+                    } else {
+                        $fila.addClass('hidden');
+                    }
+                });
+
+                // Actualizar contador
+                $('#contadorInventario').text(filasVisibles);
+
+                // Mostrar/ocultar mensaje de no resultados
+                if (filasVisibles === 0 && $('.fila-inventario').length > 0) {
+                    $('#noResultados').removeClass('hidden');
+                } else {
+                    $('#noResultados').addClass('hidden');
+                }
+            }
+
+            // Aplicar filtros en el servidor (recargar página)
+            function aplicarFiltrosServidor() {
+                var almacenId = $('#almacenId').val();
+                var categoriaId = $('#categoriaId').val();
+                var buscar = $('#buscarInventario').val();
+
+                var url = '@Url.Action("Index")' + '?';
+
+                if (almacenId) url += 'almacenId=' + almacenId + '&';
+                if (categoriaId) url += 'categoriaId=' + categoriaId + '&';
+                if (buscar) url += 'buscar=' + encodeURIComponent(buscar);
+
+                window.location.href = url;
+            }
+
+            // Cerrar modal
+            $('#cancelarMovimientoBtn').click(function() {
+                $('#movimientoRapidoModal').addClass('hidden');
+            });
+
+            // Cerrar modal al hacer clic fuera (opcional)
+            $('#movimientoRapidoModal').click(function(e) {
+                if (e.target === this) {
+                    $(this).addClass('hidden');
+                }
+            });
+
+            $('#confirmarMovimientoBtn').click(function() {
+                if (!$('#modalCantidad').val() || parseInt($('#modalCantidad').val()) <= 0) {
+                    alert('Por favor ingrese una cantidad válida');
+                    return;
+                }
+
+                // Datos del formulario con nombres en mayúsculas para coincidir con el controlador
+                const formData = {
+                    ID_PRODUCTO: $('#modalProductoId').val(),
+                    ID_ALMACEN: $('#modalAlmacenId').val(),
+                    TIPO_MOVIMIENTO: $('#modalTipoMovimiento').val(),
+                    CANTIDAD: $('#modalCantidad').val(),
+                    OBSERVACION: $('#modalObservacion').val() || "Movimiento rápido desde inventario"
+                };
+
+                // Obtener el token antifalsificación del formulario oculto
+                const token = $('#antiForgeryForm input[name="__RequestVerificationToken"]').val();
+
+                // Enviar datos al servidor mediante AJAX
+                $.ajax({
+                    url: '@Url.Action("RegistrarMovimiento", "Inventario")',
+                    type: 'POST',
+                    data: formData,
+                    headers: {
+                        "RequestVerificationToken": token,
+                        "X-Requested-With": "XMLHttpRequest" // Identificar como solicitud AJAX
+                    },
+                    success: function(response) {
+                        $('#movimientoRapidoModal').addClass('hidden');
+                        mostrarNotificacion('Movimiento registrado exitosamente', 'success');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+                    },
+                    error: function(xhr, status, error) {
+                        var mensaje = 'Error al registrar el movimiento';
+                        if (xhr.responseText) {
+                            mensaje += ': ' + xhr.responseText;
+                        }
+                        mostrarNotificacion(mensaje, 'error');
+                    }
+                });
+            });
+
+            // Función para mostrar notificaciones
+            function mostrarNotificacion(mensaje, tipo) {
+                // Eliminar notificaciones existentes
+                $('.notificacion').remove();
+
+                // Crear elemento de notificación
+                var claseColor = tipo === 'success'
+                    ? 'bg-green-100 text-green-800 border-green-200'
+                    : 'bg-red-100 text-red-800 border-red-200';
+
+                var icono = tipo === 'success'
+                    ? '<i class="fas fa-check-circle mr-2 text-green-500"></i>'
+                    : '<i class="fas fa-exclamation-circle mr-2 text-red-500"></i>';
+
+                var html = `
+                <div class="notificacion fixed top-4 right-4 z-50 max-w-md rounded-lg border ${claseColor} p-4 shadow-lg">
+                    <div class="flex items-center">
+                        ${icono}
+                        <span>${mensaje}</span>
+                    </div>
+                </div>
+                `;
+
+                // Agregar a DOM
+                $('body').append(html);
+
+                // Auto eliminar después de un tiempo
+                setTimeout(function() {
+                    $('.notificacion').fadeOut('slow', function() {
+                        $(this).remove();
+                    });
+                }, 3000);
+            }
+        });
+    </script>
+}

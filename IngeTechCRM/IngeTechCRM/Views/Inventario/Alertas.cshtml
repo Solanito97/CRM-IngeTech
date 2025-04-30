@@ -1,0 +1,237 @@
+﻿
+@model List<IngeTechCRM.Models.AlertaInventario>
+@{
+    ViewData["Title"] = "Alertas de Inventario";
+    var mostrarProcesadas = ViewBag.MostrarProcesadas;
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Alertas de Inventario</h1>
+        <div class="flex space-x-2">
+            <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-200">
+                <i class="fas fa-arrow-left mr-2"></i> Volver
+            </a>
+            <a href="@Url.Action("RegistrarMovimiento")" class="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white transition hover:bg-indigo-700">
+                <i class="fas fa-plus-circle mr-2"></i> Nuevo Movimiento
+            </a>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-yellow-500 to-red-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-exclamation-triangle mr-2"></i> Estado de Alertas
+            </h2>
+        </div>
+        <div class="flex items-center justify-between p-6">
+            <div class="flex items-center space-x-4">
+                <a href="@Url.Action("Alertas", new { procesadas = false })"
+                   class="@(!mostrarProcesadas ? "bg-indigo-100 text-indigo-700" : "bg-gray-100 text-gray-700") rounded-lg px-4 py-2 font-medium transition hover:bg-opacity-80">
+                    <i class="fas fa-bell mr-2"></i> Alertas Pendientes
+                </a>
+                <a href="@Url.Action("Alertas", new { procesadas = true })"
+                   class="@(mostrarProcesadas ? "bg-indigo-100 text-indigo-700" : "bg-gray-100 text-gray-700") rounded-lg px-4 py-2 font-medium transition hover:bg-opacity-80">
+                    <i class="fas fa-check-circle mr-2"></i> Alertas Procesadas
+                </a>
+            </div>
+
+            <div>
+                <span class="rounded-lg bg-@(mostrarProcesadas ? "green" : "red")-100 px-3 py-1 text-sm font-medium text-@(mostrarProcesadas ? "green" : "red")-800">
+                    @(mostrarProcesadas ? "Mostrando Alertas Procesadas" : "Mostrando Alertas Pendientes")
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Alertas -->
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-@(mostrarProcesadas ? "green" : "red")-600 to-@(mostrarProcesadas ? "green" : "red")-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-@(mostrarProcesadas ? "check-circle" : "exclamation-circle") mr-2"></i>
+                @(mostrarProcesadas ? "Alertas Procesadas" : "Alertas Pendientes")
+                <span class="ml-2 rounded-full bg-white px-2 py-0.5 text-xs font-bold text-@(mostrarProcesadas ? "green" : "red")-700">@Model.Count</span>
+            </h2>
+        </div>
+        <div class="p-6">
+            @if (!Model.Any())
+            {
+                <div class="rounded-lg bg-blue-50 p-4 text-blue-800">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium">
+                                @(mostrarProcesadas
+                                    ? "No hay alertas procesadas en el sistema."
+                                    : "¡Buenas noticias! No hay alertas de stock bajo pendientes en este momento.")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Fecha
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Producto
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Almacén
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Estado
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Stock Actual
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Stock Mínimo
+                                </th>
+                                @if (!mostrarProcesadas)
+                                {
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-500">
+                                        Acciones
+                                    </th>
+                                }
+                                else
+                                {
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                        Estado
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            @foreach (var alerta in Model)
+                            {
+                                var estadoStock = alerta.Inventario.CANTIDAD <= alerta.Inventario.CANTIDAD_MINIMA
+                                ? "Crítico"
+                                : "Normal";
+
+                                var clasesEstado = estadoStock == "Crítico"
+                                ? "bg-red-100 text-red-800"
+                                : "bg-green-100 text-green-800";
+
+                                <tr class="hover:bg-gray-50">
+                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                        @alerta.FECHA_ALERTA.ToString("dd/MM/yyyy HH:mm")
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                        <a href="@Url.Action("Detalles", "Producto", new { id = alerta.Inventario.ID_PRODUCTO })" class="font-medium text-indigo-600 hover:text-indigo-900">
+                                            @alerta.Inventario.Producto.NOMBRE
+                                        </a>
+                                        <span class="block text-xs text-gray-500">@alerta.Inventario.Producto.CODIGO</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @alerta.Inventario.Almacen.NOMBRE
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                        <span class="inline-flex rounded-full @clasesEstado px-2 py-1 text-xs font-semibold">
+                                            @estadoStock
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-medium">
+                                        @alerta.Inventario.CANTIDAD
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @alerta.Inventario.CANTIDAD_MINIMA
+                                    </td>
+                                    @if (!mostrarProcesadas)
+                                    {
+                                        <td class="px-6 py-4 text-center text-sm">
+                                            <div class="flex justify-center space-x-2">
+                                                <a href="@Url.Action("Detalles", new { id = alerta.Inventario.ID_INVENTARIO })"
+                                                   class="rounded bg-blue-100 p-1.5 text-blue-600 transition hover:bg-blue-200"
+                                                   title="Ver detalles">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="@Url.Action("RegistrarMovimiento")"
+                                                   class="rounded bg-green-100 p-1.5 text-green-600 transition hover:bg-green-200"
+                                                   title="Registrar movimiento">
+                                                    <i class="fas fa-plus"></i>
+                                                </a>
+                                                <form asp-action="ProcesarAlerta" method="post" class="inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="id" value="@alerta.ID_ALERTA" />
+                                                    <button type="submit"
+                                                            class="rounded bg-indigo-100 p-1.5 text-indigo-600 transition hover:bg-indigo-200"
+                                                            title="Marcar como procesada">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            <span class="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800">
+                                                Procesada
+                                            </span>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Recomendaciones -->
+    @if (Model.Any() && !mostrarProcesadas)
+    {
+        <div class="mt-6 overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                <h2 class="flex items-center font-bold">
+                    <i class="fas fa-lightbulb mr-2"></i> Recomendaciones
+                </h2>
+            </div>
+            <div class="p-6">
+                <div class="rounded-lg bg-yellow-50 p-4 text-yellow-800">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle text-yellow-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium">Acciones recomendadas para las alertas pendientes</h3>
+                            <div class="mt-2 text-sm">
+                                <ul class="list-inside list-disc space-y-1">
+                                    <li>Registre nuevas entradas de inventario para los productos con stock bajo.</li>
+                                    <li>Verifique si hay productos similares en otros almacenes disponibles.</li>
+                                    <li>Contacte a los proveedores para realizar nuevos pedidos.</li>
+                                    <li>Marque las alertas como procesadas una vez que haya tomado las medidas necesarias.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Confirmación para marcar como procesada
+            $('form').submit(function(e) {
+                if (!confirm('¿Está seguro de marcar esta alerta como procesada? Esta acción no cambiará el nivel de stock.')) {
+                    e.preventDefault();
+                    return false;
+                }
+                return true;
+            });
+        });
+    </script>
+}

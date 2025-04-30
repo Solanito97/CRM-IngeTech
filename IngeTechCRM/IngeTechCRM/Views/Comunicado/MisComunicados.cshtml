@@ -1,0 +1,82 @@
+﻿@model IEnumerable<IngeTechCRM.Models.Comunicado>
+@{
+    ViewData["Title"] = "Mis Comunicados";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">Mis Comunicados</span>
+    </nav>
+
+    <!-- Encabezado -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Mis Comunicados</h1>
+        <p class="mt-2 text-gray-600">Revise los comunicados que ha recibido del sistema.</p>
+    </div>
+
+    <!-- Lista de comunicados -->
+    <div class="grid grid-cols-1 gap-6">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var comunicado in Model)
+            {
+                <div class="overflow-hidden rounded-xl bg-white shadow-lg transition hover:shadow-xl">
+                    <div class="border-b border-gray-200 bg-indigo-600 p-4 text-white">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-white bg-opacity-20 text-xl">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <h2 class="text-lg font-bold">@comunicado.TITULO</h2>
+                            </div>
+                            <div class="text-sm text-indigo-100">
+                                @comunicado.FECHA_CREACION.ToString("dd/MM/yyyy HH:mm")
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <div class="prose prose-sm max-h-24 overflow-hidden">
+                                @Html.Raw(comunicado.MENSAJE)
+                            </div>
+                            @if (comunicado.MENSAJE.Length > 200)
+                            {
+                                <div class="mt-2 text-right">
+                                    <a href="@Url.Action("VerComunicado", new { id = comunicado.ID_COMUNICADO })" class="text-sm text-indigo-600 hover:underline">Leer más...</a>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="text-sm text-gray-500">
+                                <span>De: @(comunicado.UsuarioCreador != null ? comunicado.UsuarioCreador.NOMBRE_COMPLETO : "Administrador del Sistema")</span>
+                            </div>
+                            <div>
+                                <a href="@Url.Action("VerComunicado", new { id = comunicado.ID_COMUNICADO })" class="flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow transition hover:bg-indigo-700">
+                                    <i class="fas fa-eye mr-2"></i> Ver Completo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="flex flex-col items-center justify-center rounded-xl bg-white p-12 shadow-lg">
+                <div class="mb-6 text-6xl text-gray-300">
+                    <i class="fas fa-inbox"></i>
+                </div>
+                <h3 class="mb-2 text-xl font-bold text-gray-800">No tiene comunicados</h3>
+                <p class="text-center text-gray-600">No se han encontrado comunicados dirigidos a usted en este momento.</p>
+                <a href="@Url.Action("Index", "Home")" class="mt-6 inline-flex items-center rounded-lg bg-indigo-600 px-5 py-2 font-medium text-white shadow transition hover:bg-indigo-700">
+                    <i class="fas fa-home mr-2"></i> Volver al inicio
+                </a>
+            </div>
+        }
+    </div>
+</div>

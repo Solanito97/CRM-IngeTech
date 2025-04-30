@@ -1,0 +1,203 @@
+﻿
+@model IngeTechCRM.Models.Producto
+@{
+    ViewData["Title"] = "Crear Producto";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Crear Nuevo Producto</h1>
+        <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-200">
+            <i class="fas fa-arrow-left mr-2"></i> Volver
+        </a>
+    </div>
+
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-plus-circle mr-2"></i> Formulario de Producto
+            </h2>
+        </div>
+        <div class="p-6">
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="mb-4 rounded-lg bg-red-100 p-4 text-red-700">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm">@ViewBag.Message</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <form asp-action="Crear" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="mb-4 rounded-lg bg-red-100 p-4 text-red-700"></div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div class="space-y-4">
+                        <div>
+                            <label asp-for="CODIGO" class="mb-1 block text-sm font-medium text-gray-700">Código</label>
+                            <input asp-for="CODIGO"
+                                   type="text"
+                                   class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                   placeholder="Código del producto">
+                            <span asp-validation-for="CODIGO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label asp-for="NOMBRE" class="mb-1 block text-sm font-medium text-gray-700">Nombre</label>
+                            <input asp-for="NOMBRE"
+                                   type="text"
+                                   class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                   placeholder="Nombre del producto">
+                            <span asp-validation-for="NOMBRE" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label asp-for="DESCRIPCION" class="mb-1 block text-sm font-medium text-gray-700">Descripción</label>
+                            <textarea asp-for="DESCRIPCION"
+                                      rows="3"
+                                      class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                      placeholder="Descripción detallada del producto"></textarea>
+                            <span asp-validation-for="DESCRIPCION" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label asp-for="PRECIO" class="mb-1 block text-sm font-medium text-gray-700">Precio</label>
+                            <div class="relative mt-1 rounded-md shadow-sm">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <span class="text-gray-500 sm:text-sm">$</span>
+                                </div>
+                                <input asp-for="PRECIO"
+                                       type="number"
+                                       min="0"
+                                       step="0.01"
+                                       class="block w-full rounded-md border border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                       placeholder="0.00">
+                            </div>
+                            <span asp-validation-for="PRECIO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label asp-for="ID_CATEGORIA" class="mb-1 block text-sm font-medium text-gray-700">Categoría</label>
+                            <select asp-for="ID_CATEGORIA" asp-items="ViewBag.Categorias" class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                                <option value="">Seleccione una categoría</option>
+                            </select>
+                            <span asp-validation-for="ID_CATEGORIA" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label asp-for="ID_MARCA" class="mb-1 block text-sm font-medium text-gray-700">Marca</label>
+                            <select asp-for="ID_MARCA" asp-items="ViewBag.Marcas" class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                                <option value="">Seleccione una marca</option>
+                            </select>
+                            <span asp-validation-for="ID_MARCA" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label asp-for="ID_PROVEEDOR" class="mb-1 block text-sm font-medium text-gray-700">Proveedor</label>
+                            <select asp-for="ID_PROVEEDOR" asp-items="ViewBag.Proveedores" class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                                <option value="">Seleccione un proveedor</option>
+                            </select>
+                            <span asp-validation-for="ID_PROVEEDOR" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label for="imagenes" class="mb-1 block text-sm font-medium text-gray-700">Imágenes del Producto</label>
+                            <div class="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+                                <div class="space-y-1 text-center">
+                                    <i class="fas fa-cloud-upload-alt mx-auto h-12 w-12 text-gray-400"></i>
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="imagenes" class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                                            <span>Subir archivos</span>
+                                            <input id="imagenes" name="imagenes" type="file" class="sr-only" multiple accept="image/*">
+                                        </label>
+                                        <p class="pl-1">o arrastrar y soltar</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500">
+                                        PNG, JPG, GIF hasta 5MB
+                                    </p>
+                                </div>
+                            </div>
+                            <div id="imagePreviewContainer" class="mt-2 grid grid-cols-4 gap-2"></div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input asp-for="ACTIVO" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                            <label asp-for="ACTIVO" class="ml-2 block text-sm text-gray-700">Producto Activo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <div class="rounded-lg bg-blue-50 p-4 text-blue-700">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium">Información Importante</h3>
+                                <div class="mt-2 text-sm">
+                                    <p>Al crear un nuevo producto:</p>
+                                    <ul class="ml-4 mt-1 list-disc">
+                                        <li>Asegúrese de proporcionar un código único para el producto.</li>
+                                        <li>Las imágenes deben ser de buena calidad y representativas del producto.</li>
+                                        <li>Para añadir inventario, vaya a la sección de "Inventarios" después de crear el producto.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-3">
+                    <a href="@Url.Action("Index")" class="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+                        Cancelar
+                    </a>
+                    <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Preview de imágenes
+        document.getElementById('imagenes').addEventListener('change', function (e) {
+            const files = e.target.files;
+            const container = document.getElementById('imagePreviewContainer');
+            container.innerHTML = '';
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (!file.type.match('image.*')) continue;
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const div = document.createElement('div');
+                    div.className = 'relative';
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'h-24 w-24 rounded object-cover';
+                    div.appendChild(img);
+
+                    container.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}

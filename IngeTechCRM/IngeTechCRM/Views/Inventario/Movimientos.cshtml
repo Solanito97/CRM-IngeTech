@@ -1,0 +1,247 @@
+﻿@model List<IngeTechCRM.Models.MovimientoInventario>
+@{
+    ViewData["Title"] = "Historial de Movimientos";
+    var productos = (List<SelectListItem>)ViewBag.Productos;
+    var almacenes = (List<SelectListItem>)ViewBag.Almacenes;
+    var tiposMovimiento = (List<SelectListItem>)ViewBag.TiposMovimiento;
+    var fechaInicio = ViewBag.FechaInicio;
+    var fechaFin = ViewBag.FechaFin;
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Historial de Movimientos de Inventario</h1>
+        <div class="flex space-x-2">
+            <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-200">
+                <i class="fas fa-arrow-left mr-2"></i> Volver
+            </a>
+            <a href="@Url.Action("RegistrarMovimiento")" class="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white transition hover:bg-indigo-700">
+                <i class="fas fa-plus-circle mr-2"></i> Nuevo Movimiento
+            </a>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-filter mr-2"></i> Filtros
+            </h2>
+        </div>
+        <div class="p-6">
+            <form id="filtroForm" method="get" action="@Url.Action("Movimientos")">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5">
+                    <div>
+                        <label for="productoId" class="mb-1 block text-sm font-medium text-gray-700">Producto</label>
+                        <select name="productoId"
+                                id="productoId"
+                                class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                asp-items="productos">
+                            <option value="">Todos los productos</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="almacenId" class="mb-1 block text-sm font-medium text-gray-700">Almacén</label>
+                        <select name="almacenId"
+                                id="almacenId"
+                                class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                asp-items="almacenes">
+                            <option value="">Todos los almacenes</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="tipoMovimiento" class="mb-1 block text-sm font-medium text-gray-700">Tipo de Movimiento</label>
+                        <select name="tipoMovimiento"
+                                id="tipoMovimiento"
+                                class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                asp-items="tiposMovimiento">
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="fechaInicio" class="mb-1 block text-sm font-medium text-gray-700">Fecha Inicio</label>
+                        <input type="date"
+                               id="fechaInicio"
+                               name="fechaInicio"
+                               value="@(fechaInicio?.ToString("yyyy-MM-dd"))"
+                               class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                    </div>
+
+                    <div>
+                        <label for="fechaFin" class="mb-1 block text-sm font-medium text-gray-700">Fecha Fin</label>
+                        <input type="date"
+                               id="fechaFin"
+                               name="fechaFin"
+                               value="@(fechaFin?.ToString("yyyy-MM-dd"))"
+                               class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <div class="mt-4 flex justify-end space-x-3">
+                    <button type="button"
+                            id="limpiarFiltros"
+                            class="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+                        <i class="fas fa-times mr-2 text-red-500"></i> Limpiar
+                    </button>
+                    <button type="submit"
+                            class="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700">
+                        <i class="fas fa-search mr-2"></i> Filtrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabla de Movimientos -->
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-history mr-2"></i> Movimientos
+                <span class="ml-2 rounded-full bg-white px-2 py-0.5 text-xs font-bold text-indigo-700">@Model.Count</span>
+            </h2>
+        </div>
+        <div class="p-6">
+            @if (!Model.Any())
+            {
+                <div class="rounded-lg bg-blue-50 p-4 text-blue-800">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium">
+                                No se encontraron movimientos de inventario con los criterios de búsqueda especificados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Fecha y Hora
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Producto
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Almacén
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Tipo
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Cantidad
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Usuario
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Observación
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            @foreach (var movimiento in Model)
+                            {
+                                var bgColor = movimiento.TIPO_MOVIMIENTO == "ENTRADA"
+                                ? "bg-green-100 text-green-800"
+                                : (movimiento.TIPO_MOVIMIENTO == "SALIDA" ? "bg-red-100 text-red-800" :
+                                (movimiento.TIPO_MOVIMIENTO == "TRANSFERENCIA" ? "bg-purple-100 text-purple-800" : "bg-blue-100 text-blue-800"));
+
+                                <tr class="hover:bg-gray-50">
+                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                        @movimiento.FECHA_MOVIMIENTO.ToString("dd/MM/yyyy HH:mm")
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                        <a href="@Url.Action("Detalles", "Producto", new { id = movimiento.ID_PRODUCTO })" class="font-medium text-indigo-600 hover:text-indigo-900">
+                                            @movimiento.Producto.NOMBRE
+                                        </a>
+                                        <span class="block text-xs text-gray-500">@movimiento.Producto.CODIGO</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @movimiento.Almacen.NOMBRE
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                        <span class="inline-flex rounded-full @bgColor px-2 py-1 text-xs font-semibold">
+                                            @movimiento.TIPO_MOVIMIENTO
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-medium">
+                                        @(movimiento.TIPO_MOVIMIENTO == "AJUSTE" && movimiento.CANTIDAD < 0 ? movimiento.CANTIDAD.ToString() : "+" + movimiento.CANTIDAD)
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @movimiento.Usuario.NOMBRE_COMPLETO
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @(String.IsNullOrEmpty(movimiento.OBSERVACION) ? "-" : movimiento.OBSERVACION)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Resumen de Totales -->
+                <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-4">
+                    @{
+                        var totalEntradas = Model.Where(m => m.TIPO_MOVIMIENTO == "ENTRADA").Sum(m => m.CANTIDAD);
+                        var totalSalidas = Model.Where(m => m.TIPO_MOVIMIENTO == "SALIDA").Sum(m => m.CANTIDAD);
+                        var totalAjustes = Model.Where(m => m.TIPO_MOVIMIENTO == "AJUSTE").Sum(m => m.CANTIDAD);
+                        var totalProductos = Model.Select(m => m.ID_PRODUCTO).Distinct().Count();
+                    }
+
+                    <div class="rounded-lg bg-green-50 p-4">
+                        <h3 class="text-sm font-medium text-green-800">Total Entradas</h3>
+                        <p class="mt-2 text-2xl font-bold text-green-700">+@totalEntradas</p>
+                    </div>
+
+                    <div class="rounded-lg bg-red-50 p-4">
+                        <h3 class="text-sm font-medium text-red-800">Total Salidas</h3>
+                        <p class="mt-2 text-2xl font-bold text-red-700">-@totalSalidas</p>
+                    </div>
+
+                    <div class="rounded-lg bg-blue-50 p-4">
+                        <h3 class="text-sm font-medium text-blue-800">Total Ajustes</h3>
+                        <p class="mt-2 text-2xl font-bold text-blue-700">@(totalAjustes >= 0 ? "+" + totalAjustes : totalAjustes.ToString())</p>
+                    </div>
+
+                    <div class="rounded-lg bg-gray-50 p-4">
+                        <h3 class="text-sm font-medium text-gray-800">Productos Afectados</h3>
+                        <p class="mt-2 text-2xl font-bold text-gray-700">@totalProductos</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Botones de Exportación -->
+    <div class="mt-6 flex justify-end space-x-3">
+        <button type="button"
+                id="exportarExcel"
+                class="inline-flex items-center rounded-lg bg-green-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-green-700">
+            <i class="fas fa-file-excel mr-2"></i> Exportar a Excel
+        </button>
+        <button type="button"
+                id="exportarPdf"
+                class="inline-flex items-center rounded-lg bg-red-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-red-700">
+            <i class="fas fa-file-pdf mr-2"></i> Exportar a PDF
+        </button>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Referencias a las librerías necesarias para exportación -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- Referencia al archivo movimientos.js -->
+    <script src="~/js/movimientos.js"></script>
+}

@@ -1,0 +1,206 @@
+﻿@model IngeTechCRM.Models.Usuario
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Index", "Usuario")" class="text-gray-600 hover:text-indigo-600">Gestión de Usuarios</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">Crear Usuario</span>
+    </nav>
+
+    <!-- Encabezado -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Crear Nuevo Usuario</h1>
+        <p class="mt-2 text-gray-600">Complete el formulario para crear un nuevo usuario en el sistema.</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <!-- Formulario de creación -->
+        <div class="lg:col-span-2">
+            <form asp-action="Crear" method="post" class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="border-b border-gray-200 bg-indigo-600 p-6 text-white">
+                    <div class="flex items-center">
+                        <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-white bg-opacity-20 text-xl">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h2 class="text-xl font-bold">Información del Usuario</h2>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="mb-6 rounded-lg bg-red-50 p-4 text-red-700">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-medium text-red-800">Hay errores en el formulario</h3>
+                                    <div class="mt-2 text-sm text-red-700">
+                                        <ul class="list-disc space-y-1 pl-5">
+                                            @foreach (var modelState in ViewData.ModelState.Values)
+                                            {
+                                                foreach (var error in modelState.Errors)
+                                                {
+                                                    <li>@error.ErrorMessage</li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Campos del formulario -->
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <!-- Identificación -->
+                        <div>
+                            <label asp-for="IDENTIFICACION" class="mb-2 block text-sm font-medium text-gray-700">Identificación</label>
+                            <input asp-for="IDENTIFICACION" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <span asp-validation-for="IDENTIFICACION" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Nombre Completo -->
+                        <div>
+                            <label asp-for="NOMBRE_COMPLETO" class="mb-2 block text-sm font-medium text-gray-700">Nombre Completo</label>
+                            <input asp-for="NOMBRE_COMPLETO" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <span asp-validation-for="NOMBRE_COMPLETO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Nombre de Usuario -->
+                        <div>
+                            <label asp-for="NOMBRE_USUARIO" class="mb-2 block text-sm font-medium text-gray-700">Nombre de Usuario</label>
+                            <input asp-for="NOMBRE_USUARIO" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <span asp-validation-for="NOMBRE_USUARIO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Correo Electrónico -->
+                        <div>
+                            <label asp-for="CORREO_ELECTRONICO" class="mb-2 block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                            <input asp-for="CORREO_ELECTRONICO" type="email" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <span asp-validation-for="CORREO_ELECTRONICO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Teléfono -->
+                        <div>
+                            <label asp-for="TELEFONO" class="mb-2 block text-sm font-medium text-gray-700">Teléfono</label>
+                            <input asp-for="TELEFONO" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <span asp-validation-for="TELEFONO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Contraseña -->
+                        <div>
+                            <label asp-for="CONTRASENA" class="mb-2 block text-sm font-medium text-gray-700">Contraseña</label>
+                            <input asp-for="CONTRASENA" type="password" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <span asp-validation-for="CONTRASENA" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Confirmar Contraseña -->
+                        <div>
+                            <label for="confirmarContrasena" class="mb-2 block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
+                            <input name="confirmarContrasena" id="confirmarContrasena" type="password" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                        </div>
+
+                        <!-- Tipo de Usuario -->
+                        <div>
+                            <label asp-for="ID_TIPO_USUARIO" class="mb-2 block text-sm font-medium text-gray-700">Tipo de Usuario</label>
+                            <select asp-for="ID_TIPO_USUARIO" name="ID_TIPO_USUARIO" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                                <option value="">Seleccione un tipo de usuario</option>
+                                @if (ViewBag.TiposUsuario != null)
+                                {
+                                    @Html.Raw(ViewBag.TiposUsuario)
+                                }
+                            </select>
+                            <span asp-validation-for="ID_TIPO_USUARIO" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Provincia -->
+                        <div>
+                            <label asp-for="ID_PROVINCIA" class="mb-2 block text-sm font-medium text-gray-700">Provincia</label>
+                            <select asp-for="ID_PROVINCIA" name="ID_PROVINCIA" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                                <option value="">Seleccione una provincia</option>
+                                @if (ViewBag.Provincias != null)
+                                {
+                                    @Html.Raw(ViewBag.Provincias)
+                                }
+                            </select>
+                            <span asp-validation-for="ID_PROVINCIA" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Dirección -->
+                        <div class="md:col-span-2">
+                            <label asp-for="DIRECCION_COMPLETA" class="mb-2 block text-sm font-medium text-gray-700">Dirección</label>
+                            <textarea asp-for="DIRECCION_COMPLETA" rows="3" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                            <span asp-validation-for="DIRECCION_COMPLETA" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-end space-x-3">
+                        <a href="@Url.Action("Index")" class="rounded-lg border border-gray-300 px-5 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2">
+                            Cancelar
+                        </a>
+                        <button type="submit" class="rounded-lg bg-indigo-600 px-5 py-2 font-medium text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            Guardar Usuario
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Panel lateral -->
+        <div class="space-y-6">
+            <!-- Información de ayuda -->
+            <div class="rounded-xl bg-white p-6 shadow-lg">
+                <h3 class="mb-4 text-lg font-semibold text-gray-800">Información de usuario</h3>
+                <div class="space-y-4 text-sm text-gray-600">
+                    <div class="flex">
+                        <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <i class="fas fa-info"></i>
+                        </div>
+                        <div>
+                            <p>La <strong>identificación</strong> es un número único que identifica al usuario en el sistema. Este campo es obligatorio y no se puede modificar después de crear el usuario.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <div>
+                            <p>La <strong>contraseña</strong> debe tener al menos 8 caracteres, incluyendo letras mayúsculas, minúsculas y números para mayor seguridad.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <p>El <strong>tipo de usuario</strong> determina los permisos y acciones que puede realizar en el sistema.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notas -->
+            <div class="rounded-xl bg-yellow-50 p-6 shadow-lg">
+                <div class="flex items-center">
+                    <div class="mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-yellow-800">Notas importantes</h3>
+                </div>
+                <ul class="mt-4 space-y-2 pl-12 text-sm text-yellow-700">
+                    <li class="list-disc">Si crea un usuario de tipo "Cliente", se creará automáticamente un carrito de compras asociado a este usuario.</li>
+                    <li class="list-disc">Los usuarios administradores tendrán acceso a toda la información y funcionalidades del sistema.</li>
+                    <li class="list-disc">El correo electrónico debe ser único, ya que se utilizará para recuperar la contraseña si es necesario.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

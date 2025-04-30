@@ -1,0 +1,107 @@
+﻿
+@model IngeTechCRM.Models.Producto
+@{
+    ViewData["Title"] = "Eliminar Producto";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Eliminar Producto</h1>
+        <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-200">
+            <i class="fas fa-arrow-left mr-2"></i> Volver
+        </a>
+    </div>
+
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-red-500 to-red-600 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-exclamation-triangle mr-2"></i> Confirmar Eliminación
+            </h2>
+        </div>
+        <div class="p-6">
+            <div class="mb-6 rounded-lg bg-red-50 p-4 text-red-700">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-exclamation-circle text-xl"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-lg font-medium">¿Está seguro de que desea desactivar este producto?</h3>
+                        <div class="mt-2 text-sm">
+                            <p>Esta acción no eliminará físicamente el producto, pero lo marcará como inactivo y no aparecerá en las búsquedas ni estará disponible para nuevas operaciones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div>
+                    <h3 class="mb-3 text-lg font-medium text-gray-900">Detalles del Producto</h3>
+                    <dl class="space-y-2">
+                        <div class="grid grid-cols-3 gap-4 border-b border-gray-100 py-2">
+                            <dt class="text-sm font-medium text-gray-500">Código:</dt>
+                            <dd class="col-span-2 text-sm font-bold text-gray-900">@Model.CODIGO</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 border-b border-gray-100 py-2">
+                            <dt class="text-sm font-medium text-gray-500">Nombre:</dt>
+                            <dd class="col-span-2 text-sm font-bold text-gray-900">@Model.NOMBRE</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 border-b border-gray-100 py-2">
+                            <dt class="text-sm font-medium text-gray-500">Categoría:</dt>
+                            <dd class="col-span-2 text-sm text-gray-900">@Model.Categoria.NOMBRE</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 border-b border-gray-100 py-2">
+                            <dt class="text-sm font-medium text-gray-500">Marca:</dt>
+                            <dd class="col-span-2 text-sm text-gray-900">@Model.Marca.NOMBRE</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 border-b border-gray-100 py-2">
+                            <dt class="text-sm font-medium text-gray-500">Proveedor:</dt>
+                            <dd class="col-span-2 text-sm text-gray-900">@Model.Proveedor.NOMBRE</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-2">
+                            <dt class="text-sm font-medium text-gray-500">Precio:</dt>
+                            <dd class="col-span-2 text-sm font-bold text-indigo-600">@Model.PRECIO.ToString("C2")</dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div>
+                    <h3 class="mb-3 text-lg font-medium text-gray-900">Consecuencias</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-0.5 text-green-500"></i>
+                            <span class="ml-2">Podrá reactivar el producto más adelante si es necesario.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-0.5 text-green-500"></i>
+                            <span class="ml-2">Se conservará todo el historial y datos asociados al producto.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation-circle mt-0.5 text-red-500"></i>
+                            <span class="ml-2">El producto no estará disponible para nuevas ventas o movimientos de inventario.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation-circle mt-0.5 text-red-500"></i>
+                            <span class="ml-2">No aparecerá en las búsquedas de productos activos.</span>
+                        </li>
+                    </ul>
+
+                    <div class="mt-6">
+                        <form asp-action="ConfirmarEliminar" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.ID_PRODUCTO" />
+
+                            <div class="flex justify-end space-x-3">
+                                <a href="@Url.Action("Index")" class="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+                                    Cancelar
+                                </a>
+                                <button type="submit" class="rounded-lg bg-red-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-red-700">
+                                    <i class="fas fa-trash-alt mr-2"></i> Desactivar Producto
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

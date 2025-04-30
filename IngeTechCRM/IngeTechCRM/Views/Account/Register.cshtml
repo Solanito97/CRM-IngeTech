@@ -1,0 +1,310 @@
+﻿@model IngeTechCRM.Models.Usuario
+@{
+    ViewData["Title"] = "Registro";
+    var provincias = ViewBag.Provincias as List<Provincia>;
+    var selectedProvinciaId = Model?.ID_PROVINCIA;
+}
+
+<div class="container mx-auto px-4 py-10">
+    <div class="mx-auto max-w-4xl">
+        <!-- Tarjeta principal -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-xl">
+            <!-- Encabezado con gradiente -->
+            <div class="bg-gradient-to-r from-indigo-600 to-blue-500 py-6 text-center text-white">
+                <div class="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-white bg-opacity-20">
+                    <i class="fas fa-user-plus text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold">Crear una Cuenta</h3>
+                <p class="text-sm opacity-90">Únase a IngeTech para acceder a todos nuestros servicios</p>
+            </div>
+
+            <!-- Cuerpo del formulario -->
+            <div class="p-8">
+                <form method="post" action="@Url.Action("Register", "Account")">
+                    <!-- Mensajes de error del modelo -->
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-600">
+                            <div class="mb-2 flex items-center">
+                                <i class="fas fa-exclamation-circle mr-2 text-red-500"></i>
+                                <span class="font-medium">Por favor corrija los siguientes errores:</span>
+                            </div>
+                            <ul class="ml-6 list-disc">
+                                @foreach (var modelState in ViewData.ModelState.Values)
+                                {
+                                    foreach (var error in modelState.Errors)
+                                    {
+                                        <li>@error.ErrorMessage</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <!-- Identificación y Nombre de Usuario -->
+                    <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div>
+                            <label for="Identificacion" class="mb-2 block text-sm font-medium text-gray-700">Identificación</label>
+                            <div class="relative">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-id-card text-gray-400"></i>
+                                </div>
+                                <input type="number"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       id="Identificacion"
+                                       name="IDENTIFICACION"
+                                       value="@Model?.IDENTIFICACION"
+                                       required
+                                       placeholder="Ingrese su número de cédula">
+                                <p class="mt-1 text-xs text-gray-500">Ingrese su número de cédula sin guiones ni espacios</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="NombreUsuario" class="mb-2 block text-sm font-medium text-gray-700">Nombre de Usuario</label>
+                            <div class="relative">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       id="NombreUsuario"
+                                       name="NOMBRE_USUARIO"
+                                       value="@Model?.NOMBRE_USUARIO"
+                                       required
+                                       placeholder="Elija un nombre de usuario">
+                                <p class="mt-1 text-xs text-gray-500">Este será su nombre para ingresar al sistema</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nombre completo -->
+                    <div class="mb-6">
+                        <label for="NombreCompleto" class="mb-2 block text-sm font-medium text-gray-700">Nombre Completo</label>
+                        <div class="relative">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <i class="fas fa-user-circle text-gray-400"></i>
+                            </div>
+                            <input type="text"
+                                   class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                   id="NombreCompleto"
+                                   name="NOMBRE_COMPLETO"
+                                   value="@Model?.NOMBRE_COMPLETO"
+                                   required
+                                   placeholder="Ingrese su nombre completo">
+                        </div>
+                    </div>
+
+                    <!-- Correo electrónico -->
+                    <div class="mb-6">
+                        <label for="CorreoElectronico" class="mb-2 block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                        <div class="relative">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email"
+                                   class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                   id="CorreoElectronico"
+                                   name="CORREO_ELECTRONICO"
+                                   value="@Model?.CORREO_ELECTRONICO"
+                                   required
+                                   placeholder="ejemplo@email.com">
+                        </div>
+                    </div>
+
+                    <!-- Contraseñas -->
+                    <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div>
+                            <label for="Contrasena" class="mb-2 block text-sm font-medium text-gray-700">Contraseña</label>
+                            <div class="relative">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       id="Contrasena"
+                                       name="CONTRASENA"
+                                       required
+                                       placeholder="Cree una contraseña segura">
+                                <p class="mt-1 text-xs text-gray-500">Mínimo 6 caracteres, incluya letras y números</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="confirmarContrasena" class="mb-2 block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
+                            <div class="relative">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       id="confirmarContrasena"
+                                       name="confirmarContrasena"
+                                       required
+                                       placeholder="Repita su contraseña">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Teléfono y Fecha de Nacimiento -->
+                    <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div>
+                            <label for="Telefono" class="mb-2 block text-sm font-medium text-gray-700">Teléfono</label>
+                            <div class="relative">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-phone text-gray-400"></i>
+                                </div>
+                                <input type="tel"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       id="Telefono"
+                                       name="TELEFONO"
+                                       value="@Model?.TELEFONO"
+                                       placeholder="Número de teléfono">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="FechaNacimiento" class="mb-2 block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
+                            <div class="relative">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-calendar-alt text-gray-400"></i>
+                                </div>
+                                <input type="date"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       id="FechaNacimiento"
+                                       name="FECHA_NACIMIENTO"
+                                       value="@(Model?.FECHA_NACIMIENTO?.ToString("yyyy-MM-dd"))">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Provincia -->
+                    <div class="mb-6">
+                        <label for="IdProvincia" class="mb-2 block text-sm font-medium text-gray-700">Provincia</label>
+                        <div class="relative">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <i class="fas fa-map-marker-alt text-gray-400"></i>
+                            </div>
+                            <select class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                    id="IdProvincia"
+                                    name="ID_PROVINCIA"
+                                    required>
+                                <option value="">Seleccione una provincia</option>
+                                @foreach (var provincia in provincias)
+                                {
+                                    var selectedAttribute = selectedProvinciaId == provincia.ID_PROVINCIA ? " selected" : "";
+                                    @Html.Raw($"<option value='{provincia.ID_PROVINCIA}'{selectedAttribute}>{provincia.NOMBRE}</option>")
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Dirección completa -->
+                    <div class="mb-6">
+                        <label for="DireccionCompleta" class="mb-2 block text-sm font-medium text-gray-700">Dirección Completa</label>
+                        <div class="relative">
+                            <div class="pointer-events-none absolute left-0 top-3 flex items-center pl-3">
+                                <i class="fas fa-home text-gray-400"></i>
+                            </div>
+                            <textarea class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                      id="DireccionCompleta"
+                                      name="DIRECCION_COMPLETA"
+                                      rows="3"
+                                      required
+                                      placeholder="Ingrese su dirección completa">@Model?.DIRECCION_COMPLETA</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Términos y condiciones -->
+                    <div class="mb-6 rounded-lg bg-gray-50 p-4">
+                        <div class="flex items-start">
+                            <div class="flex h-5 items-center">
+                                <input id="terminos"
+                                       name="terminos"
+                                       type="checkbox"
+                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                       required>
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="terminos" class="font-medium text-gray-700">Acepto los términos y condiciones</label>
+                                <p class="text-gray-500">Al registrarse, acepta nuestros <a href="#" class="text-indigo-600 hover:underline">Términos de servicio</a> y <a href="#" class="text-indigo-600 hover:underline">Política de privacidad</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón de registro -->
+                    <div class="mt-8">
+                        <button type="submit"
+                                class="group relative w-full overflow-hidden rounded-lg bg-gradient-to-r from-indigo-600 to-blue-500 py-3 text-center font-bold text-white shadow-lg transition duration-300 hover:from-indigo-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                <i class="fas fa-user-plus"></i>
+                            </span>
+                            Registrarse
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Pie de la tarjeta -->
+            <div class="border-t border-gray-200 bg-gray-50 p-4 text-center">
+                <div class="flex items-center justify-center space-x-2">
+                    <span class="text-sm text-gray-600">¿Ya tiene una cuenta?</span>
+                    <a href="@Url.Action("Login", "Account")" class="rounded-md bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-600 hover:bg-indigo-100">
+                        Inicie sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventajas del registro (opcional) -->
+        <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div class="rounded-lg bg-white p-4 text-center shadow-md">
+                <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h4 class="mb-2 font-semibold">Compras más rápidas</h4>
+                <p class="text-sm text-gray-600">Guarde sus datos para finalizar las compras con un solo clic.</p>
+            </div>
+            <div class="rounded-lg bg-white p-4 text-center shadow-md">
+                <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h4 class="mb-2 font-semibold">Historial de pedidos</h4>
+                <p class="text-sm text-gray-600">Acceda fácilmente a sus pedidos anteriores y realice recompras.</p>
+            </div>
+            <div class="rounded-lg bg-white p-4 text-center shadow-md">
+                <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                    <i class="fas fa-tag"></i>
+                </div>
+                <h4 class="mb-2 font-semibold">Ofertas exclusivas</h4>
+                <p class="text-sm text-gray-600">Reciba acceso a descuentos y promociones especiales para clientes registrados.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Validación de contraseñas
+            $('#confirmarContrasena').on('keyup', function () {
+                var contrasena = $('#Contrasena').val();
+                var confirmarContrasena = $(this).val();
+
+                if (contrasena === confirmarContrasena) {
+                    $(this).removeClass('border-red-500').addClass('border-green-500');
+                } else {
+                    $(this).removeClass('border-green-500').addClass('border-red-500');
+                }
+            });
+
+            // Validación del formulario
+            $('form').submit(function (event) {
+                var contrasena = $('#Contrasena').val();
+                var confirmarContrasena = $('#confirmarContrasena').val();
+
+                if (contrasena !== confirmarContrasena) {
+                    event.preventDefault();
+                    alert('Las contraseñas no coinciden');
+                }
+            });
+        });
+    </script>
+}

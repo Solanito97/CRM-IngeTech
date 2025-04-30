@@ -1,0 +1,146 @@
+﻿
+@model IngeTechCRM.Models.Inventario
+@{
+    ViewData["Title"] = "Editar Inventario";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Editar Inventario</h1>
+        <div class="flex space-x-2">
+            <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-200">
+                <i class="fas fa-arrow-left mr-2"></i> Volver
+            </a>
+            <a href="@Url.Action("Detalles", new { id = Model.ID_INVENTARIO })" class="flex items-center rounded-lg bg-blue-100 px-4 py-2 font-medium text-blue-700 transition hover:bg-blue-200">
+                <i class="fas fa-eye mr-2"></i> Ver Detalles
+            </a>
+        </div>
+    </div>
+
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-edit mr-2"></i> Formulario de Edición
+            </h2>
+        </div>
+        <div class="p-6">
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="mb-4 rounded-lg bg-red-100 p-4 text-red-700">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm">@ViewBag.Message</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <form asp-action="Editar" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="ID_INVENTARIO" />
+                <div asp-validation-summary="ModelOnly" class="mb-4 rounded-lg bg-red-100 p-4 text-red-700"></div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="mb-1 block text-sm font-medium text-gray-700">Producto</label>
+                            <input type="hidden" asp-for="ID_PRODUCTO" />
+                            <div class="rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-gray-700">
+                                @Model.Producto.NOMBRE <span class="ml-2 text-sm text-gray-500">(@Model.Producto.CODIGO)</span>
+                            </div>
+                            <span class="mt-1 text-xs text-gray-500">El producto no se puede cambiar una vez creado el inventario</span>
+                        </div>
+
+                        <div>
+                            <label class="mb-1 block text-sm font-medium text-gray-700">Almacén</label>
+                            <input type="hidden" asp-for="ID_ALMACEN" />
+                            <div class="rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-gray-700">
+                                @Model.Almacen.NOMBRE
+                            </div>
+                            <span class="mt-1 text-xs text-gray-500">El almacén no se puede cambiar una vez creado el inventario</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label asp-for="CANTIDAD" class="mb-1 block text-sm font-medium text-gray-700">Cantidad</label>
+                            <input asp-for="CANTIDAD"
+                                   type="number"
+                                   min="0"
+                                   class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                            <span class="mt-1 text-xs text-gray-500">Al cambiar la cantidad, se registrará automáticamente un movimiento en el historial</span>
+                            <span asp-validation-for="CANTIDAD" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <div>
+                            <label asp-for="CANTIDAD_MINIMA" class="mb-1 block text-sm font-medium text-gray-700">Cantidad Mínima</label>
+                            <input asp-for="CANTIDAD_MINIMA"
+                                   type="number"
+                                   min="1"
+                                   class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                            <span class="mt-1 text-xs text-gray-500">Cantidad mínima recomendada para generar alertas de stock bajo</span>
+                            <span asp-validation-for="CANTIDAD_MINIMA" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <div class="rounded-lg bg-yellow-50 p-4 text-yellow-700">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium">Importante</h3>
+                                <div class="mt-2 text-sm">
+                                    <p>Al editar un inventario:</p>
+                                    <ul class="ml-4 mt-1 list-disc">
+                                        <li>Si cambia la cantidad, se registrará automáticamente un movimiento en el historial.</li>
+                                        <li>Si la nueva cantidad es menor o igual a la cantidad mínima, se generará una alerta.</li>
+                                        <li>El producto y almacén no pueden ser modificados. Si necesita reubicar el inventario, debe registrar una transferencia.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-3">
+                    <a href="@Url.Action("Detalles", new { id = Model.ID_INVENTARIO })" class="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+                        Cancelar
+                    </a>
+                    <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function() {
+            // Guardar el valor original para comparación
+            var cantidadOriginal = @Model.CANTIDAD;
+
+            // Al enviar el formulario
+            $('form').submit(function() {
+                var cantidadNueva = parseInt($('#CANTIDAD').val());
+
+                // Si la cantidad disminuye, confirmar con el usuario
+                if (cantidadNueva < cantidadOriginal) {
+                    return confirm('¿Está seguro de reducir el stock de ' + cantidadOriginal + ' a ' + cantidadNueva + ' unidades?');
+                }
+
+                return true;
+            });
+        });
+    </script>
+}

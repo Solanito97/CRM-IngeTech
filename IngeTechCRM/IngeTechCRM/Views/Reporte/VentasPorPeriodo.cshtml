@@ -1,0 +1,361 @@
+﻿
+@{
+    ViewData["Title"] = "Reporte de Ventas por Periodo";
+    var fechaInicio = ViewBag.FechaInicio;
+    var fechaFin = ViewBag.FechaFin;
+    var ventasDiarias = ViewBag.VentasDiarias as List<IngeTechCRM.Models.VentasDiariasViewModel>;
+    var ventasProvincia = ViewBag.VentasProvincia as List<IngeTechCRM.Models.VentasProvinciaViewModel>;
+    var productosMasVendidos = ViewBag.ProductosMasVendidos as List<IngeTechCRM.Models.ProductosMasVendidosViewModel>;
+
+    var totalPedidos = ViewBag.TotalPedidos;
+    var montoTotalVentas = ViewBag.MontoTotalVentas;
+    var promedioVentasDiarias = ViewBag.PromedioVentasDiarias;
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Reporte de Ventas por Periodo</h1>
+        <a href="@Url.Action("Index")" class="mt-4 flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-200 sm:mt-0">
+            <i class="fas fa-arrow-left mr-2"></i> Volver al Panel
+        </a>
+    </div>
+
+    <!-- Filtro de fechas -->
+    <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-calendar-alt mr-2"></i> Seleccionar Periodo
+            </h2>
+        </div>
+        <div class="p-6">
+            <form action="@Url.Action("VentasPorPeriodo")" method="post" class="flex flex-col space-y-4 md:flex-row md:items-end md:space-x-4 md:space-y-0">
+                <div class="w-full md:w-auto">
+                    <label for="fechaInicio" class="mb-2 block text-sm font-medium text-gray-700">Fecha Inicio</label>
+                    <input type="date"
+                           id="fechaInicio"
+                           name="fechaInicio"
+                           value="@fechaInicio"
+                           class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                           required>
+                </div>
+                <div class="w-full md:w-auto">
+                    <label for="fechaFin" class="mb-2 block text-sm font-medium text-gray-700">Fecha Fin</label>
+                    <input type="date"
+                           id="fechaFin"
+                           name="fechaFin"
+                           value="@fechaFin"
+                           class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                           required>
+                </div>
+                <div>
+                    <button type="submit" class="flex items-center rounded-lg bg-green-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-green-700">
+                        <i class="fas fa-search mr-2"></i> Consultar
+                    </button>
+                </div>
+                <div>
+                    <button type="button" id="btnImprimir" class="flex items-center rounded-lg bg-indigo-100 px-4 py-2 font-medium text-indigo-700 shadow-sm transition hover:bg-indigo-200">
+                        <i class="fas fa-print mr-2"></i> Imprimir
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (ventasDiarias != null && ventasDiarias.Any())
+    {
+        <!-- Resumen de ventas -->
+        <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-500 px-4 py-3 text-white">
+                    <h2 class="font-bold">Total de Pedidos</h2>
+                </div>
+                <div class="flex items-center justify-center p-6">
+                    <div class="rounded-full bg-blue-100 p-4">
+                        <i class="fas fa-shopping-cart text-4xl text-blue-500"></i>
+                    </div>
+                    <div class="ml-4">
+                        <span class="block text-3xl font-bold text-gray-800">@totalPedidos</span>
+                        <span class="text-sm text-gray-500">Pedidos en el periodo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white">
+                    <h2 class="font-bold">Monto Total de Ventas</h2>
+                </div>
+                <div class="flex items-center justify-center p-6">
+                    <div class="rounded-full bg-green-100 p-4">
+                        <i class="fas fa-dollar-sign text-4xl text-green-500"></i>
+                    </div>
+                    <div class="ml-4">
+                        <span class="block text-3xl font-bold text-gray-800">@montoTotalVentas.ToString("C")</span>
+                        <span class="text-sm text-gray-500">Ingresos en el periodo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-yellow-500 to-orange-500 px-4 py-3 text-white">
+                    <h2 class="font-bold">Promedio Diario de Ventas</h2>
+                </div>
+                <div class="flex items-center justify-center p-6">
+                    <div class="rounded-full bg-yellow-100 p-4">
+                        <i class="fas fa-chart-line text-4xl text-yellow-500"></i>
+                    </div>
+                    <div class="ml-4">
+                        <span class="block text-3xl font-bold text-gray-800">@promedioVentasDiarias.ToString("C")</span>
+                        <span class="text-sm text-gray-500">Promedio diario</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico de ventas por día -->
+        <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Ventas Diarias</h2>
+            </div>
+            <div class="p-6">
+                <div>
+                    <!-- Representación visual de ventas diarias -->
+                    @if (ventasDiarias.Any())
+                    {
+                        var maxVenta = ventasDiarias.Max(v => v.MONTO_TOTAL);
+
+                        <div class="mb-6 h-64 overflow-x-auto">
+                            <div class="flex h-full space-x-1" style="min-width: @(ventasDiarias.Count * 40)px">
+                                @foreach (var venta in ventasDiarias.OrderBy(v => v.FECHA))
+                                {
+                                    var altura = maxVenta > 0 ? (int)(venta.MONTO_TOTAL * 100 / maxVenta) : 0;
+                                    altura = Math.Max(altura, 5); // Mínimo 5% para que se vea
+                                    var fechaFormateada = venta.FECHA.ToString("dd/MM");
+                                    <div class="flex flex-col items-center">
+                                        <div class="h-full w-8 flex items-end">
+                                            <div class="w-8 bg-green-500 tooltip-trigger"
+                                                 style="height: @altura%"
+                                                 title="@fechaFormateada: @venta.MONTO_TOTAL.ToString("C")">
+                                            </div>
+                                        </div>
+                                        <span class="mt-2 text-xs">@fechaFormateada</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                            Fecha
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                            Total Pedidos
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                            Monto Total
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    @foreach (var venta in ventasDiarias.OrderByDescending(v => v.FECHA))
+                                    {
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-6 py-4 text-sm font-medium text-gray-800">
+                                                @venta.FECHA.ToString("dd/MM/yyyy")
+                                            </td>
+                                            <td class="px-6 py-4 text-sm text-gray-800">
+                                                @venta.TOTAL_PEDIDOS
+                                            </td>
+                                            <td class="px-6 py-4 text-sm font-medium text-gray-800">
+                                                @venta.MONTO_TOTAL.ToString("C")
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="rounded-lg bg-blue-50 p-4 text-blue-800">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-info-circle text-blue-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">
+                                        No se encontraron ventas en el periodo seleccionado.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido en dos columnas -->
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <!-- Ventas por provincia -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                    <h2 class="font-bold">Ventas por Provincia</h2>
+                </div>
+                <div class="p-6">
+                    @if (ventasProvincia != null && ventasProvincia.Any())
+                    {
+                        var maxVentasProvincia = ventasProvincia.Max(v => v.MONTO_TOTAL);
+
+                        <div>
+                            @foreach (var venta in ventasProvincia.OrderByDescending(v => v.MONTO_TOTAL))
+                            {
+                                var porcentaje = (int)(venta.MONTO_TOTAL * 100 / maxVentasProvincia);
+                                <div class="mb-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm font-medium text-gray-600">@venta.PROVINCIA</span>
+                                        <span class="text-sm font-medium text-gray-800">@venta.MONTO_TOTAL.ToString("C")</span>
+                                    </div>
+                                    <div class="mt-1 h-4 w-full overflow-hidden rounded-full bg-gray-200">
+                                        <div class="h-full bg-indigo-500" style="width: @porcentaje%"></div>
+                                    </div>
+                                    <div class="mt-1 flex justify-between text-xs text-gray-500">
+                                        <span>@venta.TOTAL_PEDIDOS pedidos</span>
+                                        <span>@((venta.MONTO_TOTAL / venta.TOTAL_PEDIDOS).ToString("C")) promedio</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="rounded-lg bg-blue-50 p-4 text-blue-800">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-info-circle text-blue-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">
+                                        No se encontraron datos de ventas por provincia en el periodo seleccionado.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Productos más vendidos -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-yellow-500 to-orange-500 px-4 py-3 text-white">
+                    <h2 class="font-bold">Productos Más Vendidos</h2>
+                </div>
+                <div class="p-6">
+                    @if (productosMasVendidos != null && productosMasVendidos.Any())
+                    {
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                            Producto
+                                        </th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                            Unidades
+                                        </th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                            Venta Total
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    @foreach (var producto in productosMasVendidos)
+                                    {
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-4 py-3 text-sm">
+                                                <div class="font-medium text-gray-800">@producto.PRODUCTO</div>
+                                                <div class="text-xs text-gray-500">@producto.CODIGO</div>
+                                            </td>
+                                            <td class="px-4 py-3 text-sm font-medium text-gray-800">
+                                                @producto.UNIDADES_VENDIDAS
+                                            </td>
+                                            <td class="px-4 py-3 text-sm font-medium text-gray-800">
+                                                @producto.MONTO_TOTAL.ToString("C")
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="rounded-lg bg-blue-50 p-4 text-blue-800">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-info-circle text-blue-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">
+                                        No se encontraron datos de productos vendidos en el periodo seleccionado.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="rounded-lg bg-blue-50 p-6 text-blue-800">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-info-circle text-xl text-blue-500"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-base font-medium">
+                        Seleccione un rango de fechas y presione "Consultar" para ver el reporte de ventas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Configurar tooltip para las barras del gráfico
+            $(".tooltip-trigger").tooltip();
+
+            // Configurar botón de impresión
+            $("#btnImprimir").click(function() {
+                window.print();
+            });
+
+            // Validar que fecha fin no sea menor que fecha inicio
+            $("#fechaFin").change(function() {
+                var fechaInicio = new Date($("#fechaInicio").val());
+                var fechaFin = new Date($(this).val());
+
+                if (fechaFin < fechaInicio) {
+                    alert("La fecha final no puede ser menor que la fecha inicial");
+                    $(this).val($("#fechaInicio").val());
+                }
+            });
+
+            $("#fechaInicio").change(function() {
+                var fechaInicio = new Date($(this).val());
+                var fechaFin = new Date($("#fechaFin").val());
+
+                if (fechaFin < fechaInicio) {
+                    $("#fechaFin").val($(this).val());
+                }
+            });
+        });
+    </script>
+}
+

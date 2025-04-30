@@ -1,0 +1,98 @@
+﻿
+@model IngeTechCRM.Models.Categoria
+@{
+    ViewData["Title"] = "Editar Categoría";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Editar Categoría</h1>
+        <a href="@Url.Action("Categorias")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-200">
+            <i class="fas fa-arrow-left mr-2"></i> Volver
+        </a>
+    </div>
+
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-edit mr-2"></i> Formulario de Edición
+            </h2>
+        </div>
+        <div class="p-6">
+            @if (TempData["Message"] != null)
+            {
+                <div class="mb-4 rounded-lg bg-red-100 p-4 text-red-700">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm">@TempData["Message"]</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <form asp-action="EditarCategoria" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="ID_CATEGORIA" />
+                <div asp-validation-summary="ModelOnly" class="mb-4 rounded-lg bg-red-100 p-4 text-red-700"></div>
+
+                <div class="space-y-6">
+                    <div>
+                        <label asp-for="NOMBRE" class="mb-1 block text-sm font-medium text-gray-700">Nombre</label>
+                        <input asp-for="NOMBRE"
+                               type="text"
+                               class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                               placeholder="Nombre de la categoría">
+                        <span asp-validation-for="NOMBRE" class="mt-1 text-sm text-red-600"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="DESCRIPCION" class="mb-1 block text-sm font-medium text-gray-700">Descripción</label>
+                        <textarea asp-for="DESCRIPCION"
+                                  rows="3"
+                                  class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                  placeholder="Descripción opcional de la categoría"></textarea>
+                        <span asp-validation-for="DESCRIPCION" class="mt-1 text-sm text-red-600"></span>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <div class="rounded-lg bg-yellow-50 p-4 text-yellow-700">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium">Advertencia</h3>
+                                <div class="mt-2 text-sm">
+                                    <p>Al modificar el nombre de una categoría:</p>
+                                    <ul class="ml-4 mt-1 list-disc">
+                                        <li>El cambio afectará a todos los productos asociados a esta categoría</li>
+                                        <li>Los usuarios verán el nuevo nombre en todas las secciones del sistema</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-3">
+                    <a href="@Url.Action("Categorias")" class="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+                        Cancelar
+                    </a>
+                    <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700">
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

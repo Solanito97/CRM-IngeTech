@@ -1,0 +1,409 @@
+﻿
+@model IngeTechCRM.Models.Inventario
+@{
+    ViewData["Title"] = "Detalles de Inventario";
+    var movimientos = ViewBag.Movimientos as List<IngeTechCRM.Models.MovimientoInventario>;
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Detalles de Inventario</h1>
+        <div class="flex space-x-2">
+            <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-200">
+                <i class="fas fa-arrow-left mr-2"></i> Volver
+            </a>
+            <a href="@Url.Action("Editar", new { id = Model.ID_INVENTARIO })" class="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white transition hover:bg-indigo-700">
+                <i class="fas fa-edit mr-2"></i> Editar
+            </a>
+        </div>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-3">
+        <!-- Información del Producto -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg lg:col-span-2">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-500 px-4 py-3 text-white">
+                <h2 class="flex items-center font-bold">
+                    <i class="fas fa-box mr-2"></i> Información del Producto
+                </h2>
+            </div>
+            <div class="p-6">
+                <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div>
+                        <h3 class="mb-4 text-lg font-medium text-gray-800">Datos del Producto</h3>
+                        <div class="mb-4">
+                            <p class="text-sm font-medium text-gray-500">Nombre del Producto</p>
+                            <p class="text-base text-gray-900">@Model.Producto.NOMBRE</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-sm font-medium text-gray-500">Código</p>
+                            <p class="text-base text-gray-900">@Model.Producto.CODIGO</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-sm font-medium text-gray-500">Categoría</p>
+                            <p class="text-base text-gray-900">@Model.Producto.Categoria.NOMBRE</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-sm font-medium text-gray-500">Marca</p>
+                            <p class="text-base text-gray-900">@Model.Producto.Marca.NOMBRE</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="mb-4 text-lg font-medium text-gray-800">Datos del Inventario</h3>
+                        <div class="mb-4">
+                            <p class="text-sm font-medium text-gray-500">Almacén</p>
+                            <p class="text-base text-gray-900">@Model.Almacen.NOMBRE (@Model.Almacen.Provincia.NOMBRE)</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-sm font-medium text-gray-500">Stock Actual</p>
+                            <p class="text-xl font-bold text-gray-900">@Model.CANTIDAD</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-sm font-medium text-gray-500">Stock Mínimo</p>
+                            <p class="text-base text-gray-900">@Model.CANTIDAD_MINIMA</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-sm font-medium text-gray-500">Última Actualización</p>
+                            <p class="text-base text-gray-900">@Model.FECHA_ACTUALIZACION.ToString("dd/MM/yyyy HH:mm:ss")</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3 h-px w-full bg-gray-200"></div>
+
+                @if (Model.Producto.DESCRIPCION != null)
+                {
+                    <h3 class="mb-2 text-lg font-medium text-gray-800">Descripción</h3>
+                    <p class="mb-4 text-gray-700">@Model.Producto.DESCRIPCION</p>
+                }
+
+                <!-- Estado de stock con barra de progreso -->
+                <h3 class="mb-2 text-lg font-medium text-gray-800">Estado del Stock</h3>
+                @{
+                    var porcentaje = Model.CANTIDAD_MINIMA > 0 ? Math.Min(100, (int)(Model.CANTIDAD * 100.0 / (Model.CANTIDAD_MINIMA * 2))) : 100;
+                    var colorBarra = porcentaje <= 50 ? "bg-red-500" : (porcentaje <= 75 ? "bg-yellow-500" : "bg-green-500");
+                    var textoEstado = porcentaje <= 50 ? "Stock Bajo" : (porcentaje <= 75 ? "Stock Medio" : "Stock Óptimo");
+                    var colorEstado = porcentaje <= 50 ? "text-red-800 bg-red-100" : (porcentaje <= 75 ? "text-yellow-800 bg-yellow-100" : "text-green-800 bg-green-100");
+                }
+
+                <div class="mb-2 flex items-center justify-between">
+                    <span class="inline-flex rounded-full @colorEstado px-2 py-1 text-xs font-semibold">
+                        @textoEstado
+                    </span>
+                    <span class="text-sm text-gray-500">@Model.CANTIDAD de al menos @Model.CANTIDAD_MINIMA unidades recomendadas</span>
+                </div>
+
+                <div class="mb-4 h-2.5 w-full overflow-hidden rounded-full bg-gray-200">
+                    <div class="h-full @colorBarra" style="width: @porcentaje%"></div>
+                </div>
+
+                <div class="mt-6 flex justify-center space-x-4">
+                    <button type="button"
+                            class="flex items-center rounded-lg bg-green-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-green-700"
+                            onclick="registerMovement(@Model.ID_PRODUCTO, @Model.ID_ALMACEN, 'ENTRADA')">
+                        <i class="fas fa-plus-circle mr-2"></i> Agregar Stock
+                    </button>
+                    <button type="button"
+                            class="flex items-center rounded-lg bg-red-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-red-700"
+                            onclick="registerMovement(@Model.ID_PRODUCTO, @Model.ID_ALMACEN, 'SALIDA')">
+                        <i class="fas fa-minus-circle mr-2"></i> Reducir Stock
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumen y acciones rápidas -->
+        <div class="space-y-6">
+            <!-- Tarjeta de estado -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                    <h2 class="flex items-center font-bold">
+                        <i class="fas fa-chart-pie mr-2"></i> Resumen
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <!-- Indicador de estado visual -->
+                    <div class="mb-6 flex justify-center">
+                        @{
+                            var estadoIcono = porcentaje <= 50 ? "fa-exclamation-triangle text-red-500" :
+                            (porcentaje <= 75 ? "fa-exclamation-circle text-yellow-500" :
+                            "fa-check-circle text-green-500");
+                        }
+                        <i class="fas @estadoIcono text-6xl"></i>
+                    </div>
+
+                    <!-- Métricas en tarjetas pequeñas -->
+                    <div class="mb-4 grid grid-cols-2 gap-4">
+                        <div class="rounded-lg bg-gray-50 p-4 text-center">
+                            <h3 class="mb-1 text-xs font-medium text-gray-500">Movimientos</h3>
+                            <p class="text-xl font-bold text-gray-800">@(movimientos?.Count ?? 0)</p>
+                        </div>
+                        <div class="rounded-lg bg-gray-50 p-4 text-center">
+                            <h3 class="mb-1 text-xs font-medium text-gray-500">Valor</h3>
+                            @if (Model.Producto.PRECIO>0)
+                            {
+                                <p class="text-xl font-bold text-gray-800">$@((Model.Producto.PRECIO * Model.CANTIDAD).ToString("N2"))</p>
+                            }
+                            else
+                            {
+                                <p class="text-xl font-bold text-gray-800">N/A</p>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Acciones adicionales -->
+                    <div class="space-y-2">
+                        <a href="@Url.Action("Detalles", "Producto", new { id = Model.ID_PRODUCTO })" class="flex w-full items-center justify-between rounded-lg bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
+                            Ver detalles del producto
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="@Url.Action("Movimientos", new { productoId = Model.ID_PRODUCTO, almacenId = Model.ID_ALMACEN })" class="flex w-full items-center justify-between rounded-lg bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
+                            Ver historial de movimientos
+                            <i class="fas fa-history"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Historial de movimientos recientes -->
+    <div class="mt-6 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-history mr-2"></i> Historial de Movimientos Recientes
+            </h2>
+        </div>
+        <div class="p-6">
+            @if (movimientos == null || !movimientos.Any())
+            {
+                <div class="rounded-lg bg-blue-50 p-4 text-blue-800">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium">
+                                No hay movimientos registrados para este producto en este almacén.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Fecha
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Tipo
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Cantidad
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Usuario
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Observación
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            @foreach (var movimiento in movimientos)
+                            {
+                                var bgColor = movimiento.TIPO_MOVIMIENTO == "ENTRADA"
+                                ? "bg-green-100 text-green-800"
+                                : (movimiento.TIPO_MOVIMIENTO == "SALIDA" ? "bg-red-100 text-red-800" : "bg-blue-100 text-blue-800");
+
+                                <tr class="hover:bg-gray-50">
+                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                        @movimiento.FECHA_MOVIMIENTO.ToString("dd/MM/yyyy HH:mm")
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                        <span class="inline-flex rounded-full @bgColor px-2 py-1 text-xs font-semibold">
+                                            @movimiento.TIPO_MOVIMIENTO
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-medium">
+                                        @movimiento.CANTIDAD
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @movimiento.Usuario.NOMBRE_COMPLETO
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @(String.IsNullOrEmpty(movimiento.OBSERVACION) ? "-" : movimiento.OBSERVACION)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4 text-center">
+                    <a href="@Url.Action("Movimientos", new { productoId = Model.ID_PRODUCTO, almacenId = Model.ID_ALMACEN })" class="inline-flex items-center rounded-lg bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200">
+                        Ver historial completo <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Modal para registrar movimiento rápido -->
+<div class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black bg-opacity-50" id="movimientoRapidoModal">
+    <div class="w-full max-w-md overflow-hidden rounded-lg bg-white shadow-xl">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h3 class="font-bold" id="movimientoRapidoModalLabel">Registrar Movimiento</h3>
+        </div>
+        <div class="p-6">
+            <form id="movimientoRapidoForm">
+                <input type="hidden" id="modalProductoId" name="idProducto">
+                <input type="hidden" id="modalAlmacenId" name="idAlmacen">
+                <input type="hidden" id="modalTipoMovimiento" name="tipoMovimiento">
+
+                <div class="mb-4">
+                    <label for="modalCantidad" class="mb-2 block text-sm font-medium text-gray-700">Cantidad</label>
+                    <input type="number"
+                           class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                           id="modalCantidad"
+                           name="cantidad"
+                           min="1"
+                           required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="modalObservacion" class="mb-2 block text-sm font-medium text-gray-700">Observación (opcional)</label>
+                    <textarea class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                              id="modalObservacion"
+                              name="observacion"
+                              rows="2"></textarea>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button"
+                            class="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-50"
+                            id="cancelarMovimientoBtn">
+                        Cancelar
+                    </button>
+                    <button type="button"
+                            class="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-indigo-700"
+                            id="confirmarMovimientoBtn">
+                        Confirmar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function registerMovement(productoId, almacenId, tipoMovimiento) {
+            // Configurar modal
+            $('#modalProductoId').val(productoId);
+            $('#modalAlmacenId').val(almacenId);
+            $('#modalTipoMovimiento').val(tipoMovimiento);
+
+            // Ajustar título y colores según tipo de movimiento
+            if (tipoMovimiento === 'ENTRADA') {
+                $('#movimientoRapidoModalLabel').text('Agregar Stock');
+                $('#confirmarMovimientoBtn').removeClass('bg-red-600 hover:bg-red-700').addClass('bg-green-600 hover:bg-green-700');
+            } else {
+                $('#movimientoRapidoModalLabel').text('Reducir Stock');
+                $('#confirmarMovimientoBtn').removeClass('bg-green-600 hover:bg-green-700').addClass('bg-red-600 hover:bg-red-700');
+            }
+
+            // Mostrar modal
+            $('#movimientoRapidoModal').removeClass('hidden');
+            $('#modalCantidad').val('1').focus();
+            $('#modalObservacion').val('');
+        }
+
+        $(document).ready(function() {
+            // Cerrar modal
+            $('#cancelarMovimientoBtn').click(function() {
+                $('#movimientoRapidoModal').addClass('hidden');
+            });
+
+            // Cerrar modal al hacer clic fuera
+            $('#movimientoRapidoModal').click(function(e) {
+                if (e.target === this) {
+                    $(this).addClass('hidden');
+                }
+            });
+
+            // Confirmar movimiento
+            $('#confirmarMovimientoBtn').click(function() {
+                if (!$('#modalCantidad').val() || $('#modalCantidad').val() <= 0) {
+                    alert('Por favor ingrese una cantidad válida');
+                    return;
+                }
+
+                const formData = {
+                    idProducto: $('#modalProductoId').val(),
+                    idAlmacen: $('#modalAlmacenId').val(),
+                    tipoMovimiento: $('#modalTipoMovimiento').val(),
+                    cantidad: $('#modalCantidad').val(),
+                    observacion: $('#modalObservacion').val()
+                };
+
+                // Aquí normalmente harías una llamada AJAX al servidor
+                $.ajax({
+                    url: '@Url.Action("RegistrarMovimientoRapido", "Inventario")',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        $('#movimientoRapidoModal').addClass('hidden');
+                        mostrarNotificacion('Movimiento registrado exitosamente', 'success');
+
+                        // Recargar página después de un tiempo
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+                    },
+                    error: function() {
+                        mostrarNotificacion('Error al registrar el movimiento', 'error');
+                    }
+                });
+            });
+
+            // Función para mostrar notificaciones
+            function mostrarNotificacion(mensaje, tipo) {
+                // Eliminar notificaciones existentes
+                $('.notificacion').remove();
+
+                // Crear elemento de notificación
+                var claseColor = tipo === 'success'
+                    ? 'bg-green-100 text-green-800 border-green-200'
+                    : 'bg-red-100 text-red-800 border-red-200';
+
+                var icono = tipo === 'success'
+                    ? '<i class="fas fa-check-circle mr-2 text-green-500"></i>'
+                    : '<i class="fas fa-exclamation-circle mr-2 text-red-500"></i>';
+
+                var html = `
+                <div class="notificacion fixed top-4 right-4 z-50 max-w-md rounded-lg border ${claseColor} p-4 shadow-lg">
+                    <div class="flex items-center">
+                        ${icono}
+                        <span>${mensaje}</span>
+                    </div>
+                </div>
+                `;
+
+                // Agregar a DOM
+                $('body').append(html);
+
+                // Auto eliminar después de un tiempo
+                setTimeout(function() {
+                    $('.notificacion').fadeOut('slow', function() {
+                        $(this).remove();
+                    });
+                }, 3000);
+            }
+        });
+    </script>
+}

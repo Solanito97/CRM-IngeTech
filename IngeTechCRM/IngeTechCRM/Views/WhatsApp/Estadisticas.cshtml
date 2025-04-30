@@ -1,0 +1,166 @@
+﻿@{
+    ViewData["Title"] = "Estadísticas de WhatsApp";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Index")" class="text-gray-600 hover:text-indigo-600">Gestión de WhatsApp</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">Estadísticas</span>
+    </nav>
+
+    <!-- Encabezado -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Estadísticas de WhatsApp</h1>
+        <p class="mt-2 text-gray-600">Indicadores y métricas clave de su servicio de WhatsApp</p>
+    </div>
+
+    <!-- Tarjetas de estadísticas clave -->
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-10">
+        <!-- Total de conversaciones -->
+        <div class="rounded-xl bg-white p-6 shadow-lg">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Total Conversaciones</p>
+                    <p class="text-3xl font-bold text-gray-900">@ViewBag.Estadisticas["TotalConversaciones"]</p>
+                </div>
+                <div class="rounded-full bg-indigo-100 p-3 text-indigo-600">
+                    <i class="fas fa-comments text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center text-sm">
+                <span class="text-gray-500">Hoy: @ViewBag.Estadisticas["ConversacionesHoy"]</span>
+                <span class="mx-1">•</span>
+                <span class="text-gray-500">Este mes: @ViewBag.Estadisticas["ConversacionesMes"]</span>
+            </div>
+        </div>
+
+        <!-- Total mensajes -->
+        <div class="rounded-xl bg-white p-6 shadow-lg">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Total Mensajes</p>
+                    <p class="text-3xl font-bold text-gray-900">@ViewBag.Estadisticas["TotalMensajes"]</p>
+                </div>
+                <div class="rounded-full bg-green-100 p-3 text-green-600">
+                    <i class="fas fa-comment-dots text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center text-sm">
+                <span class="text-gray-500">Entrantes: @ViewBag.Estadisticas["MensajesEntrantes"]</span>
+                <span class="mx-1">•</span>
+                <span class="text-gray-500">Salientes: @ViewBag.Estadisticas["MensajesSalientes"]</span>
+            </div>
+        </div>
+
+        <!-- Mensajes Hoy -->
+        <div class="rounded-xl bg-white p-6 shadow-lg">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Mensajes Hoy</p>
+                    <p class="text-3xl font-bold text-gray-900">@ViewBag.Estadisticas["MensajesHoy"]</p>
+                </div>
+                <div class="rounded-full bg-blue-100 p-3 text-blue-600">
+                    <i class="fas fa-calendar-day text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 text-sm">
+                <p class="text-gray-500">@DateTime.Today.ToString("dddd, dd MMMM yyyy")</p>
+            </div>
+        </div>
+
+        <!-- Tasa de Respuesta -->
+        <div class="rounded-xl bg-white p-6 shadow-lg">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Tasa de Respuesta</p>
+                    @{
+                        double tasaRespuesta = 0;
+                        if (ViewBag.Estadisticas["MensajesEntrantes"] > 0)
+                        {
+                            tasaRespuesta = (double)ViewBag.Estadisticas["MensajesSalientes"] / ViewBag.Estadisticas["MensajesEntrantes"] * 100;
+                        }
+                    }
+                    <p class="text-3xl font-bold text-gray-900">@Math.Round(tasaRespuesta)%</p>
+                </div>
+                <div class="rounded-full bg-purple-100 p-3 text-purple-600">
+                    <i class="fas fa-chart-line text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center text-sm">
+                <span class="text-gray-500">Promedio por conversación: @Math.Round((double)ViewBag.Estadisticas["TotalMensajes"] / (ViewBag.Estadisticas["TotalConversaciones"] > 0 ? ViewBag.Estadisticas["TotalConversaciones"] : 1), 1)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <!-- Usuarios más activos -->
+        <div class="rounded-xl bg-white p-6 shadow-lg">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Usuarios Más Activos</h2>
+
+            @if (ViewBag.UsuariosActivos != null && ViewBag.UsuariosActivos.Count > 0)
+            {
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Usuario</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Mensajes</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Último mensaje</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            @foreach (var usuario in ViewBag.UsuariosActivos)
+                            {
+                                <tr class="hover:bg-gray-50">
+                                    <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">@usuario.Usuario</td>
+                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@usuario.TotalMensajes</td>
+                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@usuario.UltimoMensaje.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
+                                        <a href="@Url.Action("Conversacion", new { telefono = usuario.Telefono })" class="text-indigo-600 hover:text-indigo-900">
+                                            Ver conversación
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="py-10 text-center text-gray-500">
+                    <div class="flex flex-col items-center justify-center">
+                        <i class="fas fa-users text-4xl text-gray-300 mb-3"></i>
+                        <p>No hay suficientes usuarios para mostrar estadísticas.</p>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Gráfico de actividad (se usaría un componente de React en el código real) -->
+        <div class="rounded-xl bg-white p-6 shadow-lg">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Actividad de Mensajes</h2>
+
+            <div class="h-64 flex items-center justify-center">
+                <div class="text-center text-gray-500">
+                    <i class="fas fa-chart-bar text-4xl text-gray-300 mb-3"></i>
+                    <p>El gráfico de actividad se muestra aquí.</p>
+                    <p class="text-sm mt-2">En una implementación real, se utilizaría un componente de gráficos.</p>
+                </div>
+            </div>
+
+            <div class="mt-4 text-right">
+                <div class="inline-flex rounded-md shadow-sm" role="group">
+                    <button type="button" class="rounded-l-md border border-gray-200 bg-white py-2 px-4 text-sm font-medium text-gray-900 hover:bg-gray-100">Día</button>
+                    <button type="button" class="border-b border-r border-t border-gray-200 bg-white py-2 px-4 text-sm font-medium text-gray-900 hover:bg-gray-100">Semana</button>
+                    <button type="button" class="rounded-r-md border border-gray-200 bg-white py-2 px-4 text-sm font-medium text-gray-900 hover:bg-gray-100">Mes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

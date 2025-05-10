@@ -1,0 +1,230 @@
+﻿
+@model IngeTechCRM.Models.Carrito
+@{
+    ViewData["Title"] = "Finalizar Compra";
+    var total = ViewBag.Total;
+    var usuario = ViewBag.Usuario;
+    var provincias = ViewBag.Provincias as List<IngeTechCRM.Models.Provincia>;
+}
+
+<div class="container mx-auto px-4 py-6">
+    <h1 class="mb-6 text-2xl font-bold text-gray-800 md:text-3xl">Finalizar Compra</h1>
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <!-- Resumen del pedido -->
+        <div class="lg:col-span-2">
+            <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                    <h2 class="flex items-center font-bold">
+                        <i class="fas fa-shopping-cart mr-2"></i> Resumen del Pedido
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                        Producto
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                        Precio
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-500">
+                                        Cant.
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
+                                        Subtotal
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-white">
+                                @foreach (var item in Model.Items)
+                                {
+                                    var subtotal = item.CANTIDAD * item.PRECIO_UNITARIO;
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm">
+                                            <div class="flex items-center">
+                                                <div class="h-10 w-10 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                    @{
+                                                        var imagenProducto = item.Producto.Imagenes != null && item.Producto.Imagenes.Count > 0
+                                                        ? item.Producto.Imagenes.First().RUTA_IMAGEN
+                                                        : "/images/productos/default.png";
+                                                    }
+                                                    <img src="@imagenProducto" alt="@item.Producto.NOMBRE" class="h-full w-full object-contain object-center p-1">
+                                                </div>
+                                                <div class="ml-3">
+                                                    <div class="text-sm font-medium text-gray-900">@item.Producto.NOMBRE</div>
+                                                    <div class="text-xs text-gray-500">@item.Producto.Categoria.NOMBRE</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            @item.PRECIO_UNITARIO.ToString("C")
+                                        </td>
+                                        <td class="px-6 py-4 text-center text-sm text-gray-500">
+                                            @item.CANTIDAD
+                                        </td>
+                                        <td class="px-6 py-4 text-right text-sm font-medium text-gray-900">
+                                            @subtotal.ToString("C")
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot class="bg-gray-50">
+                                <tr>
+                                    <td colspan="3" class="px-6 py-4 text-right text-sm font-medium text-gray-500">
+                                        Total
+                                    </td>
+                                    <td class="px-6 py-4 text-right text-sm font-bold text-gray-900">
+                                        @total.ToString("C")
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de envío y pago -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white">
+                    <h2 class="flex items-center font-bold">
+                        <i class="fas fa-truck mr-2"></i> Información de Envío
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <form asp-action="RealizarPedido" method="post">
+                        <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <!-- Información del cliente (solo lectura) -->
+                            <div>
+                                <h3 class="mb-4 text-lg font-medium text-gray-700">Información del Cliente</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="mb-1 block text-sm font-medium text-gray-600">Nombre Completo</label>
+                                        <div class="rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-700">
+                                            @usuario.NOMBRE_COMPLETO
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="mb-1 block text-sm font-medium text-gray-600">Correo Electrónico</label>
+                                        <div class="rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-700">
+                                            @usuario.CORREO_ELECTRONICO
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="mb-1 block text-sm font-medium text-gray-600">Teléfono</label>
+                                        <div class="rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-700">
+                                            @usuario.TELEFONO
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Información de envío (editable) -->
+                            <div>
+                                <h3 class="mb-4 text-lg font-medium text-gray-700">Dirección de Envío</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="idProvincia" class="mb-1 block text-sm font-medium text-gray-600">Provincia</label>
+                                        <select id="idProvincia" name="idProvincia" required class="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                                            @foreach (var provincia in provincias)
+                                            {
+                                                if (provincia.ID_PROVINCIA == usuario.ID_PROVINCIA)
+                                                {
+                                                    <option value="@provincia.ID_PROVINCIA" selected>@provincia.NOMBRE</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@provincia.ID_PROVINCIA">@provincia.NOMBRE</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="direccionEnvio" class="mb-1 block text-sm font-medium text-gray-600">Dirección Detallada</label>
+                                        <textarea id="direccionEnvio" name="direccionEnvio" required rows="3" class="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">@usuario.DIRECCION_COMPLETA</textarea>
+                                    </div>
+                                    <div>
+                                        <label for="notas" class="mb-1 block text-sm font-medium text-gray-600">Notas (opcional)</label>
+                                        <textarea id="notas" name="notas" rows="2" class="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500" placeholder="Instrucciones especiales para la entrega..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-6">
+                            <div class="flex flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
+                                <a href="@Url.Action("MiCarrito")" class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50">
+                                    <i class="fas fa-arrow-left mr-2"></i> Volver al carrito
+                                </a>
+                                <button type="submit" class="rounded-lg bg-indigo-600 px-6 py-3 text-center font-medium text-white shadow-md transition hover:bg-indigo-700">
+                                    <i class="fas fa-check-circle mr-2"></i> Confirmar Pedido
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumen y políticas -->
+        <div class="lg:col-span-1">
+            <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-purple-600 to-indigo-500 px-4 py-3 text-white">
+                    <h2 class="flex items-center font-bold">
+                        <i class="fas fa-receipt mr-2"></i> Resumen
+                    </h2>
+                </div>
+                <div class="p-4">
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Subtotal</span>
+                            <span class="font-medium text-gray-800">@total.ToString("C")</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Envío</span>
+                            <span class="font-medium text-gray-800">Gratis</span>
+                        </div>
+                        <div class="border-t border-gray-200 pt-3">
+                            <div class="flex justify-between">
+                                <span class="text-lg font-medium text-gray-700">Total</span>
+                                <span class="text-lg font-bold text-indigo-600">@total.ToString("C")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Políticas -->
+            <div class="space-y-6">
+                <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                    <div class="border-b border-gray-200 bg-gray-50 px-4 py-3">
+                        <h3 class="font-bold text-gray-700"><i class="fas fa-truck mr-2 text-indigo-500"></i> Envío</h3>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-sm text-gray-600">Entrega en 2-5 días hábiles dependiendo de la provincia. Envío gratuito en todas las compras.</p>
+                    </div>
+                </div>
+
+                <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                    <div class="border-b border-gray-200 bg-gray-50 px-4 py-3">
+                        <h3 class="font-bold text-gray-700"><i class="fas fa-exchange-alt mr-2 text-indigo-500"></i> Devoluciones</h3>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-sm text-gray-600">Tienes 30 días para realizar devoluciones. Los productos deben estar en su empaque original y sin uso.</p>
+                    </div>
+                </div>
+
+                <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                    <div class="border-b border-gray-200 bg-gray-50 px-4 py-3">
+                        <h3 class="font-bold text-gray-700"><i class="fas fa-credit-card mr-2 text-indigo-500"></i> Pagos</h3>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-sm text-gray-600">Pago contra entrega en efectivo o tarjeta. Aceptamos todas las tarjetas principales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

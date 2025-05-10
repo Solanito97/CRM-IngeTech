@@ -1,0 +1,350 @@
+﻿@{
+    ViewData["Title"] = "Dashboard de Administración";
+}
+
+<div class="container mx-auto mt-10">
+    <h1 class="text-3xl font-bold my-4">Dashboard de Administración</h1>
+
+    <!-- Tarjetas de resumen -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+        <div class="bg-green-100 border border-green-300 rounded-lg shadow-md p-4">
+            <div class="flex items-center">
+                <div class="mr-4">
+                    <div class="text-xs font-bold text-green-600 uppercase">Total Usuarios</div>
+                    <div class="text-2xl font-bold text-gray-800">@ViewBag.TotalUsuarios</div>
+                </div>
+                <i class="fas fa-users fa-2x text-gray-300"></i>
+            </div>
+        </div>
+
+        <div class="bg-blue-100 border border-blue-300 rounded-lg shadow-md p-4">
+            <div class="flex items-center">
+                <div class="mr-4">
+                    <div class="text-xs font-bold text-blue-600 uppercase">Total Productos</div>
+                    <div class="text-2xl font-bold text-gray-800">@ViewBag.TotalProductos</div>
+                </div>
+                <i class="fas fa-laptop fa-2x text-gray-300"></i>
+            </div>
+        </div>
+
+        <div class="bg-yellow-100 border border-yellow-300 rounded-lg shadow-md p-4">
+            <div class="flex items-center">
+                <div class="mr-4">
+                    <div class="text-xs font-bold text-yellow-600 uppercase">Total Pedidos</div>
+                    <div class="text-2xl font-bold text-gray-800">@ViewBag.TotalPedidos</div>
+                </div>
+                <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+            </div>
+        </div>
+
+        <div class="bg-red-100 border border-red-300 rounded-lg shadow-md p-4">
+            <div class="flex items-center">
+                <div class="mr-4">
+                    <div class="text-xs font-bold text-red-600 uppercase">Alertas de Inventario</div>
+                    <div class="text-2xl font-bold text-gray-800">@(ViewBag.AlertasInventario?.Count ?? 0)</div>
+                </div>
+                <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alertas de inventario y Últimos pedidos -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <!-- Alertas de inventario -->
+        <div class="bg-white shadow-md rounded-lg mb-4">
+            <div class="p-4 flex justify-between items-center border-b">
+                <h6 class="font-bold text-lg text-blue-600">Alertas de Inventario</h6>
+                <a href="@Url.Action("Alertas", "Inventario")" class="text-blue-600 hover:underline">Ver todas</a>
+            </div>
+            <div class="p-4">
+                @if (ViewBag.AlertasInventario == null || ViewBag.AlertasInventario.Count == 0)
+                {
+                    <div class="text-center py-3">
+                        <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                        <p class="mb-0">No hay alertas de inventario pendientes.</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2 text-left">Producto</th>
+                                    <th class="px-4 py-2 text-left">Almacén</th>
+                                    <th class="px-4 py-2 text-left">Stock Actual</th>
+                                    <th class="px-4 py-2 text-left">Mínimo</th>
+                                    <th class="px-4 py-2 text-left">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var alerta in ViewBag.AlertasInventario)
+                                {
+                                                                        <tr class="hover:bg-gray-100">
+                                        <td class="px-4 py-2">@alerta.Inventario.Producto.NOMBRE</td>
+                                        <td class="px-4 py-2">@alerta.Inventario.Almacen.NOMBRE</td>
+                                        <td class="px-4 py-2">
+                                            <span class="text-red-600 font-bold">@alerta.Inventario.CANTIDAD</span>
+                                        </td>
+                                        <td class="px-4 py-2">@alerta.Inventario.CANTIDAD_MINIMA</td>
+                                        <td class="px-4 py-2">
+                                            <a href="@Url.Action("RegistrarMovimiento", "Inventario", new { ID_PRODUCTO = alerta.Inventario.ID_PRODUCTO, ID_ALMACEN = alerta.Inventario.ID_ALMACEN })" class="text-blue-600 hover:underline">
+                                                <i class="fas fa-plus"></i> Agregar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Últimos pedidos -->
+        <div class="bg-white shadow-md rounded-lg mb-4">
+            <div class="p-4 flex justify-between items-center border-b">
+                <h6 class="font-bold text-lg text-blue-600">Últimos Pedidos</h6>
+                <a href="@Url.Action("Index", "Pedido")" class="text-blue-600 hover:underline">Ver todos</a>
+            </div>
+            <div class="p-4">
+                @if (ViewBag.UltimosPedidos == null || ViewBag.UltimosPedidos.Count == 0)
+                {
+                    <div class="text-center py-3">
+                        <i class="fas fa-shopping-cart fa-4x text-muted mb-3"></i>
+                        <p class="mb-0">No hay pedidos recientes.</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2 text-left">#</th>
+                                    <th class="px-4 py-2 text-left">Cliente</th>
+                                    <th class="px-4 py-2 text-left">Fecha</th>
+                                    <th class="px-4 py-2 text-left">Total</th>
+                                    <th class="px-4 py-2 text-left">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var pedido in ViewBag.UltimosPedidos)
+                                {
+                                    <tr class="hover:bg-gray-100">
+                                        <td class="px-4 py-2">
+                                            <a href="@Url.Action("Detalles", "Pedido", new { id = pedido.ID_PEDIDO })">
+                                                #@pedido.ID_PEDIDO
+                                            </a>
+                                        </td>
+                                        <td class="px-4 py-2">@pedido.Usuario.NOMBRE_COMPLETO</td>
+                                        <td class="px-4 py-2">@pedido.FECHA_PEDIDO.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td class="px-4 py-2">@pedido.TOTAL.ToString("C2")</td>
+                                        <td class="px-4 py-2">
+                                            @{
+                                                var estadoClass = "";
+                                                switch (pedido.ESTADO)
+                                                {
+                                                    case "PENDIENTE": estadoClass = "text-yellow-600"; break;
+                                                    case "PROCESANDO": estadoClass = "text-blue-600"; break;
+                                                    case "ENVIADO": estadoClass = "text-blue-600"; break;
+                                                    case "ENTREGADO": estadoClass = "text-green-600"; break;
+                                                    case "CANCELADO": estadoClass = "text-red-600"; break;
+                                                }
+                                            }
+                                            <span class="@estadoClass font-bold">@pedido.ESTADO</span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Productos más vendidos y gráfico -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <!-- Productos más vendidos -->
+        <div class="bg-white shadow-md rounded-lg mb-4">
+            <div class="p-4">
+                <h6 class="font-bold text-lg text-blue-600">Productos más vendidos</h6>
+            </div>
+            <div class="p-4">
+                @if (ViewBag.ProductosMasVendidos == null || ViewBag.ProductosMasVendidos.Count == 0)
+                {
+                                        <div class="text-center py-3">
+                        <i class="fas fa-chart-line fa-4x text-muted mb-3"></i>
+                        <p class="mb-0">No hay datos de ventas disponibles.</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2 text-left">Producto</th>
+                                    <th class="px-4 py-2 text-left">Categoría</th>
+                                    <th class="px-4 py-2 text-left">Unidades</th>
+                                    <th class="px-4 py-2 text-left">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var producto in ViewBag.ProductosMasVendidos)
+                                {
+                                    <tr class="hover:bg-gray-100">
+                                        <td class="px-4 py-2">
+                                            @if (producto != null && producto.Producto != null)
+                                            {
+                                                <a href="@Url.Action("Detalles", "Producto", new { id = producto.Producto.ID_PRODUCTO })">
+                                                    @producto.Producto.NOMBRE
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <span>Producto no disponible</span>
+                                            }
+                                        </td>
+                                        <td class="px-4 py-2">
+                                            @if (producto != null && producto.Producto != null && producto.Producto.Categoria != null)
+                                            {
+                                                @producto.Producto.Categoria.NOMBRE
+                                            }
+                                            else
+                                            {
+                                                <span>Categoría no disponible</span>
+                                            }
+                                        </td>
+                                        <td class="px-4 py-2">
+                                            @if (producto != null)
+                                            {
+                                                @producto.TotalVendido
+                                            }
+                                            else
+                                            {
+                                                <span>0</span>
+                                            }
+                                        </td>
+                                        <td class="px-4 py-2">
+                                            @if (producto != null && producto.Producto != null)
+                                            {
+                                                @((producto.TotalVendido * producto.Producto.PRECIO).ToString("C2"))
+                                            }
+                                            else
+                                            {
+                                                <span>$0.00</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Gráfico de ventas -->
+        <div class="bg-white shadow-md rounded-lg mb-4">
+            <div class="p-4">
+                <h6 class="font-bold text-lg text-blue-600">Resumen de ventas mensuales</h6>
+            </div>
+            <div class="p-4">
+                <div class="chart-area">
+                    <canvas id="ventasChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accesos rápidos -->
+    <div class="mb-4">
+        <div class="bg-white shadow-md rounded-lg">
+            <div class="p-4">
+                <h6 class="font-bold text-lg text-blue-600">Acciones rápidas</h6>
+            </div>
+            <div class="p-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <a href="@Url.Action("Crear", "Producto")" class="block bg-blue-600 text-white text-center py-3 rounded-md hover:bg-blue-700 transition">
+                            <i class="fas fa-plus-circle mr-2"></i> Nuevo Producto
+                        </a>
+                    </div>
+                    <div>
+                        <a href="@Url.Action("RegistrarMovimiento", "Inventario")" class="block bg-green-600 text-white text-center py-3 rounded-md hover:bg-green-700 transition">
+                            <i class="fas fa-boxes mr-2"></i> Movimiento de Inventario
+                        </a>
+                    </div>
+                    <div>
+                        <a href="@Url.Action("Crear", "Comunicado")" class="block bg-indigo-600 text-white text-center py-3 rounded-md hover:bg-indigo-700 transition">
+                            <i class="fas fa-envelope mr-2"></i> Nuevo Comunicado
+                        </a>
+                    </div>
+                    <div>
+                        <a href="@Url.Action("EnviarMensaje", "WhatsApp")" class="block bg-yellow-600 text-white text-center py-3 rounded-md hover:bg-yellow-700 transition">
+                            <i class="fab fa-whatsapp mr-2"></i> Enviar WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+                $(document).ready(function () {
+            // Obtener datos del servidor
+            var meses = @Html.Raw(Json.Serialize(ViewBag.EtiquetasMeses));
+            var ventas = @Html.Raw(Json.Serialize(ViewBag.DatosVentas));
+
+            var ctx = document.getElementById('ventasChart').getContext('2d');
+            var ventasChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: meses,
+                    datasets: [{
+                        label: 'Ventas (₡)',
+                        data: ventas,
+                        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                        borderColor: 'rgba(52, 152, 219, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(52, 152, 219, 1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '₡' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Ventas: ₡' + context.parsed.y.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

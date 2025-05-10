@@ -1,0 +1,424 @@
+﻿@model IngeTechCRM.Models.ConversacionWhatsApp
+@{
+    ViewData["Title"] = "Conversación de WhatsApp";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Index")" class="text-gray-600 hover:text-indigo-600">Gestión de WhatsApp</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">Conversación</span>
+    </nav>
+
+    <!-- Mensajes de notificación -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="mb-6 rounded-lg bg-green-100 p-4 text-green-700">
+            <div class="flex items-center">
+                <i class="fas fa-check-circle mr-2"></i>
+                <span>@TempData["Message"]</span>
+            </div>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="mb-6 rounded-lg bg-red-100 p-4 text-red-700">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                <span>@TempData["Error"]</span>
+            </div>
+        </div>
+    }
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-4">
+        <!-- Información del contacto -->
+        <div class="rounded-xl bg-white p-6 shadow-lg lg:col-span-1">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-gray-800">Información</h2>
+                <span class="rounded-full 
+                    @(Model.ESTADO == "Activo" ? "bg-green-100 text-green-800" : 
+                      Model.ESTADO == "Resuelto" ? "bg-blue-100 text-blue-800" : 
+                      "bg-yellow-100 text-yellow-800") 
+                    px-3 py-1 text-xs font-medium">
+                    @Model.ESTADO
+                </span>
+            </div>
+
+            <div class="mb-6">
+                <div class="flex items-center mb-2">
+                    <i class="fab fa-whatsapp text-xl text-green-500 mr-3"></i>
+                    <span class="text-sm font-medium text-gray-600">@Model.NUMERO_TELEFONO</span>
+                </div>
+                <div class="flex items-center mb-2">
+                    <i class="fas fa-user text-gray-400 mr-3"></i>
+                    <span class="text-sm font-medium text-gray-600">@Model.NOMBRE_CONTACTO</span>
+                </div>
+                @if (Model.Usuario != null)
+                {
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-id-card text-gray-400 mr-3"></i>
+                        <span class="text-sm font-medium text-gray-600">@Model.Usuario.NOMBRE_COMPLETO</span>
+                    </div>
+                }
+                <div class="flex items-center mb-2">
+                    <i class="fas fa-calendar-alt text-gray-400 mr-3"></i>
+                    <span class="text-sm font-medium text-gray-600">@Model.FECHA_CREACION.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-gray-400 mr-3"></i>
+                    <span class="text-sm font-medium text-gray-600">
+                        Última actividad: @Model.ULTIMA_ACTUALIZACION.ToString("dd/MM/yyyy HH:mm")
+                    </span>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200 pt-4">
+                <h3 class="text-sm font-semibold uppercase text-gray-600 mb-3">Acciones</h3>
+                <div class="flex flex-col space-y-2">
+                    <button type="button" id="btnActualizarInfo" 
+                            class="flex w-full items-center justify-center rounded-lg bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200">
+                        <i class="fas fa-edit mr-2"></i> Editar Información
+                    </button>
+                    
+                    <button type="button" id="btnVincularUsuario" 
+                            class="flex w-full items-center justify-center rounded-lg bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-200">
+                        <i class="fas fa-link mr-2"></i> Vincular Usuario
+                    </button>
+
+                    <a href="@Url.Action("ExportarConversacion", new { id = Model.ID_CONVERSACION })" 
+                       class="flex w-full items-center justify-center rounded-lg bg-green-100 px-4 py-2 text-sm font-medium text-green-700 hover:bg-green-200">
+                        <i class="fas fa-file-export mr-2"></i> Exportar Chat
+                    </a>
+
+                    <button type="button" id="btnCambiarEstado" 
+                            onclick="cambiarEstado(@Model.ID_CONVERSACION, '@(Model.ESTADO == "Activo" ? "Resuelto" : "Activo")')" 
+                            class="flex w-full items-center justify-center rounded-lg bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 hover:bg-purple-200">
+                        <i class="fas @(Model.ESTADO == "Activo" ? "fa-check-circle" : "fa-redo") mr-2"></i> 
+                        @(Model.ESTADO == "Activo" ? "Marcar como Resuelto" : "Marcar como Activo")
+                    </button>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.NOTAS))
+            {
+                <div class="border-t border-gray-200 pt-4 mt-4">
+                    <h3 class="text-sm font-semibold uppercase text-gray-600 mb-2">Notas</h3>
+                    <p class="text-sm text-gray-600">@Model.NOTAS</p>
+                </div>
+            }
+        </div>
+
+        <!-- Conversación -->
+        <div class="rounded-xl bg-white shadow-lg lg:col-span-3">
+            <div class="border-b border-gray-200 p-4">
+                <h2 class="text-xl font-bold text-gray-800">Conversación con @Model.NOMBRE_CONTACTO</h2>
+            </div>
+            
+            <!-- Mensajes -->
+            <div id="mensajes-container" class="h-96 overflow-y-auto p-4 space-y-4">
+                @if (Model.Mensajes != null && Model.Mensajes.Any())
+                {
+                    foreach (var mensaje in Model.Mensajes)
+                    {
+                        if (mensaje.ES_ENTRANTE)
+                        {
+                            <div class="flex justify-start">
+                                <div class="max-w-3/4 rounded-lg bg-gray-100 p-3 text-sm text-gray-800">
+                                    <div class="mb-1 text-xs text-gray-500">
+                                        @mensaje.FECHA_HORA.ToString("dd/MM/yyyy HH:mm")
+                                    </div>
+                                    @mensaje.TEXTO
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="flex justify-end">
+                                <div class="max-w-3/4 rounded-lg bg-green-100 p-3 text-sm text-gray-800">
+                                    <div class="mb-1 text-xs text-gray-500">
+                                        @mensaje.FECHA_HORA.ToString("dd/MM/yyyy HH:mm")
+                                    </div>
+                                    @mensaje.TEXTO
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    <div class="flex h-full flex-col items-center justify-center text-gray-500">
+                        <i class="fas fa-comments text-4xl text-gray-300 mb-3"></i>
+                        <p>No hay mensajes en esta conversación.</p>
+                    </div>
+                }
+            </div>
+
+            <!-- Formulario para enviar mensajes -->
+            <div class="border-t border-gray-200 p-4">
+                <form id="formResponder" class="flex space-x-2">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="telefono" name="telefono" value="@Model.NUMERO_TELEFONO" />
+                    <textarea id="mensaje" name="mensaje" rows="2" 
+                              class="w-full resize-none rounded-lg border border-gray-300 p-2 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" 
+                              placeholder="Escribe un mensaje..."></textarea>
+                    <button type="submit" class="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Información -->
+<div id="modalActualizarInfo" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="fixed inset-0 bg-black opacity-50"></div>
+    <div class="bg-white rounded-lg p-6 w-full max-w-md relative z-10">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Actualizar Información</h3>
+        <form id="formActualizarInfo" action="@Url.Action("ActualizarConversacion")" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.ID_CONVERSACION" />
+            
+            <div class="mb-4">
+                <label for="nombreContacto" class="block text-sm font-medium text-gray-700 mb-1">Nombre de Contacto</label>
+                <input type="text" id="nombreContacto" name="nombreContacto" value="@Model.NOMBRE_CONTACTO" 
+                       class="w-full rounded-lg border border-gray-300 p-2 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" />
+            </div>
+            
+            <div class="mb-4">
+                <label for="notas" class="block text-sm font-medium text-gray-700 mb-1">Notas</label>
+                <textarea id="notas" name="notas" rows="3" 
+                          class="w-full rounded-lg border border-gray-300 p-2 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">@Model.NOTAS</textarea>
+            </div>
+            
+            <div class="flex justify-end space-x-2">
+                <button type="button" id="btnCancelarActualizar" class="rounded-lg bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200">
+                    Cancelar
+                </button>
+                <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Vincular Usuario -->
+<div id="modalVincularUsuario" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="fixed inset-0 bg-black opacity-50"></div>
+    <div class="bg-white rounded-lg p-6 w-full max-w-md relative z-10">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Vincular Usuario</h3>
+        <form id="formVincularUsuario" action="@Url.Action("VincularUsuario")" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="idConversacion" value="@Model.ID_CONVERSACION" />
+            
+            <div class="mb-4">
+                <label for="idUsuario" class="block text-sm font-medium text-gray-700 mb-1">Seleccionar Usuario</label>
+                <select id="idUsuario" name="idUsuario" 
+                        class="w-full rounded-lg border border-gray-300 p-2 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                    <option value="">-- Seleccione un usuario --</option>
+                    <!-- Aquí se cargarán los usuarios mediante AJAX -->
+                </select>
+            </div>
+            
+            <div class="flex justify-end space-x-2">
+                <button type="button" id="btnCancelarVincular" class="rounded-lg bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200">
+                    Cancelar
+                </button>
+                <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700">
+                    Vincular
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Variables para la actualización en tiempo real
+        let ultimaActualizacion = new Date('@Model.ULTIMA_ACTUALIZACION.ToString("yyyy-MM-ddTHH:mm:ss")');
+        let idConversacion = @Model.ID_CONVERSACION;
+        let intervaloActualizacion;
+
+        // Función para desplazar al final de los mensajes
+        function scrollToBottom() {
+            const messagesContainer = document.getElementById('mensajes-container');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Cargar la conversación al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            scrollToBottom();
+            
+            // Iniciar verificación de nuevos mensajes cada 10 segundos
+            intervaloActualizacion = setInterval(verificarNuevosMensajes, 10000);
+            
+            // Limpiar intervalo cuando se navega fuera de la página
+            window.addEventListener('beforeunload', function() {
+                clearInterval(intervaloActualizacion);
+            });
+        });
+
+        // Función para verificar si hay nuevos mensajes
+        function verificarNuevosMensajes() {
+            fetch(`@Url.Action("VerificarNuevosMensajes")?idConversacion=${idConversacion}&ultimaActualizacion=${ultimaActualizacion.toISOString()}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cantidadNuevos > 0) {
+                        // Actualizar la conversación con los nuevos mensajes
+                        data.mensajes.forEach(mensaje => {
+                            agregarMensajeHTML(mensaje);
+                        });
+                        scrollToBottom();
+                        
+                        // Actualizar la fecha de última actualización
+                        ultimaActualizacion = new Date();
+                    }
+                })
+                .catch(error => console.error('Error al verificar nuevos mensajes:', error));
+        }
+
+        // Función para agregar un mensaje al HTML
+        function agregarMensajeHTML(mensaje) {
+            const mensajesContainer = document.getElementById('mensajes-container');
+            const fechaFormateada = new Date(mensaje.fechaHora).toLocaleString();
+            
+            let html = '';
+            if (mensaje.esEntrante) {
+                html = `
+                <div class="flex justify-start">
+                    <div class="max-w-3/4 rounded-lg bg-gray-100 p-3 text-sm text-gray-800">
+                        <div class="mb-1 text-xs text-gray-500">${fechaFormateada}</div>
+                        ${mensaje.texto}
+                    </div>
+                </div>`;
+            } else {
+                html = `
+                <div class="flex justify-end">
+                    <div class="max-w-3/4 rounded-lg bg-green-100 p-3 text-sm text-gray-800">
+                        <div class="mb-1 text-xs text-gray-500">${fechaFormateada}</div>
+                        ${mensaje.texto}
+                    </div>
+                </div>`;
+            }
+            
+            mensajesContainer.innerHTML += html;
+        }
+
+        // Enviar mensaje
+        document.getElementById('formResponder').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const telefono = document.getElementById('telefono').value;
+            const mensaje = document.getElementById('mensaje').value;
+            
+            if (!mensaje.trim()) return;
+            
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            
+            fetch('@Url.Action("ResponderMensaje")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'RequestVerificationToken': token
+                },
+                body: `telefono=${encodeURIComponent(telefono)}&mensaje=${encodeURIComponent(mensaje)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Agregar el mensaje a la interfaz
+                    agregarMensajeHTML({
+                        id: 0,
+                        texto: mensaje,
+                        fechaHora: new Date(),
+                        esEntrante: false
+                    });
+                    
+                    // Limpiar el campo de texto
+                    document.getElementById('mensaje').value = '';
+                    
+                    // Desplazar al final
+                    scrollToBottom();
+                    
+                    // Actualizar la fecha de última actualización
+                    ultimaActualizacion = new Date();
+                } else {
+                    alert('Error al enviar mensaje: ' + data.message);
+                    }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ha ocurrido un error al enviar el mensaje');
+            });
+        });
+
+        // Cambiar estado de la conversación
+        function cambiarEstado(id, estado) {
+            if (confirm('¿Está seguro que desea cambiar el estado de esta conversación a ' + estado + '?')) {
+                fetch('@Url.Action("CambiarEstadoConversacion")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({ id: id, estado: estado })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Refrescar la página para ver los cambios
+                        location.reload();
+                    } else {
+                        alert('Error al cambiar el estado: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Ha ocurrido un error al procesar la solicitud.');
+                });
+            }
+        }
+
+        // Modal Actualizar Información
+        document.getElementById('btnActualizarInfo').addEventListener('click', function() {
+            document.getElementById('modalActualizarInfo').classList.remove('hidden');
+        });
+
+        document.getElementById('btnCancelarActualizar').addEventListener('click', function() {
+            document.getElementById('modalActualizarInfo').classList.add('hidden');
+        });
+
+        // Modal Vincular Usuario
+        document.getElementById('btnVincularUsuario').addEventListener('click', function() {
+            // Cargar usuarios mediante AJAX
+            fetch('@Url.Action("GetUsuarios", "Usuario")')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('idUsuario');
+                    select.innerHTML = '<option value="">-- Seleccione un usuario --</option>';
+
+                    data.forEach(usuario => {
+                        const option = document.createElement('option');
+                        option.value = usuario.identificacion;
+                        option.textContent = `${usuario.nombreCompleto} (${usuario.identificacion})`;
+                        select.appendChild(option);
+                    });
+
+                    document.getElementById('modalVincularUsuario').classList.remove('hidden');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al cargar usuarios');
+                });
+        });
+
+        document.getElementById('btnCancelarVincular').addEventListener('click', function() {
+            document.getElementById('modalVincularUsuario').classList.add('hidden');
+        });
+    </script>
+}

@@ -1,0 +1,281 @@
+﻿
+@model IngeTechCRM.Models.Producto
+@{
+    ViewData["Title"] = "Detalles de Producto";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Detalles del Producto</h1>
+        <div class="flex space-x-2">
+            <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-200">
+                <i class="fas fa-arrow-left mr-2"></i> Volver
+            </a>
+            <a href="@Url.Action("Editar", new { id = Model.ID_PRODUCTO })" class="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-indigo-700">
+                <i class="fas fa-edit mr-2"></i> Editar
+            </a>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <!-- Columna 1: Imágenes y detalles básicos -->
+        <div class="space-y-6 lg:col-span-2">
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                    <h2 class="flex items-center font-bold">
+                        <i class="fas fa-camera mr-2"></i> Imágenes del Producto
+                    </h2>
+                </div>
+                <div class="p-6">
+                    @if (Model.Imagenes != null && Model.Imagenes.Count > 0)
+                    {
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                            @foreach (var imagen in Model.Imagenes)
+                            {
+                                <div class="relative overflow-hidden rounded-lg shadow-sm transition-all hover:shadow-md group">
+                                    <img src="@imagen.RUTA_IMAGEN" alt="@Model.NOMBRE" class="h-48 w-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity group-hover:opacity-100">
+                                        <button type="button" onclick="openImageModal('@imagen.RUTA_IMAGEN')"
+                                                class="rounded-full bg-white p-2 text-indigo-600 hover:bg-indigo-100">
+                                            <i class="fas fa-search-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="rounded-lg bg-gray-50 p-4 text-center text-gray-500">
+                            <i class="fas fa-image text-4xl mb-2"></i>
+                            <p>No hay imágenes disponibles para este producto.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                    <h2 class="flex items-center font-bold">
+                        <i class="fas fa-info-circle mr-2"></i> Información General
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Código</dt>
+                            <dd class="mt-1 text-lg font-semibold text-gray-900">@Model.CODIGO</dd>
+                        </div>
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Nombre</dt>
+                            <dd class="mt-1 text-lg font-semibold text-gray-900">@Model.NOMBRE</dd>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <dt class="text-sm font-medium text-gray-500">Descripción</dt>
+                            <dd class="mt-1 text-gray-900">@Model.DESCRIPCION</dd>
+                        </div>
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Precio</dt>
+                            <dd class="mt-1 text-lg font-semibold text-indigo-600">@Model.PRECIO.ToString("C2")</dd>
+                        </div>
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Estado</dt>
+                            <dd class="mt-1">
+                                @if (Model.ACTIVO)
+                                {
+                                    <span class="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800">
+                                        Activo
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="inline-flex rounded-full bg-red-100 px-2 py-1 text-xs font-semibold text-red-800">
+                                        Inactivo
+                                    </span>
+                                }
+                            </dd>
+                        </div>
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Categoría</dt>
+                            <dd class="mt-1 text-gray-900">@Model.Categoria.NOMBRE</dd>
+                        </div>
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Marca</dt>
+                            <dd class="mt-1 text-gray-900">@Model.Marca.NOMBRE</dd>
+                        </div>
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Proveedor</dt>
+                            <dd class="mt-1 text-gray-900">@Model.Proveedor.NOMBRE</dd>
+                        </div>
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Creado por</dt>
+                            <dd class="mt-1 text-gray-900">@Model.UsuarioCreador.NOMBRE_COMPLETO</dd>
+                        </div>
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Fecha de Creación</dt>
+                            <dd class="mt-1 text-gray-900">@Model.FECHA_CREACION.ToString("dd/MM/yyyy HH:mm")</dd>
+                        </div>
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Última Actualización</dt>
+                            <dd class="mt-1 text-gray-900">
+                                @(Model.FECHA_ACTUALIZACION.HasValue ? Model.FECHA_ACTUALIZACION.Value.ToString("dd/MM/yyyy HH:mm") : "Sin actualizar")
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna 2: Inventario y estadísticas -->
+        <div class="space-y-6">
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                    <h2 class="flex items-center font-bold">
+                        <i class="fas fa-boxes mr-2"></i> Inventario del Producto
+                    </h2>
+                </div>
+                <div class="p-6">
+                    @if (ViewBag.InventarioPorAlmacen != null && ViewBag.InventarioPorAlmacen.Count > 0)
+                    {
+                        <div class="space-y-4">
+                            @foreach (var inventario in ViewBag.InventarioPorAlmacen)
+                            {
+                                var cantidadColor = inventario.CANTIDAD <= inventario.CANTIDAD_MINIMA ? "text-red-600" : "text-green-600";
+                                <div class="rounded-lg border border-gray-200 bg-gray-50 p-4">
+                                    <div class="mb-1 flex items-center justify-between">
+                                        <h3 class="font-medium text-gray-700">@inventario.Almacen.NOMBRE</h3>
+                                        <span class="text-xs text-gray-500">@inventario.Almacen.Provincia.NOMBRE</span>
+                                    </div>
+                                    <div class="mt-2 flex items-center justify-between">
+                                        <span class="text-sm text-gray-600">Cantidad actual:</span>
+                                        <span class="font-bold @cantidadColor">@inventario.CANTIDAD</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm text-gray-600">Cantidad mínima:</span>
+                                        <span class="text-gray-600">@inventario.CANTIDAD_MINIMA</span>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="h-2 w-full overflow-hidden rounded-full bg-gray-200">
+                                            @{
+                                                // Calcular el porcentaje respecto al doble del mínimo para tener una escala
+                                                var porcentaje = Math.Min(100, (int)(inventario.CANTIDAD * 100.0 / (inventario.CANTIDAD_MINIMA * 2)));
+                                                var colorBarra = porcentaje < 50 ? "bg-red-500" : (porcentaje < 75 ? "bg-yellow-500" : "bg-green-500");
+                                            }
+                                            <div class="h-2 @colorBarra" style="width: @porcentaje%"></div>
+                                        </div>
+                                    </div>
+                                    @if (inventario.CANTIDAD <= inventario.CANTIDAD_MINIMA)
+                                    {
+                                        <div class="mt-2 rounded-md bg-red-50 p-2 text-xs text-red-600">
+                                            <i class="fas fa-exclamation-triangle mr-1"></i> Stock bajo el mínimo recomendado
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <div class="mt-4">
+                            <a href="@Url.Action("Index", "Inventario")" class="mt-4 flex w-full items-center justify-center rounded-lg border border-indigo-300 bg-indigo-50 px-4 py-2 text-indigo-600 hover:bg-indigo-100">
+                                <i class="fas fa-boxes mr-2"></i> Administrar Inventario
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="rounded-lg bg-yellow-50 p-4 text-yellow-700">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">
+                                        Este producto no tiene inventario registrado en ningún almacén.
+                                    </p>
+                                    <div class="mt-2">
+                                        <a href="@Url.Action("Crear", "Inventario")" class="text-sm font-medium text-yellow-700 underline hover:text-yellow-600">
+                                            Crear inventario para este producto
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                    <h2 class="flex items-center font-bold">
+                        <i class="fas fa-chart-pie mr-2"></i> Resumen
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="rounded-lg bg-blue-50 p-4 text-center">
+                            <span class="block text-sm font-medium text-blue-700">Stock Total</span>
+                            @{
+                                var inventarios = ViewBag.InventarioPorAlmacen as IEnumerable<IngeTechCRM.Models.Inventario>;
+                                var stockTotal = inventarios != null ? inventarios.Sum(i => i.CANTIDAD) : 0;
+                            }
+                            <span class="mt-1 block text-2xl font-bold text-blue-800">@stockTotal</span>
+                        </div>
+
+                        <div class="rounded-lg bg-green-50 p-4 text-center">
+                            <span class="block text-sm font-medium text-green-700">Almacenes</span>
+                            <span class="mt-1 block text-2xl font-bold text-green-800">
+                                @(ViewBag.InventarioPorAlmacen != null ? ViewBag.InventarioPorAlmacen.Count : 0)
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
+                        <h3 class="mb-2 text-sm font-medium text-gray-700">Acciones Rápidas</h3>
+                        <div class="grid grid-cols-1 gap-2">
+                            <a href="@Url.Action("Editar", new { id = Model.ID_PRODUCTO })" class="flex items-center rounded-lg bg-white px-3 py-2 text-sm font-medium text-indigo-600 shadow-sm transition hover:bg-indigo-50">
+                                <i class="fas fa-edit mr-2"></i> Editar Producto
+                            </a>
+                            <a href="@Url.Action("Crear", "Inventario")" class="flex items-center rounded-lg bg-white px-3 py-2 text-sm font-medium text-green-600 shadow-sm transition hover:bg-green-50">
+                                <i class="fas fa-plus-circle mr-2"></i> Añadir a Inventario
+                            </a>
+                            <a href="@Url.Action("Eliminar", new { id = Model.ID_PRODUCTO })" class="flex items-center rounded-lg bg-white px-3 py-2 text-sm font-medium text-red-600 shadow-sm transition hover:bg-red-50">
+                                <i class="fas fa-trash-alt mr-2"></i> Eliminar Producto
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para vista previa de imágenes -->
+<div id="imageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 hidden">
+    <div class="max-w-3xl mx-auto p-4">
+        <div class="relative">
+            <img id="modalImage" src="" alt="Vista previa" class="max-h-screen max-w-full">
+            <button type="button" onclick="closeImageModal()" class="absolute top-0 right-0 -mt-4 -mr-4 rounded-full bg-indigo-600 p-2 text-white hover:bg-indigo-700">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Modal de imágenes
+        function openImageModal(imageSrc) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('imageModal').classList.remove('hidden');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.add('hidden');
+        }
+
+        // Cerrar modal con Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+    </script>
+}

@@ -1,0 +1,309 @@
+﻿@model List<IngeTechCRM.Models.Producto>
+@{
+    ViewData["Title"] = "Catálogo de Productos";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class="mb-8 text-3xl font-bold text-gray-800">Catálogo de Productos</h1>
+
+    <!-- Filtros -->
+    <div class="mb-8 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+            <h2 class="flex items-center font-bold">
+                <i class="fas fa-filter mr-2"></i> Filtros de Búsqueda
+            </h2>
+        </div>
+        <div class="p-6">
+            <form method="get" action="@Url.Action("Catalogo")">
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    <!-- Categoría -->
+                    <div>
+                        <label for="categoriaId" class="mb-2 block text-sm font-medium text-gray-700">Categoría</label>
+                        <div class="relative">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <i class="fas fa-tags text-gray-400"></i>
+                            </div>
+                            <select class="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-3 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                    id="categoriaId"
+                                    name="categoriaId">
+                                <option value="">Todas las categorías</option>
+                                @foreach (var categoria in ViewBag.Categorias)
+                                {
+                                    if (ViewBag.CategoriaSeleccionada == categoria.ID_CATEGORIA)
+                                    {
+                                        <option value="@categoria.ID_CATEGORIA" selected>@categoria.NOMBRE</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@categoria.ID_CATEGORIA">@categoria.NOMBRE</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Marca -->
+                    <div>
+                        <label for="marcaId" class="mb-2 block text-sm font-medium text-gray-700">Marca</label>
+                        <div class="relative">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <i class="fas fa-copyright text-gray-400"></i>
+                            </div>
+                            <select class="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-3 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                    id="marcaId"
+                                    name="marcaId">
+                                <option value="">Todas las marcas</option>
+                                @foreach (var marca in ViewBag.Marcas)
+                                {
+                                    if (ViewBag.MarcaSeleccionada == marca.ID_MARCA)
+                                    {
+                                        <option value="@marca.ID_MARCA" selected>@marca.NOMBRE</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@marca.ID_MARCA">@marca.NOMBRE</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Provincia -->
+                    <div>
+                        <label for="provinciaId" class="mb-2 block text-sm font-medium text-gray-700">Disponible en</label>
+                        <div class="relative">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <i class="fas fa-map-marker-alt text-gray-400"></i>
+                            </div>
+                            <select class="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-3 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                    id="provinciaId"
+                                    name="provinciaId">
+                                <option value="">Todas las provincias</option>
+                                @foreach (var provincia in ViewBag.Provincias)
+                                {
+                                    if (ViewBag.ProvinciaSeleccionada == provincia.ID_PROVINCIA)
+                                    {
+                                        <option value="@provincia.ID_PROVINCIA" selected>@provincia.NOMBRE</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@provincia.ID_PROVINCIA">@provincia.NOMBRE</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Búsqueda -->
+                    <div>
+                        <label for="buscar" class="mb-2 block text-sm font-medium text-gray-700">Buscar</label>
+                        <div class="relative flex">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input type="text"
+                                   class="block w-full rounded-l-lg border border-gray-300 py-3 pl-10 pr-3 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                   id="buscar"
+                                   name="buscar"
+                                   placeholder="Nombre, código..."
+                                   value="@ViewBag.BusquedaActual">
+                            <button class="rounded-r-lg bg-gradient-to-r from-indigo-600 to-blue-500 px-4 text-white transition hover:from-indigo-700 hover:to-blue-600"
+                                    type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones adicionales -->
+                <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex flex-wrap gap-2">
+                        @if (ViewBag.CategoriaSeleccionada != null || ViewBag.MarcaSeleccionada != null || ViewBag.ProvinciaSeleccionada != null || !string.IsNullOrEmpty(ViewBag.BusquedaActual))
+                        {
+                            <a href="@Url.Action("Catalogo")" class="flex items-center rounded-full bg-gray-100 px-4 py-1 text-sm text-gray-700 transition hover:bg-gray-200">
+                                <i class="fas fa-times-circle mr-1 text-gray-500"></i> Limpiar filtros
+                            </a>
+                        }
+
+                        @if (ViewBag.CategoriaSeleccionada != null)
+                        {
+                            <span class="flex items-center rounded-full bg-indigo-100 px-4 py-1 text-sm text-indigo-700">
+                                <i class="fas fa-tag mr-1"></i>
+                                @foreach (var categoria in ViewBag.Categorias)
+                                {
+                                    if (ViewBag.CategoriaSeleccionada == categoria.ID_CATEGORIA)
+                                    {
+                                        @categoria.NOMBRE
+                                    }
+                                }
+                            </span>
+                        }
+
+                        @if (ViewBag.MarcaSeleccionada != null)
+                        {
+                            <span class="flex items-center rounded-full bg-blue-100 px-4 py-1 text-sm text-blue-700">
+                                <i class="fas fa-copyright mr-1"></i>
+                                @foreach (var marca in ViewBag.Marcas)
+                                {
+                                    if (ViewBag.MarcaSeleccionada == marca.ID_MARCA)
+                                    {
+                                        @marca.NOMBRE
+                                    }
+                                }
+                            </span>
+                        }
+
+                        @if (ViewBag.ProvinciaSeleccionada != null)
+                        {
+                            <span class="flex items-center rounded-full bg-green-100 px-4 py-1 text-sm text-green-700">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                @foreach (var provincia in ViewBag.Provincias)
+                                {
+                                    if (ViewBag.ProvinciaSeleccionada == provincia.ID_PROVINCIA)
+                                    {
+                                        @provincia.NOMBRE
+                                    }
+                                }
+                            </span>
+                        }
+                    </div>
+
+                    <div class="flex items-center gap-2 text-gray-500 text-sm">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Total: @Model.Count productos encontrados</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Resultados -->
+    @if (Model.Count == 0)
+    {
+        <div class="rounded-lg bg-blue-50 p-6 text-center">
+            <div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                <i class="fas fa-search text-3xl"></i>
+            </div>
+            <h3 class="mb-2 text-xl font-semibold text-gray-800">No se encontraron productos</h3>
+            <p class="text-gray-600">No hay productos que coincidan con los criterios de búsqueda seleccionados.</p>
+            <a href="@Url.Action("Catalogo")" class="mt-4 inline-block rounded-lg bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700">
+                <i class="fas fa-redo mr-2"></i> Ver todos los productos
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            @foreach (var producto in Model)
+            {
+                var imagenProducto = producto.Imagenes != null && producto.Imagenes.Count > 0
+                ? producto.Imagenes.First().RUTA_IMAGEN
+                : "/images/productos/default.png";
+
+                var cantidadDisponible = 0;
+                var productosConInventario = ViewBag.ProductosConInventario as IEnumerable<dynamic>;
+                if (productosConInventario != null)
+                {
+                    foreach (var item in productosConInventario)
+                    {
+                        if (item.Producto.ID_PRODUCTO == producto.ID_PRODUCTO)
+                        {
+                            cantidadDisponible = item.CantidadDisponible;
+                            break;
+                        }
+                    }
+                }
+
+                var estadoStock = cantidadDisponible > 0 ? "Disponible" : "Agotado";
+                var colorStockBg = cantidadDisponible > 0 ? "bg-green-100" : "bg-red-100";
+                var colorStockText = cantidadDisponible > 0 ? "text-green-700" : "text-red-700";
+
+                <div class="group overflow-hidden rounded-xl bg-white shadow-md transition-shadow hover:shadow-xl">
+                    <!-- Imagen con overlay de hover -->
+                    <div class="relative h-48 overflow-hidden bg-gray-100">
+                        <img class="h-full w-full object-contain p-4 transition-transform duration-300 group-hover:scale-105"
+                             src="@imagenProducto"
+                             alt="@producto.NOMBRE">
+
+                        <!-- Etiquetas flotantes -->
+                        <div class="absolute top-2 right-2 flex flex-col items-end space-y-2">
+                            <span class="rounded-full @colorStockBg @colorStockText px-3 py-1 text-xs font-semibold">
+                                @estadoStock
+                            </span>
+                        </div>
+
+                        <!-- Overlay de información en hover -->
+                        <div class="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <div class="space-y-2 p-4 text-center text-white">
+                                <h4 class="text-lg font-bold">@producto.NOMBRE</h4>
+                                <div class="flex justify-center space-x-2">
+                                    <a href="@Url.Action("DetalleProducto", new { id = producto.ID_PRODUCTO })" class="rounded-full bg-white bg-opacity-20 p-2 hover:bg-opacity-30">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    @if (cantidadDisponible > 0)
+                                    {
+                                        <a href="@Url.Action("AgregarAlCarrito", new { idProducto = producto.ID_PRODUCTO })" class="rounded-full bg-white bg-opacity-20 p-2 hover:bg-opacity-30">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contenido del producto -->
+                    <div class="p-4">
+                        <div class="mb-2 flex items-center justify-between">
+                            <span class="text-xs font-medium text-gray-500">@producto.Categoria.NOMBRE</span>
+                            <span class="text-xs font-medium text-gray-500">@producto.Marca.NOMBRE</span>
+                        </div>
+
+                        <h3 class="mb-2 text-lg font-semibold text-gray-800 line-clamp-1">@producto.NOMBRE</h3>
+
+                        <p class="mb-3 text-sm text-gray-600 line-clamp-2">
+                            @(producto.DESCRIPCION?.Length > 100 ? producto.DESCRIPCION.Substring(0, 100) + "..." : producto.DESCRIPCION)
+                        </p>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-indigo-600">@producto.PRECIO.ToString("C2")</span>
+                            @if (cantidadDisponible > 0)
+                            {
+                                <span class="text-xs text-gray-500">@cantidadDisponible unid. disponibles</span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="flex border-t border-gray-100">
+                        <a href="@Url.Action("DetalleProducto", new { id = producto.ID_PRODUCTO })" class="flex-1 border-r border-gray-100 py-3 text-center text-sm font-medium text-gray-700 transition hover:bg-gray-50">
+                            <i class="fas fa-info-circle mr-1"></i> Detalles
+                        </a>
+                        @if (cantidadDisponible > 0)
+                        {
+                            <a href="@Url.Action("AgregarAlCarrito", new { idProducto = producto.ID_PRODUCTO })" class="flex-1 py-3 text-center text-sm font-medium text-indigo-600 transition hover:bg-indigo-50">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="flex-1 cursor-not-allowed py-3 text-center text-sm font-medium text-gray-400">
+                                <i class="fas fa-ban mr-1"></i> Agotado
+                            </span>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Actualizar formulario automáticamente cuando cambia un filtro
+            $('#categoriaId, #marcaId, #provinciaId').change(function () {
+                $(this).closest('form').submit();
+            });
+        });
+    </script>
+}

@@ -1,0 +1,207 @@
+﻿@model IngeTechCRM.Models.Usuario
+@{
+    ViewData["Title"] = "Mi Perfil";
+    var provincias = ViewBag.Provincias as List<Provincia>;
+    var selectedProvinciaId = Model?.ID_PROVINCIA;
+}
+
+<div class="container mx-auto px-4 py-6">
+    <h1 class="mb-6 text-2xl font-bold text-gray-800 md:text-3xl">Mi Perfil</h1>
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <!-- Información Personal -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Información Personal</h2>
+            </div>
+            <div class="p-6">
+                <div class="mb-6 flex flex-col items-center">
+                    <div class="mb-3 flex h-24 w-24 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                        <i class="fas fa-user-circle text-5xl"></i>
+                    </div>
+                    <h3 class="mb-1 text-xl font-bold text-gray-800">@Model.NOMBRE_COMPLETO</h3>
+                    <span class="rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-600">@Model.TipoUsuario.DESCRIPCION</span>
+                </div>
+
+                <div class="mb-4 h-px w-full bg-gray-200"></div>
+
+                <div class="space-y-3 text-gray-700">
+                    <div class="flex">
+                        <span class="w-1/3 font-semibold">Usuario:</span>
+                        <span class="w-2/3">@Model.NOMBRE_USUARIO</span>
+                    </div>
+                    <div class="flex">
+                        <span class="w-1/3 font-semibold">ID:</span>
+                        <span class="w-2/3">@Model.IDENTIFICACION</span>
+                    </div>
+                    <div class="flex">
+                        <span class="w-1/3 font-semibold">Correo:</span>
+                        <span class="w-2/3 break-words">@Model.CORREO_ELECTRONICO</span>
+                    </div>
+                    <div class="flex">
+                        <span class="w-1/3 font-semibold">Teléfono:</span>
+                        <span class="w-2/3">@Model.TELEFONO</span>
+                    </div>
+                    <div class="flex">
+                        <span class="w-1/3 font-semibold">Provincia:</span>
+                        <span class="w-2/3">@Model.Provincia.NOMBRE</span>
+                    </div>
+                    <div class="flex">
+                        <span class="w-1/3 font-semibold">Dirección:</span>
+                        <span class="w-2/3">@Model.DIRECCION_COMPLETA</span>
+                    </div>
+                    @if (Model.FECHA_NACIMIENTO.HasValue)
+                    {
+                        <div class="flex">
+                            <span class="w-1/3 font-semibold">Nacimiento:</span>
+                            <span class="w-2/3">@Model.FECHA_NACIMIENTO.Value.ToString("dd/MM/yyyy")</span>
+                        </div>
+                    }
+                    <div class="flex">
+                        <span class="w-1/3 font-semibold">Registro:</span>
+                        <span class="w-2/3">@Model.FECHA_REGISTRO.ToString("dd/MM/yyyy")</span>
+                    </div>
+                    <div class="flex">
+                        <span class="w-1/3 font-semibold">Último acceso:</span>
+                        <span class="w-2/3">@Model.ULTIMO_ACCESO.ToString("dd/MM/yyyy HH:mm")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido principal: 2 columnas restantes -->
+        <div class="space-y-6 lg:col-span-2">
+            <!-- Formulario de actualización de datos -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                    <h2 class="font-bold">Actualizar Datos</h2>
+                </div>
+                <div class="p-6">
+                    <form method="post" action="@Url.Action("ActualizarPerfil", "Account")">
+                        <input type="hidden" name="Identificacion" value="@Model.IDENTIFICACION" />
+                        <input type="hidden" name="CorreoElectronico" value="@Model.CORREO_ELECTRONICO" />
+                        <input type="hidden" name="FechaRegistro" value="@Model.FECHA_REGISTRO" />
+                        <input type="hidden" name="UltimoAcceso" value="@Model.ULTIMO_ACCESO" />
+                        <input type="hidden" name="IdTipoUsuario" value="@Model.ID_TIPO_USUARIO" />
+
+                        <div class="mb-4">
+                            <label for="NombreUsuario" class="mb-2 block text-sm font-medium text-gray-700">Nombre de Usuario</label>
+                            <input type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="NombreUsuario" name="NombreUsuario" value="@Model.NOMBRE_USUARIO" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="NombreCompleto" class="mb-2 block text-sm font-medium text-gray-700">Nombre Completo</label>
+                            <input type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="NombreCompleto" name="NombreCompleto" value="@Model.NOMBRE_COMPLETO" required>
+                        </div>
+
+                        <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+                            <div>
+                                <label for="Telefono" class="mb-2 block text-sm font-medium text-gray-700">Teléfono</label>
+                                <input type="tel" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="Telefono" name="Telefono" value="@Model.TELEFONO">
+                            </div>
+                            <div>
+                                <label for="IdProvincia" class="mb-2 block text-sm font-medium text-gray-700">Provincia</label>
+                                <select class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="IdProvincia" name="IdProvincia" required>
+                                    <option value="">Seleccione una provincia</option>
+                                    @foreach (var provincia in provincias)
+                                    {
+                                        var selectedAttribute = selectedProvinciaId == provincia.ID_PROVINCIA ? " selected" : "";
+                                        @Html.Raw($"<option value='{provincia.ID_PROVINCIA}'{selectedAttribute}>{provincia.NOMBRE}</option>")
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="DireccionCompleta" class="mb-2 block text-sm font-medium text-gray-700">Dirección Completa</label>
+                            <textarea class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="DireccionCompleta" name="DireccionCompleta" rows="3" required>@Model.DIRECCION_COMPLETA</textarea>
+                        </div>
+
+                        <div class="mb-4 mt-6 h-px w-full bg-gray-200"></div>
+
+                        <h3 class="mb-2 text-lg font-medium text-gray-800">Cambiar Contraseña</h3>
+                        <p class="mb-4 text-sm text-gray-500">Deje estos campos en blanco si no desea cambiar su contraseña actual.</p>
+
+                        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                            <div>
+                                <label for="Contrasena" class="mb-2 block text-sm font-medium text-gray-700">Nueva Contraseña</label>
+                                <input type="password" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="Contrasena" name="Contrasena">
+                                <p class="mt-1 text-xs text-gray-500">Mínimo 6 caracteres</p>
+                            </div>
+                            <div>
+                                <label for="confirmarContrasena" class="mb-2 block text-sm font-medium text-gray-700">Confirmar Nueva Contraseña</label>
+                                <input type="password" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="confirmarContrasena" name="confirmarContrasena">
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button type="submit" class="rounded-lg bg-gradient-to-r from-indigo-600 to-blue-500 px-6 py-2 font-medium text-white shadow-md transition hover:from-indigo-700 hover:to-blue-600">
+                                <i class="fas fa-save mr-2"></i> Guardar Cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Acciones rápidas -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+                    <h2 class="font-bold">Acciones Rápidas</h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <a href="@Url.Action("MisPedidos", "Home")" class="flex items-center justify-center rounded-lg border border-indigo-500 bg-white px-4 py-3 font-medium text-indigo-600 transition hover:bg-indigo-50">
+                            <i class="fas fa-shopping-bag mr-2"></i> Mis Pedidos
+                        </a>
+                        <a href="@Url.Action("MiCarrito", "Home")" class="flex items-center justify-center rounded-lg border border-green-500 bg-white px-4 py-3 font-medium text-green-600 transition hover:bg-green-50">
+                            <i class="fas fa-shopping-cart mr-2"></i> Mi Carrito
+                        </a>
+                    </div>
+
+                    @if (Model.ID_TIPO_USUARIO == 1)
+                    {
+                        <div class="mt-6 rounded-lg bg-blue-50 p-4 text-blue-800">
+                            <h3 class="mb-2 text-lg font-semibold">Acceso de Administrador</h3>
+                            <p class="mb-4">Tiene acceso a funciones administrativas del sistema.</p>
+                            <div class="h-px w-full bg-blue-200"></div>
+                            <div class="mt-4">
+                                <a href="@Url.Action("Dashboard", "Home")" class="inline-flex items-center rounded-lg bg-blue-500 px-6 py-2 font-medium text-white transition hover:bg-blue-600">
+                                    <i class="fas fa-tachometer-alt mr-2"></i> Ir al Dashboard
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Validación de contraseñas
+            $('#confirmarContrasena').on('keyup', function() {
+                var contrasena = $('#Contrasena').val();
+                var confirmarContrasena = $(this).val();
+
+                if (contrasena === confirmarContrasena) {
+                    $(this).removeClass('border-red-500').addClass('border-green-500');
+                } else {
+                    $(this).removeClass('border-green-500').addClass('border-red-500');
+                }
+            });
+
+            // Validación del formulario
+            $('form').submit(function(event) {
+                var contrasena = $('#Contrasena').val();
+                var confirmarContrasena = $('#confirmarContrasena').val();
+
+                if (contrasena !== '' && contrasena !== confirmarContrasena) {
+                    event.preventDefault();
+                    alert('Las contraseñas no coinciden');
+                }
+            });
+        });
+    </script>
+}

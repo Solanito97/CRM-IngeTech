@@ -1,0 +1,188 @@
+﻿@{
+    ViewData["Title"] = "Enviar Mensaje Masivo";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Index")" class="text-gray-600 hover:text-indigo-600">Gestión de WhatsApp</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">Enviar Mensaje Masivo</span>
+    </nav>
+
+    <!-- Encabezado -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Enviar Mensaje Masivo</h1>
+        <p class="mt-2 text-gray-600">Envíe mensajes personalizados a múltiples usuarios según provincias y tipos de usuario</p>
+    </div>
+
+    <!-- Mensajes de notificación -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="mb-6 rounded-lg bg-green-100 p-4 text-green-700">
+            <div class="flex items-center">
+                <i class="fas fa-check-circle mr-2"></i>
+                <span>@TempData["Message"]</span>
+            </div>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="mb-6 rounded-lg bg-red-100 p-4 text-red-700">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                <span>@TempData["Error"]</span>
+            </div>
+        </div>
+    }
+
+    <!-- Formulario -->
+    <div class="rounded-xl bg-white p-6 shadow-lg">
+        <form asp-action="EnviarMensajeMasivo" method="post">
+            @Html.AntiForgeryToken()
+            
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <!-- Columna izquierda - Filtros -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Filtros de Destinatarios</h3>
+                    
+                    <!-- Provincias -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Provincias</label>
+                        <div class="space-y-2 max-h-60 overflow-y-auto border border-gray-200 rounded-md p-3">
+                            @if (ViewBag.Provincias != null)
+                            {
+                                foreach (var provincia in ViewBag.Provincias)
+                                {
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="provincia_@provincia.ID_PROVINCIA" name="provinciasSeleccionadas" value="@provincia.ID_PROVINCIA" 
+                                               class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <label for="provincia_@provincia.ID_PROVINCIA" class="ml-2 text-sm text-gray-700">@provincia.NOMBRE</label>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500">Seleccione las provincias a las que desea enviar el mensaje</p>
+                    </div>
+                    
+                    <!-- Tipos de Usuario -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipos de Usuario</label>
+                        <div class="space-y-2 max-h-60 overflow-y-auto border border-gray-200 rounded-md p-3">
+                            @if (ViewBag.TiposUsuario != null)
+                            {
+                                foreach (var tipoUsuario in ViewBag.TiposUsuario)
+                                {
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="tipo_@tipoUsuario.ID_TIPO_USUARIO" name="tiposUsuarioSeleccionados" value="@tipoUsuario.ID_TIPO_USUARIO" 
+                                               class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <label for="tipo_@tipoUsuario.ID_TIPO_USUARIO" class="ml-2 text-sm text-gray-700">@tipoUsuario.DESCRIPCION</label>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500">Seleccione los tipos de usuarios a los que desea enviar el mensaje</p>
+                    </div>
+                </div>
+
+                <!-- Columna derecha - Mensaje -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Mensaje a Enviar</h3>
+
+                    <div class="mb-6">
+                        <label for="mensaje" class="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="8" required
+                                  class="w-full rounded-md border border-gray-300 p-2 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                  placeholder="Escribe tu mensaje aquí..."></textarea>
+                        <p class="mt-1 text-xs text-gray-500">
+                            <i class="fas fa-info-circle mr-1"></i> Puede usar la variable <code>{nombre}</code> que será reemplazada por el nombre del usuario.
+                        </p>
+                    </div>
+
+                    <!-- Vista previa -->
+                    <div id="vistaPreviaContainer" class="mb-4 hidden bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Vista previa:</h4>
+                        <div id="vistaPrevia" class="bg-white rounded-lg p-3 border border-gray-200 text-sm"></div>
+                    </div>
+
+                    <button type="button" id="btnVistaPrevia" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm mb-4">
+                        <i class="fas fa-eye mr-1"></i> Vista previa del mensaje
+                    </button>
+                </div>
+            </div>
+
+            <!-- Alertas y advertencias -->
+            <div class="mb-6 mt-4 rounded-lg bg-yellow-50 p-4 text-yellow-800">
+                <div class="flex items-start">
+                    <i class="fas fa-exclamation-triangle mt-1 mr-3"></i>
+                    <div>
+                        <h4 class="font-medium">Consideraciones importantes:</h4>
+                        <ul class="mt-1 list-disc pl-5 text-sm space-y-1">
+                            <li>El mensaje se enviará solo a usuarios que tengan un número de teléfono registrado.</li>
+                            <li>El envío masivo puede tomar tiempo dependiendo de la cantidad de destinatarios.</li>
+                            <li>Evite enviar mensajes repetitivos en cortos períodos para no ser marcado como spam.</li>
+                            <li>Si no selecciona ningún filtro, el mensaje se enviará a <strong>todos los usuarios</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                <a href="@Url.Action("Index")" class="rounded-md bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200">
+                    Cancelar
+                </a>
+                <button type="submit" class="rounded-md bg-blue-600 px-6 py-2 text-sm font-medium text-white shadow hover:bg-blue-700">
+                    <i class="fas fa-paper-plane mr-2"></i> Enviar Mensajes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Vista previa del mensaje
+        document.getElementById('btnVistaPrevia').addEventListener('click', function() {
+            const mensaje = document.getElementById('mensaje').value;
+            if (!mensaje) {
+                alert('Por favor, escriba un mensaje primero');
+                return;
+            }
+
+            // Mostrar la vista previa
+            const vistaPreviaContainer = document.getElementById('vistaPreviaContainer');
+            const vistaPrevia = document.getElementById('vistaPrevia');
+
+            // Reemplazar la variable {nombre} con un ejemplo
+            let mensajeEjemplo = mensaje.replace(/{nombre}/g, 'Juan Pérez');
+
+            // Convertir saltos de línea a <br>
+            mensajeEjemplo = mensajeEjemplo.replace(/\n/g, '<br>');
+
+            vistaPrevia.innerHTML = mensajeEjemplo;
+            vistaPreviaContainer.classList.remove('hidden');
+        });
+
+        // Actualizar vista previa cuando cambia el mensaje
+        document.getElementById('mensaje').addEventListener('input', function() {
+            if (document.getElementById('vistaPreviaContainer').classList.contains('hidden')) {
+                return;
+            }
+
+            const mensaje = this.value;
+            const vistaPrevia = document.getElementById('vistaPrevia');
+
+            // Reemplazar la variable {nombre} con un ejemplo
+            let mensajeEjemplo = mensaje.replace(/{nombre}/g, 'Juan Pérez');
+
+            // Convertir saltos de línea a <br>
+            mensajeEjemplo = mensajeEjemplo.replace(/\n/g, '<br>');
+
+            vistaPrevia.innerHTML = mensajeEjemplo;
+        });
+    </script>
+}

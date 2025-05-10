@@ -1,0 +1,203 @@
+﻿
+@model List<IngeTechCRM.Models.ClientesProvinciaViewModel>
+@{
+    ViewData["Title"] = "Clientes por Provincia";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">Clientes por Provincia</h1>
+        <a href="@Url.Action("Index")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-200">
+            <i class="fas fa-arrow-left mr-2"></i> Volver al Panel
+        </a>
+    </div>
+    
+    <!-- Resumen general -->
+    <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-yellow-500 to-orange-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Total de Clientes</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                <div class="rounded-full bg-yellow-100 p-4">
+                    <i class="fas fa-users text-4xl text-yellow-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@Model.Sum(p => p.TOTAL_CLIENTES)</span>
+                    <span class="text-sm text-gray-500">Clientes registrados</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Clientes Activos</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                <div class="rounded-full bg-green-100 p-4">
+                    <i class="fas fa-user-check text-4xl text-green-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@Model.Sum(p => p.CLIENTES_ACTIVOS)</span>
+                    <span class="text-sm text-gray-500">Último mes</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Tasa de Actividad</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                @{
+                    var totalClientes = Model.Sum(p => p.TOTAL_CLIENTES);
+                    var totalActivos = Model.Sum(p => p.CLIENTES_ACTIVOS);
+                    var tasaActividad = totalClientes > 0 ? (double)totalActivos / totalClientes * 100 : 0;
+                }
+                <div class="rounded-full bg-blue-100 p-4">
+                    <i class="fas fa-percentage text-4xl text-blue-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@tasaActividad.ToString("0.0")%</span>
+                    <span class="text-sm text-gray-500">Clientes activos</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tabla de provincias -->
+    <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gray-50 px-6 py-4">
+            <h2 class="font-bold text-gray-800">
+                Distribución de Clientes por Provincia
+            </h2>
+        </div>
+        <div class="p-6">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Provincia
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Total Clientes
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Clientes Activos
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                % Activos
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                        @foreach (var provincia in Model.OrderByDescending(p => p.TOTAL_CLIENTES))
+                        {
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 text-sm font-medium text-gray-800">
+                                    @provincia.PROVINCIA
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-800">
+                                    @provincia.TOTAL_CLIENTES
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-800">
+                                    @provincia.CLIENTES_ACTIVOS
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    @{
+                                        var porcentajeActivos = provincia.PORCENTAJE_ACTIVOS;
+                                        var colorPorcentaje = porcentajeActivos >= 70 
+                                            ? "bg-green-100 text-green-800" 
+                                            : (porcentajeActivos >= 40 ? "bg-yellow-100 text-yellow-800" : "bg-red-100 text-red-800");
+                                    }
+                                    <span class="inline-flex rounded-full @colorPorcentaje px-2 py-1 text-xs font-semibold">
+                                        @porcentajeActivos.ToString("0.0")%
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center text-sm font-medium">
+                                    <a href="@Url.Action("DetalleClientesPorProvincia", new { id = provincia.ID_PROVINCIA })" 
+                                       class="rounded bg-blue-100 p-1.5 text-blue-600 transition hover:bg-blue-200"
+                                       title="Ver detalle">
+                                        <i class="fas fa-search"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gráficos -->
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <!-- Distribución de clientes por provincia -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-yellow-500 to-orange-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Distribución de Clientes</h2>
+            </div>
+            <div class="p-6">
+                <div class="h-64">
+                    <!-- Representación visual de clientes por provincia -->
+                    @{
+                        var maxClientes = Model.Max(p => p.TOTAL_CLIENTES);
+                        var topProvincias = Model.OrderByDescending(p => p.TOTAL_CLIENTES).Take(8).ToList();
+                    }
+                    
+                    @foreach (var provincia in topProvincias)
+                    {
+                        var porcentaje = (int)(provincia.TOTAL_CLIENTES * 100 / maxClientes);
+                        <div class="mb-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-600">@provincia.PROVINCIA</span>
+                                <span class="text-sm font-medium text-gray-800">@provincia.TOTAL_CLIENTES clientes</span>
+                            </div>
+                            <div class="mt-1 h-4 w-full overflow-hidden rounded-full bg-gray-200">
+                                <div class="h-full bg-yellow-500" style="width: @porcentaje%"></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tasa de actividad por provincia -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Tasa de Actividad por Provincia</h2>
+            </div>
+            <div class="p-6">
+                <div class="h-64">
+                    <!-- Representación visual de tasa de actividad -->
+                    @{
+                        var provinciasConClientes = Model.Where(p => p.TOTAL_CLIENTES > 0).OrderByDescending(p => p.PORCENTAJE_ACTIVOS).Take(8).ToList();
+                    }
+                    
+                    @foreach (var provincia in provinciasConClientes)
+                    {
+                        var colorBarra = provincia.PORCENTAJE_ACTIVOS >= 70 
+                            ? "bg-green-500" 
+                            : (provincia.PORCENTAJE_ACTIVOS >= 40 ? "bg-yellow-500" : "bg-red-500");
+                        
+                        <div class="mb-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-600">@provincia.PROVINCIA</span>
+                                <span class="text-sm font-medium text-gray-800">@provincia.PORCENTAJE_ACTIVOS.ToString("0.0")%</span>
+                            </div>
+                            <div class="mt-1 h-4 w-full overflow-hidden rounded-full bg-gray-200">
+                                <div class="h-full @colorBarra" style="width: @provincia.PORCENTAJE_ACTIVOS%"></div>
+                            </div>
+                            <div class="mt-1 flex justify-between text-xs text-gray-500">
+                                <span>@provincia.CLIENTES_ACTIVOS de @provincia.TOTAL_CLIENTES activos</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,381 @@
+﻿@model IngeTechCRM.Models.Comunicado
+@{
+    ViewData["Title"] = "Detalles de Comunicado";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Index", "Comunicado")" class="text-gray-600 hover:text-indigo-600">Gestión de Comunicados</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">Detalles del Comunicado</span>
+    </nav>
+
+    <!-- Encabezado -->
+    <div class="mb-8 flex flex-wrap items-center justify-between">
+        <h1 class="text-3xl font-bold text-gray-800">Detalles del Comunicado</h1>
+        <div class="flex space-x-3">
+            @if (!Model.FECHA_ENVIO_REAL.HasValue)
+            {
+                <a href="@Url.Action("Editar", new { id = Model.ID_COMUNICADO })" class="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow transition hover:bg-indigo-700">
+                    <i class="fas fa-edit mr-2"></i> Editar
+                </a>
+                <form asp-action="EnviarComunicadoManual" method="post" class="inline">
+                    <input type="hidden" name="id" value="@Model.ID_COMUNICADO" />
+                    <button type="submit" class="flex items-center rounded-lg bg-green-600 px-4 py-2 font-medium text-white shadow transition hover:bg-green-700">
+                        <i class="fas fa-paper-plane mr-2"></i> Enviar Ahora
+                    </button>
+                </form>
+            }
+            <a href="@Url.Action("Index")" class="flex items-center rounded-lg border border-gray-300 px-4 py-2 font-medium text-gray-700 shadow transition hover:bg-gray-50">
+                <i class="fas fa-arrow-left mr-2"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <!-- Información del comunicado -->
+        <div class="col-span-2 space-y-8">
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="border-b border-gray-200 bg-indigo-600 p-6 text-white">
+                    <div class="flex items-center">
+                        <div class="mr-4 flex h-16 w-16 items-center justify-center rounded-full bg-white bg-opacity-20 text-3xl">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold">@Model.TITULO</h2>
+                            <p class="text-indigo-100">
+                                @{
+                                    string estadoTexto = "Borrador";
+
+                                    if (Model.FECHA_ENVIO_REAL.HasValue)
+                                    {
+                                        estadoTexto = "Enviado el " + Model.FECHA_ENVIO_REAL.Value.ToString("dd/MM/yyyy HH:mm");
+                                    }
+                                    else if (Model.FECHA_ENVIO_PROGRAMADO.HasValue && Model.FECHA_ENVIO_PROGRAMADO > DateTime.Now)
+                                    {
+                                        estadoTexto = "Programado para el " + Model.FECHA_ENVIO_PROGRAMADO.Value.ToString("dd/MM/yyyy HH:mm");
+                                    }
+                                    else if (Model.FECHA_ENVIO_PROGRAMADO.HasValue && Model.FECHA_ENVIO_PROGRAMADO <= DateTime.Now)
+                                    {
+                                        estadoTexto = "Pendiente de Envío";
+                                    }
+                                }
+                                @estadoTexto
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div class="space-y-4">
+                            <div class="rounded-lg bg-gray-50 p-4">
+                                <p class="text-sm font-medium text-gray-500">ID del Comunicado</p>
+                                <p class="font-medium text-gray-800">@Model.ID_COMUNICADO</p>
+                            </div>
+                            <div class="rounded-lg bg-gray-50 p-4">
+                                <p class="text-sm font-medium text-gray-500">Fecha de Creación</p>
+                                <p class="font-medium text-gray-800">@Model.FECHA_CREACION.ToString("dd/MM/yyyy HH:mm")</p>
+                            </div>
+                            <div class="rounded-lg bg-gray-50 p-4">
+                                <p class="text-sm font-medium text-gray-500">Creado por</p>
+                                <p class="font-medium text-gray-800">@(Model.UsuarioCreador != null ? Model.UsuarioCreador.NOMBRE_COMPLETO : "N/A")</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="rounded-lg bg-gray-50 p-4">
+                                <p class="text-sm font-medium text-gray-500">Fecha de Envío Programado</p>
+                                <p class="font-medium text-gray-800">@(Model.FECHA_ENVIO_PROGRAMADO.HasValue ? Model.FECHA_ENVIO_PROGRAMADO.Value.ToString("dd/MM/yyyy HH:mm") : "No programado")</p>
+                            </div>
+                            <div class="rounded-lg bg-gray-50 p-4">
+                                <p class="text-sm font-medium text-gray-500">Fecha de Envío Real</p>
+                                <p class="font-medium text-gray-800">@(Model.FECHA_ENVIO_REAL.HasValue ? Model.FECHA_ENVIO_REAL.Value.ToString("dd/MM/yyyy HH:mm") : "No enviado")</p>
+                            </div>
+                            <div class="rounded-lg bg-gray-50 p-4">
+                                <p class="text-sm font-medium text-gray-500">Total de Destinatarios</p>
+                                <p class="font-medium text-gray-800">@ViewBag.TotalEnvios</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contenido del mensaje -->
+                    <div class="mt-6 rounded-lg border border-gray-200 p-6">
+                        <h3 class="mb-4 text-lg font-semibold text-gray-800">Mensaje</h3>
+                        <div class="prose max-w-none">
+                            @Html.Raw(Model.MENSAJE)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segmentación -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="border-b border-gray-200 bg-gray-50 p-6">
+                    <h3 class="text-xl font-semibold text-gray-800">Segmentación de Destinatarios</h3>
+                </div>
+                <div class="p-6">
+                    @if (Model.Segmentos != null && Model.Segmentos.Count > 0)
+                    {
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <!-- Provincias seleccionadas -->
+                            <div>
+                                <h4 class="mb-2 font-medium text-gray-700">Provincias</h4>
+                                <div class="space-y-2">
+                                    @{
+                                        var provincias = Model.Segmentos.Where(s => s.ID_PROVINCIA.HasValue).Select(s => s.Provincia).ToList();
+                                    }
+
+                                    @if (provincias.Any())
+                                    {
+                                        foreach (var provincia in provincias)
+                                        {
+                                            <div class="flex items-center rounded-lg bg-blue-50 px-3 py-2 text-blue-800">
+                                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                                <span>@provincia.NOMBRE</span>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="italic text-gray-500">No se seleccionaron provincias específicas.</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Tipos de usuario seleccionados -->
+                            <div>
+                                <h4 class="mb-2 font-medium text-gray-700">Tipos de Usuario</h4>
+                                <div class="space-y-2">
+                                    @{
+                                        var tiposUsuario = Model.Segmentos.Where(s => s.ID_TIPO_USUARIO.HasValue).Select(s => s.TipoUsuario).ToList();
+                                    }
+
+                                    @if (tiposUsuario.Any())
+                                    {
+                                        foreach (var tipo in tiposUsuario)
+                                        {
+                                            <div class="flex items-center rounded-lg bg-purple-50 px-3 py-2 text-purple-800">
+                                                <i class="fas fa-users mr-2"></i>
+                                                <span>@tipo.DESCRIPCION</span>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="italic text-gray-500">No se seleccionaron tipos de usuario específicos.</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (!provincias.Any() && !tiposUsuario.Any())
+                        {
+                            <div class="mt-4 rounded-lg bg-yellow-50 p-4 text-yellow-800">
+                                <div class="flex">
+                                    <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 text-yellow-500">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">Comunicado dirigido a todos los usuarios</p>
+                                        <p class="mt-1 text-sm">No se aplicaron filtros específicos, por lo que este comunicado se enviará a todos los usuarios cliente del sistema.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="rounded-lg bg-yellow-50 p-4 text-yellow-800">
+                            <div class="flex">
+                                <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 text-yellow-500">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Comunicado dirigido a todos los usuarios</p>
+                                    <p class="mt-1 text-sm">No se aplicaron filtros específicos, por lo que este comunicado se enviará a todos los usuarios cliente del sistema.</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Lista de envíos -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="border-b border-gray-200 bg-gray-50 p-6">
+                    <h3 class="text-xl font-semibold text-gray-800">Destinatarios</h3>
+                </div>
+                <div class="p-6">
+                    @if (ViewBag.Envios != null && ((IEnumerable<dynamic>)ViewBag.Envios).Any())
+                    {
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">ID</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Usuario</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Correo Electrónico</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Fecha Envío</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    @foreach (var envio in (IEnumerable<dynamic>)ViewBag.Envios)
+                                    {
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">@envio.ID_ENVIO</td>
+                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@envio.UsuarioDestinatario.NOMBRE_COMPLETO</td>
+                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@envio.UsuarioDestinatario.CORREO_ELECTRONICO</td>
+                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@envio.FECHA_ENVIO.ToString("dd/MM/yyyy HH:mm")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="flex flex-col items-center justify-center py-8 text-center text-gray-500">
+                            <i class="fas fa-inbox text-4xl text-gray-300 mb-3"></i>
+                            <p>Este comunicado aún no ha sido enviado a ningún destinatario.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel lateral -->
+        <div class="space-y-6">
+            <!-- Estado del comunicado -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="border-b border-gray-200 bg-gray-50 p-6">
+                    <h3 class="text-xl font-semibold text-gray-800">Estado del Comunicado</h3>
+                </div>
+                <div class="p-6">
+                    @{
+                        string estadoClase = "bg-gray-100 text-gray-800";
+                        string estadoIcon = "fa-file-alt";
+
+                        if (Model.FECHA_ENVIO_REAL.HasValue)
+                        {
+                            estadoClase = "bg-green-100 text-green-800";
+                            estadoIcon = "fa-check-circle";
+                        }
+                        else if (Model.FECHA_ENVIO_PROGRAMADO.HasValue && Model.FECHA_ENVIO_PROGRAMADO > DateTime.Now)
+                        {
+                            estadoClase = "bg-blue-100 text-blue-800";
+                            estadoIcon = "fa-clock";
+                        }
+                        else if (Model.FECHA_ENVIO_PROGRAMADO.HasValue && Model.FECHA_ENVIO_PROGRAMADO <= DateTime.Now)
+                        {
+                            estadoClase = "bg-yellow-100 text-yellow-800";
+                            estadoIcon = "fa-hourglass-half";
+                        }
+                    }
+
+                    <div class="flex items-center justify-center rounded-lg @estadoClase p-6">
+                        <div class="mr-4 text-4xl">
+                            <i class="fas @estadoIcon"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold">@estadoTexto</h4>
+                            @if (Model.FECHA_ENVIO_REAL.HasValue)
+                            {
+                                <p class="text-sm">Enviado a @ViewBag.TotalEnvios destinatarios</p>
+                            }
+                            else if (Model.FECHA_ENVIO_PROGRAMADO.HasValue)
+                            {
+                                <p class="text-sm">Programado para el @Model.FECHA_ENVIO_PROGRAMADO.Value.ToString("dd/MM/yyyy HH:mm")</p>
+                            }
+                            else
+                            {
+                                <p class="text-sm">Sin fecha de envío programada</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="border-b border-gray-200 bg-gray-50 p-6">
+                    <h3 class="text-lg font-semibold text-gray-800">Acciones</h3>
+                </div>
+                <div class="divide-y divide-gray-100">
+                    @if (!Model.FECHA_ENVIO_REAL.HasValue)
+                    {
+                        <a href="@Url.Action("Editar", new { id = Model.ID_COMUNICADO })" class="flex items-center justify-between p-4 hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                                <span class="font-medium">Editar Comunicado</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </a>
+
+                        <form asp-action="EnviarComunicadoManual" method="post" class="block">
+                            <input type="hidden" name="id" value="@Model.ID_COMUNICADO" />
+                            <button type="submit" class="flex w-full items-center justify-between p-4 text-left hover:bg-gray-50">
+                                <div class="flex items-center">
+                                    <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </div>
+                                    <span class="font-medium">Enviar Ahora</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </button>
+                        </form>
+                    }
+
+                    <a href="@Url.Action("Eliminar", new { id = Model.ID_COMUNICADO })" class="flex items-center justify-between p-4 hover:bg-gray-50">
+                        <div class="flex items-center">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-red-600">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                            <span class="font-medium">Eliminar Comunicado</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </a>
+
+                    <a href="@Url.Action("Index")" class="flex items-center justify-between p-4 hover:bg-gray-50">
+                        <div class="flex items-center">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600">
+                                <i class="fas fa-arrow-left"></i>
+                            </div>
+                            <span class="font-medium">Volver a la Lista</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Vista previa en correo -->
+            <div class="rounded-xl bg-white p-6 shadow-lg">
+                <h3 class="mb-4 text-lg font-semibold text-gray-800">Vista previa de correo</h3>
+                <div class="overflow-hidden rounded-lg border border-gray-200">
+                    <div class="bg-gray-100 p-3">
+                        <div class="space-y-1 text-sm">
+                            <div><strong>De:</strong> IngeTech CRM &lt;noreply@ingetech.cr&gt;</div>
+                            <div><strong>Para:</strong> usuario@ejemplo.com</div>
+                            <div><strong>Asunto:</strong> @Model.TITULO</div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4">
+                        <div class="rounded-lg border border-gray-200 p-4">
+                            <div class="prose prose-sm max-w-none">
+                                @Html.Raw(Model.MENSAJE)
+                            </div>
+                            <div class="mt-4 border-t border-gray-200 pt-4 text-xs text-gray-500">
+                                <p>Este es un mensaje automático del sistema IngeTech CRM.</p>
+                                <p>Por favor no responda a este correo electrónico.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

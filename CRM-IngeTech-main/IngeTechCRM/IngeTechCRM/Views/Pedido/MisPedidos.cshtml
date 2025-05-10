@@ -1,0 +1,273 @@
+﻿
+@model List<IngeTechCRM.Models.Pedido>
+@{
+    ViewData["Title"] = "Mis Pedidos";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <h1 class="mb-6 text-2xl font-bold text-gray-800 md:text-3xl">Mis Pedidos</h1>
+
+    <!-- Resumen de pedidos -->
+    <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-4">
+        <!-- Total pedidos -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Total Pedidos</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                <div class="rounded-full bg-blue-100 p-4">
+                    <i class="fas fa-shopping-cart text-4xl text-blue-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@Model.Count</span>
+                    <span class="text-sm text-gray-500">pedidos realizados</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pedidos pendientes -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-yellow-500 to-amber-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Pendientes</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                @{
+                    var pendientes = Model.Count(p => p.ESTADO == "PENDIENTE" || p.ESTADO == "PROCESANDO");
+                }
+                <div class="rounded-full bg-yellow-100 p-4">
+                    <i class="fas fa-clock text-4xl text-yellow-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@pendientes</span>
+                    <span class="text-sm text-gray-500">en proceso</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pedidos entregados -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Entregados</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                @{
+                    var entregados = Model.Count(p => p.ESTADO == "ENTREGADO");
+                }
+                <div class="rounded-full bg-green-100 p-4">
+                    <i class="fas fa-check-circle text-4xl text-green-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@entregados</span>
+                    <span class="text-sm text-gray-500">completados</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monto total -->
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-purple-600 to-indigo-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Total Compras</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                @{
+                    var totalCompras = Model
+                    .Where(p => p.ESTADO != "CANCELADO")
+                    .Sum(p => p.TOTAL);
+                }
+                <div class="rounded-full bg-purple-100 p-4">
+                    <i class="fas fa-dollar-sign text-4xl text-purple-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@totalCompras.ToString("C")</span>
+                    <span class="text-sm text-gray-500">en compras</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de pedidos -->
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="border-b border-gray-200 bg-gray-50 px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h2 class="font-bold text-gray-800">
+                    Historial de Pedidos
+                    <span class="ml-2 rounded-full bg-indigo-100 px-2 py-1 text-xs font-semibold text-indigo-800">@Model.Count</span>
+                </h2>
+                <a href="@Url.Action("Catalogo", "Home")" class="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-indigo-700">
+                    <i class="fas fa-shopping-cart mr-2"></i> Seguir Comprando
+                </a>
+            </div>
+        </div>
+
+        <div class="p-6">
+            @if (Model.Count == 0)
+            {
+                <div class="rounded-lg bg-blue-50 p-4 text-blue-800">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium">
+                                No has realizado ningún pedido todavía.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <p class="mb-4 text-gray-600">Comienza a explorar nuestro catálogo para realizar tu primera compra.</p>
+                    <a href="@Url.Action("Catalogo", "Home")" class="inline-flex items-center rounded-lg bg-indigo-600 px-6 py-3 font-medium text-white shadow-md transition hover:bg-indigo-700">
+                        <i class="fas fa-shopping-basket mr-2"></i> Ver Catálogo
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Pedido
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Fecha
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Dirección
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Total
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Estado
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-500">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            @foreach (var pedido in Model)
+                            {
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm font-medium text-indigo-600">
+                                        #@pedido.ID_PEDIDO
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        @pedido.FECHA_PEDIDO.ToString("dd/MM/yyyy HH:mm")
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        <div class="max-w-xs truncate">@pedido.DIRECCION_ENVIO</div>
+                                        <div class="text-xs text-gray-400">@pedido.Provincia.NOMBRE</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                                        @pedido.TOTAL.ToString("C")
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                        @{
+                                            var estadoClass = pedido.ESTADO switch
+                                            {
+                                                "PENDIENTE" => "bg-yellow-100 text-yellow-800",
+                                                "PROCESANDO" => "bg-blue-100 text-blue-800",
+                                                "ENVIADO" => "bg-indigo-100 text-indigo-800",
+                                                "ENTREGADO" => "bg-green-100 text-green-800",
+                                                "CANCELADO" => "bg-red-100 text-red-800",
+                                                _ => "bg-gray-100 text-gray-800"
+                                            };
+                                        }
+                                        <span class="inline-flex rounded-full @estadoClass px-2 py-1 text-xs font-semibold">
+                                            @pedido.ESTADO
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-center text-sm font-medium">
+                                        <div class="flex justify-center space-x-2">
+                                            <a href="@Url.Action("Detalles", new { id = pedido.ID_PEDIDO })"
+                                               class="rounded bg-blue-100 p-1.5 text-blue-600 transition hover:bg-blue-200"
+                                               title="Ver detalles">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+
+                                            @if (pedido.ESTADO == "PENDIENTE" || pedido.ESTADO == "PROCESANDO")
+                                            {
+                                                <form asp-action="CancelarPedido" method="post" onsubmit="return confirm('¿Está seguro que desea cancelar este pedido?');">
+                                                    <input type="hidden" name="id" value="@pedido.ID_PEDIDO" />
+                                                    <button type="submit"
+                                                            class="rounded bg-red-100 p-1.5 text-red-600 transition hover:bg-red-200"
+                                                            title="Cancelar pedido">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Estados del pedido - Explicación -->
+    <div class="mt-6 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-gray-700 to-gray-900 px-4 py-3 text-white">
+            <h2 class="font-bold">Estados del Pedido</h2>
+        </div>
+        <div class="p-6">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-5">
+                <div class="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
+                    <div class="mb-2 flex items-center">
+                        <span class="mr-2 inline-flex rounded-full bg-yellow-100 px-2 py-1 text-xs font-semibold text-yellow-800">PENDIENTE</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Tu pedido ha sido recibido y está pendiente de procesamiento.</p>
+                </div>
+
+                <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
+                    <div class="mb-2 flex items-center">
+                        <span class="mr-2 inline-flex rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800">PROCESANDO</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Estamos preparando tu pedido para su envío.</p>
+                </div>
+
+                <div class="rounded-lg border border-indigo-200 bg-indigo-50 p-4">
+                    <div class="mb-2 flex items-center">
+                        <span class="mr-2 inline-flex rounded-full bg-indigo-100 px-2 py-1 text-xs font-semibold text-indigo-800">ENVIADO</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Tu pedido ha sido enviado y está en camino.</p>
+                </div>
+
+                <div class="rounded-lg border border-green-200 bg-green-50 p-4">
+                    <div class="mb-2 flex items-center">
+                        <span class="mr-2 inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800">ENTREGADO</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Tu pedido ha sido entregado exitosamente.</p>
+                </div>
+
+                <div class="rounded-lg border border-red-200 bg-red-50 p-4">
+                    <div class="mb-2 flex items-center">
+                        <span class="mr-2 inline-flex rounded-full bg-red-100 px-2 py-1 text-xs font-semibold text-red-800">CANCELADO</span>
+                    </div>
+                    <p class="text-sm text-gray-600">El pedido ha sido cancelado y los productos devueltos al inventario.</p>
+                </div>
+            </div>
+
+            <div class="mt-4 rounded-lg bg-blue-50 p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-info-circle text-blue-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-800">
+                            <span class="font-medium">Nota:</span> Solo puedes cancelar pedidos que estén en estado "Pendiente" o "Procesando".
+                            Una vez que el pedido ha sido enviado, no podrás cancelarlo a través del sistema.
+                            Si necesitas ayuda con un pedido ya enviado, por favor contacta a nuestro servicio al cliente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

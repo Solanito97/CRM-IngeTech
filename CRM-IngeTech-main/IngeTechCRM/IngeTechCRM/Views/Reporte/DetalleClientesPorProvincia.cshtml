@@ -1,0 +1,234 @@
+﻿
+@model List<IngeTechCRM.Models.Usuario>
+@{
+    ViewData["Title"] = "Detalle de Clientes por Provincia";
+    var provincia = ViewBag.Provincia;
+    var totalClientes = ViewBag.TotalClientes;
+    var clientesActivos = ViewBag.ClientesActivos;
+}
+
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800 md:text-3xl">
+                Clientes de Provincia: @provincia.NOMBRE
+            </h1>
+        </div>
+        <div class="mt-4 flex space-x-2 sm:mt-0">
+            <a href="@Url.Action("ClientesPorProvincia")" class="flex items-center rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-200">
+                <i class="fas fa-arrow-left mr-2"></i> Volver
+            </a>
+            <button onclick="window.print()" class="flex items-center rounded-lg bg-indigo-100 px-4 py-2 font-medium text-indigo-700 shadow-sm transition hover:bg-indigo-200">
+                <i class="fas fa-print mr-2"></i> Imprimir
+            </button>
+        </div>
+    </div>
+
+    <!-- Resumen de la provincia -->
+    <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-yellow-500 to-orange-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Total de Clientes</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                <div class="rounded-full bg-yellow-100 p-4">
+                    <i class="fas fa-users text-4xl text-yellow-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@totalClientes</span>
+                    <span class="text-sm text-gray-500">Clientes registrados</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Clientes Activos</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                <div class="rounded-full bg-green-100 p-4">
+                    <i class="fas fa-user-check text-4xl text-green-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold text-gray-800">@clientesActivos</span>
+                    <span class="text-sm text-gray-500">Último mes</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-500 px-4 py-3 text-white">
+                <h2 class="font-bold">Tasa de Actividad</h2>
+            </div>
+            <div class="flex items-center justify-center p-6">
+                @{
+                    var porcentajeActivos = totalClientes > 0 ? (double)clientesActivos / totalClientes * 100 : 0;
+                    var colorPorcentaje = porcentajeActivos >= 70
+                    ? "text-green-500"
+                    : (porcentajeActivos >= 40 ? "text-yellow-500" : "text-red-500");
+                }
+                <div class="rounded-full bg-blue-100 p-4">
+                    <i class="fas fa-percentage text-4xl text-blue-500"></i>
+                </div>
+                <div class="ml-4">
+                    <span class="block text-3xl font-bold @colorPorcentaje">@porcentajeActivos.ToString("0.0")%</span>
+                    <span class="text-sm text-gray-500">Clientes activos</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de clientes en la provincia -->
+    <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gray-50 px-6 py-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <h2 class="font-bold text-gray-800">
+                    Listado de Clientes en la Provincia
+                </h2>
+                <div class="mt-3 sm:mt-0">
+                    <div class="relative rounded-md shadow-sm">
+                        <input type="text" id="buscarCliente" placeholder="Buscar cliente..."
+                               class="block w-full rounded-md border border-gray-300 py-2 pl-3 pr-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-6">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200" id="tablaClientes">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Cliente
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Correo Electrónico
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Teléfono
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Último Acceso
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                Estado
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                        @foreach (var cliente in Model)
+                        {
+                            var esActivo = cliente.ULTIMO_ACCESO >= DateTime.Now.AddMonths(-1);
+                            var estadoColor = esActivo ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800";
+                            var estadoTexto = esActivo ? "Activo" : "Inactivo";
+
+                            <tr class="hover:bg-gray-50 fila-cliente">
+                                <td class="px-6 py-4 text-sm">
+                                    <div class="font-medium text-gray-800">@cliente.NOMBRE_COMPLETO</div>
+                                    <div class="text-xs text-gray-500">ID: @cliente.IDENTIFICACION</div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    @cliente.CORREO_ELECTRONICO
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    @cliente.TELEFONO
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    @(cliente.ULTIMO_ACCESO == DateTime.MinValue ? "Nunca" : cliente.ULTIMO_ACCESO.ToString("dd/MM/yyyy HH:mm"))
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <span class="inline-flex rounded-full @estadoColor px-2 py-1 text-xs font-semibold">
+                                        @estadoTexto
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico de actividad -->
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-500 px-4 py-3 text-white">
+            <h2 class="font-bold">Actividad de Clientes</h2>
+        </div>
+        <div class="p-6">
+            <div class="flex flex-col items-center justify-center md:flex-row md:justify-around">
+                <div class="mb-4 h-48 w-48 md:mb-0">
+                    <!-- Gráfico circular para mostrar la proporción activos/inactivos -->
+                    <div class="relative h-full w-full">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-gray-800">@porcentajeActivos.ToString("0.0")%</div>
+                                <div class="text-sm text-gray-500">Activos</div>
+                            </div>
+                        </div>
+                        <svg viewBox="0 0 36 36" class="h-full w-full">
+                            <!-- Fondo del gráfico -->
+                            <path class="fill-gray-200"
+                                  d="M18 2.0845
+                                     a 15.9155 15.9155 0 0 1 0 31.831
+                                     a 15.9155 15.9155 0 0 1 0 -31.831" />
+
+                            <!-- Porcentaje activo -->
+                            @{
+                                var dashArray = 100;
+                                var dashOffset = (100 - porcentajeActivos);
+                                var pathColor = porcentajeActivos >= 70
+                                ? "#10B981" // verde
+                                : (porcentajeActivos >= 40 ? "#F59E0B" : "#EF4444"); // amarillo o rojo
+                            }
+                            <path class="fill-none stroke-current" style="stroke: @pathColor; stroke-width: 3; stroke-dasharray: @dashArray; stroke-dashoffset: @dashOffset;"
+                                  d="M18 2.0845
+                                     a 15.9155 15.9155 0 0 1 0 31.831
+                                     a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2">
+                    <h3 class="mb-4 text-center font-medium text-gray-700">Resumen de Actividad</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-600">Clientes Activos</span>
+                                <span class="text-sm font-medium text-gray-800">@clientesActivos</span>
+                            </div>
+                            <div class="mt-1 h-3 w-full overflow-hidden rounded-full bg-gray-200">
+                                <div class="h-full bg-green-500" style="width: @porcentajeActivos%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-600">Clientes Inactivos</span>
+                                <span class="text-sm font-medium text-gray-800">@(totalClientes - clientesActivos)</span>
+                            </div>
+                            <div class="mt-1 h-3 w-full overflow-hidden rounded-full bg-gray-200">
+                                <div class="h-full bg-gray-400" style="width: @(100 - porcentajeActivos)%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Filtro para la tabla de clientes
+            $("#buscarCliente").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tablaClientes .fila-cliente").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}

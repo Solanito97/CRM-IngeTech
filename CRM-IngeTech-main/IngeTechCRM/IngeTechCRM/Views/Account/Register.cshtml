@@ -10,11 +10,11 @@
         <!-- Tarjeta principal -->
         <div class="overflow-hidden rounded-xl bg-white shadow-xl">
             <!-- Encabezado con gradiente -->
-            <div class="bg-gradient-to-r from-indigo-600 to-blue-500 py-6 text-center text-white">
+            <div class="bg-gradient-to-r from-brand-blue to-blue-500 py-6 text-center text-white">
                 <div class="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-white bg-opacity-20">
                     <i class="fas fa-user-plus text-2xl"></i>
                 </div>
-                <h3 class="text-2xl font-bold">Crear una Cuenta</h3>
+                <h3 class="text-[35px] font-bold">Crear una Cuenta</h3>
                 <p class="text-sm opacity-90">Únase a IngeTech para acceder a todos nuestros servicios</p>
             </div>
 
@@ -44,48 +44,48 @@
                     <!-- Identificación y Nombre de Usuario -->
                     <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
                         <div>
-                            <label for="Identificacion" class="mb-2 block text-sm font-medium text-gray-700">Identificación</label>
+                            <label for="Identificacion" class="mb-2 block text-sm font-medium text-gray-dark">Identificación</label>
                             <div class="relative">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fas fa-id-card text-gray-400"></i>
+                                    <i class="fas fa-id-card text-gray-light"></i>
                                 </div>
                                 <input type="number"
-                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                        id="Identificacion"
                                        name="IDENTIFICACION"
                                        value="@Model?.IDENTIFICACION"
                                        required
                                        placeholder="Ingrese su número de cédula">
-                                <p class="mt-1 text-xs text-gray-500">Ingrese su número de cédula sin guiones ni espacios</p>
+                                <p class="mt-1 text-xs text-gray-light">Ingrese su número de cédula sin guiones ni espacios</p>
                             </div>
                         </div>
                         <div>
-                            <label for="NombreUsuario" class="mb-2 block text-sm font-medium text-gray-700">Nombre de Usuario</label>
+                            <label for="NombreUsuario" class="mb-2 block text-sm font-medium text-gray-dark">Nombre de Usuario</label>
                             <div class="relative">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fas fa-user text-gray-400"></i>
+                                    <i class="fas fa-user text-gray-light"></i>
                                 </div>
                                 <input type="text"
-                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                        id="NombreUsuario"
                                        name="NOMBRE_USUARIO"
                                        value="@Model?.NOMBRE_USUARIO"
                                        required
                                        placeholder="Elija un nombre de usuario">
-                                <p class="mt-1 text-xs text-gray-500">Este será su nombre para ingresar al sistema</p>
+                                <p class="mt-1 text-xs text-gray-light">Este será su nombre para ingresar al sistema</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Nombre completo -->
                     <div class="mb-6">
-                        <label for="NombreCompleto" class="mb-2 block text-sm font-medium text-gray-700">Nombre Completo</label>
+                        <label for="NombreCompleto" class="mb-2 block text-sm font-medium text-gray-dark">Nombre Completo</label>
                         <div class="relative">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i class="fas fa-user-circle text-gray-400"></i>
+                                <i class="fas fa-user-circle text-gray-light"></i>
                             </div>
                             <input type="text"
-                                   class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                   class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                    id="NombreCompleto"
                                    name="NOMBRE_COMPLETO"
                                    value="@Model?.NOMBRE_COMPLETO"
@@ -96,13 +96,13 @@
 
                     <!-- Correo electrónico -->
                     <div class="mb-6">
-                        <label for="CorreoElectronico" class="mb-2 block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                        <label for="CorreoElectronico" class="mb-2 block text-sm font-medium text-gray-dark">Correo Electrónico</label>
                         <div class="relative">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i class="fas fa-envelope text-gray-400"></i>
+                                <i class="fas fa-envelope text-gray-light"></i>
                             </div>
                             <input type="email"
-                                   class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                   class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                    id="CorreoElectronico"
                                    name="CORREO_ELECTRONICO"
                                    value="@Model?.CORREO_ELECTRONICO"
@@ -114,28 +114,28 @@
                     <!-- Contraseñas -->
                     <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
                         <div>
-                            <label for="Contrasena" class="mb-2 block text-sm font-medium text-gray-700">Contraseña</label>
+                            <label for="Contrasena" class="mb-2 block text-sm font-medium text-gray-dark">Contraseña</label>
                             <div class="relative">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fas fa-lock text-gray-400"></i>
+                                    <i class="fas fa-lock text-gray-light"></i>
                                 </div>
                                 <input type="password"
-                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                        id="Contrasena"
                                        name="CONTRASENA"
                                        required
                                        placeholder="Cree una contraseña segura">
-                                <p class="mt-1 text-xs text-gray-500">Mínimo 6 caracteres, incluya letras y números</p>
+                                <p class="mt-1 text-xs text-gray-light">Mínimo 6 caracteres, incluya letras y números</p>
                             </div>
                         </div>
                         <div>
-                            <label for="confirmarContrasena" class="mb-2 block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
+                            <label for="confirmarContrasena" class="mb-2 block text-sm font-medium text-gray-dark">Confirmar Contraseña</label>
                             <div class="relative">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fas fa-lock text-gray-400"></i>
+                                    <i class="fas fa-lock text-gray-light"></i>
                                 </div>
                                 <input type="password"
-                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                        id="confirmarContrasena"
                                        name="confirmarContrasena"
                                        required
@@ -147,13 +147,13 @@
                     <!-- Teléfono y Fecha de Nacimiento -->
                     <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
                         <div>
-                            <label for="Telefono" class="mb-2 block text-sm font-medium text-gray-700">Teléfono</label>
+                            <label for="Telefono" class="mb-2 block text-sm font-medium text-gray-dark">Teléfono</label>
                             <div class="relative">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fas fa-phone text-gray-400"></i>
+                                    <i class="fas fa-phone text-gray-light"></i>
                                 </div>
                                 <input type="tel"
-                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                        id="Telefono"
                                        name="TELEFONO"
                                        value="@Model?.TELEFONO"
@@ -161,13 +161,13 @@
                             </div>
                         </div>
                         <div>
-                            <label for="FechaNacimiento" class="mb-2 block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
+                            <label for="FechaNacimiento" class="mb-2 block text-sm font-medium text-gray-dark">Fecha de Nacimiento</label>
                             <div class="relative">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fas fa-calendar-alt text-gray-400"></i>
+                                    <i class="fas fa-calendar-alt text-gray-light"></i>
                                 </div>
                                 <input type="date"
-                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                       class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                        id="FechaNacimiento"
                                        name="FECHA_NACIMIENTO"
                                        value="@(Model?.FECHA_NACIMIENTO?.ToString("yyyy-MM-dd"))">
@@ -177,12 +177,12 @@
 
                     <!-- Provincia -->
                     <div class="mb-6">
-                        <label for="IdProvincia" class="mb-2 block text-sm font-medium text-gray-700">Provincia</label>
+                        <label for="IdProvincia" class="mb-2 block text-sm font-medium text-gray-dark">Provincia</label>
                         <div class="relative">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i class="fas fa-map-marker-alt text-gray-400"></i>
+                                <i class="fas fa-map-marker-alt text-gray-light"></i>
                             </div>
-                            <select class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                            <select class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                     id="IdProvincia"
                                     name="ID_PROVINCIA"
                                     required>
@@ -198,12 +198,12 @@
 
                     <!-- Dirección completa -->
                     <div class="mb-6">
-                        <label for="DireccionCompleta" class="mb-2 block text-sm font-medium text-gray-700">Dirección Completa</label>
+                        <label for="DireccionCompleta" class="mb-2 block text-sm font-medium text-gray-dark">Dirección Completa</label>
                         <div class="relative">
                             <div class="pointer-events-none absolute left-0 top-3 flex items-center pl-3">
-                                <i class="fas fa-home text-gray-400"></i>
+                                <i class="fas fa-home text-gray-light"></i>
                             </div>
-                            <textarea class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                            <textarea class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                       id="DireccionCompleta"
                                       name="DIRECCION_COMPLETA"
                                       rows="3"
@@ -213,18 +213,18 @@
                     </div>
 
                     <!-- Términos y condiciones -->
-                    <div class="mb-6 rounded-lg bg-gray-50 p-4">
+                    <div class="mb-6 rounded-lg bg-gray-light/30 p-4">
                         <div class="flex items-start">
                             <div class="flex h-5 items-center">
                                 <input id="terminos"
                                        name="terminos"
                                        type="checkbox"
-                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                       class="h-4 w-4 rounded border-gray-300 text-brand-blue focus:ring-brand-blue/30"
                                        required>
                             </div>
                             <div class="ml-3 text-sm">
-                                <label for="terminos" class="font-medium text-gray-700">Acepto los términos y condiciones</label>
-                                <p class="text-gray-500">Al registrarse, acepta nuestros <a href="#" class="text-indigo-600 hover:underline">Términos de servicio</a> y <a href="#" class="text-indigo-600 hover:underline">Política de privacidad</a>.</p>
+                                <label for="terminos" class="font-medium text-gray-dark">Acepto los términos y condiciones</label>
+                                <p class="text-gray-light">Al registrarse, acepta nuestros <a href="#" class="text-brand-blue hover:underline">Términos de servicio</a> y <a href="#" class="text-brand-blue hover:underline">Política de privacidad</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -232,7 +232,7 @@
                     <!-- Botón de registro -->
                     <div class="mt-8">
                         <button type="submit"
-                                class="group relative w-full overflow-hidden rounded-lg bg-gradient-to-r from-indigo-600 to-blue-500 py-3 text-center font-bold text-white shadow-lg transition duration-300 hover:from-indigo-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                class="group relative w-full overflow-hidden rounded-lg bg-gradient-to-r from-brand-blue to-blue-500 py-3 text-center font-bold text-white shadow-lg transition duration-300 hover:from-brand-blue/90 hover:to-blue-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-offset-2">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                                 <i class="fas fa-user-plus"></i>
                             </span>
@@ -243,10 +243,10 @@
             </div>
 
             <!-- Pie de la tarjeta -->
-            <div class="border-t border-gray-200 bg-gray-50 p-4 text-center">
+            <div class="border-t border-gray-200 bg-gray-light/30 p-4 text-center">
                 <div class="flex items-center justify-center space-x-2">
-                    <span class="text-sm text-gray-600">¿Ya tiene una cuenta?</span>
-                    <a href="@Url.Action("Login", "Account")" class="rounded-md bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-600 hover:bg-indigo-100">
+                    <span class="text-sm text-gray-light">¿Ya tiene una cuenta?</span>
+                    <a href="@Url.Action("Login", "Account")" class="rounded-md bg-brand-blue/10 px-3 py-1 text-sm font-medium text-brand-blue hover:bg-brand-blue/20">
                         Inicie sesión
                     </a>
                 </div>
@@ -256,25 +256,25 @@
         <!-- Ventajas del registro (opcional) -->
         <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             <div class="rounded-lg bg-white p-4 text-center shadow-md">
-                <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                     <i class="fas fa-shopping-cart"></i>
                 </div>
-                <h4 class="mb-2 font-semibold">Compras más rápidas</h4>
-                <p class="text-sm text-gray-600">Guarde sus datos para finalizar las compras con un solo clic.</p>
+                <h4 class="mb-2 font-semibold text-gray-dark">Compras más rápidas</h4>
+                <p class="text-sm text-gray-light">Guarde sus datos para finalizar las compras con un solo clic.</p>
             </div>
             <div class="rounded-lg bg-white p-4 text-center shadow-md">
-                <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                     <i class="fas fa-history"></i>
                 </div>
-                <h4 class="mb-2 font-semibold">Historial de pedidos</h4>
-                <p class="text-sm text-gray-600">Acceda fácilmente a sus pedidos anteriores y realice recompras.</p>
+                <h4 class="mb-2 font-semibold text-gray-dark">Historial de pedidos</h4>
+                <p class="text-sm text-gray-light">Acceda fácilmente a sus pedidos anteriores y realice recompras.</p>
             </div>
             <div class="rounded-lg bg-white p-4 text-center shadow-md">
-                <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                     <i class="fas fa-tag"></i>
                 </div>
-                <h4 class="mb-2 font-semibold">Ofertas exclusivas</h4>
-                <p class="text-sm text-gray-600">Reciba acceso a descuentos y promociones especiales para clientes registrados.</p>
+                <h4 class="mb-2 font-semibold text-gray-dark">Ofertas exclusivas</h4>
+                <p class="text-sm text-gray-light">Reciba acceso a descuentos y promociones especiales para clientes registrados.</p>
             </div>
         </div>
     </div>

@@ -4,11 +4,11 @@
 }
 
 <div class="container mx-auto px-4 py-8">
-    <h1 class="mb-8 text-3xl font-bold text-gray-800">Catálogo de Productos</h1>
+    <h1 class="mb-8 text-[35px] font-bold text-gray-dark">Catálogo de Productos</h1>
 
     <!-- Filtros -->
     <div class="mb-8 overflow-hidden rounded-xl bg-white shadow-lg">
-        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
+        <div class="bg-gradient-to-r from-brand-blue to-blue-500 px-4 py-3 text-white">
             <h2 class="flex items-center font-bold">
                 <i class="fas fa-filter mr-2"></i> Filtros de Búsqueda
             </h2>
@@ -18,12 +18,12 @@
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     <!-- Categoría -->
                     <div>
-                        <label for="categoriaId" class="mb-2 block text-sm font-medium text-gray-700">Categoría</label>
+                        <label for="categoriaId" class="mb-2 block text-sm font-medium text-gray-dark">Categoría</label>
                         <div class="relative">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i class="fas fa-tags text-gray-400"></i>
+                                <i class="fas fa-tags text-gray-light"></i>
                             </div>
-                            <select class="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-3 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                            <select class="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-3 text-gray-dark focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                     id="categoriaId"
                                     name="categoriaId">
                                 <option value="">Todas las categorías</option>
@@ -44,12 +44,12 @@
 
                     <!-- Marca -->
                     <div>
-                        <label for="marcaId" class="mb-2 block text-sm font-medium text-gray-700">Marca</label>
+                        <label for="marcaId" class="mb-2 block text-sm font-medium text-gray-dark">Marca</label>
                         <div class="relative">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i class="fas fa-copyright text-gray-400"></i>
+                                <i class="fas fa-copyright text-gray-light"></i>
                             </div>
-                            <select class="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-3 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                            <select class="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-3 text-gray-dark focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                     id="marcaId"
                                     name="marcaId">
                                 <option value="">Todas las marcas</option>
@@ -70,12 +70,12 @@
 
                     <!-- Provincia -->
                     <div>
-                        <label for="provinciaId" class="mb-2 block text-sm font-medium text-gray-700">Disponible en</label>
+                        <label for="provinciaId" class="mb-2 block text-sm font-medium text-gray-dark">Disponible en</label>
                         <div class="relative">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i class="fas fa-map-marker-alt text-gray-400"></i>
+                                <i class="fas fa-map-marker-alt text-gray-light"></i>
                             </div>
-                            <select class="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-3 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                            <select class="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-3 text-gray-dark focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                     id="provinciaId"
                                     name="provinciaId">
                                 <option value="">Todas las provincias</option>
@@ -96,18 +96,18 @@
 
                     <!-- Búsqueda -->
                     <div>
-                        <label for="buscar" class="mb-2 block text-sm font-medium text-gray-700">Buscar</label>
+                        <label for="buscar" class="mb-2 block text-sm font-medium text-gray-dark">Buscar</label>
                         <div class="relative flex">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i class="fas fa-search text-gray-400"></i>
+                                <i class="fas fa-search text-gray-light"></i>
                             </div>
                             <input type="text"
-                                   class="block w-full rounded-l-lg border border-gray-300 py-3 pl-10 pr-3 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                   class="block w-full rounded-l-lg border border-gray-300 py-3 pl-10 pr-3 text-gray-dark focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
                                    id="buscar"
                                    name="buscar"
                                    placeholder="Nombre, código..."
                                    value="@ViewBag.BusquedaActual">
-                            <button class="rounded-r-lg bg-gradient-to-r from-indigo-600 to-blue-500 px-4 text-white transition hover:from-indigo-700 hover:to-blue-600"
+                            <button class="rounded-r-lg bg-gradient-to-r from-brand-blue to-blue-500 px-4 text-white transition hover:from-brand-blue/90 hover:to-blue-400"
                                     type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -120,14 +120,14 @@
                     <div class="flex flex-wrap gap-2">
                         @if (ViewBag.CategoriaSeleccionada != null || ViewBag.MarcaSeleccionada != null || ViewBag.ProvinciaSeleccionada != null || !string.IsNullOrEmpty(ViewBag.BusquedaActual))
                         {
-                            <a href="@Url.Action("Catalogo")" class="flex items-center rounded-full bg-gray-100 px-4 py-1 text-sm text-gray-700 transition hover:bg-gray-200">
-                                <i class="fas fa-times-circle mr-1 text-gray-500"></i> Limpiar filtros
+                            <a href="@Url.Action("Catalogo")" class="flex items-center rounded-full bg-gray-light/50 px-4 py-1 text-sm text-gray-dark transition hover:bg-gray-light/70">
+                                <i class="fas fa-times-circle mr-1 text-gray-light"></i> Limpiar filtros
                             </a>
                         }
 
                         @if (ViewBag.CategoriaSeleccionada != null)
                         {
-                            <span class="flex items-center rounded-full bg-indigo-100 px-4 py-1 text-sm text-indigo-700">
+                            <span class="flex items-center rounded-full bg-brand-blue/20 px-4 py-1 text-sm text-brand-blue">
                                 <i class="fas fa-tag mr-1"></i>
                                 @foreach (var categoria in ViewBag.Categorias)
                                 {
@@ -141,7 +141,7 @@
 
                         @if (ViewBag.MarcaSeleccionada != null)
                         {
-                            <span class="flex items-center rounded-full bg-blue-100 px-4 py-1 text-sm text-blue-700">
+                            <span class="flex items-center rounded-full bg-brand-blue/20 px-4 py-1 text-sm text-brand-blue">
                                 <i class="fas fa-copyright mr-1"></i>
                                 @foreach (var marca in ViewBag.Marcas)
                                 {
@@ -155,7 +155,7 @@
 
                         @if (ViewBag.ProvinciaSeleccionada != null)
                         {
-                            <span class="flex items-center rounded-full bg-green-100 px-4 py-1 text-sm text-green-700">
+                            <span class="flex items-center rounded-full bg-gray-light/50 px-4 py-1 text-sm text-gray-dark">
                                 <i class="fas fa-map-marker-alt mr-1"></i>
                                 @foreach (var provincia in ViewBag.Provincias)
                                 {
@@ -168,7 +168,7 @@
                         }
                     </div>
 
-                    <div class="flex items-center gap-2 text-gray-500 text-sm">
+                    <div class="flex items-center gap-2 text-gray-light text-sm">
                         <i class="fas fa-info-circle"></i>
                         <span>Total: @Model.Count productos encontrados</span>
                     </div>
@@ -180,13 +180,13 @@
     <!-- Resultados -->
     @if (Model.Count == 0)
     {
-        <div class="rounded-lg bg-blue-50 p-6 text-center">
-            <div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+        <div class="rounded-lg bg-brand-blue/10 p-6 text-center">
+            <div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                 <i class="fas fa-search text-3xl"></i>
             </div>
-            <h3 class="mb-2 text-xl font-semibold text-gray-800">No se encontraron productos</h3>
-            <p class="text-gray-600">No hay productos que coincidan con los criterios de búsqueda seleccionados.</p>
-            <a href="@Url.Action("Catalogo")" class="mt-4 inline-block rounded-lg bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700">
+            <h3 class="mb-2 text-xl font-semibold text-gray-dark">No se encontraron productos</h3>
+            <p class="text-gray-light">No hay productos que coincidan con los criterios de búsqueda seleccionados.</p>
+            <a href="@Url.Action("Catalogo")" class="mt-4 inline-block rounded-lg bg-brand-blue px-4 py-2 text-white transition hover:bg-brand-blue/90">
                 <i class="fas fa-redo mr-2"></i> Ver todos los productos
             </a>
         </div>
@@ -254,39 +254,39 @@
                     <!-- Contenido del producto -->
                     <div class="p-4">
                         <div class="mb-2 flex items-center justify-between">
-                            <span class="text-xs font-medium text-gray-500">@producto.Categoria.NOMBRE</span>
-                            <span class="text-xs font-medium text-gray-500">@producto.Marca.NOMBRE</span>
+                            <span class="text-xs font-medium text-gray-light">@producto.Categoria.NOMBRE</span>
+                            <span class="text-xs font-medium text-gray-light">@producto.Marca.NOMBRE</span>
                         </div>
 
-                        <h3 class="mb-2 text-lg font-semibold text-gray-800 line-clamp-1">@producto.NOMBRE</h3>
+                        <h3 class="mb-2 text-lg font-semibold text-gray-dark line-clamp-1">@producto.NOMBRE</h3>
 
-                        <p class="mb-3 text-sm text-gray-600 line-clamp-2">
+                        <p class="mb-3 text-sm text-gray-light line-clamp-2">
                             @(producto.DESCRIPCION?.Length > 100 ? producto.DESCRIPCION.Substring(0, 100) + "..." : producto.DESCRIPCION)
                         </p>
 
                         <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-indigo-600">@producto.PRECIO.ToString("C2")</span>
+                            <span class="text-lg font-bold text-brand-blue">@producto.PRECIO.ToString("C2")</span>
                             @if (cantidadDisponible > 0)
                             {
-                                <span class="text-xs text-gray-500">@cantidadDisponible unid. disponibles</span>
+                                <span class="text-xs text-gray-light">@cantidadDisponible unid. disponibles</span>
                             }
                         </div>
                     </div>
 
                     <!-- Botones de acción -->
                     <div class="flex border-t border-gray-100">
-                        <a href="@Url.Action("DetalleProducto", new { id = producto.ID_PRODUCTO })" class="flex-1 border-r border-gray-100 py-3 text-center text-sm font-medium text-gray-700 transition hover:bg-gray-50">
+                        <a href="@Url.Action("DetalleProducto", new { id = producto.ID_PRODUCTO })" class="flex-1 border-r border-gray-100 py-3 text-center text-sm font-medium text-gray-dark transition hover:bg-gray-light/30">
                             <i class="fas fa-info-circle mr-1"></i> Detalles
                         </a>
                         @if (cantidadDisponible > 0)
                         {
-                            <a href="@Url.Action("AgregarAlCarrito", new { idProducto = producto.ID_PRODUCTO })" class="flex-1 py-3 text-center text-sm font-medium text-indigo-600 transition hover:bg-indigo-50">
+                            <a href="@Url.Action("AgregarAlCarrito", new { idProducto = producto.ID_PRODUCTO })" class="flex-1 py-3 text-center text-sm font-medium text-brand-blue transition hover:bg-brand-blue/10">
                                 <i class="fas fa-cart-plus mr-1"></i> Agregar
                             </a>
                         }
                         else
                         {
-                            <span class="flex-1 cursor-not-allowed py-3 text-center text-sm font-medium text-gray-400">
+                            <span class="flex-1 cursor-not-allowed py-3 text-center text-sm font-medium text-gray-light">
                                 <i class="fas fa-ban mr-1"></i> Agotado
                             </span>
                         }

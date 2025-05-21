@@ -3,15 +3,15 @@
     ViewData["Title"] = "Iniciar Sesión";
 }
 
-<div class="flex min-h-[80vh] items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+<div class="flex min-h-[80vh] items-center justify-center bg-white px-4 py-12 sm:px-6 lg:px-8">
     <div class="w-full max-w-md space-y-8">
         <!-- Logo y encabezado -->
         <div class="text-center">
-            <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-blue-500 text-white">
+            <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-brand-blue to-blue-500 text-white">
                 <i class="fas fa-laptop-code text-3xl"></i>
             </div>
-            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Bienvenido de nuevo</h2>
-            <p class="mt-2 text-sm text-gray-600">
+            <h2 class="mt-6 text-[35px] font-extrabold text-gray-dark">Bienvenido de nuevo</h2>
+            <p class="mt-2 text-sm text-gray-light">
                 Ingresa tus credenciales para acceder a tu cuenta
             </p>
         </div>
@@ -30,12 +30,12 @@
 
             <form method="post" action="@Url.Action("Login", "Account")" class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700" for="correo">
+                    <label class="block text-sm font-medium text-gray-dark" for="correo">
                         Correo electrónico
                     </label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i class="fas fa-envelope text-gray-400"></i>
+                            <i class="fas fa-envelope text-gray-light"></i>
                         </div>
                         <input id="correo"
                                name="correo"
@@ -43,17 +43,17 @@
                                required
                                autocomplete="email"
                                placeholder="Ingrese su correo electrónico"
-                               class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50" />
+                               class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 text-gray-dark placeholder-gray-light focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50" />
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700" for="contrasena">
+                    <label class="block text-sm font-medium text-gray-dark" for="contrasena">
                         Contraseña
                     </label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i class="fas fa-lock text-gray-400"></i>
+                            <i class="fas fa-lock text-gray-light"></i>
                         </div>
                         <input id="contrasena"
                                name="contrasena"
@@ -61,7 +61,7 @@
                                required
                                autocomplete="current-password"
                                placeholder="Ingrese su contraseña"
-                               class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50" />
+                               class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 text-gray-dark placeholder-gray-light focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50" />
                     </div>
                 </div>
 
@@ -70,14 +70,14 @@
                         <input id="recordarme"
                                name="recordarme"
                                type="checkbox"
-                               class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <label for="recordarme" class="ml-2 block text-sm text-gray-700">
+                               class="h-4 w-4 rounded border-gray-300 text-brand-blue focus:ring-brand-blue/30" />
+                        <label for="recordarme" class="ml-2 block text-sm text-gray-dark">
                             Recordarme
                         </label>
                     </div>
 
                     <div class="text-sm">
-                        <a href="@Url.Action("OlvidarContrasena", "Account")" class="font-medium text-indigo-600 hover:text-indigo-500">
+                        <a href="@Url.Action("OlvidarContrasena", "Account")" class="font-medium text-brand-blue hover:text-brand-blue/80">
                             ¿Olvidó su contraseña?
                         </a>
                     </div>
@@ -85,7 +85,7 @@
 
                 <div>
                     <button type="submit"
-                            class="group relative flex w-full justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-blue-500 py-3 px-4 text-sm font-medium text-white shadow-lg transition duration-300 hover:from-indigo-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            class="group relative flex w-full justify-center rounded-lg bg-gradient-to-r from-brand-blue to-blue-500 py-3 px-4 text-sm font-medium text-white shadow-lg transition duration-300 hover:from-brand-blue/90 hover:to-blue-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-offset-2">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                             <i class="fas fa-sign-in-alt"></i>
                         </span>
@@ -97,20 +97,20 @@
             <!-- Separador -->
             <div class="relative mt-8">
                 <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-gray-200"></div>
+                    <div class="w-full border-t border-gray-light/50"></div>
                 </div>
                 <div class="relative flex justify-center text-sm">
-                    <span class="bg-white px-4 text-gray-500">O continúe con</span>
+                    <span class="bg-white px-4 text-gray-light">O continúe con</span>
                 </div>
             </div>
 
             <!-- Botones de redes sociales -->
             <div class="mt-6 grid grid-cols-2 gap-3">
-                <a href="#" class="inline-flex justify-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50">
+                <a href="#" class="inline-flex justify-center rounded-lg border border-gray-light/50 bg-white py-2 px-4 text-sm font-medium text-gray-dark shadow-sm transition hover:bg-gray-light/10">
                     <i class="fab fa-google text-red-500 mr-2"></i>
                     Google
                 </a>
-                <a href="#" class="inline-flex justify-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50">
+                <a href="#" class="inline-flex justify-center rounded-lg border border-gray-light/50 bg-white py-2 px-4 text-sm font-medium text-gray-dark shadow-sm transition hover:bg-gray-light/10">
                     <i class="fab fa-facebook text-blue-600 mr-2"></i>
                     Facebook
                 </a>
@@ -120,19 +120,19 @@
         <!-- Enlace de registro -->
         <div class="text-center">
             <div class="my-4 flex items-center justify-center">
-                <span class="text-sm text-gray-600">¿No tiene una cuenta?</span>
-                <a href="@Url.Action("Register", "Account")" class="ml-2 rounded-md bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-600 hover:bg-indigo-100">
+                <span class="text-sm text-gray-light">¿No tiene una cuenta?</span>
+                <a href="@Url.Action("Register", "Account")" class="ml-2 rounded-md bg-brand-blue/10 px-3 py-1 text-sm font-medium text-brand-blue hover:bg-brand-blue/20">
                     ¡Regístrese ahora!
                 </a>
             </div>
-            <p class="mt-2 text-xs text-gray-500">
-                Al iniciar sesión, acepta nuestros <a href="#" class="text-indigo-600 hover:text-indigo-500">Términos de Servicio</a> y
-                <a href="#" class="text-indigo-600 hover:text-indigo-500">Política de Privacidad</a>
+            <p class="mt-2 text-xs text-gray-light">
+                Al iniciar sesión, acepta nuestros <a href="#" class="text-brand-blue hover:text-brand-blue/80">Términos de Servicio</a> y
+                <a href="#" class="text-brand-blue hover:text-brand-blue/80">Política de Privacidad</a>
             </p>
         </div>
     </div>
 </div>
 
 <!-- Opcional: Decoraciones visuales para el fondo -->
-<div class="absolute top-0 right-0 hidden h-64 w-64 transform translate-x-1/4 -translate-y-1/4 rounded-full bg-indigo-500 opacity-10 blur-3xl lg:block"></div>
+<div class="absolute top-0 right-0 hidden h-64 w-64 transform translate-x-1/4 -translate-y-1/4 rounded-full bg-brand-blue opacity-10 blur-3xl lg:block"></div>
 <div class="absolute bottom-0 left-0 hidden h-64 w-64 transform -translate-x-1/4 translate-y-1/4 rounded-full bg-blue-500 opacity-10 blur-3xl lg:block"></div>

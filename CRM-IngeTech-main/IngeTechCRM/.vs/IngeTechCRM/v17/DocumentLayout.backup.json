@@ -1,7 +1,20 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\bjsol\\Downloads\\IngeTechCRM\\IngeTechCRM\\",
-  "Documents": [],
+  "WorkspaceRootPath": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|f:\\crm\\crm-ingetech\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|f:\\crm\\crm-ingetech\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|f:\\crm\\crm-ingetech\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\views\\home\\catalogo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\views\\home\\catalogo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,12 +22,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 17,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
@@ -70,6 +79,49 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "IngeTechCRM\\Views\\Account\\Login.cshtml",
+              "ToolTip": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "IngeTechCRM\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-21T23:56:40.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Catalogo.cshtml",
+              "DocumentMoniker": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Home\\Catalogo.cshtml",
+              "RelativeDocumentMoniker": "IngeTechCRM\\Views\\Home\\Catalogo.cshtml",
+              "ToolTip": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Home\\Catalogo.cshtml",
+              "RelativeToolTip": "IngeTechCRM\\Views\\Home\\Catalogo.cshtml",
+              "ViewState": "AgIAABwBAAAAAAAAAAAqwFIBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-21T23:55:27.115Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-21T23:54:16.864Z",
+              "EditorCaption": ""
             }
           ]
         },

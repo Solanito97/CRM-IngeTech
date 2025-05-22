@@ -9,299 +9,301 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = IngeTechCRM
 build_property.RootNamespace = IngeTechCRM
-build_property.ProjectDir = C:\Users\bisma\Downloads\CRM-IngeTech-main\CRM-IngeTech-main\IngeTechCRM\IngeTechCRM\
+build_property.ProjectDir = F:\CRM\CRM-IngeTech\CRM-IngeTech-main\IngeTechCRM\IngeTechCRM\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\bisma\Downloads\CRM-IngeTech-main\CRM-IngeTech-main\IngeTechCRM\IngeTechCRM
+build_property.MSBuildProjectDirectory = F:\CRM\CRM-IngeTech\CRM-IngeTech-main\IngeTechCRM\IngeTechCRM
 build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/Login.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/MiPerfil.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/MiPerfil.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxNaVBlcmZpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/OlvidarContrasena.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/OlvidarContrasena.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxPbHZpZGFyQ29udHJhc2VuYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/Register.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/RestablecerContrasena.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/RestablecerContrasena.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXN0YWJsZWNlckNvbnRyYXNlbmEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/TokenInvalido.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Account/TokenInvalido.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxUb2tlbkludmFsaWRvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/Crear.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tdW5pY2Fkb1xDcmVhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/Detalles.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/Detalles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tdW5pY2Fkb1xEZXRhbGxlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/Editar.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tdW5pY2Fkb1xFZGl0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/Eliminar.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/Eliminar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tdW5pY2Fkb1xFbGltaW5hci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/Index.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tdW5pY2Fkb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/MisComunicados.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/MisComunicados.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tdW5pY2Fkb1xNaXNDb211bmljYWRvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/VerComunicado.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Comunicado/VerComunicado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tdW5pY2Fkb1xWZXJDb211bmljYWRvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/Catalogo.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/Catalogo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYXRhbG9nby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/Checkout.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/Checkout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaGVja291dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/Dashboard.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/DetalleProducto.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/DetalleProducto.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZXRhbGxlUHJvZHVjdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/Index.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/MiCarrito.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/MiCarrito.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNaUNhcnJpdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/Privacy.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Alertas.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Alertas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xBbGVydGFzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Crear.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xDcmVhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Detalles.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Detalles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xEZXRhbGxlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Editar.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xFZGl0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Index.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Movimientos.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/Movimientos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xNb3ZpbWllbnRvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/RegistrarMovimiento.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Inventario/RegistrarMovimiento.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xSZWdpc3RyYXJNb3ZpbWllbnRvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Pedido/Detalles.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Pedido/Detalles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVkaWRvXERldGFsbGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Pedido/Index.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Pedido/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVkaWRvXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Pedido/MisPedidos.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Pedido/MisPedidos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVkaWRvXE1pc1BlZGlkb3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Categorias.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Categorias.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cQ2F0ZWdvcmlhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Crear.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cQ3JlYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/CrearCategoria.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/CrearCategoria.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cQ3JlYXJDYXRlZ29yaWEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/CrearMarca.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/CrearMarca.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cQ3JlYXJNYXJjYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/CrearProveedor.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/CrearProveedor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cQ3JlYXJQcm92ZWVkb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Detalles.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Detalles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRGV0YWxsZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Editar.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRWRpdGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/EditarCategoria.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/EditarCategoria.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRWRpdGFyQ2F0ZWdvcmlhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/EditarMarca.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/EditarMarca.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRWRpdGFyTWFyY2EuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/EditarProveedor.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/EditarProveedor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRWRpdGFyUHJvdmVlZG9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Eliminar.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Eliminar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRWxpbWluYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Index.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Marcas.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Marcas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cTWFyY2FzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Proveedores.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Producto/Proveedores.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cUHJvdmVlZG9yZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/ClientesPorProvincia.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/ClientesPorProvincia.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxDbGllbnRlc1BvclByb3ZpbmNpYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/DetalleClientesPorProvincia.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/DetalleClientesPorProvincia.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxEZXRhbGxlQ2xpZW50ZXNQb3JQcm92aW5jaWEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/DetalleEfectividadComunicado.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/DetalleEfectividadComunicado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxEZXRhbGxlRWZlY3RpdmlkYWRDb211bmljYWRvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/DetalleInventarioPorAlmacen.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/DetalleInventarioPorAlmacen.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxEZXRhbGxlSW52ZW50YXJpb1BvckFsbWFjZW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/DetalleInventarioPorCategoria.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/DetalleInventarioPorCategoria.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxEZXRhbGxlSW52ZW50YXJpb1BvckNhdGVnb3JpYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/EfectividadComunicados.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/EfectividadComunicados.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxFZmVjdGl2aWRhZENvbXVuaWNhZG9zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/Index.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/InventarioPorAlmacen.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/InventarioPorAlmacen.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxJbnZlbnRhcmlvUG9yQWxtYWNlbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/InventarioPorCategoria.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/InventarioPorCategoria.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxJbnZlbnRhcmlvUG9yQ2F0ZWdvcmlhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/VentasPorPeriodo.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Reporte/VentasPorPeriodo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxWZW50YXNQb3JQZXJpb2RvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Shared/Components/CartCount/Default.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Shared/Components/CartCount/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ2FydENvdW50XERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Shared/Error.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Shared/_ValidationScriptsPartial.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Usuario/Crear.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Usuario/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Usuario/Detalles.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Usuario/Detalles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZXRhbGxlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Usuario/Editar.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Usuario/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Usuario/Eliminar.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Usuario/Eliminar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFbGltaW5hci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Usuario/Index.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Usuario/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/BuscarConversaciones.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/BuscarConversaciones.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNBcHBcQnVzY2FyQ29udmVyc2FjaW9uZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/ConfigurarChatbot.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/ConfigurarChatbot.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNBcHBcQ29uZmlndXJhckNoYXRib3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/Conversacion.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/Conversacion.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNBcHBcQ29udmVyc2FjaW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/EnviarMensaje.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/EnviarMensaje.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNBcHBcRW52aWFyTWVuc2FqZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/EnviarMensajeMasivo.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/EnviarMensajeMasivo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNBcHBcRW52aWFyTWVuc2FqZU1hc2l2by5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/Estadisticas.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/Estadisticas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNBcHBcRXN0YWRpc3RpY2FzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/Index.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/WhatsApp/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNBcHBcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/_ViewImports.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/_ViewStart.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/bisma/Downloads/CRM-IngeTech-main/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Shared/_Layout.cshtml]
+[F:/CRM/CRM-IngeTech/CRM-IngeTech-main/IngeTechCRM/IngeTechCRM/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-vo5yr6ddas

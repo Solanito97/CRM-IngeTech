@@ -1,110 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\",
+  "WorkspaceRootPath": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\checkoutviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\checkoutviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\wwwroot\\css\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\wwwroot\\css\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\wwwroot\\css\\custom.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\wwwroot\\css\\custom.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|c:\\users\\bisma\\downloads\\crm-ingetech-main\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\wwwroot\\images\\productos\\7cda11a8-f8bc-40f3-b4f6-c9d12b32ce0b.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\wwwroot\\images\\productos\\7cda11a8-f8bc-40f3-b4f6-c9d12b32ce0b.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|c:\\users\\bisma\\downloads\\crm-ingetech-main\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|f:\\crm\\crm-ingetech\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|f:\\crm\\crm-ingetech\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\enviocomunicado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\enviocomunicado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\detallepedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\detallepedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\configuracionchatbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\configuracionchatbot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\comunicadoefectividadviewmodel,cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\comunicadoefectividadviewmodel,cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\comunicado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\comunicado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\clientesprovinciaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\clientesprovinciaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\carritoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\carritoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\carrito.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\carrito.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\almacen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\almacen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\models\\alertainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\alertainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\controllers\\reportecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\controllers\\reportecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\controllers\\pedidocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\controllers\\pedidocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\controllers\\inventariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\controllers\\inventariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\controllers\\comunicadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\controllers\\comunicadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\ingetechcrm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|f:\\crm\\crm-ingetech\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\views\\home\\catalogo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\views\\home\\catalogo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -114,23 +22,31 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 29,
+          "SelectedChildIndex": 17,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",
@@ -138,11 +54,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
@@ -158,351 +74,52 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:2:0:{f2bd8fb8-fc94-3dae-a733-fd993c73cc87}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "7cda11a8-f8bc-40f3-b4f6-c9d12b32ce0b.png -  [Espa\u00F1ol (M\u00E9xico)] - PNG [1919x1079, 32 bits, PNG]",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\7cda11a8-f8bc-40f3-b4f6-c9d12b32ce0b.png",
-              "RelativeDocumentMoniker": "IngeTechCRM\\wwwroot\\images\\productos\\7cda11a8-f8bc-40f3-b4f6-c9d12b32ce0b.png",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\7cda11a8-f8bc-40f3-b4f6-c9d12b32ce0b.png -  [Espa\u00F1ol (M\u00E9xico)] - PNG [1919x1079, 32 bits, PNG]",
-              "RelativeToolTip": "IngeTechCRM\\wwwroot\\images\\productos\\7cda11a8-f8bc-40f3-b4f6-c9d12b32ce0b.png -  [Espa\u00F1ol (M\u00E9xico)] - PNG [1919x1079, 32 bits, PNG]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2025-05-10T02:19:10.237Z",
-              "EditorCaption": " -  [Espa\u00F1ol (M\u00E9xico)] - PNG [1919x1079, 32 bits, PNG]"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "custom.css",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\css\\custom.css",
-              "RelativeDocumentMoniker": "IngeTechCRM\\wwwroot\\css\\custom.css",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\css\\custom.css",
-              "RelativeToolTip": "IngeTechCRM\\wwwroot\\css\\custom.css",
-              "ViewState": "AQIAABcAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-05-01T04:33:27.992Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "styles.css",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\css\\styles.css",
-              "RelativeDocumentMoniker": "IngeTechCRM\\wwwroot\\css\\styles.css",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\css\\styles.css",
-              "RelativeToolTip": "IngeTechCRM\\wwwroot\\css\\styles.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAC6AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-05-01T04:33:20.18Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "IngeTechCRM\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "IngeTechCRM\\wwwroot\\css\\site.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-05-01T04:33:18.638Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAHQAAAAAAAAAAAAAAGYAAABhAAAA",
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "IngeTechCRM\\Views\\Account\\Login.cshtml",
+              "ToolTip": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "IngeTechCRM\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-01T04:11:43.955Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T23:56:40.443Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ErrorViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\ErrorViewModel.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\ErrorViewModel.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\ErrorViewModel.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\ErrorViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:04:13.149Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "EnvioComunicado.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\EnvioComunicado.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\EnvioComunicado.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\EnvioComunicado.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\EnvioComunicado.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:04:09.747Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ConfiguracionChatbot.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\ConfiguracionChatbot.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\ConfiguracionChatbot.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\ConfiguracionChatbot.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\ConfiguracionChatbot.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:38.307Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ComunicadoEfectividadViewModel,cs.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\ComunicadoEfectividadViewModel,cs.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\ComunicadoEfectividadViewModel,cs.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\ComunicadoEfectividadViewModel,cs.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\ComunicadoEfectividadViewModel,cs.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:35.202Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Comunicado.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Comunicado.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\Comunicado.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Comunicado.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\Comunicado.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:32.108Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ClientesProvinciaViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\ClientesProvinciaViewModel.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\ClientesProvinciaViewModel.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\ClientesProvinciaViewModel.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\ClientesProvinciaViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:28.468Z"
+              "DocumentIndex": 2,
+              "Title": "Catalogo.cshtml",
+              "DocumentMoniker": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Home\\Catalogo.cshtml",
+              "RelativeDocumentMoniker": "IngeTechCRM\\Views\\Home\\Catalogo.cshtml",
+              "ToolTip": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Home\\Catalogo.cshtml",
+              "RelativeToolTip": "IngeTechCRM\\Views\\Home\\Catalogo.cshtml",
+              "ViewState": "AgIAABwBAAAAAAAAAAAqwFIBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-21T23:55:27.115Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CheckoutViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\CheckoutViewModel.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\CheckoutViewModel.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\CheckoutViewModel.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\CheckoutViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:24.941Z",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "IngeTechCRM\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-21T23:54:16.864Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Categoria.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Categoria.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\Categoria.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Categoria.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\Categoria.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:23.86Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "CarritoViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\CarritoViewModel.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\CarritoViewModel.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\CarritoViewModel.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\CarritoViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:22.893Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Carrito.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Carrito.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\Carrito.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Carrito.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\Carrito.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:21.526Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Almacen.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Almacen.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\Almacen.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Almacen.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\Almacen.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:20.504Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "AlertaInventario.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\AlertaInventario.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\AlertaInventario.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\AlertaInventario.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\AlertaInventario.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:19.524Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DetallePedido.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\DetallePedido.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\DetallePedido.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\DetallePedido.cs",
-              "RelativeToolTip": "IngeTechCRM\\Models\\DetallePedido.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:17.954Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ReporteController.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\ReporteController.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Controllers\\ReporteController.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\ReporteController.cs",
-              "RelativeToolTip": "IngeTechCRM\\Controllers\\ReporteController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:13.325Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ProductoController.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\ProductoController.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Controllers\\ProductoController.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\ProductoController.cs",
-              "RelativeToolTip": "IngeTechCRM\\Controllers\\ProductoController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:03:09.929Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "PedidoController.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\PedidoController.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Controllers\\PedidoController.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\PedidoController.cs",
-              "RelativeToolTip": "IngeTechCRM\\Controllers\\PedidoController.cs",
-              "ViewState": "AQIAAFEAAAAAAAAAAAAYwGsAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:02:52.997Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "InventarioController.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\InventarioController.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Controllers\\InventarioController.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\InventarioController.cs",
-              "RelativeToolTip": "IngeTechCRM\\Controllers\\InventarioController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:02:44.831Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "IngeTechCRM\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAMwCoAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:00:25.835Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "ComunicadoController.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\ComunicadoController.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Controllers\\ComunicadoController.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\ComunicadoController.cs",
-              "RelativeToolTip": "IngeTechCRM\\Controllers\\ComunicadoController.cs",
-              "ViewState": "AQIAAIEBAAAAAAAAAADwv50BAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:02:31.558Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "IngeTechCRM\\Controllers\\AccountController.cs",
-              "ViewState": "AQIAABQCAAAAAAAAAAAQwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T04:02:24.324Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Program.cs",
-              "RelativeDocumentMoniker": "IngeTechCRM\\Program.cs",
-              "ToolTip": "C:\\Users\\bisma\\Downloads\\CRM-IngeTech-main\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Program.cs",
-              "RelativeToolTip": "IngeTechCRM\\Program.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAADgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T03:58:15.076Z"
             }
           ]
         },

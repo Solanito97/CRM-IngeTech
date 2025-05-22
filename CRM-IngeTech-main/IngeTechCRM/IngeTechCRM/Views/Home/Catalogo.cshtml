@@ -8,12 +8,15 @@
 
     <!-- Filtros -->
     <div class="mb-8 overflow-hidden rounded-xl bg-white shadow-lg">
-        <div class="bg-gradient-to-r from-brand-blue to-blue-500 px-4 py-3 text-white">
-            <h2 class="flex items-center font-bold">
-                <i class="fas fa-filter mr-2"></i> Filtros de Búsqueda
+        <div id="filter-toggle-button" class="bg-gradient-to-r from-brand-blue to-blue-500 px-4 py-3 text-white cursor-pointer">
+            <h2 class="flex items-center justify-between font-bold">
+                <span class="flex items-center">
+                    <i class="fas fa-filter mr-2"></i> Filtros de Búsqueda
+                </span>
+                <i id="filter-chevron" class="fas fa-chevron-down transition-transform duration-300"></i>
             </h2>
         </div>
-        <div class="p-6">
+        <div id="filter-content" class="p-6 hidden">
             <form method="get" action="@Url.Action("Catalogo")">
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     <!-- Categoría -->
@@ -304,6 +307,33 @@
             $('#categoriaId, #marcaId, #provinciaId').change(function () {
                 $(this).closest('form').submit();
             });
+
+            // Collapsible filter section
+            const toggleButton = document.getElementById('filter-toggle-button');
+            const filterContent = document.getElementById('filter-content');
+            const filterChevron = document.getElementById('filter-chevron');
+
+            if (toggleButton && filterContent && filterChevron) {
+                // Check local storage for saved state
+                if (localStorage.getItem('filtersOpen') === 'true') {
+                    filterContent.classList.remove('hidden');
+                    filterChevron.classList.add('rotate-180');
+                } else {
+                    filterContent.classList.add('hidden');
+                    filterChevron.classList.remove('rotate-180');
+                }
+
+                toggleButton.addEventListener('click', function () {
+                    filterContent.classList.toggle('hidden');
+                    filterChevron.classList.toggle('rotate-180');
+                    // Save state to local storage
+                    if (filterContent.classList.contains('hidden')) {
+                        localStorage.setItem('filtersOpen', 'false');
+                    } else {
+                        localStorage.setItem('filtersOpen', 'true');
+                    }
+                });
+            }
         });
     </script>
 }

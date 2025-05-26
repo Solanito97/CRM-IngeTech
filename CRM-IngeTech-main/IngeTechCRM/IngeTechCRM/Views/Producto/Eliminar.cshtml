@@ -86,7 +86,7 @@
                     </ul>
 
                     <div class="mt-6">
-                        <form asp-action="ConfirmarEliminar" method="post">
+                        <form asp-action="Eliminar" method="post">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="id" value="@Model.ID_PRODUCTO" />
 

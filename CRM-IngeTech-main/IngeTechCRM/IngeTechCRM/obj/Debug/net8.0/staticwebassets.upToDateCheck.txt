@@ -6,6 +6,9 @@ wwwroot\images\productos\0784a6a7-e595-43e7-8929-4168bf9ed8dd.png
 wwwroot\images\productos\7cda11a8-f8bc-40f3-b4f6-c9d12b32ce0b.png
 wwwroot\images\productos\7ef84ee9-4108-4a7d-bf2f-324010b3ee5d.png
 wwwroot\images\productos\9b1bac0c-15b5-4922-9677-49703c506700.png
+wwwroot\images\productos\Logo F L.jpg
+wwwroot\images\productos\Logo SF L.png
+wwwroot\images\productos\Logo SF.png
 wwwroot\js\movimientos.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css

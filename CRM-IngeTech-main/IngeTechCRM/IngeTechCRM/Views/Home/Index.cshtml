@@ -3,7 +3,7 @@
 }
 
 <!-- Banner principal con gradiente y efecto de onda -->
-<div class="relative overflow-hidden bg-gradient-to-r from-indigo-600 to-blue-500 py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-brand-blue to-blue-500 py-16 md:py-24">
     <div class="absolute inset-0 z-10 bg-opacity-30 pattern-dots"></div>
     <div class="absolute bottom-0 left-0 right-0">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="text-white">
@@ -12,16 +12,16 @@
     </div>
     <div class="container relative z-20 mx-auto px-4 text-white">
         <div class="max-w-4xl">
-            <h1 class="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">
+            <h1 class="mb-4 text-[35px] font-bold md:text-5xl lg:text-6xl">
                 IngeTech <span class="font-light">- Tecnología para todos</span>
             </h1>
             <p class="mb-6 text-xl md:text-2xl">Tu tienda de confianza para equipos informáticos y accesorios electrónicos.</p>
             <p class="mb-8 text-lg opacity-90">Ofrecemos los mejores productos a precios competitivos. Contamos con envíos a todo el país.</p>
             <div class="flex flex-wrap items-center gap-4">
-                <a href="@Url.Action("Catalogo")" class="inline-flex items-center rounded-lg bg-white px-6 py-3 font-medium text-indigo-600 shadow-lg transition duration-300 hover:bg-indigo-50">
+                <a href="@Url.Action("Catalogo")" class="inline-flex items-center rounded-lg bg-white px-6 py-3 font-medium text-brand-blue shadow-lg transition duration-300 hover:bg-brand-blue/10">
                     <i class="fas fa-th-large mr-2"></i> Ver catálogo
                 </a>
-                <a href="@Url.Action("Contacto")" class="inline-flex items-center rounded-lg border-2 border-white bg-transparent px-6 py-3 font-medium text-white transition duration-300 hover:bg-white hover:text-indigo-600">
+                <a href="@Url.Action("Contacto")" class="inline-flex items-center rounded-lg border-2 border-white bg-transparent px-6 py-3 font-medium text-white transition duration-300 hover:bg-white hover:text-brand-blue">
                     <i class="fas fa-headset mr-2"></i> Soporte técnico
                 </a>
             </div>
@@ -33,31 +33,31 @@
 <div class="bg-white py-6 shadow-md">
     <div class="container mx-auto grid grid-cols-2 gap-4 px-4 md:grid-cols-4">
         <div class="flex items-center justify-center space-x-2 text-center">
-            <i class="fas fa-users text-xl text-indigo-500 md:text-2xl"></i>
+            <i class="fas fa-users text-xl text-brand-blue md:text-2xl"></i>
             <div>
-                <div class="font-bold text-gray-700">+10,000</div>
-                <div class="text-sm text-gray-500">Clientes</div>
+                <div class="font-bold text-gray-dark">+10,000</div>
+                <div class="text-sm text-gray-light">Clientes</div>
             </div>
         </div>
         <div class="flex items-center justify-center space-x-2 text-center">
-            <i class="fas fa-laptop text-xl text-indigo-500 md:text-2xl"></i>
+            <i class="fas fa-laptop text-xl text-brand-blue md:text-2xl"></i>
             <div>
-                <div class="font-bold text-gray-700">+5,000</div>
-                <div class="text-sm text-gray-500">Productos</div>
+                <div class="font-bold text-gray-dark">+5,000</div>
+                <div class="text-sm text-gray-light">Productos</div>
             </div>
         </div>
         <div class="flex items-center justify-center space-x-2 text-center">
-            <i class="fas fa-truck text-xl text-indigo-500 md:text-2xl"></i>
+            <i class="fas fa-truck text-xl text-brand-blue md:text-2xl"></i>
             <div>
-                <div class="font-bold text-gray-700">7</div>
-                <div class="text-sm text-gray-500">Provincias</div>
+                <div class="font-bold text-gray-dark">7</div>
+                <div class="text-sm text-gray-light">Provincias</div>
             </div>
         </div>
         <div class="flex items-center justify-center space-x-2 text-center">
-            <i class="fas fa-headset text-xl text-indigo-500 md:text-2xl"></i>
+            <i class="fas fa-headset text-xl text-brand-blue md:text-2xl"></i>
             <div>
-                <div class="font-bold text-gray-700">24/7</div>
-                <div class="text-sm text-gray-500">Soporte</div>
+                <div class="font-bold text-gray-dark">24/7</div>
+                <div class="text-sm text-gray-light">Soporte</div>
             </div>
         </div>
     </div>
@@ -68,14 +68,14 @@
 {
     <div class="container mx-auto px-4 py-16">
         <div class="mb-12 text-center">
-            <h2 class="mb-2 text-3xl font-bold text-gray-800">Categorías destacadas</h2>
-            <p class="mx-auto max-w-2xl text-gray-600">Descubre nuestra amplia gama de productos organizados por categorías para facilitar tu búsqueda.</p>
+            <h2 class="mb-2 text-[35px] font-bold text-gray-dark">Categorías destacadas</h2>
+            <p class="mx-auto max-w-2xl text-gray-light">Descubre nuestra amplia gama de productos organizados por categorías para facilitar tu búsqueda.</p>
         </div>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             @foreach (var categoria in ViewBag.CategoriasDestacadas)
             {
                 <div class="group overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
-                    <div class="bg-gradient-to-r from-indigo-500 to-blue-500 p-8 text-white">
+                    <div class="bg-gradient-to-r from-brand-blue to-blue-500 p-8 text-white">
                         <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white bg-opacity-30 text-3xl">
                             <i class="fas fa-laptop"></i>
                         </div>
@@ -83,7 +83,7 @@
                         <p class="opacity-90">@(string.IsNullOrEmpty(categoria.DESCRIPCION) ? "Descubre nuestros productos de esta categoría" : categoria.DESCRIPCION)</p>
                     </div>
                     <div class="bg-white p-6">
-                        <a href="@Url.Action("Catalogo", new { categoriaId = categoria.ID_CATEGORIA })" class="inline-flex w-full items-center justify-center rounded-lg border border-indigo-500 bg-white px-4 py-2 font-medium text-indigo-600 transition duration-300 group-hover:bg-indigo-500 group-hover:text-white">
+                        <a href="@Url.Action("Catalogo", new { categoriaId = categoria.ID_CATEGORIA })" class="inline-flex w-full items-center justify-center rounded-lg border border-brand-blue bg-white px-4 py-2 font-medium text-brand-blue transition duration-300 group-hover:bg-brand-blue group-hover:text-white">
                             Ver productos <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
@@ -96,11 +96,11 @@
 <!-- Productos destacados -->
 @if (ViewBag.ProductosDestacados != null && ViewBag.ProductosDestacados.Count > 0)
 {
-    <div class="bg-gray-50 py-16">
+    <div class="bg-gray-light/30 py-16">
         <div class="container mx-auto px-4">
             <div class="mb-12 text-center">
-                <h2 class="mb-2 text-3xl font-bold text-gray-800">Productos destacados</h2>
-                <p class="mx-auto max-w-2xl text-gray-600">Una selección de nuestros mejores productos con la mejor calidad y precio del mercado.</p>
+                <h2 class="mb-2 text-[35px] font-bold text-gray-dark">Productos destacados</h2>
+                <p class="mx-auto max-w-2xl text-gray-light">Una selección de nuestros mejores productos con la mejor calidad y precio del mercado.</p>
             </div>
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach (var producto in ViewBag.ProductosDestacados)
@@ -114,21 +114,21 @@
                         <div class="relative h-64 overflow-hidden bg-gray-100">
                             <img src="@imagen" class="h-full w-full object-contain p-4 transition-transform duration-300 group-hover:scale-105" alt="@producto.NOMBRE">
                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                <span class="inline-block rounded-full bg-indigo-600 px-3 py-1 text-xs font-semibold text-white">@producto.Categoria.NOMBRE</span>
-                                <span class="ml-2 inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">@producto.Marca.NOMBRE</span>
+                                <span class="inline-block rounded-full bg-brand-blue px-3 py-1 text-xs font-semibold text-white">@producto.Categoria.NOMBRE</span>
+                                <span class="ml-2 inline-block rounded-full bg-brand-blue px-3 py-1 text-xs font-semibold text-white">@producto.Marca.NOMBRE</span>
                             </div>
                         </div>
                         <div class="p-4">
-                            <h3 class="mb-2 text-lg font-semibold text-gray-800 line-clamp-2">@producto.NOMBRE</h3>
-                            <p class="mb-3 text-sm text-gray-600 line-clamp-3">@(producto.DESCRIPCION?.Length > 100 ? producto.DESCRIPCION.Substring(0, 100) + "..." : producto.DESCRIPCION)</p>
+                            <h3 class="mb-2 text-lg font-semibold text-gray-dark line-clamp-2">@producto.NOMBRE</h3>
+                            <p class="mb-3 text-sm text-gray-light line-clamp-3">@(producto.DESCRIPCION?.Length > 100 ? producto.DESCRIPCION.Substring(0, 100) + "..." : producto.DESCRIPCION)</p>
                         </div>
                         <div class="flex items-center justify-between border-t border-gray-100 p-4">
-                            <span class="text-lg font-bold text-indigo-600">@producto.PRECIO.ToString("C2")</span>
+                            <span class="text-lg font-bold text-brand-blue">@producto.PRECIO.ToString("C2")</span>
                             <div class="flex space-x-2">
-                                <a href="@Url.Action("DetalleProducto", new { id = producto.ID_PRODUCTO })" class="rounded-full bg-gray-100 p-2 text-gray-600 transition hover:bg-gray-200" title="Ver detalles">
+                                <a href="@Url.Action("DetalleProducto", new { id = producto.ID_PRODUCTO })" class="rounded-full bg-gray-100 p-2 text-gray-dark transition hover:bg-gray-200" title="Ver detalles">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="@Url.Action("AgregarAlCarrito", new { idProducto = producto.ID_PRODUCTO })" class="rounded-full bg-indigo-600 p-2 text-white transition hover:bg-indigo-700" title="Agregar al carrito">
+                                <a href="@Url.Action("AgregarAlCarrito", new { idProducto = producto.ID_PRODUCTO })" class="rounded-full bg-brand-blue p-2 text-white transition hover:bg-brand-blue/90" title="Agregar al carrito">
                                     <i class="fas fa-shopping-cart"></i>
                                 </a>
                             </div>
@@ -137,7 +137,7 @@
                 }
             </div>
             <div class="mt-12 text-center">
-                <a href="@Url.Action("Catalogo")" class="inline-flex items-center rounded-lg border-2 border-indigo-600 bg-white px-6 py-3 font-medium text-indigo-600 shadow-md transition duration-300 hover:bg-indigo-600 hover:text-white">
+                <a href="@Url.Action("Catalogo")" class="inline-flex items-center rounded-lg border-2 border-brand-blue bg-white px-6 py-3 font-medium text-brand-blue shadow-md transition duration-300 hover:bg-brand-blue hover:text-white">
                     Ver todos los productos <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -148,42 +148,42 @@
 <!-- Características de la tienda -->
 <div class="container mx-auto px-4 py-16">
     <div class="mb-12 text-center">
-        <h2 class="mb-2 text-3xl font-bold text-gray-800">¿Por qué elegirnos?</h2>
-        <p class="mx-auto max-w-2xl text-gray-600">Nos destacamos por ofrecer el mejor servicio y calidad en todos nuestros productos y servicios.</p>
+        <h2 class="mb-2 text-[35px] font-bold text-gray-dark">¿Por qué elegirnos?</h2>
+        <p class="mx-auto max-w-2xl text-gray-light">Nos destacamos por ofrecer el mejor servicio y calidad en todos nuestros productos y servicios.</p>
     </div>
     <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         <div class="overflow-hidden rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl">
-            <div class="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-indigo-100 text-3xl text-indigo-600">
+            <div class="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-brand-blue/20 text-3xl text-brand-blue">
                 <i class="fas fa-truck"></i>
             </div>
-            <h3 class="mb-3 text-xl font-bold text-gray-800">Envíos a todo el país</h3>
-            <p class="text-gray-600">Realizamos envíos a todas las provincias de Costa Rica. Consulta los tiempos de entrega según tu ubicación.</p>
+            <h3 class="mb-3 text-xl font-bold text-gray-dark">Envíos a todo el país</h3>
+            <p class="text-gray-light">Realizamos envíos a todas las provincias de Costa Rica. Consulta los tiempos de entrega según tu ubicación.</p>
             <div class="mt-6">
-                <a href="#" class="inline-flex items-center text-indigo-600 hover:underline">
+                <a href="#" class="inline-flex items-center text-brand-blue hover:underline">
                     Ver zonas de cobertura <i class="fas fa-chevron-right ml-1 text-xs"></i>
                 </a>
             </div>
         </div>
         <div class="overflow-hidden rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl">
-            <div class="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-indigo-100 text-3xl text-indigo-600">
+            <div class="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-brand-blue/20 text-3xl text-brand-blue">
                 <i class="fas fa-headset"></i>
             </div>
-            <h3 class="mb-3 text-xl font-bold text-gray-800">Soporte técnico</h3>
-            <p class="text-gray-600">Contamos con un equipo de técnicos especializados que te ayudarán con cualquier consulta o problema.</p>
+            <h3 class="mb-3 text-xl font-bold text-gray-dark">Soporte técnico</h3>
+            <p class="text-gray-light">Contamos con un equipo de técnicos especializados que te ayudarán con cualquier consulta o problema.</p>
             <div class="mt-6">
-                <a href="#" class="inline-flex items-center text-indigo-600 hover:underline">
+                <a href="#" class="inline-flex items-center text-brand-blue hover:underline">
                     Solicitar soporte <i class="fas fa-chevron-right ml-1 text-xs"></i>
                 </a>
             </div>
         </div>
         <div class="overflow-hidden rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl">
-            <div class="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-indigo-100 text-3xl text-indigo-600">
+            <div class="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-brand-blue/20 text-3xl text-brand-blue">
                 <i class="fas fa-shield-alt"></i>
             </div>
-            <h3 class="mb-3 text-xl font-bold text-gray-800">Garantía en productos</h3>
-            <p class="text-gray-600">Todos nuestros productos cuentan con garantía del fabricante. Tu tranquilidad es nuestra prioridad.</p>
+            <h3 class="mb-3 text-xl font-bold text-gray-dark">Garantía en productos</h3>
+            <p class="text-gray-light">Todos nuestros productos cuentan con garantía del fabricante. Tu tranquilidad es nuestra prioridad.</p>
             <div class="mt-6">
-                <a href="#" class="inline-flex items-center text-indigo-600 hover:underline">
+                <a href="#" class="inline-flex items-center text-brand-blue hover:underline">
                     Más información <i class="fas fa-chevron-right ml-1 text-xs"></i>
                 </a>
             </div>
@@ -192,119 +192,119 @@
 </div>
 
 <!-- Provincias - Cobertura nacional -->
-<div class="bg-gray-50 py-16">
+<div class="bg-gray-light/30 py-16">
     <div class="container mx-auto px-4">
         <div class="mb-12 text-center">
-            <h2 class="mb-2 text-3xl font-bold text-gray-800">Cobertura nacional</h2>
-            <p class="mx-auto max-w-2xl text-gray-600">Nuestros servicios están disponibles en todo Costa Rica para brindarte la mejor experiencia.</p>
+            <h2 class="mb-2 text-[35px] font-bold text-gray-dark">Cobertura nacional</h2>
+            <p class="mx-auto max-w-2xl text-gray-light">Nuestros servicios están disponibles en todo Costa Rica para brindarte la mejor experiencia.</p>
         </div>
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <div class="overflow-hidden rounded-xl bg-white shadow-lg">
-                <div class="bg-gradient-to-r from-indigo-600 to-blue-500 p-6 text-white">
+                <div class="bg-gradient-to-r from-brand-blue to-blue-500 p-6 text-white">
                     <h3 class="text-xl font-bold">Presencia en todo Costa Rica</h3>
                     <p>Contamos con almacenes en las 7 provincias para asegurar una entrega rápida y eficiente de tus productos.</p>
                 </div>
                 <div class="p-6">
                     <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                        <div class="flex items-center rounded-lg bg-gray-50 p-3">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                        <div class="flex items-center rounded-lg bg-white p-3">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-building"></i>
                             </div>
-                            <span class="font-medium">San José - Oficina Central</span>
+                            <span class="font-medium text-gray-dark">San José - Oficina Central</span>
                         </div>
-                        <div class="flex items-center rounded-lg bg-gray-50 p-3">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                        <div class="flex items-center rounded-lg bg-white p-3">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-warehouse"></i>
                             </div>
-                            <span class="font-medium">Alajuela</span>
+                            <span class="font-medium text-gray-dark">Alajuela</span>
                         </div>
-                        <div class="flex items-center rounded-lg bg-gray-50 p-3">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                        <div class="flex items-center rounded-lg bg-white p-3">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-warehouse"></i>
                             </div>
-                            <span class="font-medium">Cartago</span>
+                            <span class="font-medium text-gray-dark">Cartago</span>
                         </div>
-                        <div class="flex items-center rounded-lg bg-gray-50 p-3">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                        <div class="flex items-center rounded-lg bg-white p-3">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-warehouse"></i>
                             </div>
-                            <span class="font-medium">Heredia</span>
+                            <span class="font-medium text-gray-dark">Heredia</span>
                         </div>
-                        <div class="flex items-center rounded-lg bg-gray-50 p-3">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                        <div class="flex items-center rounded-lg bg-white p-3">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-warehouse"></i>
                             </div>
-                            <span class="font-medium">Guanacaste</span>
+                            <span class="font-medium text-gray-dark">Guanacaste</span>
                         </div>
-                        <div class="flex items-center rounded-lg bg-gray-50 p-3">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                        <div class="flex items-center rounded-lg bg-white p-3">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-warehouse"></i>
                             </div>
-                            <span class="font-medium">Puntarenas</span>
+                            <span class="font-medium text-gray-dark">Puntarenas</span>
                         </div>
-                        <div class="flex items-center rounded-lg bg-gray-50 p-3">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                        <div class="flex items-center rounded-lg bg-white p-3">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-warehouse"></i>
                             </div>
-                            <span class="font-medium">Limón</span>
+                            <span class="font-medium text-gray-dark">Limón</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="overflow-hidden rounded-xl bg-white shadow-lg">
-                <div class="bg-gradient-to-r from-blue-600 to-indigo-500 p-6 text-white">
+                <div class="bg-gradient-to-r from-blue-500 to-brand-blue p-6 text-white">
                     <h3 class="text-xl font-bold">Busca por tu provincia</h3>
                     <p>Puedes ver los productos disponibles específicamente en tu provincia para una entrega más rápida.</p>
                 </div>
                 <div class="divide-y divide-gray-100">
-                    <a href="@Url.Action("Catalogo", new { provinciaId = 1 })" class="flex items-center justify-between p-4 transition hover:bg-gray-50">
+                    <a href="@Url.Action("Catalogo", new { provinciaId = 1 })" class="flex items-center justify-between p-4 transition hover:bg-gray-light/10">
                         <div class="flex items-center">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <span class="font-medium">San José</span>
+                            <span class="font-medium text-gray-dark">San José</span>
                         </div>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
+                        <i class="fas fa-chevron-right text-gray-light"></i>
                     </a>
-                    <a href="@Url.Action("Catalogo", new { provinciaId = 2 })" class="flex items-center justify-between p-4 transition hover:bg-gray-50">
+                    <a href="@Url.Action("Catalogo", new { provinciaId = 2 })" class="flex items-center justify-between p-4 transition hover:bg-gray-light/10">
                         <div class="flex items-center">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <span class="font-medium">Alajuela</span>
+                            <span class="font-medium text-gray-dark">Alajuela</span>
                         </div>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
+                        <i class="fas fa-chevron-right text-gray-light"></i>
                     </a>
-                    <a href="@Url.Action("Catalogo", new { provinciaId = 3 })" class="flex items-center justify-between p-4 transition hover:bg-gray-50">
+                    <a href="@Url.Action("Catalogo", new { provinciaId = 3 })" class="flex items-center justify-between p-4 transition hover:bg-gray-light/10">
                         <div class="flex items-center">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <span class="font-medium">Cartago</span>
+                            <span class="font-medium text-gray-dark">Cartago</span>
                         </div>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
+                        <i class="fas fa-chevron-right text-gray-light"></i>
                     </a>
-                    <a href="@Url.Action("Catalogo", new { provinciaId = 4 })" class="flex items-center justify-between p-4 transition hover:bg-gray-50">
+                    <a href="@Url.Action("Catalogo", new { provinciaId = 4 })" class="flex items-center justify-between p-4 transition hover:bg-gray-light/10">
                         <div class="flex items-center">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <span class="font-medium">Heredia</span>
+                            <span class="font-medium text-gray-dark">Heredia</span>
                         </div>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
+                        <i class="fas fa-chevron-right text-gray-light"></i>
                     </a>
-                    <a href="@Url.Action("Catalogo", new { provinciaId = 5 })" class="flex items-center justify-between p-4 transition hover:bg-gray-50">
+                    <a href="@Url.Action("Catalogo", new { provinciaId = 5 })" class="flex items-center justify-between p-4 transition hover:bg-gray-light/10">
                         <div class="flex items-center">
-                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <span class="font-medium">Guanacaste</span>
+                            <span class="font-medium text-gray-dark">Guanacaste</span>
                         </div>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
+                        <i class="fas fa-chevron-right text-gray-light"></i>
                     </a>
                 </div>
-                <div class="bg-gray-50 p-4 text-center">
-                    <a href="@Url.Action("Catalogo")" class="inline-flex items-center font-medium text-indigo-600 hover:underline">
+                <div class="bg-gray-light/10 p-4 text-center">
+                    <a href="@Url.Action("Catalogo")" class="inline-flex items-center font-medium text-brand-blue hover:underline">
                         Ver todas las provincias <i class="fas fa-arrow-right ml-1"></i>
                     </a>
                 </div>
@@ -316,7 +316,7 @@
 <!-- Formulario de contacto -->
 <div class="container mx-auto px-4 py-16">
     <div class="rounded-xl bg-white shadow-xl lg:grid lg:grid-cols-2">
-        <div class="bg-gradient-to-br from-indigo-600 to-blue-500 p-12 text-white lg:rounded-l-xl">
+        <div class="bg-gradient-to-br from-brand-blue to-blue-500 p-12 text-white lg:rounded-l-xl">
             <h3 class="mb-6 text-2xl font-bold">¿Tienes preguntas?</h3>
             <p class="mb-8 text-lg">Estamos aquí para ayudarte. Contáctanos y nos pondremos en contacto contigo lo antes posible.</p>
             
@@ -367,21 +367,21 @@
         </div>
         
         <div class="p-12 lg:rounded-r-xl">
-            <h3 class="mb-6 text-2xl font-bold text-gray-800">Envíanos un mensaje</h3>
+            <h3 class="mb-6 text-2xl font-bold text-gray-dark">Envíanos un mensaje</h3>
             <form action="@Url.Action("EnviarContacto")" method="post">
                 <div class="mb-6">
-                    <label for="nombre" class="mb-2 block text-sm font-medium text-gray-700">Nombre completo</label>
-                    <input type="text" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                    <label for="nombre" class="mb-2 block text-sm font-medium text-gray-dark">Nombre completo</label>
+                    <input type="text" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-brand-blue focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50" id="nombre" name="nombre" placeholder="Tu nombre" required>
                 </div>
                 <div class="mb-6">
-                    <label for="email" class="mb-2 block text-sm font-medium text-gray-700">Correo electrónico</label>
-                    <input type="email" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="email" name="email" placeholder="tu@email.com" required>
+                    <label for="email" class="mb-2 block text-sm font-medium text-gray-dark">Correo electrónico</label>
+                    <input type="email" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-brand-blue focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50" id="email" name="email" placeholder="tu@email.com" required>
                 </div>
                 <div class="mb-6">
-                    <label for="mensaje" class="mb-2 block text-sm font-medium text-gray-700">Mensaje</label>
-                    <textarea rows="4" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="mensaje" name="mensaje" placeholder="¿Cómo podemos ayudarte?" required></textarea>
+                    <label for="mensaje" class="mb-2 block text-sm font-medium text-gray-dark">Mensaje</label>
+                    <textarea rows="4" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-brand-blue focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50" id="mensaje" name="mensaje" placeholder="¿Cómo podemos ayudarte?" required></textarea>
                 </div>
-                <button type="submit" class="w-full rounded-lg bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 font-medium text-white shadow-md transition hover:from-indigo-700 hover:to-blue-600 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <button type="submit" class="w-full rounded-lg bg-gradient-to-r from-brand-blue to-blue-500 px-4 py-3 font-medium text-white shadow-md transition hover:from-brand-blue/90 hover:to-blue-400 focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50">
                     Enviar mensaje
                 </button>
             </form>
@@ -542,7 +542,7 @@
     }
 
         .testimonial-dot.active {
-            background-color: #4f46e5;
+        background-color: #005da4; /* brand-blue */
         }
 
     /* Estilos para efecto de tarjeta giratoria */
@@ -577,15 +577,15 @@
 </style>
 
 <!-- Sección de Testimonios -->
-<div class="bg-gradient-to-r from-indigo-900 to-blue-800 py-16 text-white">
+<div class="bg-gradient-to-r from-gray-dark to-gray-dark/90 py-16 text-white">
     <div class="container mx-auto px-4">
         <div class="mb-12 text-center">
-            <h2 class="mb-2 text-3xl font-bold">Lo que dicen nuestros clientes</h2>
+            <h2 class="mb-2 text-[35px] font-bold">Lo que dicen nuestros clientes</h2>
             <p class="mx-auto max-w-2xl opacity-80">Descubre por qué más de 10,000 clientes confían en nosotros para sus necesidades tecnológicas.</p>
         </div>
 
         <div class="testimonial-container mx-auto max-w-4xl">
-            <div class="relative rounded-xl bg-white p-8 text-gray-800 shadow-xl">
+            <div class="relative rounded-xl bg-white p-8 text-gray-dark shadow-xl">
                 <div class="absolute -top-5 left-10 h-10 w-10 rotate-45 transform bg-white"></div>
 
                 <div class="testimonial-item active">
@@ -594,14 +594,14 @@
                             <img src="/api/placeholder/150/150" alt="Cliente" class="h-full w-full object-cover" />
                         </div>
                         <div>
-                            <h4 class="text-xl font-bold text-gray-900">Roberto Gómez</h4>
-                            <p class="text-gray-600">Desarrollador de Software</p>
+                            <h4 class="text-xl font-bold text-gray-dark">Roberto Gómez</h4>
+                            <p class="text-gray-light">Desarrollador de Software</p>
                         </div>
-                        <div class="ml-auto text-4xl text-indigo-200">
+                        <div class="ml-auto text-4xl text-brand-blue/50">
                             <i class="fas fa-quote-right"></i>
                         </div>
                     </div>
-                    <p class="mb-4 text-lg italic text-gray-700">
+                    <p class="mb-4 text-lg italic text-gray-dark">
                         "IngeTech ha sido mi proveedor de tecnología durante más de 5 años. Su servicio al cliente es excepcional y siempre tienen los productos más recientes. ¡Altamente recomendados!"
                     </p>
                     <div class="flex text-yellow-400">
@@ -619,14 +619,14 @@
                             <img src="/api/placeholder/150/150" alt="Cliente" class="h-full w-full object-cover" />
                         </div>
                         <div>
-                            <h4 class="text-xl font-bold text-gray-900">María Fernández</h4>
-                            <p class="text-gray-600">Diseñadora Gráfica</p>
+                            <h4 class="text-xl font-bold text-gray-dark">María Fernández</h4>
+                            <p class="text-gray-light">Diseñadora Gráfica</p>
                         </div>
-                        <div class="ml-auto text-4xl text-indigo-200">
+                        <div class="ml-auto text-4xl text-brand-blue/50">
                             <i class="fas fa-quote-right"></i>
                         </div>
                     </div>
-                    <p class="mb-4 text-lg italic text-gray-700">
+                    <p class="mb-4 text-lg italic text-gray-dark">
                         "Compré mi laptop para diseño en IngeTech y no podría estar más feliz. El asesoramiento técnico me ayudó a elegir el equipo perfecto para mi trabajo. El servicio post-venta también es excelente."
                     </p>
                     <div class="flex text-yellow-400">
@@ -644,14 +644,14 @@
                             <img src="/api/placeholder/150/150" alt="Cliente" class="h-full w-full object-cover" />
                         </div>
                         <div>
-                            <h4 class="text-xl font-bold text-gray-900">Carlos Jiménez</h4>
-                            <p class="text-gray-600">Gerente de TI</p>
+                            <h4 class="text-xl font-bold text-gray-dark">Carlos Jiménez</h4>
+                            <p class="text-gray-light">Gerente de TI</p>
                         </div>
-                        <div class="ml-auto text-4xl text-indigo-200">
+                        <div class="ml-auto text-4xl text-brand-blue/50">
                             <i class="fas fa-quote-right"></i>
                         </div>
                     </div>
-                    <p class="mb-4 text-lg italic text-gray-700">
+                    <p class="mb-4 text-lg italic text-gray-dark">
                         "Como encargado de la infraestructura tecnológica de nuestra empresa, confío en IngeTech para todas nuestras necesidades. Su capacidad de respuesta y profesionalismo son incomparables."
                     </p>
                     <div class="flex text-yellow-400">
@@ -664,16 +664,16 @@
                 </div>
 
                 <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-                    <span class="testimonial-dot bg-indigo-600"></span>
+                    <span class="testimonial-dot bg-brand-blue"></span>
                     <span class="testimonial-dot"></span>
                     <span class="testimonial-dot"></span>
                 </div>
 
-                <button class="testimonial-prev absolute -left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 transform items-center justify-center rounded-full bg-white text-indigo-600 shadow-lg transition hover:bg-indigo-100">
+                <button class="testimonial-prev absolute -left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 transform items-center justify-center rounded-full bg-white text-brand-blue shadow-lg transition hover:bg-brand-blue/10">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
-                <button class="testimonial-next absolute -right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 transform items-center justify-center rounded-full bg-white text-indigo-600 shadow-lg transition hover:bg-indigo-100">
+                <button class="testimonial-next absolute -right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 transform items-center justify-center rounded-full bg-white text-brand-blue shadow-lg transition hover:bg-brand-blue/10">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -684,8 +684,8 @@
 <!-- Marcas con las que trabajamos -->
 <div class="container mx-auto px-4 py-16">
     <div class="mb-12 text-center">
-        <h2 class="mb-2 text-3xl font-bold text-gray-800">Nuestras marcas</h2>
-        <p class="mx-auto max-w-2xl text-gray-600">Trabajamos con las mejores marcas del mercado para ofrecerte productos de calidad y garantía.</p>
+        <h2 class="mb-2 text-[35px] font-bold text-gray-dark">Nuestras marcas</h2>
+        <p class="mx-auto max-w-2xl text-gray-light">Trabajamos con las mejores marcas del mercado para ofrecerte productos de calidad y garantía.</p>
     </div>
 
     <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
@@ -711,23 +711,23 @@
 </div>
 
 <!-- Banner de promoción final -->
-<div class="relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-600 py-16">
+<div class="relative overflow-hidden bg-gradient-to-r from-brand-blue to-blue-500 py-16">
     <div class="absolute inset-0 z-10 bg-opacity-20 pattern-dots"></div>
     <div class="absolute -bottom-10 right-0">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="h-64 w-full text-blue-700 opacity-10">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="h-64 w-full text-brand-blue/80 opacity-10">
             <path fill="currentColor" d="M0,64L48,96C96,128,192,192,288,192C384,192,480,128,576,122.7C672,117,768,171,864,197.3C960,224,1056,224,1152,208C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
         </svg>
     </div>
     <div class="container relative z-20 mx-auto px-4 text-center text-white">
-        <h2 class="mb-6 text-3xl font-bold md:text-4xl">¿Listo para mejorar tu experiencia tecnológica?</h2>
+        <h2 class="mb-6 text-[35px] font-bold md:text-4xl">¿Listo para mejorar tu experiencia tecnológica?</h2>
         <p class="mx-auto mb-8 max-w-2xl text-lg">
             Nuestro equipo de expertos está listo para ayudarte a encontrar los productos perfectos para tus necesidades.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-            <a href="@Url.Action("Catalogo")" class="inline-flex items-center rounded-lg bg-white px-6 py-3 font-medium text-indigo-600 shadow-lg transition duration-300 hover:bg-indigo-50">
+            <a href="@Url.Action("Catalogo")" class="inline-flex items-center rounded-lg bg-white px-6 py-3 font-medium text-brand-blue shadow-lg transition duration-300 hover:bg-brand-blue/10">
                 <i class="fas fa-shopping-cart mr-2"></i> Comprar ahora
             </a>
-            <a href="@Url.Action("Contacto")" class="inline-flex items-center rounded-lg border-2 border-white bg-transparent px-6 py-3 font-medium text-white transition duration-300 hover:bg-white hover:text-indigo-600">
+            <a href="@Url.Action("Contacto")" class="inline-flex items-center rounded-lg border-2 border-white bg-transparent px-6 py-3 font-medium text-white transition duration-300 hover:bg-white hover:text-brand-blue">
                 <i class="fas fa-headset mr-2"></i> Hablar con un asesor
             </a>
         </div>
@@ -735,21 +735,21 @@
 </div>
 
 <!-- Newsletter -->
-<div class="bg-gray-100 py-12">
+<div class="bg-gray-light/30 py-12">
     <div class="container mx-auto px-4">
         <div class="rounded-xl bg-white p-8 shadow-lg lg:flex lg:items-center lg:justify-between">
             <div class="mb-6 lg:mb-0 lg:w-1/2">
-                <h3 class="mb-2 text-2xl font-bold text-gray-800">Mantente informado</h3>
-                <p class="text-gray-600">Suscríbete a nuestro boletín para recibir las últimas noticias, promociones y lanzamientos de productos.</p>
+                <h3 class="mb-2 text-2xl font-bold text-gray-dark">Mantente informado</h3>
+                <p class="text-gray-light">Suscríbete a nuestro boletín para recibir las últimas noticias, promociones y lanzamientos de productos.</p>
             </div>
             <div class="lg:w-1/2">
                 <form class="flex flex-col space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
-                    <input type="email" placeholder="Tu correo electrónico" class="flex-grow rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
-                    <button type="submit" class="rounded-lg bg-gradient-to-r from-indigo-600 to-blue-500 px-6 py-3 font-medium text-white shadow-md transition hover:from-indigo-700 hover:to-blue-600">
+                    <input type="email" placeholder="Tu correo electrónico" class="flex-grow rounded-lg border border-gray-300 px-4 py-3 focus:border-brand-blue focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50" required>
+                    <button type="submit" class="rounded-lg bg-gradient-to-r from-brand-blue to-blue-500 px-6 py-3 font-medium text-white shadow-md transition hover:from-brand-blue/90 hover:to-blue-400">
                         Suscribirse
                     </button>
                 </form>
-                <p class="mt-2 text-sm text-gray-500">Nos importa tu privacidad. Nunca compartiremos tu información.</p>
+                <p class="mt-2 text-sm text-gray-light">Nos importa tu privacidad. Nunca compartiremos tu información.</p>
             </div>
         </div>
     </div>

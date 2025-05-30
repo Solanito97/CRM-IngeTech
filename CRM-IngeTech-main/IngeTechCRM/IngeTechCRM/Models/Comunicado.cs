@@ -9,8 +9,8 @@ namespace IngeTechCRM.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_COMUNICADO { get; set; }
 
-        [Required]
-        [StringLength(150)]
+        [Required(ErrorMessage = "El título es obligatorio.")]
+        [StringLength(150, ErrorMessage = "El título no puede exceder los 150 caracteres.")]
         [Display(Name = "Título")]
         public string TITULO { get; set; }
 
@@ -18,6 +18,7 @@ namespace IngeTechCRM.Models
         [Display(Name = "Mensaje")]
         public string MENSAJE { get; set; }
 
+        [Required(ErrorMessage = "La fecha de envío programado es obligatoria.")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Fecha Creación")]
         public DateTime FECHA_CREACION { get; set; } = DateTime.Now;

@@ -460,7 +460,7 @@ namespace IngeTechCRM.Controllers
             {
                 // Registrar la excepción y mostrar mensaje de error
                 // logger.LogError(ex, "Error al eliminar usuario {Id}", id);
-                TempData["Error"] = "Ocurrió un error al eliminar el usuario: " + ex.Message;
+                TempData["Error"] = "Ocurrió un error al eliminar el usuario: ";
             }
 
             return RedirectToAction(nameof(Index));

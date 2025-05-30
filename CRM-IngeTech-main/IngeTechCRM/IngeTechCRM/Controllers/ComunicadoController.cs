@@ -241,7 +241,7 @@ namespace IngeTechCRM.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(int id, Comunicado comunicado, List<int> provinciasSeleccionadas, List<int> tiposUsuarioSeleccionados, bool enviarInmediatamente, bool enviarPorCorreo, bool enviarPorWhatsApp)
+        public async Task<IActionResult> Editar(int id, Comunicado comunicado, List<int> provinciasSeleccionadas, List<int> tiposUsuarioSeleccionados, string enviarInmediatamente, bool enviarPorCorreo, bool enviarPorWhatsApp)
         {
             // Verificar si el usuario es administrador
             var tipoUsuarioId = HttpContext.Session.GetInt32("TipoUsuarioId");
@@ -271,9 +271,16 @@ namespace IngeTechCRM.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            // Convertir el valor del checkbox a bool
+            bool enviarAhora = !string.IsNullOrEmpty(enviarInmediatamente) &&
+                               (enviarInmediatamente.ToLower() == "true" || enviarInmediatamente == "on");
+
             ModelState.Remove("Envios");
             ModelState.Remove("Segmentos");
             ModelState.Remove("UsuarioCreador");
+
+            // Remover la validación del parámetro enviarInmediatamente ya que lo manejamos manualmente
+            ModelState.Remove("enviarInmediatamente");
 
             if (ModelState.IsValid)
             {
@@ -285,7 +292,7 @@ namespace IngeTechCRM.Controllers
                     comunicadoOriginal.FECHA_ENVIO_PROGRAMADO = comunicado.FECHA_ENVIO_PROGRAMADO;
 
                     // Si se solicita envío inmediato
-                    if (enviarInmediatamente)
+                    if (enviarAhora)
                     {
                         comunicadoOriginal.FECHA_ENVIO_PROGRAMADO = DateTime.Now;
                     }
@@ -335,12 +342,14 @@ namespace IngeTechCRM.Controllers
                         await _context.SaveChangesAsync();
 
                         // Si se solicita envío inmediato, procesar el envío
-                        if (enviarInmediatamente)
+                        if (enviarAhora)
                         {
-                            await EnviarComunicado(comunicado.ID_COMUNICADO, enviarPorCorreo, enviarPorWhatsApp);
+                            await EnviarComunicado(comunicado.ID_COMUNICADO, enviarPorCorreo);
                         }
 
-                        TempData["Message"] = "Comunicado actualizado exitosamente";
+                        TempData["Message"] = enviarAhora ?
+                            "Comunicado actualizado y enviado exitosamente" :
+                            "Comunicado actualizado exitosamente";
                         return RedirectToAction(nameof(Index));
                     }
                     finally
@@ -596,6 +605,7 @@ namespace IngeTechCRM.Controllers
                 Console.WriteLine($"Error al enviar correo: {ex.Message}");
             }
         }
+        
 
         // Método para enviar por WhatsApp
         private async Task<(bool Success, string Message)> EnviarPorWhatsApp(string telefono, string titulo, string mensaje)

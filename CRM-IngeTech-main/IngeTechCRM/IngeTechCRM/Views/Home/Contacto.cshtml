@@ -1,0 +1,495 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - IngeTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-blue': '#005da4',
+                        'gray-dark': '#2d3748',
+                        'gray-light': '#718096'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Banner -->
+    <div class="relative overflow-hidden bg-gradient-to-r from-brand-blue to-blue-500 py-16 md:py-20">
+        <div class="absolute inset-0 z-10 bg-opacity-30 pattern-dots"></div>
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="text-white">
+                <path fill="currentColor" fill-opacity="1" d="M0,224L60,229.3C120,235,240,245,360,224C480,203,600,149,720,144C840,139,960,181,1080,197.3C1200,213,1320,203,1380,197.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+            </svg>
+        </div>
+        <div class="container relative z-20 mx-auto px-4 text-white text-center">
+            <h1 class="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">Contáctanos</h1>
+            <p class="text-xl md:text-2xl mb-2">Estamos aquí para ayudarte</p>
+            <p class="text-lg opacity-90 max-w-2xl mx-auto">Nuestro equipo de expertos está listo para resolver tus dudas y brindarte el mejor servicio</p>
+        </div>
+    </div>
+
+    <!-- Información de contacto rápida -->
+    <div class="bg-white py-8 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                <div class="flex items-center justify-center space-x-4 text-center md:text-left">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
+                        <i class="fas fa-phone-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-gray-dark">Llámanos</div>
+                        <div class="text-brand-blue">+506 2222-3333</div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center space-x-4 text-center md:text-left">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-gray-dark">Email</div>
+                        <div class="text-brand-blue">info@ingetech.cr</div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center space-x-4 text-center md:text-left">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
+                        <i class="fas fa-clock text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-gray-dark">Horario</div>
+                        <div class="text-brand-blue">Lun - Vie: 8AM - 6PM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario de contacto principal -->
+    <div class="container mx-auto px-4 py-16">
+        <div class="grid gap-12 lg:grid-cols-2">
+            <!-- Formulario -->
+            <div class="order-2 lg:order-1">
+                <div class="rounded-xl bg-white p-8 shadow-xl">
+                    <h2 class="mb-6 text-3xl font-bold text-gray-dark">Envíanos un mensaje</h2>
+                    <p class="mb-8 text-gray-light">Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+
+                    <form id="contactForm" action="/Home/ProcesarContacto" method="POST" class="space-y-6">
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <div>
+                                <label for="nombre" class="mb-2 block text-sm font-medium text-gray-dark">Nombre completo *</label>
+                                <input type="text" id="nombre" name="nombre" required
+                                       class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-brand-blue focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50"
+                                       placeholder="Tu nombre completo">
+                            </div>
+                            <div>
+                                <label for="telefono" class="mb-2 block text-sm font-medium text-gray-dark">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono"
+                                       class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-brand-blue focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50"
+                                       placeholder="+506 1234-5678">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="mb-2 block text-sm font-medium text-gray-dark">Correo electrónico *</label>
+                            <input type="email" id="email" name="email" required
+                                   class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-brand-blue focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50"
+                                   placeholder="tu@email.com">
+                        </div>
+
+                        <div>
+                            <label for="asunto" class="mb-2 block text-sm font-medium text-gray-dark">Asunto *</label>
+                            <select id="asunto" name="asunto" required
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-brand-blue focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50">
+                                <option value="">Selecciona un asunto</option>
+                                <option value="consulta-producto">Consulta sobre productos</option>
+                                <option value="soporte-tecnico">Soporte técnico</option>
+                                <option value="garantia">Garantía</option>
+                                <option value="envios">Envíos y entregas</option>
+                                <option value="cotizacion">Solicitar cotización</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="mensaje" class="mb-2 block text-sm font-medium text-gray-dark">Mensaje *</label>
+                            <textarea id="mensaje" name="mensaje" rows="5" required
+                                      class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-brand-blue focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50"
+                                      placeholder="Describe tu consulta o solicitud..."></textarea>
+                        </div>
+
+                        <div class="flex items-start">
+                            <input type="checkbox" id="acepto-terminos" name="acepto-terminos" required
+                                   class="mt-1 h-4 w-4 rounded border-gray-300 text-brand-blue focus:ring-brand-blue">
+                            <label for="acepto-terminos" class="ml-2 text-sm text-gray-light">
+                                Acepto los <a href="#" class="text-brand-blue hover:underline">términos y condiciones</a> y autorizo el tratamiento de mis datos personales.
+                            </label>
+                        </div>
+
+                        <button type="submit"
+                                class="w-full rounded-lg bg-gradient-to-r from-brand-blue to-blue-500 px-6 py-4 font-medium text-white shadow-md transition hover:from-brand-blue/90 hover:to-blue-400 focus:outline-none focus:ring focus:ring-brand-blue/30 focus:ring-opacity-50">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Enviar mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Información adicional -->
+            <div class="order-1 lg:order-2">
+                <div class="sticky top-8">
+                    <!-- Información de contacto -->
+                    <div class="mb-8 rounded-xl bg-gradient-to-br from-brand-blue to-blue-500 p-8 text-white">
+                        <h3 class="mb-6 text-2xl font-bold">Información de contacto</h3>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white bg-opacity-20">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold">Oficina Central</h4>
+                                    <p class="opacity-90">Calle 1, Avenida Central</p>
+                                    <p class="opacity-90">San José, Costa Rica</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white bg-opacity-20">
+                                    <i class="fas fa-phone-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold">Teléfonos</h4>
+                                    <p class="opacity-90">Principal: +506 2222-3333</p>
+                                    <p class="opacity-90">WhatsApp: +506 8888-9999</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white bg-opacity-20">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold">Email</h4>
+                                    <p class="opacity-90">info@ingetech.cr</p>
+                                    <p class="opacity-90">ventas@ingetech.cr</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white bg-opacity-20">
+                                    <i class="fas fa-clock text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold">Horarios</h4>
+                                    <p class="opacity-90">Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+                                    <p class="opacity-90">Sábados: 9:00 AM - 2:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex space-x-4">
+                            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full bg-white bg-opacity-20 text-white transition hover:bg-opacity-30">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full bg-white bg-opacity-20 text-white transition hover:bg-opacity-30">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full bg-white bg-opacity-20 text-white transition hover:bg-opacity-30">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full bg-white bg-opacity-20 text-white transition hover:bg-opacity-30">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Preguntas frecuentes rápidas -->
+                    <div class="rounded-xl bg-white p-6 shadow-lg">
+                        <h3 class="mb-4 text-xl font-bold text-gray-dark">Preguntas frecuentes</h3>
+                        <div class="space-y-3">
+                            <div class="rounded-lg border-l-4 border-brand-blue bg-brand-blue/5 p-3">
+                                <h4 class="font-semibold text-gray-dark">¿Hacen envíos a todo el país?</h4>
+                                <p class="text-sm text-gray-light">Sí, realizamos envíos a todas las provincias de Costa Rica.</p>
+                            </div>
+                            <div class="rounded-lg border-l-4 border-brand-blue bg-brand-blue/5 p-3">
+                                <h4 class="font-semibold text-gray-dark">¿Qué garantía tienen los productos?</h4>
+                                <p class="text-sm text-gray-light">Todos nuestros productos cuentan con garantía del fabricante.</p>
+                            </div>
+                            <div class="rounded-lg border-l-4 border-brand-blue bg-brand-blue/5 p-3">
+                                <h4 class="font-semibold text-gray-dark">¿Ofrecen soporte técnico?</h4>
+                                <p class="text-sm text-gray-light">Sí, contamos con soporte técnico especializado 24/7.</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <a href="#" class="text-sm text-brand-blue hover:underline">Ver todas las preguntas frecuentes →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mapa y ubicaciones -->
+    <div class="bg-gray-light/30 py-16">
+        <div class="container mx-auto px-4">
+            <div class="mb-12 text-center">
+                <h2 class="mb-2 text-3xl font-bold text-gray-dark">Nuestras ubicaciones</h2>
+                <p class="mx-auto max-w-2xl text-gray-light">Visítanos en cualquiera de nuestras sucursales a nivel nacional</p>
+            </div>
+
+            <div class="grid gap-8 lg:grid-cols-2">
+                <!-- Mapa placeholder -->
+                <div class="rounded-xl bg-white p-2 shadow-lg">
+                    <div class="flex h-96 items-center justify-center rounded-lg bg-gray-200 text-gray-500">
+                        <div class="text-center">
+                            <i class="fas fa-map-marker-alt mb-4 text-4xl"></i>
+                            <p class="text-lg font-medium">Mapa interactivo</p>
+                            <p class="text-sm">Aquí iría integrado Google Maps</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de sucursales -->
+                <div class="space-y-4">
+                    <div class="rounded-xl bg-white p-6 shadow-lg">
+                        <div class="flex items-start">
+                            <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold text-gray-dark">San José - Oficina Central</h3>
+                                <p class="text-gray-light">Calle 1, Avenida Central, San José</p>
+                                <p class="text-sm text-gray-light">Tel: +506 2222-3333</p>
+                                <div class="mt-2 flex space-x-4 text-sm">
+                                    <span class="text-green-600"><i class="fas fa-clock mr-1"></i>Abierto ahora</span>
+                                    <span class="text-gray-light">8:00 AM - 6:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl bg-white p-6 shadow-lg">
+                        <div class="flex items-start">
+                            <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold text-gray-dark">Heredia - Sucursal</h3>
+                                <p class="text-gray-light">Centro Comercial Plaza Real, Heredia</p>
+                                <p class="text-sm text-gray-light">Tel: +506 2222-4444</p>
+                                <div class="mt-2 flex space-x-4 text-sm">
+                                    <span class="text-green-600"><i class="fas fa-clock mr-1"></i>Abierto ahora</span>
+                                    <span class="text-gray-light">9:00 AM - 7:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl bg-white p-6 shadow-lg">
+                        <div class="flex items-start">
+                            <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold text-gray-dark">Cartago - Sucursal</h3>
+                                <p class="text-gray-light">Avenida 2, Calle 4, Cartago Centro</p>
+                                <p class="text-sm text-gray-light">Tel: +506 2222-5555</p>
+                                <div class="mt-2 flex space-x-4 text-sm">
+                                    <span class="text-red-600"><i class="fas fa-clock mr-1"></i>Cerrado</span>
+                                    <span class="text-gray-light">Abre mañana 8:00 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Otras formas de contacto -->
+    <div class="container mx-auto px-4 py-16">
+        <div class="mb-12 text-center">
+            <h2 class="mb-2 text-3xl font-bold text-gray-dark">Otras formas de contactarnos</h2>
+            <p class="mx-auto max-w-2xl text-gray-light">Elige la forma que más te convenga para comunicarte con nosotros</p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div class="group overflow-hidden rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl">
+                <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-3xl text-green-600">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3 class="mb-2 text-xl font-bold text-gray-dark">WhatsApp</h3>
+                <p class="mb-4 text-gray-light">Chatea con nosotros directamente por WhatsApp para consultas rápidas.</p>
+                <a href="https://wa.me/50688889999" target="_blank"
+                   class="inline-flex items-center text-green-600 hover:underline">
+                    Iniciar chat <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                </a>
+            </div>
+
+            <div class="group overflow-hidden rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl">
+                <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-3xl text-blue-600">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3 class="mb-2 text-xl font-bold text-gray-dark">Llamada directa</h3>
+                <p class="mb-4 text-gray-light">Llámanos directamente para atención personalizada inmediata.</p>
+                <a href="tel:+50622223333" class="inline-flex items-center text-blue-600 hover:underline">
+                    +506 2222-3333 <i class="fas fa-phone ml-1 text-xs"></i>
+                </a>
+            </div>
+
+            <div class="group overflow-hidden rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl">
+                <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100 text-3xl text-purple-600">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="mb-2 text-xl font-bold text-gray-dark">Chat en vivo</h3>
+                <p class="mb-4 text-gray-light">Usa nuestro chat en vivo en el sitio web para soporte inmediato.</p>
+                <button onclick="openLiveChat()" class="inline-flex items-center text-purple-600 hover:underline">
+                    Abrir chat <i class="fas fa-comment ml-1 text-xs"></i>
+                </button>
+            </div>
+
+            <div class="group overflow-hidden rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl">
+                <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 text-3xl text-red-600">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3 class="mb-2 text-xl font-bold text-gray-dark">Soporte técnico</h3>
+                <p class="mb-4 text-gray-light">Accede a nuestro portal de soporte técnico especializado.</p>
+                <a href="#" class="inline-flex items-center text-red-600 hover:underline">
+                    Portal de soporte <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patrones CSS -->
+    <style>
+        .pattern-dots {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.4) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .error-message {
+            display: none;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script>
+        // Manejo del formulario de contacto
+               document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+
+            // Cambiar estado del botón
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
+            submitButton.disabled = true;
+
+            // Crear FormData con los datos del formulario
+            const formData = new FormData(this);
+
+            // Enviar datos al servidor
+            fetch('/Home/ProcesarContacto', {  // Cambia por la ruta de tu controlador
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Error en el servidor');
+            })
+            .then(data => {
+                if (data.success) {
+                    showMessage('¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.', 'success');
+                    this.reset(); // Limpiar formulario
+                } else {
+                    showMessage(data.message || 'Error al enviar el mensaje', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('Error al enviar el mensaje. Inténtalo de nuevo.', 'error');
+            })
+            .finally(() => {
+                // Restaurar botón
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            });
+        });
+
+        // Función para mostrar mensajes
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `fixed top-4 right-4 z-50 max-w-sm p-4 rounded-lg shadow-lg ${
+                type === 'success' ? 'bg-green-100 border border-green-400 text-green-700' : 'bg-red-100 border border-red-400 text-red-700'
+            }`;
+            messageDiv.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-lg">×</button>
+                </div>
+            `;
+
+            document.body.appendChild(messageDiv);
+
+            // Auto-remover después de 5 segundos
+            setTimeout(() => {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Función para abrir chat en vivo (placeholder)
+        function openLiveChat() {
+            alert('Función de chat en vivo - Aquí se integraría un widget de chat como Intercom, Zendesk, etc.');
+        }
+
+        // Animación de entrada para elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Aplicar animación a elementos con clase animate-on-scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -12,10 +12,12 @@ namespace IngeTechCRM.Controllers
     public class HomeController : Controller
     {
         private readonly IngeTechDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(IngeTechDbContext context)
+        public HomeController(IngeTechDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -688,14 +690,93 @@ namespace IngeTechCRM.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult EnviarContacto(string nombre, string email, string mensaje)
+        private async Task EnviarPorCorreo(string email, string titulo, string mensaje)
         {
-            // Aquí se podría implementar el envío de un correo electrónico
-            // o guardar el mensaje en la base de datos
+            try
+            {
+                using (var client = new System.Net.Mail.SmtpClient(_configuration["Email:SmtpServer"]))
+                {
+                    client.Port = int.Parse(_configuration["Email:Port"]);
+                    client.Credentials = new System.Net.NetworkCredential(
+                        _configuration["Email:Username"],
+                        _configuration["Email:Password"]);
+                    client.EnableSsl = true;
 
-            TempData["Message"] = "Su mensaje ha sido enviado correctamente. Nos pondremos en contacto pronto.";
-            return RedirectToAction("Contacto");
+                    var mailMessage = new System.Net.Mail.MailMessage
+                    {
+                        From = new System.Net.Mail.MailAddress(_configuration["Email:FromAddress"]),
+                        Subject = titulo,
+                        Body = mensaje,
+                        IsBodyHtml = true
+                    };
+
+                    mailMessage.To.Add(email);
+                    await client.SendMailAsync(mailMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Puedes registrar el error en algún log o simplemente imprimirlo en la consola
+                Console.WriteLine($"Error al enviar correo: {ex.Message}");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> ProcesarContacto()
+        {
+            try
+            {
+                // Obtener datos del formulario directamente
+                string nombre = Request.Form["nombre"];
+                string telefono = Request.Form["telefono"];
+                string email = Request.Form["email"];
+                string asunto = Request.Form["asunto"];
+                string mensaje = Request.Form["mensaje"];
+                bool aceptoTerminos = Request.Form["acepto-terminos"] == "on";
+
+                // Validaciones básicas
+                if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(mensaje))
+                {
+                    return BadRequest("Nombre, email y mensaje son obligatorios");
+                }
+
+                if (!aceptoTerminos)
+                {
+                    return BadRequest("Debe aceptar los términos y condiciones");
+                }
+
+                // Crear el mensaje para el correo
+                string tituloCorreo = $"Contacto web: {asunto}";
+                string mensajeCorreo = $@"
+            <h3>Nuevo mensaje desde el formulario de contacto</h3>
+            <p><strong>Nombre:</strong> {nombre}</p>
+            <p><strong>Email:</strong> {email}</p>
+            <p><strong>Teléfono:</strong> {(!string.IsNullOrWhiteSpace(telefono) ? telefono : "No proporcionado")}</p>
+            <p><strong>Asunto:</strong> {asunto}</p>
+            <p><strong>Mensaje:</strong></p>
+            <div style='background: #f5f5f5; padding: 15px; border-left: 4px solid #005da4;'>
+                {mensaje.Replace("\n", "<br>")}
+            </div>
+            <p><strong>Fecha:</strong> {DateTime.Now:dd/MM/yyyy HH:mm:ss}</p>
+        ";
+
+                // Enviar correo (usando tu método existente)
+                await EnviarPorCorreo("jabs9606@gmail.com", tituloCorreo, mensajeCorreo);
+
+                // Opcional: Enviar confirmación al cliente
+                string confirmacion = $@"
+            <h3>¡Gracias por contactarnos, {nombre}!</h3>
+            <p>Hemos recibido tu mensaje y nos pondremos en contacto contigo pronto.</p>
+            <p>Tu consulta: <em>{asunto}</em></p>
+        ";
+                await EnviarPorCorreo(email, "Gracias por contactarnos - IngeTech", confirmacion);
+
+                return Ok(new { success = true, message = "Mensaje enviado correctamente" });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al procesar contacto: {ex.Message}");
+                return StatusCode(500, "Error al enviar el mensaje");
+            }
         }
 
         public IActionResult SobreNosotros()

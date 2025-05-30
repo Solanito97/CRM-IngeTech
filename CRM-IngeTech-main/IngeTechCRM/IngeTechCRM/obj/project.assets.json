@@ -3483,23 +3483,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bjsol\\.nuget\\packages\\": {},
+    "C:\\Users\\jabs0\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj",
+      "projectUniqueName": "C:\\Users\\jabs0\\source\\Repositorios\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj",
       "projectName": "IngeTechCRM",
-      "projectPath": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj",
-      "packagesPath": "C:\\Users\\bjsol\\.nuget\\packages\\",
-      "outputPath": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\obj\\",
+      "projectPath": "C:\\Users\\jabs0\\source\\Repositorios\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj",
+      "packagesPath": "C:\\Users\\jabs0\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jabs0\\source\\Repositorios\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\bjsol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jabs0\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3508,7 +3508,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3579,10 +3578,16 @@
   },
   "logs": [
     {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema al leer el archivo de caché C:\\Users\\jabs0\\source\\Repositorios\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
+    {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'iTextSharp 5.5.13.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "message": "El paquete \"iTextSharp 5.5.13.4\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \"net8.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "iTextSharp",
       "targetGraphs": [
         "net8.0"

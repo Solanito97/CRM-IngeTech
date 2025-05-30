@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace IngeTechCRM.Controllers
 
         public IActionResult Index()
         {
-            // Verificar si hay un usuario en sesión
+            // Verificar si hay un usuario en sesiÃ³n
             var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
             var tipoUsuarioId = HttpContext.Session.GetInt32("TipoUsuarioId");
 
@@ -36,11 +36,12 @@ namespace IngeTechCRM.Controllers
                 }
             }
 
-            // Mostrar información para la página principal
+            // Mostrar informaciÃ³n para la pÃ¡gina principal
             var categoriasDestacadas = _context.Categorias.Take(5).ToList();
             var productosDestacados = _context.Productos
                 .Include(p => p.Categoria)
                 .Include(p => p.Marca)
+                .Include(p => p.Imagenes)
                 .Where(p => p.ACTIVO)
                 .OrderByDescending(p => p.FECHA_CREACION)
                 .Take(8)
@@ -78,7 +79,7 @@ namespace IngeTechCRM.Controllers
                     .Take(10)
                     .ToList();
 
-                // Últimos pedidos con manejo de NULL
+                // Ãšltimos pedidos con manejo de NULL
                 var ultimosPedidos = _context.Pedidos
                     .Include(p => p.Usuario)
                     .OrderByDescending(p => p.FECHA_PEDIDO)
@@ -92,7 +93,7 @@ namespace IngeTechCRM.Controllers
                     })
                     .ToList();
 
-                // Productos más vendidos (solo en pedidos ENVIADOS o ENTREGADOS)
+                // Productos mÃ¡s vendidos (solo en pedidos ENVIADOS o ENTREGADOS)
                 List<object> productosMasVendidos = new List<object>();
 
                 // Verificar si hay pedidos primero
@@ -115,44 +116,44 @@ namespace IngeTechCRM.Controllers
                         .ToList<object>();
                 }
 
-                // Calcular ventas mensuales (últimos 6 meses)
+                // Calcular ventas mensuales (Ãºltimos 6 meses)
                 var hoy = DateTime.Today;
-                var fechaInicio = new DateTime(hoy.Year, hoy.Month, 1).AddMonths(-5); // Primer día de hace 5 meses
+                var fechaInicio = new DateTime(hoy.Year, hoy.Month, 1).AddMonths(-5); // Primer dÃ­a de hace 5 meses
 
                 var ventasMensuales = _context.Pedidos
                     .Where(p => p.FECHA_PEDIDO >= fechaInicio &&
                            (p.ESTADO == "ENVIADO" || p.ESTADO == "ENTREGADO"))
                     .GroupBy(p => new {
-                        Año = p.FECHA_PEDIDO.Year,
+                        AÃ±o = p.FECHA_PEDIDO.Year,
                         Mes = p.FECHA_PEDIDO.Month
                     })
                     .Select(g => new {
-                        Año = g.Key.Año,
+                        AÃ±o = g.Key.AÃ±o,
                         Mes = g.Key.Mes,
                         Total = g.Sum(p => p.TOTAL)
                     })
-                    .OrderBy(x => x.Año)
+                    .OrderBy(x => x.AÃ±o)
                     .ThenBy(x => x.Mes)
                     .ToList();
 
-                // Generar datos para los últimos 6 meses
+                // Generar datos para los Ãºltimos 6 meses
                 var etiquetasMeses = new List<string>();
                 var datosVentas = new List<decimal>();
 
-                // Obtener los nombres de los meses en español
+                // Obtener los nombres de los meses en espaÃ±ol
                 var nombresMeses = new string[] {
             "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
         };
 
-                // Generar lista para los últimos 6 meses
+                // Generar lista para los Ãºltimos 6 meses
                 for (int i = 5; i >= 0; i--)
                 {
                     var fecha = hoy.AddMonths(-i);
-                    var año = fecha.Year;
+                    var aÃ±o = fecha.Year;
                     var mes = fecha.Month;
 
-                    var venta = ventasMensuales.FirstOrDefault(v => v.Año == año && v.Mes == mes);
+                    var venta = ventasMensuales.FirstOrDefault(v => v.AÃ±o == aÃ±o && v.Mes == mes);
                     var total = venta != null ? venta.Total : 0;
 
                     etiquetasMeses.Add(nombresMeses[mes - 1]);
@@ -175,7 +176,7 @@ namespace IngeTechCRM.Controllers
                 // Mostrar mensaje de error al usuario
                 TempData["Error"] = "Hubo un problema al cargar el dashboard.";
 
-                // Inicializar ViewBags con valores vacíos/por defecto
+                // Inicializar ViewBags con valores vacÃ­os/por defecto
                 ViewBag.TotalUsuarios = 0;
                 ViewBag.TotalProductos = 0;
                 ViewBag.TotalPedidos = 0;
@@ -197,7 +198,7 @@ namespace IngeTechCRM.Controllers
                 .Include(p => p.Imagenes)
                 .Where(p => p.ACTIVO);
 
-            // Filtrar por categoría si se especifica
+            // Filtrar por categorÃ­a si se especifica
             if (categoriaId.HasValue)
             {
                 productosQuery = productosQuery.Where(p => p.ID_CATEGORIA == categoriaId.Value);
@@ -209,7 +210,7 @@ namespace IngeTechCRM.Controllers
                 productosQuery = productosQuery.Where(p => p.ID_MARCA == marcaId.Value);
             }
 
-            // Filtrar por búsqueda si se especifica
+            // Filtrar por bÃºsqueda si se especifica
             if (!string.IsNullOrEmpty(buscar))
             {
                 productosQuery = productosQuery.Where(p =>
@@ -310,7 +311,7 @@ namespace IngeTechCRM.Controllers
                 })
                 .ToList();
 
-            // Productos relacionados (misma categoría)
+            // Productos relacionados (misma categorÃ­a)
             var productosRelacionados = _context.Productos
                 .Include(p => p.Categoria)
                 .Include(p => p.Marca)
@@ -357,7 +358,7 @@ namespace IngeTechCRM.Controllers
                 _context.SaveChanges();
             }
 
-            // Verificar si el producto ya está en el carrito
+            // Verificar si el producto ya estÃ¡ en el carrito
             var itemCarrito = _context.ItemsCarrito
                 .FirstOrDefault(i => i.ID_CARRITO == carrito.ID_CARRITO && i.ID_PRODUCTO == idProducto);
 
@@ -369,7 +370,7 @@ namespace IngeTechCRM.Controllers
             }
             else
             {
-                // Agregar nuevo ítem
+                // Agregar nuevo Ã­tem
                 itemCarrito = new ItemCarrito
                 {
                     ID_CARRITO = carrito.ID_CARRITO,
@@ -433,7 +434,7 @@ namespace IngeTechCRM.Controllers
 
             if (idItem.Length != cantidad.Length)
             {
-                TempData["Error"] = "Datos inválidos";
+                TempData["Error"] = "Datos invÃ¡lidos";
                 return RedirectToAction("MiCarrito");
             }
 
@@ -500,7 +501,7 @@ namespace IngeTechCRM.Controllers
 
             if (carrito == null || carrito.Items.Count == 0)
             {
-                TempData["Error"] = "Su carrito está vacío";
+                TempData["Error"] = "Su carrito estÃ¡ vacÃ­o";
                 return RedirectToAction("MiCarrito");
             }
 
@@ -539,7 +540,7 @@ namespace IngeTechCRM.Controllers
 
             if (carrito == null || carrito.Items.Count == 0)
             {
-                TempData["Error"] = "Su carrito está vacío";
+                TempData["Error"] = "Su carrito estÃ¡ vacÃ­o";
                 return RedirectToAction("MiCarrito");
             }
 
@@ -564,7 +565,7 @@ namespace IngeTechCRM.Controllers
             // Agregar los detalles del pedido
             foreach (var item in carrito.Items)
             {
-                // Buscar el almacén más cercano con stock disponible
+                // Buscar el almacÃ©n mÃ¡s cercano con stock disponible
                 var almacenConStock = _context.Inventarios
                     .Include(i => i.Almacen)
                     .Where(i => i.ID_PRODUCTO == item.ID_PRODUCTO && i.CANTIDAD >= item.CANTIDAD)
@@ -690,7 +691,7 @@ namespace IngeTechCRM.Controllers
         [HttpPost]
         public IActionResult EnviarContacto(string nombre, string email, string mensaje)
         {
-            // Aquí se podría implementar el envío de un correo electrónico
+            // AquÃ­ se podrÃ­a implementar el envÃ­o de un correo electrÃ³nico
             // o guardar el mensaje en la base de datos
 
             TempData["Message"] = "Su mensaje ha sido enviado correctamente. Nos pondremos en contacto pronto.";

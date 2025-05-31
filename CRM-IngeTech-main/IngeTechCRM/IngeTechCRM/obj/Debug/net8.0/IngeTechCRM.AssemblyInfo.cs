@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IngeTechCRM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+032bbfb527227b15b34ce0fe992592566be362ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c8961df947169628395030c0b1f2a2d280a8f55")]
 [assembly: System.Reflection.AssemblyProductAttribute("IngeTechCRM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IngeTechCRM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

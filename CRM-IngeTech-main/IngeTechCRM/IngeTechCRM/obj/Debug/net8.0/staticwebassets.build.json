@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Vza1vik3kpPBKn3Lnaar9UNksf1d7ZSAU8lb9ytvPKQ=",
+  "Hash": "egQsqWMDXlku44AUoGuNCtRrvUnqI3mqtw8gN4OIT4s=",
   "Source": "IngeTechCRM",
   "BasePath": "_content/IngeTechCRM",
   "Mode": "Default",
@@ -115,8 +115,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "d5l79mpvgw",
-      "Integrity": "0XfI3aGRHMUIOlKunnqOka1wIo/iOI8uXl1yKwe4mEU=",
+      "Fingerprint": "29s8p45hto",
+      "Integrity": "Bhp8qz/Gu8ZADeFlULcfhn6RJIfB1ynWoL3ZYqqazhk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\styles.css"
@@ -141,6 +141,531 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\08037c5f-5978-4494-9355-164fe193e8c5.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/08037c5f-5978-4494-9355-164fe193e8c5#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yauxlct8b3",
+      "Integrity": "qszP286gC+pO0qDNxe0EVZQix2CL5lfqPXTvZs4Tshc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\08037c5f-5978-4494-9355-164fe193e8c5.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\165b5e17-8f4d-4db1-96b4-5afbb0964669.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/165b5e17-8f4d-4db1-96b4-5afbb0964669#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "9kjt9b5g88",
+      "Integrity": "SQ0o1dohP7w+xRXZL7JyEqDoNzSO9IJuGy/NgJu6G2E=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\165b5e17-8f4d-4db1-96b4-5afbb0964669.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\24eb80eb-14ba-4172-abb1-74b3aa20fe86.png",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/24eb80eb-14ba-4172-abb1-74b3aa20fe86#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eq00xvl0xc",
+      "Integrity": "Sg8L5SWpwDmdtWYNuMpJieXc2YHOp8GtwUMKkeePvjk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\24eb80eb-14ba-4172-abb1-74b3aa20fe86.png"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\28fb1723-e12e-4463-8afd-179f42846050.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/28fb1723-e12e-4463-8afd-179f42846050#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "vpz30xpeqe",
+      "Integrity": "kwtUXq5clZ1HHGrnqTjMq5CmxR+JSsmAMwpy24Jnlx0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\28fb1723-e12e-4463-8afd-179f42846050.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\2a6be99d-425b-43f8-8b25-8925ac5b16b4.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/2a6be99d-425b-43f8-8b25-8925ac5b16b4#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "8sj2lqvf7v",
+      "Integrity": "qF08mIwEarMz8mN7CTy2C3E5qHQ+WCoztyd7JEyQJ/w=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\2a6be99d-425b-43f8-8b25-8925ac5b16b4.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\36b12067-c8d2-4592-bc41-957c14ec5068.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/36b12067-c8d2-4592-bc41-957c14ec5068#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "tclmj3la65",
+      "Integrity": "Yzvk+jIY952ggEouxT09+PSdL2rbVurGMr5WkdBpTiw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\36b12067-c8d2-4592-bc41-957c14ec5068.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\39b64ff1-f8b1-4799-88ac-10d63e110b01.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/39b64ff1-f8b1-4799-88ac-10d63e110b01#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "uadugll596",
+      "Integrity": "Kk2sbkeSH3vVdihQiF8Hj61tft4XLpF+fVO4hU57uR0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\39b64ff1-f8b1-4799-88ac-10d63e110b01.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\3c9129e2-09fd-463e-a8c4-68b594d9468c.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/3c9129e2-09fd-463e-a8c4-68b594d9468c#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "w4v1azavcj",
+      "Integrity": "IJbhOn8jTsv/YU300FhHdVqdnDnhOVwoH6GWwc2NwsU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\3c9129e2-09fd-463e-a8c4-68b594d9468c.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\444f7032-23f7-4c1c-bd22-d557e1184bab.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/444f7032-23f7-4c1c-bd22-d557e1184bab#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "dcqpn9pc4d",
+      "Integrity": "Y+O0/p6zslnrDIpX/L8sZbJPXAFSlpVlhWZ5wUhBrCI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\444f7032-23f7-4c1c-bd22-d557e1184bab.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\4985d608-2787-4f1a-9470-f79e8d75ab23.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/4985d608-2787-4f1a-9470-f79e8d75ab23#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "r2t17zm03l",
+      "Integrity": "c3yLXbmboBkJsySmt5Uc7FFET0Dpgp2AfEoVEQLbwMg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\4985d608-2787-4f1a-9470-f79e8d75ab23.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\57ffd7d2-70e4-4a9c-b199-5a64f40d3f2d.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/57ffd7d2-70e4-4a9c-b199-5a64f40d3f2d#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "29mjtsrizg",
+      "Integrity": "mqvmaRDfphSByqsU2cetXSriq/Mm0LdUcaH8lKDckEk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\57ffd7d2-70e4-4a9c-b199-5a64f40d3f2d.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\68776b81-1675-40f6-831e-8844b44b215a.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/68776b81-1675-40f6-831e-8844b44b215a#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "udiz6kkit2",
+      "Integrity": "0p0KkuIkPRBx/WTL5f9S5RFfEDKOoz571As95G0V70E=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\68776b81-1675-40f6-831e-8844b44b215a.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\71875667-6519-4eda-bb2f-00ead6e0cc54.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/71875667-6519-4eda-bb2f-00ead6e0cc54#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "nqfb5zyz6f",
+      "Integrity": "kWrOoLtP6znSraZHGAKtjDAqLykPt2A4jTFYZQRCA30=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\71875667-6519-4eda-bb2f-00ead6e0cc54.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\71936265-02eb-406c-b085-45c3a8474e74.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/71936265-02eb-406c-b085-45c3a8474e74#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "pflqh4vwy2",
+      "Integrity": "BSBmQWbNx78qc5kv52vXgKWxIIm8wGQ1bpo0DX+nL5M=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\71936265-02eb-406c-b085-45c3a8474e74.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\77dc1c4f-89ff-4aa9-89a4-1f87838e4913.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/77dc1c4f-89ff-4aa9-89a4-1f87838e4913#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "l3h3ypwqul",
+      "Integrity": "UV+KsRWaqlEfGE+T3BSck1WRWYdvkJiyldjz/cxfiYY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\77dc1c4f-89ff-4aa9-89a4-1f87838e4913.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\7b396b6c-a87b-47fa-90d3-3fc592026a64.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/7b396b6c-a87b-47fa-90d3-3fc592026a64#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "1fsnjd14qc",
+      "Integrity": "Y7kbt6olwIyte7fXCndxrY9DN6hWln9jz7x2kixcsys=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\7b396b6c-a87b-47fa-90d3-3fc592026a64.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\8347135a-5f01-4ecb-b285-6e9417c0b047.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/8347135a-5f01-4ecb-b285-6e9417c0b047#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yhd7izsn6e",
+      "Integrity": "6oE970cahsmZdk1Tz9YVSsa1rkQY0MfVGCFe+yzZ4kg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\8347135a-5f01-4ecb-b285-6e9417c0b047.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\8631945a-1720-47e1-85ee-c738d25daae0.png",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/8631945a-1720-47e1-85ee-c738d25daae0#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "dr63vb3h6w",
+      "Integrity": "B8BY0bpgQynmUWkqicXKNNXJ8vK5eaUgJ2k0SHoSvKQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\8631945a-1720-47e1-85ee-c738d25daae0.png"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\9900ba72-bfcf-4ede-9e09-be7d0c225f3b.png",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/9900ba72-bfcf-4ede-9e09-be7d0c225f3b#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "swq2o8btzn",
+      "Integrity": "ROPP9YauqwLjr21pAFX60ROz6jFJwm++zCcrEqfEF8U=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\9900ba72-bfcf-4ede-9e09-be7d0c225f3b.png"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\c372a3bc-7042-47aa-aaf2-84994598e90b.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/c372a3bc-7042-47aa-aaf2-84994598e90b#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "roaxxcfkkz",
+      "Integrity": "peqbD+Acs4SWuL8Z+Ay3ULZoXbeFREpodp62wcTqujA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\c372a3bc-7042-47aa-aaf2-84994598e90b.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\c41fd14d-d3e3-4c60-b6e2-c3c0442657ba.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/c41fd14d-d3e3-4c60-b6e2-c3c0442657ba#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "up3kp3sixj",
+      "Integrity": "Lsvtt3aNuTm1e19VJcGANDztNPdSNvkGet7pnh0MQ8Y=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\c41fd14d-d3e3-4c60-b6e2-c3c0442657ba.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\c9b65769-17c7-4ac2-8cbe-260e675d4d54.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/c9b65769-17c7-4ac2-8cbe-260e675d4d54#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "av4semq9nq",
+      "Integrity": "ps3boyFwi9ki8FX5YLPD5hcf02USlokB+WVXMCRVVE0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\c9b65769-17c7-4ac2-8cbe-260e675d4d54.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\dc5ad70a-74b0-4f70-80da-fe7dbd1e42de.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/dc5ad70a-74b0-4f70-80da-fe7dbd1e42de#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "nzt239ueyj",
+      "Integrity": "Uwt4XsFlSA8Y1m58IuiEWrSud3g/qG2nQbJvjTFAIwI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\dc5ad70a-74b0-4f70-80da-fe7dbd1e42de.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\e906426b-e01c-4e33-8e85-2be9b5030c41.jpg",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/e906426b-e01c-4e33-8e85-2be9b5030c41#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yt8fveiy1y",
+      "Integrity": "ig4pqJ10eXKm8CdqzbMQRA0dWgJ4KF0x3nlkaLz4Uq8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\e906426b-e01c-4e33-8e85-2be9b5030c41.jpg"
+    },
+    {
+      "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\ec1596e9-6636-4811-99f5-ead9a139327c.jfif",
+      "SourceId": "IngeTechCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\",
+      "BasePath": "_content/IngeTechCRM",
+      "RelativePath": "images/productos/ec1596e9-6636-4811-99f5-ead9a139327c#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "1fc8syd6vm",
+      "Integrity": "I1uiu2ZI0DzrBoW7LFtR4QPDEMt7WbUvhXA16qyvXVw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productos\\ec1596e9-6636-4811-99f5-ead9a139327c.jfif"
     },
     {
       "Identity": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\Logo F L.jpg",
@@ -1611,6 +2136,51 @@
       ]
     },
     {
+      "Route": "css/styles.29s8p45hto.css",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\css\\styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "47320"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Bhp8qz/Gu8ZADeFlULcfhn6RJIfB1ynWoL3ZYqqazhk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 31 May 2025 00:35:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "29s8p45hto"
+        },
+        {
+          "Name": "label",
+          "Value": "css/styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Bhp8qz/Gu8ZADeFlULcfhn6RJIfB1ynWoL3ZYqqazhk="
+        }
+      ]
+    },
+    {
       "Route": "css/styles.css",
       "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\css\\styles.css",
       "Selectors": [],
@@ -1621,7 +2191,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "46479"
+          "Value": "47320"
         },
         {
           "Name": "Content-Type",
@@ -1629,11 +2199,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"0XfI3aGRHMUIOlKunnqOka1wIo/iOI8uXl1yKwe4mEU=\""
+          "Value": "\"Bhp8qz/Gu8ZADeFlULcfhn6RJIfB1ynWoL3ZYqqazhk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 26 May 2025 22:58:42 GMT"
+          "Value": "Sat, 31 May 2025 00:35:23 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1643,52 +2213,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-0XfI3aGRHMUIOlKunnqOka1wIo/iOI8uXl1yKwe4mEU="
-        }
-      ]
-    },
-    {
-      "Route": "css/styles.d5l79mpvgw.css",
-      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\css\\styles.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "46479"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"0XfI3aGRHMUIOlKunnqOka1wIo/iOI8uXl1yKwe4mEU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 26 May 2025 22:58:42 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "d5l79mpvgw"
-        },
-        {
-          "Name": "label",
-          "Value": "css/styles.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-0XfI3aGRHMUIOlKunnqOka1wIo/iOI8uXl1yKwe4mEU="
+          "Value": "sha256-Bhp8qz/Gu8ZADeFlULcfhn6RJIfB1ynWoL3ZYqqazhk="
         }
       ]
     },
@@ -1771,6 +2296,2056 @@
         {
           "Name": "integrity",
           "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/08037c5f-5978-4494-9355-164fe193e8c5.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\08037c5f-5978-4494-9355-164fe193e8c5.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "181427"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qszP286gC+pO0qDNxe0EVZQix2CL5lfqPXTvZs4Tshc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qszP286gC+pO0qDNxe0EVZQix2CL5lfqPXTvZs4Tshc="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/08037c5f-5978-4494-9355-164fe193e8c5.yauxlct8b3.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\08037c5f-5978-4494-9355-164fe193e8c5.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "181427"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qszP286gC+pO0qDNxe0EVZQix2CL5lfqPXTvZs4Tshc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yauxlct8b3"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/08037c5f-5978-4494-9355-164fe193e8c5.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qszP286gC+pO0qDNxe0EVZQix2CL5lfqPXTvZs4Tshc="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/165b5e17-8f4d-4db1-96b4-5afbb0964669.9kjt9b5g88.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\165b5e17-8f4d-4db1-96b4-5afbb0964669.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1306466"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SQ0o1dohP7w+xRXZL7JyEqDoNzSO9IJuGy/NgJu6G2E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9kjt9b5g88"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/165b5e17-8f4d-4db1-96b4-5afbb0964669.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SQ0o1dohP7w+xRXZL7JyEqDoNzSO9IJuGy/NgJu6G2E="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/165b5e17-8f4d-4db1-96b4-5afbb0964669.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\165b5e17-8f4d-4db1-96b4-5afbb0964669.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1306466"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SQ0o1dohP7w+xRXZL7JyEqDoNzSO9IJuGy/NgJu6G2E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-SQ0o1dohP7w+xRXZL7JyEqDoNzSO9IJuGy/NgJu6G2E="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/24eb80eb-14ba-4172-abb1-74b3aa20fe86.eq00xvl0xc.png",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\24eb80eb-14ba-4172-abb1-74b3aa20fe86.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "402393"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Sg8L5SWpwDmdtWYNuMpJieXc2YHOp8GtwUMKkeePvjk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eq00xvl0xc"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/24eb80eb-14ba-4172-abb1-74b3aa20fe86.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Sg8L5SWpwDmdtWYNuMpJieXc2YHOp8GtwUMKkeePvjk="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/24eb80eb-14ba-4172-abb1-74b3aa20fe86.png",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\24eb80eb-14ba-4172-abb1-74b3aa20fe86.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "402393"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Sg8L5SWpwDmdtWYNuMpJieXc2YHOp8GtwUMKkeePvjk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Sg8L5SWpwDmdtWYNuMpJieXc2YHOp8GtwUMKkeePvjk="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/28fb1723-e12e-4463-8afd-179f42846050.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\28fb1723-e12e-4463-8afd-179f42846050.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "294894"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kwtUXq5clZ1HHGrnqTjMq5CmxR+JSsmAMwpy24Jnlx0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kwtUXq5clZ1HHGrnqTjMq5CmxR+JSsmAMwpy24Jnlx0="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/28fb1723-e12e-4463-8afd-179f42846050.vpz30xpeqe.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\28fb1723-e12e-4463-8afd-179f42846050.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "294894"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kwtUXq5clZ1HHGrnqTjMq5CmxR+JSsmAMwpy24Jnlx0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vpz30xpeqe"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/28fb1723-e12e-4463-8afd-179f42846050.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kwtUXq5clZ1HHGrnqTjMq5CmxR+JSsmAMwpy24Jnlx0="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/2a6be99d-425b-43f8-8b25-8925ac5b16b4.8sj2lqvf7v.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\2a6be99d-425b-43f8-8b25-8925ac5b16b4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "33653"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qF08mIwEarMz8mN7CTy2C3E5qHQ+WCoztyd7JEyQJ/w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8sj2lqvf7v"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/2a6be99d-425b-43f8-8b25-8925ac5b16b4.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qF08mIwEarMz8mN7CTy2C3E5qHQ+WCoztyd7JEyQJ/w="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/2a6be99d-425b-43f8-8b25-8925ac5b16b4.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\2a6be99d-425b-43f8-8b25-8925ac5b16b4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "33653"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qF08mIwEarMz8mN7CTy2C3E5qHQ+WCoztyd7JEyQJ/w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qF08mIwEarMz8mN7CTy2C3E5qHQ+WCoztyd7JEyQJ/w="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/36b12067-c8d2-4592-bc41-957c14ec5068.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\36b12067-c8d2-4592-bc41-957c14ec5068.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "168081"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Yzvk+jIY952ggEouxT09+PSdL2rbVurGMr5WkdBpTiw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Yzvk+jIY952ggEouxT09+PSdL2rbVurGMr5WkdBpTiw="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/36b12067-c8d2-4592-bc41-957c14ec5068.tclmj3la65.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\36b12067-c8d2-4592-bc41-957c14ec5068.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "168081"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Yzvk+jIY952ggEouxT09+PSdL2rbVurGMr5WkdBpTiw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tclmj3la65"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/36b12067-c8d2-4592-bc41-957c14ec5068.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Yzvk+jIY952ggEouxT09+PSdL2rbVurGMr5WkdBpTiw="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/39b64ff1-f8b1-4799-88ac-10d63e110b01.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\39b64ff1-f8b1-4799-88ac-10d63e110b01.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "103657"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Kk2sbkeSH3vVdihQiF8Hj61tft4XLpF+fVO4hU57uR0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Kk2sbkeSH3vVdihQiF8Hj61tft4XLpF+fVO4hU57uR0="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/39b64ff1-f8b1-4799-88ac-10d63e110b01.uadugll596.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\39b64ff1-f8b1-4799-88ac-10d63e110b01.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "103657"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Kk2sbkeSH3vVdihQiF8Hj61tft4XLpF+fVO4hU57uR0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "uadugll596"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/39b64ff1-f8b1-4799-88ac-10d63e110b01.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Kk2sbkeSH3vVdihQiF8Hj61tft4XLpF+fVO4hU57uR0="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/3c9129e2-09fd-463e-a8c4-68b594d9468c.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\3c9129e2-09fd-463e-a8c4-68b594d9468c.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "121211"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IJbhOn8jTsv/YU300FhHdVqdnDnhOVwoH6GWwc2NwsU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IJbhOn8jTsv/YU300FhHdVqdnDnhOVwoH6GWwc2NwsU="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/3c9129e2-09fd-463e-a8c4-68b594d9468c.w4v1azavcj.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\3c9129e2-09fd-463e-a8c4-68b594d9468c.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "121211"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IJbhOn8jTsv/YU300FhHdVqdnDnhOVwoH6GWwc2NwsU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "w4v1azavcj"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/3c9129e2-09fd-463e-a8c4-68b594d9468c.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IJbhOn8jTsv/YU300FhHdVqdnDnhOVwoH6GWwc2NwsU="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/444f7032-23f7-4c1c-bd22-d557e1184bab.dcqpn9pc4d.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\444f7032-23f7-4c1c-bd22-d557e1184bab.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29381"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y+O0/p6zslnrDIpX/L8sZbJPXAFSlpVlhWZ5wUhBrCI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "dcqpn9pc4d"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/444f7032-23f7-4c1c-bd22-d557e1184bab.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Y+O0/p6zslnrDIpX/L8sZbJPXAFSlpVlhWZ5wUhBrCI="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/444f7032-23f7-4c1c-bd22-d557e1184bab.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\444f7032-23f7-4c1c-bd22-d557e1184bab.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29381"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y+O0/p6zslnrDIpX/L8sZbJPXAFSlpVlhWZ5wUhBrCI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Y+O0/p6zslnrDIpX/L8sZbJPXAFSlpVlhWZ5wUhBrCI="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/4985d608-2787-4f1a-9470-f79e8d75ab23.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\4985d608-2787-4f1a-9470-f79e8d75ab23.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "128827"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"c3yLXbmboBkJsySmt5Uc7FFET0Dpgp2AfEoVEQLbwMg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-c3yLXbmboBkJsySmt5Uc7FFET0Dpgp2AfEoVEQLbwMg="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/4985d608-2787-4f1a-9470-f79e8d75ab23.r2t17zm03l.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\4985d608-2787-4f1a-9470-f79e8d75ab23.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "128827"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"c3yLXbmboBkJsySmt5Uc7FFET0Dpgp2AfEoVEQLbwMg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "r2t17zm03l"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/4985d608-2787-4f1a-9470-f79e8d75ab23.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-c3yLXbmboBkJsySmt5Uc7FFET0Dpgp2AfEoVEQLbwMg="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/57ffd7d2-70e4-4a9c-b199-5a64f40d3f2d.29mjtsrizg.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\57ffd7d2-70e4-4a9c-b199-5a64f40d3f2d.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "318119"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mqvmaRDfphSByqsU2cetXSriq/Mm0LdUcaH8lKDckEk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "29mjtsrizg"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/57ffd7d2-70e4-4a9c-b199-5a64f40d3f2d.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mqvmaRDfphSByqsU2cetXSriq/Mm0LdUcaH8lKDckEk="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/57ffd7d2-70e4-4a9c-b199-5a64f40d3f2d.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\57ffd7d2-70e4-4a9c-b199-5a64f40d3f2d.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "318119"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mqvmaRDfphSByqsU2cetXSriq/Mm0LdUcaH8lKDckEk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mqvmaRDfphSByqsU2cetXSriq/Mm0LdUcaH8lKDckEk="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/68776b81-1675-40f6-831e-8844b44b215a.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\68776b81-1675-40f6-831e-8844b44b215a.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "223884"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0p0KkuIkPRBx/WTL5f9S5RFfEDKOoz571As95G0V70E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0p0KkuIkPRBx/WTL5f9S5RFfEDKOoz571As95G0V70E="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/68776b81-1675-40f6-831e-8844b44b215a.udiz6kkit2.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\68776b81-1675-40f6-831e-8844b44b215a.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "223884"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0p0KkuIkPRBx/WTL5f9S5RFfEDKOoz571As95G0V70E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "udiz6kkit2"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/68776b81-1675-40f6-831e-8844b44b215a.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0p0KkuIkPRBx/WTL5f9S5RFfEDKOoz571As95G0V70E="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/71875667-6519-4eda-bb2f-00ead6e0cc54.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\71875667-6519-4eda-bb2f-00ead6e0cc54.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19439"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kWrOoLtP6znSraZHGAKtjDAqLykPt2A4jTFYZQRCA30=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kWrOoLtP6znSraZHGAKtjDAqLykPt2A4jTFYZQRCA30="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/71875667-6519-4eda-bb2f-00ead6e0cc54.nqfb5zyz6f.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\71875667-6519-4eda-bb2f-00ead6e0cc54.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19439"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kWrOoLtP6znSraZHGAKtjDAqLykPt2A4jTFYZQRCA30=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "nqfb5zyz6f"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/71875667-6519-4eda-bb2f-00ead6e0cc54.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kWrOoLtP6znSraZHGAKtjDAqLykPt2A4jTFYZQRCA30="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/71936265-02eb-406c-b085-45c3a8474e74.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\71936265-02eb-406c-b085-45c3a8474e74.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "68808"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BSBmQWbNx78qc5kv52vXgKWxIIm8wGQ1bpo0DX+nL5M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-BSBmQWbNx78qc5kv52vXgKWxIIm8wGQ1bpo0DX+nL5M="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/71936265-02eb-406c-b085-45c3a8474e74.pflqh4vwy2.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\71936265-02eb-406c-b085-45c3a8474e74.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "68808"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BSBmQWbNx78qc5kv52vXgKWxIIm8wGQ1bpo0DX+nL5M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "pflqh4vwy2"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/71936265-02eb-406c-b085-45c3a8474e74.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-BSBmQWbNx78qc5kv52vXgKWxIIm8wGQ1bpo0DX+nL5M="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/77dc1c4f-89ff-4aa9-89a4-1f87838e4913.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\77dc1c4f-89ff-4aa9-89a4-1f87838e4913.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "130302"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UV+KsRWaqlEfGE+T3BSck1WRWYdvkJiyldjz/cxfiYY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-UV+KsRWaqlEfGE+T3BSck1WRWYdvkJiyldjz/cxfiYY="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/77dc1c4f-89ff-4aa9-89a4-1f87838e4913.l3h3ypwqul.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\77dc1c4f-89ff-4aa9-89a4-1f87838e4913.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "130302"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UV+KsRWaqlEfGE+T3BSck1WRWYdvkJiyldjz/cxfiYY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "l3h3ypwqul"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/77dc1c4f-89ff-4aa9-89a4-1f87838e4913.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-UV+KsRWaqlEfGE+T3BSck1WRWYdvkJiyldjz/cxfiYY="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/7b396b6c-a87b-47fa-90d3-3fc592026a64.1fsnjd14qc.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\7b396b6c-a87b-47fa-90d3-3fc592026a64.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "45548"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y7kbt6olwIyte7fXCndxrY9DN6hWln9jz7x2kixcsys=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1fsnjd14qc"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/7b396b6c-a87b-47fa-90d3-3fc592026a64.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Y7kbt6olwIyte7fXCndxrY9DN6hWln9jz7x2kixcsys="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/7b396b6c-a87b-47fa-90d3-3fc592026a64.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\7b396b6c-a87b-47fa-90d3-3fc592026a64.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "45548"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y7kbt6olwIyte7fXCndxrY9DN6hWln9jz7x2kixcsys=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Y7kbt6olwIyte7fXCndxrY9DN6hWln9jz7x2kixcsys="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/8347135a-5f01-4ecb-b285-6e9417c0b047.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\8347135a-5f01-4ecb-b285-6e9417c0b047.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "110063"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6oE970cahsmZdk1Tz9YVSsa1rkQY0MfVGCFe+yzZ4kg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6oE970cahsmZdk1Tz9YVSsa1rkQY0MfVGCFe+yzZ4kg="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/8347135a-5f01-4ecb-b285-6e9417c0b047.yhd7izsn6e.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\8347135a-5f01-4ecb-b285-6e9417c0b047.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "110063"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6oE970cahsmZdk1Tz9YVSsa1rkQY0MfVGCFe+yzZ4kg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yhd7izsn6e"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/8347135a-5f01-4ecb-b285-6e9417c0b047.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6oE970cahsmZdk1Tz9YVSsa1rkQY0MfVGCFe+yzZ4kg="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/8631945a-1720-47e1-85ee-c738d25daae0.dr63vb3h6w.png",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\8631945a-1720-47e1-85ee-c738d25daae0.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "444029"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"B8BY0bpgQynmUWkqicXKNNXJ8vK5eaUgJ2k0SHoSvKQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "dr63vb3h6w"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/8631945a-1720-47e1-85ee-c738d25daae0.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-B8BY0bpgQynmUWkqicXKNNXJ8vK5eaUgJ2k0SHoSvKQ="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/8631945a-1720-47e1-85ee-c738d25daae0.png",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\8631945a-1720-47e1-85ee-c738d25daae0.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "444029"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"B8BY0bpgQynmUWkqicXKNNXJ8vK5eaUgJ2k0SHoSvKQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-B8BY0bpgQynmUWkqicXKNNXJ8vK5eaUgJ2k0SHoSvKQ="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/9900ba72-bfcf-4ede-9e09-be7d0c225f3b.png",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\9900ba72-bfcf-4ede-9e09-be7d0c225f3b.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "555597"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ROPP9YauqwLjr21pAFX60ROz6jFJwm++zCcrEqfEF8U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ROPP9YauqwLjr21pAFX60ROz6jFJwm++zCcrEqfEF8U="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/9900ba72-bfcf-4ede-9e09-be7d0c225f3b.swq2o8btzn.png",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\9900ba72-bfcf-4ede-9e09-be7d0c225f3b.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "555597"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ROPP9YauqwLjr21pAFX60ROz6jFJwm++zCcrEqfEF8U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "swq2o8btzn"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/9900ba72-bfcf-4ede-9e09-be7d0c225f3b.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ROPP9YauqwLjr21pAFX60ROz6jFJwm++zCcrEqfEF8U="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/c372a3bc-7042-47aa-aaf2-84994598e90b.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\c372a3bc-7042-47aa-aaf2-84994598e90b.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120366"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"peqbD+Acs4SWuL8Z+Ay3ULZoXbeFREpodp62wcTqujA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-peqbD+Acs4SWuL8Z+Ay3ULZoXbeFREpodp62wcTqujA="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/c372a3bc-7042-47aa-aaf2-84994598e90b.roaxxcfkkz.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\c372a3bc-7042-47aa-aaf2-84994598e90b.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120366"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"peqbD+Acs4SWuL8Z+Ay3ULZoXbeFREpodp62wcTqujA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "roaxxcfkkz"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/c372a3bc-7042-47aa-aaf2-84994598e90b.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-peqbD+Acs4SWuL8Z+Ay3ULZoXbeFREpodp62wcTqujA="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/c41fd14d-d3e3-4c60-b6e2-c3c0442657ba.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\c41fd14d-d3e3-4c60-b6e2-c3c0442657ba.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "299285"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Lsvtt3aNuTm1e19VJcGANDztNPdSNvkGet7pnh0MQ8Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Lsvtt3aNuTm1e19VJcGANDztNPdSNvkGet7pnh0MQ8Y="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/c41fd14d-d3e3-4c60-b6e2-c3c0442657ba.up3kp3sixj.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\c41fd14d-d3e3-4c60-b6e2-c3c0442657ba.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "299285"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Lsvtt3aNuTm1e19VJcGANDztNPdSNvkGet7pnh0MQ8Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "up3kp3sixj"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/c41fd14d-d3e3-4c60-b6e2-c3c0442657ba.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Lsvtt3aNuTm1e19VJcGANDztNPdSNvkGet7pnh0MQ8Y="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/c9b65769-17c7-4ac2-8cbe-260e675d4d54.av4semq9nq.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\c9b65769-17c7-4ac2-8cbe-260e675d4d54.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21863"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ps3boyFwi9ki8FX5YLPD5hcf02USlokB+WVXMCRVVE0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "av4semq9nq"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/c9b65769-17c7-4ac2-8cbe-260e675d4d54.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ps3boyFwi9ki8FX5YLPD5hcf02USlokB+WVXMCRVVE0="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/c9b65769-17c7-4ac2-8cbe-260e675d4d54.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\c9b65769-17c7-4ac2-8cbe-260e675d4d54.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21863"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ps3boyFwi9ki8FX5YLPD5hcf02USlokB+WVXMCRVVE0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ps3boyFwi9ki8FX5YLPD5hcf02USlokB+WVXMCRVVE0="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/dc5ad70a-74b0-4f70-80da-fe7dbd1e42de.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\dc5ad70a-74b0-4f70-80da-fe7dbd1e42de.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21162"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Uwt4XsFlSA8Y1m58IuiEWrSud3g/qG2nQbJvjTFAIwI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Uwt4XsFlSA8Y1m58IuiEWrSud3g/qG2nQbJvjTFAIwI="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/dc5ad70a-74b0-4f70-80da-fe7dbd1e42de.nzt239ueyj.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\dc5ad70a-74b0-4f70-80da-fe7dbd1e42de.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21162"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Uwt4XsFlSA8Y1m58IuiEWrSud3g/qG2nQbJvjTFAIwI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "nzt239ueyj"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/dc5ad70a-74b0-4f70-80da-fe7dbd1e42de.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Uwt4XsFlSA8Y1m58IuiEWrSud3g/qG2nQbJvjTFAIwI="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/e906426b-e01c-4e33-8e85-2be9b5030c41.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\e906426b-e01c-4e33-8e85-2be9b5030c41.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "83970"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ig4pqJ10eXKm8CdqzbMQRA0dWgJ4KF0x3nlkaLz4Uq8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ig4pqJ10eXKm8CdqzbMQRA0dWgJ4KF0x3nlkaLz4Uq8="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/e906426b-e01c-4e33-8e85-2be9b5030c41.yt8fveiy1y.jpg",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\e906426b-e01c-4e33-8e85-2be9b5030c41.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "83970"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ig4pqJ10eXKm8CdqzbMQRA0dWgJ4KF0x3nlkaLz4Uq8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yt8fveiy1y"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/e906426b-e01c-4e33-8e85-2be9b5030c41.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ig4pqJ10eXKm8CdqzbMQRA0dWgJ4KF0x3nlkaLz4Uq8="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/ec1596e9-6636-4811-99f5-ead9a139327c.1fc8syd6vm.jfif",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\ec1596e9-6636-4811-99f5-ead9a139327c.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15548"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"I1uiu2ZI0DzrBoW7LFtR4QPDEMt7WbUvhXA16qyvXVw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1fc8syd6vm"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productos/ec1596e9-6636-4811-99f5-ead9a139327c.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-I1uiu2ZI0DzrBoW7LFtR4QPDEMt7WbUvhXA16qyvXVw="
+        }
+      ]
+    },
+    {
+      "Route": "images/productos/ec1596e9-6636-4811-99f5-ead9a139327c.jfif",
+      "AssetFile": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\images\\productos\\ec1596e9-6636-4811-99f5-ead9a139327c.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15548"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"I1uiu2ZI0DzrBoW7LFtR4QPDEMt7WbUvhXA16qyvXVw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 30 May 2025 19:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-I1uiu2ZI0DzrBoW7LFtR4QPDEMt7WbUvhXA16qyvXVw="
         }
       ]
     },

@@ -1213,8 +1213,156 @@ namespace IngeTechCRM.Controllers
         }
     }
 
-    // Método para obtener inventario filtrado (reutiliza lógica del Index)
-    private async Task<List<Inventario>> ObtenerInventarioFiltrado(int? almacenId, int? categoriaId, string buscar)
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> RegistrarMovimientoRapido(int idProducto, int idAlmacen, string tipoMovimiento, int cantidad, string observacion = "")
+        {
+            // Verificar si el usuario es administrador
+            var tipoUsuarioId = HttpContext.Session.GetInt32("TipoUsuarioId");
+            if (tipoUsuarioId != 1)
+            {
+                return Json(new { success = false, message = "No tiene permisos para realizar esta acción" });
+            }
+
+            // Obtener ID del usuario en sesión
+            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            if (usuarioId == null)
+            {
+                return Json(new { success = false, message = "No se encontró información del usuario en la sesión" });
+            }
+
+            try
+            {
+                // Validaciones básicas
+                if (cantidad <= 0)
+                {
+                    return Json(new { success = false, message = "La cantidad debe ser mayor a 0" });
+                }
+
+                if (string.IsNullOrEmpty(tipoMovimiento) || (tipoMovimiento != "ENTRADA" && tipoMovimiento != "SALIDA"))
+                {
+                    return Json(new { success = false, message = "Tipo de movimiento inválido" });
+                }
+
+                // Crear el objeto MovimientoInventario
+                var movimiento = new MovimientoInventario
+                {
+                    ID_PRODUCTO = idProducto,
+                    ID_ALMACEN = idAlmacen,
+                    TIPO_MOVIMIENTO = tipoMovimiento,
+                    CANTIDAD = cantidad,
+                    FECHA_MOVIMIENTO = DateTime.Now,
+                    ID_USUARIO = usuarioId.Value,
+                    OBSERVACION = string.IsNullOrEmpty(observacion) ? $"Movimiento rápido desde detalles - {tipoMovimiento.ToLower()}" : observacion
+                };
+
+                // Iniciar transacción explícita
+                using var transaction = await _context.Database.BeginTransactionAsync();
+
+                try
+                {
+                    // Buscar inventario existente
+                    var inventario = await _context.Inventarios
+                        .FirstOrDefaultAsync(i => i.ID_PRODUCTO == idProducto && i.ID_ALMACEN == idAlmacen);
+
+                    if (inventario == null)
+                    {
+                        if (tipoMovimiento == "ENTRADA")
+                        {
+                            // Crear nuevo registro de inventario
+                            inventario = new Inventario
+                            {
+                                ID_PRODUCTO = idProducto,
+                                ID_ALMACEN = idAlmacen,
+                                CANTIDAD = 0, // Se actualizará después
+                                CANTIDAD_MINIMA = 5, // Valor por defecto
+                                FECHA_ACTUALIZACION = DateTime.Now
+                            };
+                            _context.Inventarios.Add(inventario);
+                            await _context.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            return Json(new { success = false, message = "No existe inventario para este producto en este almacén" });
+                        }
+                    }
+
+                    // Calcular nueva cantidad según tipo de movimiento
+                    int nuevaCantidad = inventario.CANTIDAD;
+
+                    if (tipoMovimiento == "ENTRADA")
+                    {
+                        nuevaCantidad += cantidad;
+                    }
+                    else if (tipoMovimiento == "SALIDA")
+                    {
+                        if (inventario.CANTIDAD < cantidad)
+                        {
+                            return Json(new
+                            {
+                                success = false,
+                                message = $"No hay suficiente stock disponible. Stock actual: {inventario.CANTIDAD} unidades, cantidad solicitada: {cantidad} unidades."
+                            });
+                        }
+                        nuevaCantidad -= cantidad;
+                    }
+
+                    // Actualizar inventario usando SQL directo para evitar problemas con el trigger
+                    await _context.Database.ExecuteSqlRawAsync(
+                        "UPDATE CRM_INVENTARIO SET CANTIDAD = {0}, FECHA_ACTUALIZACION = {1} WHERE ID_INVENTARIO = {2}",
+                        nuevaCantidad,
+                        DateTime.Now,
+                        inventario.ID_INVENTARIO);
+
+                    // Registrar el movimiento
+                    _context.MovimientosInventario.Add(movimiento);
+                    await _context.SaveChangesAsync();
+
+                    // Verificar si se debe crear una alerta de stock bajo
+                    if (nuevaCantidad <= inventario.CANTIDAD_MINIMA)
+                    {
+                        // Verificar si ya existe una alerta no procesada
+                        var alertaExistente = await _context.AlertasInventario
+                            .AnyAsync(a => a.ID_INVENTARIO == inventario.ID_INVENTARIO && !a.PROCESADA);
+
+                        if (!alertaExistente)
+                        {
+                            var alerta = new AlertaInventario
+                            {
+                                ID_INVENTARIO = inventario.ID_INVENTARIO,
+                                FECHA_ALERTA = DateTime.Now,
+                                PROCESADA = false
+                            };
+
+                            _context.AlertasInventario.Add(alerta);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+
+                    await transaction.CommitAsync();
+
+                    return Json(new
+                    {
+                        success = true,
+                        message = "Movimiento registrado exitosamente",
+                        nuevoStock = nuevaCantidad
+                    });
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    return Json(new { success = false, message = "Error al registrar el movimiento: " + ex.Message });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Error al procesar la solicitud: " + ex.Message });
+            }
+        }
+
+        // Método para obtener inventario filtrado (reutiliza lógica del Index)
+        private async Task<List<Inventario>> ObtenerInventarioFiltrado(int? almacenId, int? categoriaId, string buscar)
     {
         // Consulta base
         var query = _context.Inventarios

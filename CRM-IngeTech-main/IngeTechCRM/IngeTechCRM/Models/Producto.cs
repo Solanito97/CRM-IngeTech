@@ -19,6 +19,7 @@ namespace IngeTechCRM.Models
         [Display(Name = "Nombre")]
         public string NOMBRE { get; set; }
 
+        [Required(ErrorMessage = "El campo Descripción es obligatorio.")]
         [Display(Name = "Descripción")]
         public string DESCRIPCION { get; set; }
 

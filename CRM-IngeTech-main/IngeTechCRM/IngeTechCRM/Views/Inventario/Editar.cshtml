@@ -131,57 +131,69 @@
     </div>
 </div>
 
+<!-- Modal de confirmación para reducción de stock -->
+<div id="stockReductionModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+    <div class="mx-4 w-full max-w-md transform rounded-xl bg-white p-6 shadow-2xl transition-all">
+        <div class="flex items-center justify-center mb-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-100">
+                <i class="fas fa-exclamation-triangle text-yellow-600 text-xl"></i>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                Confirmar Reducción de Stock
+            </h3>
+            <div class="text-sm text-gray-600 mb-6">
+                <p class="mb-2">¿Está seguro de reducir la cantidad en inventario?</p>
+                <div class="bg-gray-50 rounded-lg p-3 text-left">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-gray-500">Cantidad actual:</span>
+                        <span class="font-semibold text-gray-900" id="currentStock"></span>
+                    </div>
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-gray-500">Nueva cantidad:</span>
+                        <span class="font-semibold text-gray-900" id="newStock"></span>
+                    </div>
+                    <hr class="my-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-500">Diferencia:</span>
+                        <span class="font-semibold text-red-600" id="stockDifference"></span>
+                    </div>
+                </div>
+                <p class="mt-3 text-xs text-gray-500">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Se registrará automáticamente un movimiento de salida en el historial.
+                </p>
+            </div>
+        </div>
+
+        <div class="flex space-x-3">
+            <button type="button" id="cancelReduction"
+                    class="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">
+                <i class="fas fa-times mr-2"></i>Cancelar
+            </button>
+            <button type="button" id="confirmReduction"
+                    class="flex-1 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors">
+                <i class="fas fa-check mr-2"></i>Confirmar
+            </button>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
+    <script src="~/js/inventario.js"></script>
     <script>
-        $(document).ready(function() {
-            // Guardar el valor original para comparación
-            var cantidadOriginal = @Model.CANTIDAD;
+        // Pasar datos del modelo al JavaScript
+        window.inventarioData = {
+            cantidadOriginal: @Model.CANTIDAD
+        };
 
-            // Validación adicional con JavaScript para prevenir decimales
-            const cantidadInput = document.querySelector('input[name="CANTIDAD"]');
-            const cantidadMinimaInput = document.querySelector('input[name="CANTIDAD_MINIMA"]');
-
-            // Prevenir entrada de decimales
-            [cantidadInput, cantidadMinimaInput].forEach(input => {
-                input.addEventListener('keypress', function(e) {
-                    // Permitir solo números y teclas de control
-                    if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                        e.preventDefault();
-                    }
-                });
-
-                input.addEventListener('paste', function(e) {
-                    // Validar contenido pegado
-                    setTimeout(() => {
-                        if (!/^[0-9]+$/.test(this.value)) {
-                            this.value = this.value.replace(/[^0-9]/g, '');
-                        }
-                    }, 0);
-                });
-
-                // Prevenir rueda del mouse para cambiar valores accidentalmente
-                input.addEventListener('wheel', function(e) {
-                    e.preventDefault();
-                });
-            });
-
-            // Al enviar el formulario
-            $('form').submit(function() {
-                var cantidadNueva = parseInt($('#CANTIDAD').val());
-
-               
-
-                // Si la cantidad disminuye, confirmar con el usuario
-                if (cantidadNueva < cantidadOriginal) {
-                    return confirm('¿Está seguro de reducir el stock de ' + cantidadOriginal + ' a ' + cantidadNueva + ' unidades?');
-                }
-
-                return true;
-            });
-        });
+        // Inicializar validaciones específicas para editar
+        initializeInventarioEditValidation();
     </script>
 }

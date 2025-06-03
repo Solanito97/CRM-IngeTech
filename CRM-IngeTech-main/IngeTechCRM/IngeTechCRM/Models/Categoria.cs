@@ -9,11 +9,12 @@ namespace IngeTechCRM.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_CATEGORIA { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo Nombre es obligatorio.")]
         [StringLength(100)]
         [Display(Name = "Nombre")]
         public string NOMBRE { get; set; }
 
+        [Required(ErrorMessage = "El campo Descripción es obligatorio.")]
         [Display(Name = "Descripción")]
         public string DESCRIPCION { get; set; }
 

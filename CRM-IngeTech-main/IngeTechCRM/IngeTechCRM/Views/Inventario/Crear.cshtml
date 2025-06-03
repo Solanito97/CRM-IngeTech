@@ -32,7 +32,7 @@
                 </div>
             }
 
-            <form asp-action="Crear" method="post">
+            <form asp-action="Crear" method="post" novalidate>
                 @Html.AntiForgeryToken()
                 <div asp-validation-summary="ModelOnly" class="mb-4 rounded-lg bg-red-100 p-4 text-red-700"></div>
 
@@ -40,7 +40,9 @@
                     <div class="space-y-4">
                         <div>
                             <label asp-for="ID_PRODUCTO" class="mb-1 block text-sm font-medium text-gray-700">Producto</label>
-                            <select asp-for="ID_PRODUCTO" class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                            <select asp-for="ID_PRODUCTO"
+                                    required
+                                    class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
                                 <option value="">Seleccione un producto</option>
                                 @foreach (var item in ViewBag.ProductosList)
                                 {
@@ -48,11 +50,16 @@
                                 }
                             </select>
                             <span asp-validation-for="ID_PRODUCTO" class="mt-1 text-sm text-red-600"></span>
+                            <div class="invalid-feedback mt-1 text-sm text-red-600 hidden">
+                                Por favor seleccione un producto.
+                            </div>
                         </div>
 
                         <div>
                             <label asp-for="ID_ALMACEN" class="mb-1 block text-sm font-medium text-gray-700">Almacén</label>
-                            <select asp-for="ID_ALMACEN" class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
+                            <select asp-for="ID_ALMACEN"
+                                    required
+                                    class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
                                 <option value="">Seleccione un almacén</option>
                                 @foreach (var item in ViewBag.AlmacenesList)
                                 {
@@ -60,6 +67,9 @@
                                 }
                             </select>
                             <span asp-validation-for="ID_ALMACEN" class="mt-1 text-sm text-red-600"></span>
+                            <div class="invalid-feedback mt-1 text-sm text-red-600 hidden">
+                                Por favor seleccione un almacén.
+                            </div>
                         </div>
                     </div>
                     <div class="space-y-4">
@@ -68,8 +78,15 @@
                             <input asp-for="CANTIDAD"
                                    type="number"
                                    min="0"
+                                   step="1"
+                                   pattern="[0-9]*"
+                                   required
+                                   title="Solo se permiten números enteros positivos"
+                                   oninvalid="this.setCustomValidity('Por favor ingrese un número entero válido (sin decimales)')"
+                                   oninput="this.setCustomValidity('')"
                                    class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
                             <span asp-validation-for="CANTIDAD" class="mt-1 text-sm text-red-600"></span>
+                            <span class="mt-1 text-xs text-gray-500">Solo números enteros (ej: 1, 5, 10)</span>
                         </div>
 
                         <div>
@@ -77,7 +94,13 @@
                             <input asp-for="CANTIDAD_MINIMA"
                                    type="number"
                                    min="1"
+                                   step="1"
+                                   pattern="[1-9][0-9]*"
                                    value="5"
+                                   required
+                                   title="Debe ser un número entero mayor a 0"
+                                   oninvalid="this.setCustomValidity('Por favor ingrese un número entero mayor a 0')"
+                                   oninput="this.setCustomValidity('')"
                                    class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
                             <span class="mt-1 text-xs text-gray-500">Cantidad mínima recomendada para generar alertas de stock bajo</span>
                             <span asp-validation-for="CANTIDAD_MINIMA" class="mt-1 text-sm text-red-600"></span>
@@ -123,4 +146,32 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script>
+        // Validación adicional con JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const cantidadInput = document.querySelector('input[name="CANTIDAD"]');
+            const cantidadMinimaInput = document.querySelector('input[name="CANTIDAD_MINIMA"]');
+
+            // Prevenir entrada de decimales
+            [cantidadInput, cantidadMinimaInput].forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    // Permitir solo números y teclas de control
+                    if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+
+                input.addEventListener('paste', function(e) {
+                    // Validar contenido pegado
+                    setTimeout(() => {
+                        if (!/^[0-9]+$/.test(this.value)) {
+                            this.value = this.value.replace(/[^0-9]/g, '');
+                        }
+                    }, 0);
+                });
+            });
+        });
+    </script>
 }

@@ -9,18 +9,21 @@ namespace IngeTechCRM.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_INVENTARIO { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El producto es obligatorio.")]
         [Display(Name = "Producto")]
         public int ID_PRODUCTO { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El almacén es obligatorio.")]
         [Display(Name = "Almacén")]
         public int ID_ALMACEN { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "La cantidad es obligatoria.")]
+        [Range(0, int.MaxValue, ErrorMessage = "La cantidad debe ser mayor o igual a 0.")]
         [Display(Name = "Cantidad")]
         public int CANTIDAD { get; set; }
 
+        [Required(ErrorMessage = "La cantidad mínima es obligatoria.")]
+        [Range(1, int.MaxValue, ErrorMessage = "La cantidad mínima debe ser mayor a 0.")]
         [Display(Name = "Cantidad Mínima")]
         public int CANTIDAD_MINIMA { get; set; } = 5;
 

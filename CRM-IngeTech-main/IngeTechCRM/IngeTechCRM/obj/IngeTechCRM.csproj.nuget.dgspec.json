@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj": {}
+    "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj": {}
   },
   "projects": {
-    "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj": {
+    "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj",
+        "projectUniqueName": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj",
         "projectName": "IngeTechCRM",
-        "projectPath": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj",
-        "packagesPath": "C:\\Users\\bjsol\\.nuget\\packages\\",
-        "outputPath": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\obj\\",
+        "projectPath": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\IngeTechCRM.csproj",
+        "packagesPath": "C:\\Users\\jabs0\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\bjsol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jabs0\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

@@ -1,7 +1,32 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\CRM\\CRM-IngeTech\\CRM-IngeTech-main\\IngeTechCRM\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|c:\\users\\jabs0\\source\\repositorio\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\views\\inventario\\editar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\views\\inventario\\editar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|c:\\users\\jabs0\\source\\repositorio\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\views\\inventario\\crear.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\views\\inventario\\crear.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|c:\\users\\jabs0\\source\\repositorio\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\wwwroot\\js\\movimientos.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\wwwroot\\js\\movimientos.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|c:\\users\\jabs0\\source\\repositorio\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|c:\\users\\jabs0\\source\\repositorio\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\models\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|c:\\users\\jabs0\\source\\repositorio\\crm-ingetech-main\\ingetechcrm\\ingetechcrm\\models\\almacen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F5B18-22E2-4B7B-A308-D46C8774FC24}|IngeTechCRM\\IngeTechCRM.csproj|solutionrelative:ingetechcrm\\models\\almacen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 18,
           "Children": [
             {
               "$type": "Bookmark",
@@ -17,7 +42,35 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Bookmark",
@@ -34,14 +87,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Bookmark",
@@ -64,12 +109,86 @@
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Editar.cshtml",
+              "DocumentMoniker": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Inventario\\Editar.cshtml",
+              "RelativeDocumentMoniker": "IngeTechCRM\\Views\\Inventario\\Editar.cshtml",
+              "ToolTip": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Inventario\\Editar.cshtml*",
+              "RelativeToolTip": "IngeTechCRM\\Views\\Inventario\\Editar.cshtml*",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAQwK8AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T18:59:17.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "movimientos.js",
+              "DocumentMoniker": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\js\\movimientos.js",
+              "RelativeDocumentMoniker": "IngeTechCRM\\wwwroot\\js\\movimientos.js",
+              "ToolTip": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\js\\movimientos.js",
+              "RelativeToolTip": "IngeTechCRM\\wwwroot\\js\\movimientos.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-06-03T18:57:49.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "site.js",
+              "DocumentMoniker": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "IngeTechCRM\\wwwroot\\js\\site.js",
+              "ToolTip": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "IngeTechCRM\\wwwroot\\js\\site.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-06-03T18:57:42.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Crear.cshtml",
+              "DocumentMoniker": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Inventario\\Crear.cshtml",
+              "RelativeDocumentMoniker": "IngeTechCRM\\Views\\Inventario\\Crear.cshtml",
+              "ToolTip": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Views\\Inventario\\Crear.cshtml",
+              "RelativeToolTip": "IngeTechCRM\\Views\\Inventario\\Crear.cshtml",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAqwLAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T18:47:50.743Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Inventario.cs",
+              "DocumentMoniker": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Inventario.cs",
+              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\Inventario.cs",
+              "ToolTip": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Inventario.cs",
+              "RelativeToolTip": "IngeTechCRM\\Models\\Inventario.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAQwAsAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T18:46:45.596Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Almacen.cs",
+              "DocumentMoniker": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Almacen.cs",
+              "RelativeDocumentMoniker": "IngeTechCRM\\Models\\Almacen.cs",
+              "ToolTip": "C:\\Users\\jabs0\\source\\Repositorio\\CRM-IngeTech-main\\IngeTechCRM\\IngeTechCRM\\Models\\Almacen.cs",
+              "RelativeToolTip": "IngeTechCRM\\Models\\Almacen.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T18:46:04.063Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         },

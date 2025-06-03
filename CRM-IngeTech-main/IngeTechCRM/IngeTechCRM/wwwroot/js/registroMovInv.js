@@ -60,11 +60,71 @@ $(document).ready(function () {
         }
     };
 
-    // Validación para entrada de caracteres según tipo de movimiento
+    // **NUEVA FUNCIÓN**: Interceptar validación HTML5 para todos los campos
+    function interceptarValidacionHTML5(elemento, mensajesPersonalizados) {
+        if (!elemento) return;
+
+        // Limpiar validaciones del navegador cuando el usuario interactúe
+        elemento.addEventListener('input', function () {
+            this.setCustomValidity('');
+            hideValidationAlert();
+        });
+
+        elemento.addEventListener('change', function () {
+            this.setCustomValidity('');
+            hideValidationAlert();
+        });
+
+        // Interceptar TODOS los eventos de validación del navegador
+        elemento.addEventListener('invalid', function (e) {
+            e.preventDefault(); // Previene el mensaje del navegador
+            e.stopPropagation(); // Detiene la propagación del evento
+
+            // Determinar el mensaje personalizado
+            let mensaje = 'Por favor complete este campo correctamente.';
+
+            if (this.validity.valueMissing && mensajesPersonalizados.required) {
+                mensaje = mensajesPersonalizados.required;
+            } else if (this.validity.patternMismatch && mensajesPersonalizados.pattern) {
+                mensaje = mensajesPersonalizados.pattern;
+            } else if (this.validity.rangeUnderflow && mensajesPersonalizados.min) {
+                mensaje = mensajesPersonalizados.min;
+            } else if (this.validity.stepMismatch && mensajesPersonalizados.step) {
+                mensaje = mensajesPersonalizados.step;
+            }
+
+            showValidationAlert(mensaje);
+            this.focus();
+            return false;
+        });
+    }
+
+    // **APLICAR INTERCEPTACIÓN A TODOS LOS CAMPOS**
+
+    // Campo Producto
+    const productoSelect = document.getElementById('productoSelect');
+    interceptarValidacionHTML5(productoSelect, {
+        required: 'Por favor seleccione un producto.'
+    });
+
+    // Campo Almacén
+    const almacenSelect = document.getElementById('almacenSelect');
+    interceptarValidacionHTML5(almacenSelect, {
+        required: 'Por favor seleccione un almacén.'
+    });
+
+    // Campo Tipo de Movimiento
+    const tipoMovimientoSelect = document.getElementById('tipoMovimientoSelect');
+    interceptarValidacionHTML5(tipoMovimientoSelect, {
+        required: 'Por favor seleccione un tipo de movimiento.'
+    });
+
+    // Campo Cantidad (con lógica especial existente)
     const cantidadInput = document.querySelector('#cantidadInput');
     const cantidadHelp = document.querySelector('#cantidadHelp');
 
     if (cantidadInput) {
+        // Validación para entrada de caracteres según tipo de movimiento
         cantidadInput.addEventListener('keypress', function (e) {
             const tipoMovimiento = $('#tipoMovimientoSelect').val();
             const isNumber = /[0-9]/.test(e.key);
@@ -107,23 +167,29 @@ $(document).ready(function () {
             }
         });
 
-        // Limpiar validaciones del navegador cuando el usuario escriba
-        cantidadInput.addEventListener('input', function () {
-            // Siempre limpiar validaciones del navegador
-            this.setCustomValidity('');
-
-            // También ocultar nuestros mensajes personalizados
-            hideValidationAlert();
+        // Aplicar interceptación con mensajes personalizados para cantidad
+        interceptarValidacionHTML5(cantidadInput, {
+            required: 'Por favor ingrese una cantidad.',
+            min: function () {
+                const tipo = $('#tipoMovimientoSelect').val();
+                if (tipo === 'ENTRADA') {
+                    return 'Para movimientos de entrada, la cantidad debe ser mayor a 0.';
+                } else if (tipo === 'SALIDA') {
+                    return 'Para movimientos de salida, la cantidad debe ser mayor a 0.';
+                } else {
+                    return 'La cantidad debe ser un número válido.';
+                }
+            },
+            step: 'Por favor ingrese un número entero válido.'
         });
 
-        // Interceptar TODOS los eventos de validación del navegador
+        // Interceptar validación específica con lógica dinámica
         cantidadInput.addEventListener('invalid', function (e) {
-            e.preventDefault(); // Previene el mensaje del navegador
-            e.stopPropagation(); // Detiene la propagación del evento
+            e.preventDefault();
+            e.stopPropagation();
 
             const tipo = $('#tipoMovimientoSelect').val();
 
-            // Validar y mostrar nuestro mensaje personalizado
             if (this.validity.valueMissing) {
                 showValidationAlert('Por favor ingrese una cantidad.');
             } else if (this.validity.rangeUnderflow) {
@@ -139,13 +205,7 @@ $(document).ready(function () {
             }
 
             this.focus();
-            return false; // Prevenir cualquier validación adicional
-        });
-
-        // Interceptar el evento de validación HTML5 al nivel del formulario
-        cantidadInput.addEventListener('change', function () {
-            // Limpiar cualquier validación HTML5 previa
-            this.setCustomValidity('');
+            return false;
         });
     }
 
@@ -176,7 +236,7 @@ $(document).ready(function () {
             }
 
             // Configurar para entrada/salida (QUITAR min para evitar validación HTML5)
-            cantidadInputJQ.removeAttr('min'); // CAMBIO CLAVE: No usar min
+            cantidadInputJQ.removeAttr('min');
             cantidadInputJQ.attr('step', '1');
 
             if (tipo === 'ENTRADA') {
@@ -226,17 +286,47 @@ $(document).ready(function () {
 
     $('#productoSelect, #almacenSelect').change(verificarStock);
 
-    // Interceptar el submit del formulario y prevenir validación HTML5
+    // **INTERCEPTAR EL SUBMIT DEL FORMULARIO COMPLETAMENTE**
     $('form').on('submit', function (e) {
-        // Primero prevenir el submit por defecto
+        // Siempre prevenir el submit por defecto
         e.preventDefault();
+
+        // Limpiar todos los mensajes de validación HTML5
+        const campos = ['productoSelect', 'almacenSelect', 'tipoMovimientoSelect', 'cantidadInput'];
+        campos.forEach(id => {
+            const elemento = document.getElementById(id);
+            if (elemento) {
+                elemento.setCustomValidity('');
+            }
+        });
 
         const tipo = $('#tipoMovimientoSelect').val();
         const cantidadValue = $('#cantidadInput').val().trim();
         const cantidad = parseInt(cantidadValue);
         const stockActual = parseInt($('#stockActual').text()) || 0;
+        const productoId = $('#productoSelect').val();
+        const almacenId = $('#almacenSelect').val();
 
         hideValidationAlert();
+
+        // Validaciones personalizadas
+        if (!productoId) {
+            showValidationAlert('Por favor seleccione un producto.');
+            $('#productoSelect').focus();
+            return false;
+        }
+
+        if (!almacenId) {
+            showValidationAlert('Por favor seleccione un almacén.');
+            $('#almacenSelect').focus();
+            return false;
+        }
+
+        if (!tipo) {
+            showValidationAlert('Por favor seleccione un tipo de movimiento.');
+            $('#tipoMovimientoSelect').focus();
+            return false;
+        }
 
         // Validar que sea un número entero válido
         if (cantidadValue === '' || isNaN(cantidad)) {
@@ -284,8 +374,20 @@ $(document).ready(function () {
         return true;
     });
 
-    // Inicialización: quitar atributo min del input al cargar la página
-    if (cantidadInput) {
-        $(cantidadInput).removeAttr('min');
-    }
+    // **INTERCEPTAR VALIDACIÓN HTML5 AL NIVEL DEL FORMULARIO**
+    $('form')[0].addEventListener('invalid', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }, true);
+
+    // Inicialización: quitar atributos de validación HTML5 de todos los campos
+    $(document).ready(function () {
+        // Quitar required de todos los campos para manejar validación manualmente
+        $('#productoSelect, #almacenSelect, #tipoMovimientoSelect').removeAttr('required');
+
+        if (cantidadInput) {
+            $(cantidadInput).removeAttr('min').removeAttr('required');
+        }
+    });
 });

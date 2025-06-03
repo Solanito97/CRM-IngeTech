@@ -69,45 +69,70 @@
                             <input value="@Model.IDENTIFICACION" class="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-500" readonly>
                         </div>
 
-                        <!-- Nombre Completo -->
+                        <!-- Nombre Completo (REQUERIDO) -->
                         <div>
-                            <label asp-for="NOMBRE_COMPLETO" class="mb-2 block text-sm font-medium text-gray-700">Nombre Completo</label>
-                            <input asp-for="NOMBRE_COMPLETO" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <label asp-for="NOMBRE_COMPLETO" class="mb-2 block text-sm font-medium text-gray-700">
+                                Nombre Completo <span class="text-red-500">*</span>
+                            </label>
+                            <input asp-for="NOMBRE_COMPLETO"
+                                   class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                   required>
                             <span asp-validation-for="NOMBRE_COMPLETO" class="mt-1 text-sm text-red-600"></span>
                         </div>
 
-                        <!-- Nombre de Usuario -->
+                        <!-- Nombre de Usuario (REQUERIDO) -->
                         <div>
-                            <label asp-for="NOMBRE_USUARIO" class="mb-2 block text-sm font-medium text-gray-700">Nombre de Usuario</label>
-                            <input asp-for="NOMBRE_USUARIO" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <label asp-for="NOMBRE_USUARIO" class="mb-2 block text-sm font-medium text-gray-700">
+                                Nombre de Usuario <span class="text-red-500">*</span>
+                            </label>
+                            <input asp-for="NOMBRE_USUARIO"
+                                   class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                   required>
                             <span asp-validation-for="NOMBRE_USUARIO" class="mt-1 text-sm text-red-600"></span>
                         </div>
 
-                        <!-- Correo Electrónico -->
+                        <!-- Correo Electrónico (REQUERIDO) -->
                         <div>
-                            <label asp-for="CORREO_ELECTRONICO" class="mb-2 block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                            <input asp-for="CORREO_ELECTRONICO" type="email" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <label asp-for="CORREO_ELECTRONICO" class="mb-2 block text-sm font-medium text-gray-700">
+                                Correo Electrónico <span class="text-red-500">*</span>
+                            </label>
+                            <input asp-for="CORREO_ELECTRONICO"
+                                   type="email"
+                                   class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                   required>
                             <span asp-validation-for="CORREO_ELECTRONICO" class="mt-1 text-sm text-red-600"></span>
                         </div>
 
-                        <!-- Teléfono -->
+                        <!-- Teléfono (Opcional por defecto - descomenta para hacer requerido) -->
                         <div>
-                            <label asp-for="TELEFONO" class="mb-2 block text-sm font-medium text-gray-700">Teléfono</label>
-                            <input asp-for="TELEFONO" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <label asp-for="TELEFONO" class="mb-2 block text-sm font-medium text-gray-700">
+                                Teléfono
+                                 <span class="text-red-500">*</span> 
+                            </label>
+                            <input asp-for="TELEFONO"
+                                   class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            @* Descomenta para hacer requerido: required *@
                             <span asp-validation-for="TELEFONO" class="mt-1 text-sm text-red-600"></span>
                         </div>
 
                         <!-- Nueva Contraseña (opcional) -->
                         <div>
                             <label for="nuevaContrasena" class="mb-2 block text-sm font-medium text-gray-700">Nueva Contraseña (opcional)</label>
-                            <input id="nuevaContrasena" name="nuevaContrasena" type="password" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <input id="nuevaContrasena"
+                                   name="nuevaContrasena"
+                                   type="password"
+                                   class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             <p class="mt-1 text-xs text-gray-500">Dejar en blanco para mantener la contraseña actual</p>
                         </div>
 
-                        <!-- Tipo de Usuario -->
+                        <!-- Tipo de Usuario (REQUERIDO) -->
                         <div>
-                            <label asp-for="ID_TIPO_USUARIO" class="mb-2 block text-sm font-medium text-gray-700">Tipo de Usuario</label>
-                            <select asp-for="ID_TIPO_USUARIO" name="ID_TIPO_USUARIO" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <label asp-for="ID_TIPO_USUARIO" class="mb-2 block text-sm font-medium text-gray-700">
+                                Tipo de Usuario <span class="text-red-500">*</span>
+                            </label>
+                            <select asp-for="ID_TIPO_USUARIO"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    required>
                                 <option value="">Seleccione un tipo de usuario</option>
                                 @if (ViewBag.TiposUsuario != null)
                                 {
@@ -117,10 +142,14 @@
                             <span asp-validation-for="ID_TIPO_USUARIO" class="mt-1 text-sm text-red-600"></span>
                         </div>
 
-                        <!-- Provincia -->
+                        <!-- Provincia (REQUERIDO) -->
                         <div>
-                            <label asp-for="ID_PROVINCIA" class="mb-2 block text-sm font-medium text-gray-700">Provincia</label>
-                            <select asp-for="ID_PROVINCIA" name="ID_PROVINCIA" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <label asp-for="ID_PROVINCIA" class="mb-2 block text-sm font-medium text-gray-700">
+                                Provincia <span class="text-red-500">*</span>
+                            </label>
+                            <select asp-for="ID_PROVINCIA"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    required>
                                 <option value="">Seleccione una provincia</option>
                                 @if (ViewBag.Provincias != null)
                                 {
@@ -130,10 +159,16 @@
                             <span asp-validation-for="ID_PROVINCIA" class="mt-1 text-sm text-red-600"></span>
                         </div>
 
-                        <!-- Dirección -->
+                        <!-- Dirección (Opcional por defecto - descomenta para hacer requerida) -->
                         <div class="md:col-span-2">
-                            <label asp-for="DIRECCION_COMPLETA" class="mb-2 block text-sm font-medium text-gray-700">Dirección</label>
-                            <textarea asp-for="DIRECCION_COMPLETA" rows="3" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                            <label asp-for="DIRECCION_COMPLETA" class="mb-2 block text-sm font-medium text-gray-700">
+                                Dirección Completa
+                                 <span class="text-red-500">*</span> 
+                            </label>
+                            <textarea asp-for="DIRECCION_COMPLETA"
+                                      rows="3"
+                                      class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                            @* Descomenta para hacer requerida: required *@
                             <span asp-validation-for="DIRECCION_COMPLETA" class="mt-1 text-sm text-red-600"></span>
                         </div>
 
@@ -191,6 +226,14 @@
                             <p>Los campos de <strong>fecha de registro</strong> y <strong>último acceso</strong> no se pueden modificar manualmente.</p>
                         </div>
                     </div>
+                    <div class="flex">
+                        <div class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-red-100 text-red-600">
+                            <i class="fas fa-asterisk"></i>
+                        </div>
+                        <div>
+                            <p>Los campos marcados con <span class="text-red-500">*</span> son <strong>obligatorios</strong>.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -232,8 +275,15 @@
                 <ul class="mt-4 space-y-2 pl-12 text-sm text-yellow-700">
                     <li class="list-disc">Si cambia el tipo de usuario, los permisos y accesos del usuario se verán afectados inmediatamente.</li>
                     <li class="list-disc">Las nuevas contraseñas deben tener al menos 8 caracteres, incluyendo letras mayúsculas, minúsculas y números para mayor seguridad.</li>
+                    <li class="list-disc">Los campos de teléfono y dirección son opcionales por defecto, pero pueden configurarse como obligatorios si es necesario.</li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

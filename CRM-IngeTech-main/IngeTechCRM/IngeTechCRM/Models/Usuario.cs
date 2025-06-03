@@ -11,39 +11,42 @@ namespace IngeTechCRM.Models
         [Key]
         public int IDENTIFICACION { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "El nombre de usuario es obligatorio")]
+        [StringLength(50, ErrorMessage = "El nombre de usuario no puede exceder los 50 caracteres")]
         [Display(Name = "Nombre de Usuario")]
         public string NOMBRE_USUARIO { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        [EmailAddress]
+        [Required(ErrorMessage = "El correo electrónico es obligatorio")]
+        [StringLength(100, ErrorMessage = "El correo electrónico no puede exceder los 100 caracteres")]
+        [EmailAddress(ErrorMessage = "Ingrese un correo electrónico válido")]
         [Display(Name = "Correo Electrónico")]
         public string CORREO_ELECTRONICO { get; set; }
 
-        [Required]
-        [StringLength(128)]
+        [Required(ErrorMessage = "La contraseña es obligatoria")]
+        [StringLength(128, MinimumLength = 6, ErrorMessage = "La contraseña debe tener entre 6 y 128 caracteres")]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string CONTRASENA { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required(ErrorMessage = "El nombre completo es obligatorio")]
+        [StringLength(100, ErrorMessage = "El nombre completo no puede exceder los 100 caracteres")]
         [Display(Name = "Nombre Completo")]
         public string NOMBRE_COMPLETO { get; set; }
 
-        [StringLength(20)]
+        [Required(ErrorMessage = "El teléfono es obligatorio")]
+        [StringLength(20, ErrorMessage = "El teléfono no puede exceder los 20 caracteres")]
         [Display(Name = "Teléfono")]
+        [RegularExpression(@"^[\d\-\+\(\)\s]+$", ErrorMessage = "El teléfono solo puede contener números, espacios, guiones, paréntesis y el signo +")]
         public string TELEFONO { get; set; }
 
-        [Required]
-        [StringLength(200)]
+        [Required(ErrorMessage = "La dirección completa es obligatoria")]
+        [StringLength(200, ErrorMessage = "La dirección no puede exceder los 200 caracteres")]
         [Display(Name = "Dirección Completa")]
         public string DIRECCION_COMPLETA { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Fecha de Nacimiento")]
+        [Range(typeof(DateTime), "1900-01-01", "2010-12-31", ErrorMessage = "La fecha de nacimiento debe estar entre 1900 y 2010")]
         public DateTime? FECHA_NACIMIENTO { get; set; }
 
         [DataType(DataType.DateTime)]
@@ -54,12 +57,14 @@ namespace IngeTechCRM.Models
         [Display(Name = "Último Acceso")]
         public DateTime ULTIMO_ACCESO { get; set; } = DateTime.Now;
 
-        [Required]
+        [Required(ErrorMessage = "La provincia es obligatoria")]
         [Display(Name = "Provincia")]
+        [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar una provincia válida")]
         public int ID_PROVINCIA { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El tipo de usuario es obligatorio")]
         [Display(Name = "Tipo de Usuario")]
+        [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un tipo de usuario válido")]
         public int ID_TIPO_USUARIO { get; set; }
 
         // Propiedades de navegación

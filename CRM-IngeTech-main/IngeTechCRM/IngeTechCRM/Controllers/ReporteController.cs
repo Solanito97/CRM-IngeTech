@@ -55,8 +55,8 @@ namespace IngeTechCRM.Controllers
                         .Join(_context.Productos,
                             i => i.ID_PRODUCTO,
                             p => p.ID_PRODUCTO,
-                            (i, p) => new { Inventario = i, Producto = p })
-                        .Sum(x => x.Inventario.CANTIDAD * x.Producto.PRECIO),
+                            (i, p) => (decimal?)(i.CANTIDAD * p.PRECIO)) // Cast to nullable decimal
+                        .Sum() ?? 0M, // Sum nullable decimals and coalesce to 0M if null (empty sequence)
                     ProductosStockBajo = _context.Inventarios
                         .Count(i => i.ID_ALMACEN == a.ID_ALMACEN && i.CANTIDAD <= i.CANTIDAD_MINIMA)
                 })
@@ -128,14 +128,14 @@ namespace IngeTechCRM.Controllers
                         .Join(_context.Productos.Where(p => p.ID_CATEGORIA == c.ID_CATEGORIA),
                             i => i.ID_PRODUCTO,
                             p => p.ID_PRODUCTO,
-                            (i, p) => i.CANTIDAD)
-                        .Sum(),
+                            (i, p) => (int?)i.CANTIDAD) // Cast to nullable int
+                        .Sum() ?? 0, // Sum nullable ints and coalesce to 0 if null
                     ValorTotal = _context.Inventarios
                         .Join(_context.Productos.Where(p => p.ID_CATEGORIA == c.ID_CATEGORIA),
                             i => i.ID_PRODUCTO,
                             p => p.ID_PRODUCTO,
-                            (i, p) => i.CANTIDAD * p.PRECIO)
-                        .Sum()
+                            (i, p) => (decimal?)(i.CANTIDAD * p.PRECIO)) // Cast to nullable decimal
+                        .Sum() ?? 0M // Sum nullable decimals and coalesce to 0M if null
                 })
                 .ToList();
 
@@ -467,6 +467,6 @@ namespace IngeTechCRM.Controllers
             return View(comunicado);
         }
     }
-   
- 
+
+
 }

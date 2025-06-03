@@ -1254,5 +1254,49 @@ namespace IngeTechCRM.Controllers
         
         return await query.ToListAsync();
     }
+
+        [HttpGet]
+        public async Task<IActionResult> ObtenerStockActual(int productoId, int almacenId)
+        {
+            try
+            {
+                // Buscar el inventario para el producto y almacén específicos
+                var inventario = await _context.Inventarios
+                    .Where(i => i.ID_PRODUCTO == productoId && i.ID_ALMACEN == almacenId)
+                    .FirstOrDefaultAsync();
+
+                if (inventario != null)
+                {
+                    return Json(new
+                    {
+                        success = true,
+                        stock = inventario.CANTIDAD,
+                        stockMinimo = inventario.CANTIDAD_MINIMA
+                    });
+                }
+                else
+                {
+                    // No existe inventario para este producto en este almacén
+                    return Json(new
+                    {
+                        success = false,
+                        stock = 0,
+                        message = "No existe inventario para este producto en este almacén"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log del error si tienes sistema de logging
+                // _logger.LogError(ex, "Error al obtener stock actual");
+
+                return Json(new
+                {
+                    success = false,
+                    stock = 0,
+                    error = "Error al consultar el stock: " + ex.Message
+                });
+            }
+        }
     }
 }

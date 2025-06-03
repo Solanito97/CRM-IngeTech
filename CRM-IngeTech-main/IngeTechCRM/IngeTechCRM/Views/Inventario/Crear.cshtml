@@ -77,16 +77,16 @@
                             <label asp-for="CANTIDAD" class="mb-1 block text-sm font-medium text-gray-700">Cantidad</label>
                             <input asp-for="CANTIDAD"
                                    type="number"
-                                   min="0"
+                                   min="1"
                                    step="1"
-                                   pattern="[0-9]*"
+                                   pattern="[1-9][0-9]*"
                                    required
-                                   title="Solo se permiten números enteros positivos"
-                                   oninvalid="this.setCustomValidity('Por favor ingrese un número entero válido (sin decimales)')"
+                                   title="Debe ser un número entero mayor a 0"
+                                   oninvalid="this.setCustomValidity('Por favor ingrese un número entero mayor a 0')"
                                    oninput="this.setCustomValidity('')"
                                    class="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500">
                             <span asp-validation-for="CANTIDAD" class="mt-1 text-sm text-red-600"></span>
-                            <span class="mt-1 text-xs text-gray-500">Solo números enteros (ej: 1, 5, 10)</span>
+                            <span class="mt-1 text-xs text-gray-500">Cantidad inicial de productos (ej: 1, 5, 10)</span>
                         </div>
 
                         <div>

@@ -9,20 +9,20 @@ namespace IngeTechCRM.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_MOVIMIENTO { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El Producto es obligatorio.")]
         [Display(Name = "Producto")]
         public int ID_PRODUCTO { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El Almacén es obligatorio.")]
         [Display(Name = "Almacén")]
         public int ID_ALMACEN { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El Tipo de Movimiento es obligatorio.")]
         [StringLength(20)]
         [Display(Name = "Tipo Movimiento")]
         public string TIPO_MOVIMIENTO { get; set; } // ENTRADA, SALIDA, TRANSFERENCIA, AJUSTE
 
-        [Required]
+        [Required(ErrorMessage = "La Cantidad es obligatoria.")]
         [Display(Name = "Cantidad")]
         public int CANTIDAD { get; set; }
 
@@ -34,6 +34,7 @@ namespace IngeTechCRM.Models
         [Display(Name = "Usuario")]
         public int ID_USUARIO { get; set; }
 
+        [Required(ErrorMessage = "La Observación es obligatoria.")]
         [StringLength(255)]
         [Display(Name = "Observación")]
         public string OBSERVACION { get; set; }

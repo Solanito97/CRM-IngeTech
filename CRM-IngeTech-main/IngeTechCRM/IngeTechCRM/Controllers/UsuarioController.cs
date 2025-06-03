@@ -24,7 +24,6 @@ namespace IngeTechCRM.Controllers
         }
 
         // Acción para mostrar la lista de usuarios con filtros
-        // Acción para mostrar la lista de usuarios con filtros
         public async Task<IActionResult> Index(string buscar, int? provinciaId, int? tipoUsuarioId)
         {
             // Verificar si el usuario es administrador usando un método centralizado
@@ -63,26 +62,8 @@ namespace IngeTechCRM.Controllers
                 .OrderBy(u => u.NOMBRE_COMPLETO)
                 .ToListAsync();
 
-            // Generar el HTML para los select manualmente en vez de usar SelectList
-            var provincias = await _context.Provincias.ToListAsync();
-            var tiposUsuario = await _context.TiposUsuario.ToListAsync();
-
-            var provinciasHtml = new System.Text.StringBuilder();
-            foreach (var provincia in provincias)
-            {
-                var selected = provinciaId.HasValue && provinciaId.Value == provincia.ID_PROVINCIA ? "selected" : "";
-                provinciasHtml.AppendLine($"<option value=\"{provincia.ID_PROVINCIA}\" {selected}>{provincia.NOMBRE}</option>");
-            }
-
-            var tiposUsuarioHtml = new System.Text.StringBuilder();
-            foreach (var tipo in tiposUsuario)
-            {
-                var selected = tipoUsuarioId.HasValue && tipoUsuarioId.Value == tipo.ID_TIPO_USUARIO ? "selected" : "";
-                tiposUsuarioHtml.AppendLine($"<option value=\"{tipo.ID_TIPO_USUARIO}\" {selected}>{tipo.DESCRIPCION}</option>");
-            }
-
-            ViewBag.Provincias = provinciasHtml.ToString();
-            ViewBag.TiposUsuario = tiposUsuarioHtml.ToString();
+            // Generar el HTML para los select manualmente
+            await CargarListasDesplegablesHTML(provinciaId, tipoUsuarioId);
             ViewBag.Buscar = buscar;
 
             return View(usuarios);
@@ -136,25 +117,7 @@ namespace IngeTechCRM.Controllers
                 return RedirectToAction("AccesoDenegado", "Home");
             }
 
-            // Generar el HTML para las opciones de los select manualmente
-            var provincias = await _context.Provincias.ToListAsync();
-            var tiposUsuario = await _context.TiposUsuario.ToListAsync();
-
-            var provinciasHtml = new System.Text.StringBuilder();
-            foreach (var provincia in provincias)
-            {
-                provinciasHtml.AppendLine($"<option value=\"{provincia.ID_PROVINCIA}\">{provincia.NOMBRE}</option>");
-            }
-
-            var tiposUsuarioHtml = new System.Text.StringBuilder();
-            foreach (var tipo in tiposUsuario)
-            {
-                tiposUsuarioHtml.AppendLine($"<option value=\"{tipo.ID_TIPO_USUARIO}\">{tipo.DESCRIPCION}</option>");
-            }
-
-            ViewBag.Provincias = provinciasHtml.ToString();
-            ViewBag.TiposUsuario = tiposUsuarioHtml.ToString();
-
+            await CargarListasDesplegablesHTML();
             return View();
         }
 
@@ -167,6 +130,8 @@ namespace IngeTechCRM.Controllers
             {
                 return RedirectToAction("AccesoDenegado", "Home");
             }
+
+            // Remover validaciones de propiedades de navegación
             ModelState.Remove("Pedidos");
             ModelState.Remove("Carritos");
             ModelState.Remove("Provincia");
@@ -176,14 +141,25 @@ namespace IngeTechCRM.Controllers
             ModelState.Remove("ComunicadosRecibidos");
             ModelState.Remove("MovimientosInventario");
 
+            // Permitir campos opcionales como nulos o vacíos
+            if (string.IsNullOrWhiteSpace(usuario.TELEFONO))
+            {
+                ModelState.Remove("TELEFONO");
+                usuario.TELEFONO = null;
+            }
+
+            if (string.IsNullOrWhiteSpace(usuario.DIRECCION_COMPLETA))
+            {
+                ModelState.Remove("DIRECCION_COMPLETA");
+                usuario.DIRECCION_COMPLETA = null;
+            }
+
             if (ModelState.IsValid)
             {
                 if (usuario.CONTRASENA != confirmarContrasena)
                 {
                     ModelState.AddModelError("ConfirmarContrasena", "Las contraseñas no coinciden");
-
-                    // Regenerar HTML para los select
-                    await RegenerarSelectsHtml(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
+                    await CargarListasDesplegablesHTML(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
                     return View(usuario);
                 }
 
@@ -192,7 +168,7 @@ namespace IngeTechCRM.Controllers
                 if (existeIdentificacion)
                 {
                     ModelState.AddModelError("IDENTIFICACION", "Esta identificación ya está registrada");
-                    await RegenerarSelectsHtml(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
+                    await CargarListasDesplegablesHTML(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
                     return View(usuario);
                 }
 
@@ -201,7 +177,7 @@ namespace IngeTechCRM.Controllers
                 if (existeCorreo)
                 {
                     ModelState.AddModelError("CORREO_ELECTRONICO", "Este correo electrónico ya está registrado");
-                    await RegenerarSelectsHtml(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
+                    await CargarListasDesplegablesHTML(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
                     return View(usuario);
                 }
 
@@ -232,32 +208,8 @@ namespace IngeTechCRM.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            await RegenerarSelectsHtml(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
+            await CargarListasDesplegablesHTML(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
             return View(usuario);
-        }
-
-        // Método auxiliar para regenerar el HTML de los select
-        private async Task RegenerarSelectsHtml(int? provinciaId = null, int? tipoUsuarioId = null)
-        {
-            var provincias = await _context.Provincias.ToListAsync();
-            var tiposUsuario = await _context.TiposUsuario.ToListAsync();
-
-            var provinciasHtml = new System.Text.StringBuilder();
-            foreach (var provincia in provincias)
-            {
-                var selected = provinciaId.HasValue && provinciaId.Value == provincia.ID_PROVINCIA ? "selected" : "";
-                provinciasHtml.AppendLine($"<option value=\"{provincia.ID_PROVINCIA}\" {selected}>{provincia.NOMBRE}</option>");
-            }
-
-            var tiposUsuarioHtml = new System.Text.StringBuilder();
-            foreach (var tipo in tiposUsuario)
-            {
-                var selected = tipoUsuarioId.HasValue && tipoUsuarioId.Value == tipo.ID_TIPO_USUARIO ? "selected" : "";
-                tiposUsuarioHtml.AppendLine($"<option value=\"{tipo.ID_TIPO_USUARIO}\" {selected}>{tipo.DESCRIPCION}</option>");
-            }
-
-            ViewBag.Provincias = provinciasHtml.ToString();
-            ViewBag.TiposUsuario = tiposUsuarioHtml.ToString();
         }
 
         // Acción para mostrar el formulario de edición de usuario
@@ -274,27 +226,7 @@ namespace IngeTechCRM.Controllers
                 return NotFound();
             }
 
-            // Generar el HTML para las opciones de los select manualmente
-            var provincias = await _context.Provincias.ToListAsync();
-            var tiposUsuario = await _context.TiposUsuario.ToListAsync();
-
-            var provinciasHtml = new System.Text.StringBuilder();
-            foreach (var provincia in provincias)
-            {
-                var selected = usuario.ID_PROVINCIA == provincia.ID_PROVINCIA ? "selected" : "";
-                provinciasHtml.AppendLine($"<option value=\"{provincia.ID_PROVINCIA}\" {selected}>{provincia.NOMBRE}</option>");
-            }
-
-            var tiposUsuarioHtml = new System.Text.StringBuilder();
-            foreach (var tipo in tiposUsuario)
-            {
-                var selected = usuario.ID_TIPO_USUARIO == tipo.ID_TIPO_USUARIO ? "selected" : "";
-                tiposUsuarioHtml.AppendLine($"<option value=\"{tipo.ID_TIPO_USUARIO}\" {selected}>{tipo.DESCRIPCION}</option>");
-            }
-
-            ViewBag.Provincias = provinciasHtml.ToString();
-            ViewBag.TiposUsuario = tiposUsuarioHtml.ToString();
-
+            await CargarListasDesplegablesHTML(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
             return View(usuario);
         }
 
@@ -312,6 +244,8 @@ namespace IngeTechCRM.Controllers
             {
                 return NotFound();
             }
+
+            // SOLO remover validaciones de campos que no son parte del formulario
             ModelState.Remove("nuevaContrasena");
             ModelState.Remove("CONTRASENA");
             ModelState.Remove("Pedidos");
@@ -322,6 +256,10 @@ namespace IngeTechCRM.Controllers
             ModelState.Remove("ComunicadosCreados");
             ModelState.Remove("ComunicadosRecibidos");
             ModelState.Remove("MovimientosInventario");
+
+            // NO remover validaciones de TELEFONO y DIRECCION_COMPLETA
+            // Dejar que ModelState.IsValid haga su trabajo normal
+
             if (ModelState.IsValid)
             {
                 try
@@ -345,7 +283,7 @@ namespace IngeTechCRM.Controllers
                         if (existeCorreo)
                         {
                             ModelState.AddModelError("CORREO_ELECTRONICO", "Este correo electrónico ya está registrado");
-                            await CargarListasDesplegables(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
+                            await CargarListasDesplegablesHTML(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
                             return View(usuario);
                         }
                     }
@@ -367,6 +305,9 @@ namespace IngeTechCRM.Controllers
 
                     _context.Update(usuario);
                     await _context.SaveChangesAsync();
+
+                    TempData["Message"] = "Usuario actualizado exitosamente";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -379,10 +320,10 @@ namespace IngeTechCRM.Controllers
                         throw;
                     }
                 }
-                TempData["Message"] = "Usuario actualizado exitosamente";
-                return RedirectToAction(nameof(Index));
             }
-            await CargarListasDesplegables(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
+
+            // Si hay errores de validación, recargar las listas y mostrar la vista con errores
+            await CargarListasDesplegablesHTML(usuario.ID_PROVINCIA, usuario.ID_TIPO_USUARIO);
             return View(usuario);
         }
 
@@ -459,8 +400,7 @@ namespace IngeTechCRM.Controllers
             catch (Exception ex)
             {
                 // Registrar la excepción y mostrar mensaje de error
-                // logger.LogError(ex, "Error al eliminar usuario {Id}", id);
-                TempData["Error"] = "Ocurrió un error al eliminar el usuario: ";
+                TempData["Error"] = "Ocurrió un error al eliminar el usuario";
             }
 
             return RedirectToAction(nameof(Index));
@@ -475,11 +415,28 @@ namespace IngeTechCRM.Controllers
             return tipoUsuarioId == 1; // Asumiendo que 1 es el ID para administradores
         }
 
-        // Método para cargar las listas desplegables
-        private async Task CargarListasDesplegables(int? provinciaId = null, int? tipoUsuarioId = null)
+        // MÉTODO CORREGIDO: Cargar las listas desplegables como HTML
+        private async Task CargarListasDesplegablesHTML(int? provinciaId = null, int? tipoUsuarioId = null)
         {
-            ViewBag.Provincias = new SelectList(await _context.Provincias.ToListAsync(), "IdProvincia", "Nombre", provinciaId);
-            ViewBag.TiposUsuario = new SelectList(await _context.TiposUsuario.ToListAsync(), "IdTipoUsuario", "Descripcion", tipoUsuarioId);
+            var provincias = await _context.Provincias.ToListAsync();
+            var tiposUsuario = await _context.TiposUsuario.ToListAsync();
+
+            var provinciasHtml = new System.Text.StringBuilder();
+            foreach (var provincia in provincias)
+            {
+                var selected = provinciaId.HasValue && provinciaId.Value == provincia.ID_PROVINCIA ? "selected" : "";
+                provinciasHtml.AppendLine($"<option value=\"{provincia.ID_PROVINCIA}\" {selected}>{provincia.NOMBRE}</option>");
+            }
+
+            var tiposUsuarioHtml = new System.Text.StringBuilder();
+            foreach (var tipo in tiposUsuario)
+            {
+                var selected = tipoUsuarioId.HasValue && tipoUsuarioId.Value == tipo.ID_TIPO_USUARIO ? "selected" : "";
+                tiposUsuarioHtml.AppendLine($"<option value=\"{tipo.ID_TIPO_USUARIO}\" {selected}>{tipo.DESCRIPCION}</option>");
+            }
+
+            ViewBag.Provincias = provinciasHtml.ToString();
+            ViewBag.TiposUsuario = tiposUsuarioHtml.ToString();
         }
 
         // Método para verificar si un usuario existe

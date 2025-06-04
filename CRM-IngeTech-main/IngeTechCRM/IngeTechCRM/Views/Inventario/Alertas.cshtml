@@ -1,5 +1,4 @@
-﻿
-@model List<IngeTechCRM.Models.AlertaInventario>
+﻿@model List<IngeTechCRM.Models.AlertaInventario>
 @{
     ViewData["Title"] = "Alertas de Inventario";
     var mostrarProcesadas = ViewBag.MostrarProcesadas;
@@ -222,16 +221,9 @@
 </div>
 
 @section Scripts {
-    <script>
-        $(document).ready(function() {
-            // Confirmación para marcar como procesada
-            $('form').submit(function(e) {
-                if (!confirm('¿Está seguro de marcar esta alerta como procesada? Esta acción no cambiará el nivel de stock.')) {
-                    e.preventDefault();
-                    return false;
-                }
-                return true;
-            });
-        });
-    </script>
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Tu script externo -->
+    <script src="~/js/alertas-inventario.js"></script>
 }

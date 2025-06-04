@@ -128,6 +128,7 @@ namespace IngeTechCRM.Controllers
             ModelState.Remove("ComunicadosRecibidos");
             ModelState.Remove("Provincia");
             ModelState.Remove("TipoUsuario");
+            ModelState.Remove("ID_TIPO_USUARIO");
             ViewBag.Provincias = _context.Provincias.ToList();
 
             if (!ModelState.IsValid)

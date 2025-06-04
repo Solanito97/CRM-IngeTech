@@ -506,7 +506,6 @@ namespace IngeTechCRM.Controllers
             ModelState.Remove("Almacen");
             ModelState.Remove("Usuario");
 
-
             if (ModelState.IsValid)
             {
                 try
@@ -601,6 +600,24 @@ namespace IngeTechCRM.Controllers
                         // Registrar el movimiento
                         _context.MovimientosInventario.Add(movimiento);
                         await _context.SaveChangesAsync();
+
+                        // *** AUTO-PROCESAR ALERTAS PENDIENTES ***
+                        if (movimiento.TIPO_MOVIMIENTO == "ENTRADA" && nuevaCantidad > inventario.CANTIDAD_MINIMA)
+                        {
+                            // Auto-procesar alertas pendientes para este inventario
+                            var alertasPendientes = await _context.AlertasInventario
+                                .Where(a => a.ID_INVENTARIO == inventario.ID_INVENTARIO && !a.PROCESADA)
+                                .ToListAsync();
+
+                            if (alertasPendientes.Any())
+                            {
+                                foreach (var alertaPendiente in alertasPendientes)
+                                {
+                                    alertaPendiente.PROCESADA = true;
+                                }
+                                await _context.SaveChangesAsync();
+                            }
+                        }
 
                         // Verificar si se debe crear una alerta de stock bajo
                         if (nuevaCantidad <= inventario.CANTIDAD_MINIMA)
@@ -786,7 +803,7 @@ namespace IngeTechCRM.Controllers
         }
 
         [Authorize]
-        public IActionResult Alertas(bool? procesadas)
+        public async Task<IActionResult> Alertas(bool? procesadas)
         {
             // Verificar si el usuario es administrador
             var tipoUsuarioId = HttpContext.Session.GetInt32("TipoUsuarioId");
@@ -795,25 +812,83 @@ namespace IngeTechCRM.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            // Verificar y procesar alertas automáticamente antes de cargar la vista
+            await VerificarYProcesarAlertasAutomaticamente();
+
+            // Forzar recarga del contexto para obtener datos actualizados
+            _context.ChangeTracker.Clear();
+
+            var mostrarProcesadas = procesadas ?? false;
+
             var alertasQuery = _context.AlertasInventario
                 .Include(a => a.Inventario)
-                .ThenInclude(i => i.Producto)
+                    .ThenInclude(i => i.Producto)
+                        .ThenInclude(p => p.Categoria)
                 .Include(a => a.Inventario)
-                .ThenInclude(i => i.Almacen)
+                    .ThenInclude(i => i.Producto)
+                        .ThenInclude(p => p.Marca)
+                .Include(a => a.Inventario)
+                    .ThenInclude(i => i.Almacen)
+                .Where(a => a.PROCESADA == mostrarProcesadas)
                 .AsQueryable();
 
-            if (procesadas.HasValue)
-            {
-                alertasQuery = alertasQuery.Where(a => a.PROCESADA == procesadas.Value);
-            }
-
-            var alertas = alertasQuery
+            var alertas = await alertasQuery
                 .OrderByDescending(a => a.FECHA_ALERTA)
-                .ToList();
+                .ToListAsync();
 
-            ViewBag.MostrarProcesadas = procesadas ?? false;
+            ViewBag.MostrarProcesadas = mostrarProcesadas;
 
             return View(alertas);
+        }
+
+
+        private async Task VerificarYProcesarAlertasAutomaticamente()
+        {
+            try
+            {
+                // Obtener todas las alertas pendientes con sus relaciones
+                var alertasPendientes = await _context.AlertasInventario
+                    .Include(a => a.Inventario)
+                    .Where(a => !a.PROCESADA)
+                    .ToListAsync();
+
+                if (!alertasPendientes.Any())
+                    return;
+
+                var alertasParaProcesar = new List<AlertaInventario>();
+
+                foreach (var alerta in alertasPendientes)
+                {
+                    // Verificar si el stock actual ya está por encima del mínimo
+                    if (alerta.Inventario.CANTIDAD > alerta.Inventario.CANTIDAD_MINIMA)
+                    {
+                        alertasParaProcesar.Add(alerta);
+                    }
+                }
+
+                if (alertasParaProcesar.Any())
+                {
+                    // Marcar alertas como procesadas usando SQL directo para asegurar persistencia
+                    var idsAlertas = alertasParaProcesar.Select(a => a.ID_ALERTA).ToList();
+                    var idsString = string.Join(",", idsAlertas);
+
+                    await _context.Database.ExecuteSqlRawAsync(
+                        $"UPDATE CRM_ALERTA_INVENTARIO SET PROCESADA = 1 WHERE ID_ALERTA IN ({idsString})"
+                    );
+
+                    // También actualizar en el contexto actual para consistencia
+                    foreach (var alerta in alertasParaProcesar)
+                    {
+                        alerta.PROCESADA = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log del error si tienes sistema de logging
+                // Por ahora, continuamos sin romper el flujo
+                Console.WriteLine($"Error al verificar alertas: {ex.Message}");
+            }
         }
 
         [Authorize]
@@ -1319,6 +1394,24 @@ namespace IngeTechCRM.Controllers
                     _context.MovimientosInventario.Add(movimiento);
                     await _context.SaveChangesAsync();
 
+                    // *** AUTO-PROCESAR ALERTAS PENDIENTES ***
+                    if (tipoMovimiento == "ENTRADA" && nuevaCantidad > inventario.CANTIDAD_MINIMA)
+                    {
+                        // Auto-procesar alertas pendientes para este inventario
+                        var alertasPendientes = await _context.AlertasInventario
+                            .Where(a => a.ID_INVENTARIO == inventario.ID_INVENTARIO && !a.PROCESADA)
+                            .ToListAsync();
+
+                        if (alertasPendientes.Any())
+                        {
+                            foreach (var alertaPendiente in alertasPendientes)
+                            {
+                                alertaPendiente.PROCESADA = true;
+                            }
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+
                     // Verificar si se debe crear una alerta de stock bajo
                     if (nuevaCantidad <= inventario.CANTIDAD_MINIMA)
                     {
@@ -1363,7 +1456,7 @@ namespace IngeTechCRM.Controllers
 
         // Método para obtener inventario filtrado (reutiliza lógica del Index)
         private async Task<List<Inventario>> ObtenerInventarioFiltrado(int? almacenId, int? categoriaId, string buscar)
-    {
+        {
         // Consulta base
         var query = _context.Inventarios
             .Include(i => i.Producto)
@@ -1401,7 +1494,7 @@ namespace IngeTechCRM.Controllers
         query = query.OrderBy(i => i.Producto.NOMBRE);
         
         return await query.ToListAsync();
-    }
+        }
 
         [HttpGet]
         public async Task<IActionResult> ObtenerStockActual(int productoId, int almacenId)

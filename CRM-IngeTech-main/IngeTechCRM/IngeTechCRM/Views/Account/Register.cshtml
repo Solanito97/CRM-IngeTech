@@ -56,14 +56,15 @@
                                        value="@Model?.IDENTIFICACION"
                                        required
                                        placeholder="Ingrese su número de cédula">
-                                <p class="mt-1 text-xs text-gray-light">Ingrese su número de cédula sin guiones ni espacios</p>
+                                
                             </div>
+                            <p class="mt-1 text-xs text-gray-light">Ingrese su número de cédula sin guiones ni espacios</p>
                         </div>
                         <div>
                             <label for="NombreUsuario" class="mb-2 block text-sm font-medium text-gray-dark">Nombre de Usuario</label>
                             <div class="relative">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fas fa-user text-gray-light"></i>
+                                <div class="absolute left-0 top-1/2 -translate-y-1/2 pl-3 pointer-events-none">
+                                    <i class="fas fa-user text-gray-light text-base"></i>
                                 </div>
                                 <input type="text"
                                        class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50"
@@ -72,8 +73,9 @@
                                        value="@Model?.NOMBRE_USUARIO"
                                        required
                                        placeholder="Elija un nombre de usuario">
-                                <p class="mt-1 text-xs text-gray-light">Este será su nombre para ingresar al sistema</p>
+                               
                             </div>
+                            <p class="mt-1 text-xs text-gray-light">Este será su nombre para ingresar al sistema</p>
                         </div>
                     </div>
 
@@ -125,8 +127,9 @@
                                        name="CONTRASENA"
                                        required
                                        placeholder="Cree una contraseña segura">
-                                <p class="mt-1 text-xs text-gray-light">Mínimo 6 caracteres, incluya letras y números</p>
+                                
                             </div>
+                            <p class="mt-1 text-xs text-gray-light">Mínimo 6 caracteres, incluya letras y números</p>
                         </div>
                         <div>
                             <label for="confirmarContrasena" class="mb-2 block text-sm font-medium text-gray-dark">Confirmar Contraseña</label>

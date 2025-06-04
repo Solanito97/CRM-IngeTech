@@ -141,6 +141,20 @@ namespace IngeTechCRM.Controllers
             ModelState.Remove("ComunicadosRecibidos");
             ModelState.Remove("MovimientosInventario");
 
+            if (!string.IsNullOrEmpty(usuario.NOMBRE_COMPLETO))
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(usuario.NOMBRE_COMPLETO, @"^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]+$"))
+                {
+                    ModelState.AddModelError("NOMBRE_COMPLETO",
+                        "El nombre completo solo puede contener letras, espacios y tildes. No se permiten números.");
+                }
+            }
+            if (!string.IsNullOrEmpty(usuario.TELEFONO) && !usuario.TELEFONO.EsTelefonoCostaRicaValido())
+            {
+                ModelState.AddModelError("TELEFONO",
+                    "Ingrese un número de teléfono válido de Costa Rica (8 dígitos, debe empezar con 2, 6, 7 u 8)");
+            }
+
             // Permitir campos opcionales como nulos o vacíos
             if (string.IsNullOrWhiteSpace(usuario.TELEFONO))
             {
@@ -495,5 +509,31 @@ namespace IngeTechCRM.Controllers
         }
 
         #endregion
+    }
+
+    public static class ValidacionTelefono
+    {
+        public static bool EsTelefonoCostaRicaValido(this string telefono)
+        {
+            if (string.IsNullOrWhiteSpace(telefono))
+                return false;
+
+            // Remover espacios y guiones si los hay
+            string telefonoLimpio = telefono.Replace(" ", "").Replace("-", "");
+
+            // Verificar que solo contenga números
+            if (!System.Text.RegularExpressions.Regex.IsMatch(telefonoLimpio, @"^[0-9]+$"))
+                return false;
+
+            // Verificar longitud (8 dígitos para Costa Rica)
+            if (telefonoLimpio.Length != 8)
+                return false;
+
+            // Verificar que empiece con números válidos para Costa Rica
+            // Móviles: 6, 7, 8
+            // Fijos: 2
+            string primerDigito = telefonoLimpio.Substring(0, 1);
+            return primerDigito == "2" || primerDigito == "6" || primerDigito == "7" || primerDigito == "8";
+        }
     }
 }

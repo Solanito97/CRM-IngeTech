@@ -29,6 +29,8 @@ namespace IngeTechCRM.Models
         public string CONTRASENA { get; set; }
 
         [Required(ErrorMessage = "El nombre completo es obligatorio")]
+        [RegularExpression(@"^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]+$",
+        ErrorMessage = "El nombre completo solo puede contener letras, espacios y tildes")]
         [StringLength(100, ErrorMessage = "El nombre completo no puede exceder los 100 caracteres")]
         [Display(Name = "Nombre Completo")]
         public string NOMBRE_COMPLETO { get; set; }

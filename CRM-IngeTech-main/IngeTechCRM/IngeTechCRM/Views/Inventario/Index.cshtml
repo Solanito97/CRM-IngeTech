@@ -380,53 +380,88 @@
 </div>
 
 <!-- Modal para registrar movimiento rápido -->
-<div class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black bg-opacity-50" id="movimientoRapidoModal">
-    <div class="w-full max-w-md overflow-hidden rounded-lg bg-white shadow-xl">
-        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-3 text-white">
-            <h3 class="font-bold" id="movimientoRapidoModalLabel">Registrar Movimiento</h3>
+<div class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm" id="movimientoRapidoModal">
+    <div class="w-full max-w-md transform overflow-hidden rounded-xl bg-white shadow-2xl transition-all duration-300 scale-95" id="modalContent">
+        <!-- Header del modal con gradiente dinámico -->
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-6 py-4 text-white" id="modalHeader">
+            <div class="flex items-center justify-between">
+                <h3 class="flex items-center text-lg font-bold" id="movimientoRapidoModalLabel">
+                    <i class="fas fa-plus-circle mr-3 text-xl" id="modalIcon"></i>
+                    Registrar Movimiento
+                </h3>
+                <button type="button" class="text-white hover:text-gray-200 transition-colors" id="closeModalBtn">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
         </div>
+
         <div class="p-6">
+            <!-- Indicador visual del tipo de movimiento -->
+            <div class="mb-6 text-center">
+                <div class="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full" id="tipoIndicador">
+                    <i class="text-3xl" id="tipoIcono"></i>
+                </div>
+                <p class="text-sm text-gray-600" id="tipoDescripcion">Ingrese la cantidad del movimiento</p>
+            </div>
+
             <form id="movimientoRapidoForm">
                 <input type="hidden" id="modalProductoId" name="ID_PRODUCTO">
                 <input type="hidden" id="modalAlmacenId" name="ID_ALMACEN">
                 <input type="hidden" id="modalTipoMovimiento" name="TIPO_MOVIMIENTO">
-                
-                <div class="mb-4">
-                    <label for="modalCantidad" class="mb-2 block text-sm font-medium text-gray-700">Cantidad</label>
-                    <input 
-                        type="number" 
-                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500" 
-                        id="modalCantidad" 
-                        name="CANTIDAD" 
-                        min="1" 
-                        required
-                    >
+
+                <div class="mb-6">
+                    <label for="modalCantidad" class="mb-2 block text-sm font-semibold text-gray-700">
+                        <i class="fas fa-hashtag mr-1"></i>
+                        Cantidad
+                    </label>
+                    <div class="relative">
+                        <input type="number"
+                               class="w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-lg font-medium text-center focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 transition-all duration-200"
+                               id="modalCantidad"
+                               name="CANTIDAD"
+                               min="1"
+                               step="1"
+                               oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                               onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                               placeholder="0"
+                               required>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                    </div>
+                    <div class="mt-1 hidden" id="cantidadError">
+                        <p class="flex items-center text-sm text-red-600">
+                            <i class="fas fa-exclamation-triangle mr-1"></i>
+                            <span id="cantidadErrorText">La cantidad debe ser mayor a 0</span>
+                        </p>
+                    </div>
                 </div>
-                
-                <div class="mb-4">
-                    <label for="modalObservacion" class="mb-2 block text-sm font-medium text-gray-700">Observación (opcional)</label>
-                    <textarea 
-                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500" 
-                        id="modalObservacion" 
-                        name="OBSERVACION" 
-                        rows="2"
-                    ></textarea>
+
+                <div class="mb-6">
+                    <label for="modalObservacion" class="mb-2 block text-sm font-semibold text-gray-700">
+                        <i class="fas fa-comment-alt mr-1"></i>
+                        Observación
+                        <span class="text-gray-400 font-normal">(opcional)</span>
+                    </label>
+                    <textarea class="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 transition-all duration-200 resize-none"
+                              id="modalObservacion"
+                              name="OBSERVACION"
+                              rows="3"
+                              placeholder="Agregue una nota sobre este movimiento..."></textarea>
                 </div>
-                
-                <div class="mt-6 flex justify-end space-x-3">
-                    <button 
-                        type="button" 
-                        class="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-50" 
-                        id="cancelarMovimientoBtn"
-                    >
+
+                <div class="flex space-x-3">
+                    <button type="button"
+                            class="flex-1 rounded-lg border-2 border-gray-300 bg-white px-4 py-3 font-semibold text-gray-700 shadow-sm transition-all duration-200 hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                            id="cancelarMovimientoBtn">
+                        <i class="fas fa-times mr-2"></i>
                         Cancelar
                     </button>
-                    <button 
-                        type="button" 
-                        class="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-indigo-700" 
-                        id="confirmarMovimientoBtn"
-                    >
-                        Confirmar
+                    <button type="button"
+                            class="flex-1 rounded-lg px-4 py-3 font-semibold text-white shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 transform hover:scale-105"
+                            id="confirmarMovimientoBtn">
+                        <i class="fas fa-check mr-2"></i>
+                        <span id="confirmarBtnText">Confirmar</span>
                     </button>
                 </div>
             </form>
@@ -441,32 +476,239 @@
 
 @section Scripts {
     <script>
+        // Variables globales para el modal
+        let formularioActual = null;
+
+        // Función para validar cantidad
+        function validarCantidad() {
+            const cantidad = $('#modalCantidad').val();
+            const cantidadNum = parseInt(cantidad);
+
+            if (!cantidad || cantidad === '0' || cantidadNum <= 0 || isNaN(cantidadNum)) {
+                $('#cantidadError').removeClass('hidden');
+                $('#modalCantidad').addClass('border-red-500 focus:border-red-500 focus:ring-red-200');
+                return false;
+            } else {
+                $('#cantidadError').addClass('hidden');
+                $('#modalCantidad').removeClass('border-red-500 focus:border-red-500 focus:ring-red-200');
+                return true;
+            }
+        }
+
         $(document).ready(function() {
+            // Validación solo en input (no en blur para evitar errores al cerrar)
+            $('#modalCantidad').on('input', function() {
+                // Solo validar si el campo no está vacío
+                if ($(this).val().length > 0) {
+                    validarCantidad();
+                } else {
+                    // Si está vacío, ocultar error
+                    $('#cantidadError').addClass('hidden');
+                    $('#modalCantidad').removeClass('border-red-500 focus:border-red-500 focus:ring-red-200');
+                }
+            });
+
+            // Función para cerrar modal con animación y limpiar errores
+            function cerrarModal() {
+                // Limpiar errores antes de cerrar
+                $('#cantidadError').addClass('hidden');
+                $('#modalCantidad').removeClass('border-red-500 focus:border-red-500 focus:ring-red-200');
+
+                $('#modalContent').removeClass('scale-100').addClass('scale-95');
+                setTimeout(() => {
+                    $('#movimientoRapidoModal').addClass('hidden');
+                }, 150);
+            }
+
             // Delegación de eventos para botones de movimiento de stock
             $(document).on('click', '.btn-movimiento-stock', function() {
                 var productoId = $(this).data('producto');
                 var almacenId = $(this).data('almacen');
                 var tipoMovimiento = $(this).data('tipo');
-                
+
                 // Configurar modal
                 $('#modalProductoId').val(productoId);
                 $('#modalAlmacenId').val(almacenId);
                 $('#modalTipoMovimiento').val(tipoMovimiento);
 
-                // Ajustar título y colores según tipo de movimiento
+                // Ajustar título, colores e iconos según tipo de movimiento
                 if (tipoMovimiento === 'ENTRADA') {
-                    $('#movimientoRapidoModalLabel').text('Agregar Stock');
-                    $('#confirmarMovimientoBtn').removeClass('bg-red-600 hover:bg-red-700').addClass('bg-green-600 hover:bg-green-700');
+                    // Configurar para entrada
+                    $('#movimientoRapidoModalLabel').html('<i class="fas fa-plus-circle mr-3 text-xl"></i>Agregar Stock');
+                    $('#modalIcon').removeClass().addClass('fas fa-plus-circle mr-3 text-xl');
+                    $('#modalHeader').removeClass().addClass('bg-gradient-to-r from-green-600 to-emerald-500 px-6 py-4 text-white');
+                    $('#tipoIndicador').removeClass().addClass('mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-green-100');
+                    $('#tipoIcono').removeClass().addClass('fas fa-arrow-up text-3xl text-green-600');
+                    $('#tipoDescripcion').text('¿Cuántas unidades desea agregar al inventario?');
+                    $('#confirmarMovimientoBtn').removeClass().addClass('flex-1 rounded-lg px-4 py-3 font-semibold text-white shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 transform hover:scale-105 bg-green-600 hover:bg-green-700 focus:ring-green-200');
+                    $('#confirmarBtnText').html('<i class="fas fa-plus mr-2"></i>Agregar Stock');
                 } else {
-                    $('#movimientoRapidoModalLabel').text('Reducir Stock');
-                    $('#confirmarMovimientoBtn').removeClass('bg-green-600 hover:bg-green-700').addClass('bg-red-600 hover:bg-red-700');
+                    // Configurar para salida
+                    $('#movimientoRapidoModalLabel').html('<i class="fas fa-minus-circle mr-3 text-xl"></i>Reducir Stock');
+                    $('#modalIcon').removeClass().addClass('fas fa-minus-circle mr-3 text-xl');
+                    $('#modalHeader').removeClass().addClass('bg-gradient-to-r from-red-600 to-rose-500 px-6 py-4 text-white');
+                    $('#tipoIndicador').removeClass().addClass('mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-red-100');
+                    $('#tipoIcono').removeClass().addClass('fas fa-arrow-down text-3xl text-red-600');
+                    $('#tipoDescripcion').text('¿Cuántas unidades desea quitar del inventario?');
+                    $('#confirmarMovimientoBtn').removeClass().addClass('flex-1 rounded-lg px-4 py-3 font-semibold text-white shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 transform hover:scale-105 bg-red-600 hover:bg-red-700 focus:ring-red-200');
+                    $('#confirmarBtnText').html('<i class="fas fa-minus mr-2"></i>Reducir Stock');
                 }
 
-                // Mostrar modal
+                // Mostrar modal con animación
                 $('#movimientoRapidoModal').removeClass('hidden');
-                $('#modalCantidad').val('1').focus();
+                setTimeout(() => {
+                    $('#modalContent').removeClass('scale-95').addClass('scale-100');
+                }, 10);
+
+                // Limpiar y enfocar
+                $('#modalCantidad').val('').focus();
                 $('#modalObservacion').val('');
+                // Asegurar que no hay errores visibles al abrir
+                $('#cantidadError').addClass('hidden');
+                $('#modalCantidad').removeClass('border-red-500 focus:border-red-500 focus:ring-red-200');
             });
+
+            // Cerrar modal con botón X
+            $('#closeModalBtn').click(function() {
+                cerrarModal();
+            });
+
+            // Cerrar modal con botón cancelar
+            $('#cancelarMovimientoBtn').click(function() {
+                cerrarModal();
+            });
+
+            // Cerrar modal al hacer clic fuera
+            $('#movimientoRapidoModal').click(function(e) {
+                if (e.target === this) {
+                    cerrarModal();
+                }
+            });
+
+            // Cerrar modal con tecla Escape
+            $(document).keydown(function(e) {
+                if (e.key === 'Escape' && !$('#movimientoRapidoModal').hasClass('hidden')) {
+                    cerrarModal();
+                }
+            });
+
+            // Confirmar con Enter
+            $('#modalCantidad, #modalObservacion').keypress(function(e) {
+                if (e.which === 13 && $(this).attr('id') === 'modalCantidad') {
+                    if (validarCantidad()) {
+                        $('#confirmarMovimientoBtn').click();
+                    }
+                }
+            });
+
+            // Confirmar movimiento con validación mejorada
+            $('#confirmarMovimientoBtn').click(function() {
+                if (!validarCantidad()) {
+                    // Hacer shake al input para llamar la atención
+                    $('#modalCantidad').addClass('animate-pulse');
+                    setTimeout(() => {
+                        $('#modalCantidad').removeClass('animate-pulse');
+                    }, 1000);
+                    return;
+                }
+
+                // Deshabilitar botón durante procesamiento
+                const $btn = $(this);
+                const originalText = $btn.html();
+                $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-2"></i>Procesando...');
+
+                // Datos del formulario con nombres en mayúsculas para coincidir con el controlador
+                const formData = {
+                    ID_PRODUCTO: $('#modalProductoId').val(),
+                    ID_ALMACEN: $('#modalAlmacenId').val(),
+                    TIPO_MOVIMIENTO: $('#modalTipoMovimiento').val(),
+                    CANTIDAD: $('#modalCantidad').val(),
+                    OBSERVACION: $('#modalObservacion').val() || "Movimiento rápido desde inventario"
+                };
+
+                // Obtener el token antifalsificación del formulario oculto
+                const token = $('#antiForgeryForm input[name="__RequestVerificationToken"]').val();
+
+                // Enviar datos al servidor mediante AJAX
+                $.ajax({
+                    url: '@Url.Action("RegistrarMovimiento", "Inventario")',
+                    type: 'POST',
+                    data: formData,
+                    headers: {
+                        "RequestVerificationToken": token,
+                        "X-Requested-With": "XMLHttpRequest" // Identificar como solicitud AJAX
+                    },
+                    success: function(response) {
+                        cerrarModal();
+                        mostrarNotificacion('Movimiento registrado exitosamente', 'success');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+                    },
+                    error: function(xhr, status, error) {
+                        var mensaje = 'Error al registrar el movimiento';
+                        if (xhr.responseText) {
+                            mensaje += ': ' + xhr.responseText;
+                        }
+                        mostrarNotificacion(mensaje, 'error');
+                    },
+                    complete: function() {
+                        // Rehabilitar botón
+                        $btn.prop('disabled', false).html(originalText);
+                    }
+                });
+            });
+
+            // Función mejorada para mostrar notificaciones
+            function mostrarNotificacion(mensaje, tipo) {
+                $('.notificacion').remove();
+
+                var config = tipo === 'success'
+                    ? {
+                        clase: 'bg-green-50 text-green-800 border-green-200 shadow-green-100',
+                        icono: 'fas fa-check-circle text-green-500',
+                        color: 'green'
+                    }
+                    : {
+                        clase: 'bg-red-50 text-red-800 border-red-200 shadow-red-100',
+                        icono: 'fas fa-exclamation-circle text-red-500',
+                        color: 'red'
+                    };
+
+                var html = `
+                <div class="notificacion fixed top-4 right-4 z-50 max-w-md rounded-xl border-2 ${config.clase} p-4 shadow-2xl transform transition-all duration-300 translate-x-full">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="${config.icono} text-xl"></i>
+                        </div>
+                        <div class="ml-3 flex-1">
+                            <p class="font-semibold">${mensaje}</p>
+                        </div>
+                        <button class="ml-3 text-${config.color}-400 hover:text-${config.color}-600" onclick="$(this).closest('.notificacion').remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                `;
+
+                $('body').append(html);
+
+                // Animación de entrada
+                setTimeout(() => {
+                    $('.notificacion').removeClass('translate-x-full').addClass('translate-x-0');
+                }, 100);
+
+                // Auto eliminar
+                setTimeout(function() {
+                    $('.notificacion').addClass('translate-x-full');
+                    setTimeout(() => {
+                        $('.notificacion').remove();
+                    }, 300);
+                }, 4000);
+            }
+
+            // Resto del código original para filtros...
+            // [El código de filtros se mantiene igual]
 
             // Filtro de búsqueda en tiempo real
             $('#buscarInventario').on('input', function() {
@@ -538,96 +780,6 @@
                 if (buscar) url += 'buscar=' + encodeURIComponent(buscar);
 
                 window.location.href = url;
-            }
-
-            // Cerrar modal
-            $('#cancelarMovimientoBtn').click(function() {
-                $('#movimientoRapidoModal').addClass('hidden');
-            });
-
-            // Cerrar modal al hacer clic fuera (opcional)
-            $('#movimientoRapidoModal').click(function(e) {
-                if (e.target === this) {
-                    $(this).addClass('hidden');
-                }
-            });
-
-            $('#confirmarMovimientoBtn').click(function() {
-                if (!$('#modalCantidad').val() || parseInt($('#modalCantidad').val()) <= 0) {
-                    alert('Por favor ingrese una cantidad válida');
-                    return;
-                }
-
-                // Datos del formulario con nombres en mayúsculas para coincidir con el controlador
-                const formData = {
-                    ID_PRODUCTO: $('#modalProductoId').val(),
-                    ID_ALMACEN: $('#modalAlmacenId').val(),
-                    TIPO_MOVIMIENTO: $('#modalTipoMovimiento').val(),
-                    CANTIDAD: $('#modalCantidad').val(),
-                    OBSERVACION: $('#modalObservacion').val() || "Movimiento rápido desde inventario"
-                };
-
-                // Obtener el token antifalsificación del formulario oculto
-                const token = $('#antiForgeryForm input[name="__RequestVerificationToken"]').val();
-
-                // Enviar datos al servidor mediante AJAX
-                $.ajax({
-                    url: '@Url.Action("RegistrarMovimiento", "Inventario")',
-                    type: 'POST',
-                    data: formData,
-                    headers: {
-                        "RequestVerificationToken": token,
-                        "X-Requested-With": "XMLHttpRequest" // Identificar como solicitud AJAX
-                    },
-                    success: function(response) {
-                        $('#movimientoRapidoModal').addClass('hidden');
-                        mostrarNotificacion('Movimiento registrado exitosamente', 'success');
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1500);
-                    },
-                    error: function(xhr, status, error) {
-                        var mensaje = 'Error al registrar el movimiento';
-                        if (xhr.responseText) {
-                            mensaje += ': ' + xhr.responseText;
-                        }
-                        mostrarNotificacion(mensaje, 'error');
-                    }
-                });
-            });
-
-            // Función para mostrar notificaciones
-            function mostrarNotificacion(mensaje, tipo) {
-                // Eliminar notificaciones existentes
-                $('.notificacion').remove();
-
-                // Crear elemento de notificación
-                var claseColor = tipo === 'success'
-                    ? 'bg-green-100 text-green-800 border-green-200'
-                    : 'bg-red-100 text-red-800 border-red-200';
-
-                var icono = tipo === 'success'
-                    ? '<i class="fas fa-check-circle mr-2 text-green-500"></i>'
-                    : '<i class="fas fa-exclamation-circle mr-2 text-red-500"></i>';
-
-                var html = `
-                <div class="notificacion fixed top-4 right-4 z-50 max-w-md rounded-lg border ${claseColor} p-4 shadow-lg">
-                    <div class="flex items-center">
-                        ${icono}
-                        <span>${mensaje}</span>
-                    </div>
-                </div>
-                `;
-
-                // Agregar a DOM
-                $('body').append(html);
-
-                // Auto eliminar después de un tiempo
-                setTimeout(function() {
-                    $('.notificacion').fadeOut('slow', function() {
-                        $(this).remove();
-                    });
-                }, 3000);
             }
         });
     </script>

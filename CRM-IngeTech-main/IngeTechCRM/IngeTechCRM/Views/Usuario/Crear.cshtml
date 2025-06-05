@@ -118,16 +118,29 @@
 
                         <!-- Contraseña -->
                         <div>
-                            <label asp-for="CONTRASENA" class="mb-2 block text-sm font-medium text-gray-700">Contraseña</label>
-                            <input asp-for="CONTRASENA" type="password" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                            <span asp-validation-for="CONTRASENA" class="mt-1 text-sm text-red-600"></span>
+                         <label asp-for="CONTRASENA" class="mb-2 block text-sm font-medium text-gray-700">Contraseña</label>
+                        <div class="relative">
+                            <input asp-for="CONTRASENA" 
+                                   type="password" 
+                                   class="w-full rounded-lg border border-gray-300 px-4 py-2 pr-12 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" 
+                                   required>
+                            
                         </div>
+                        <span asp-validation-for="CONTRASENA" class="mt-1 text-sm text-red-600"></span>
+                    </div>
 
-                        <!-- Confirmar Contraseña -->
-                        <div>
-                            <label for="confirmarContrasena" class="mb-2 block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
-                            <input name="confirmarContrasena" id="confirmarContrasena" type="password" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    
+                    <div>
+                        <label for="confirmarContrasena" class="mb-2 block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
+                        <div class="relative">
+                            <input name="confirmarContrasena" 
+                                   id="confirmarContrasena" 
+                                   type="password" 
+                                   class="w-full rounded-lg border border-gray-300 px-4 py-2 pr-12 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" 
+                                   required>
+                           
                         </div>
+                    </div>
 
                         <!-- Tipo de Usuario -->
                         <div>

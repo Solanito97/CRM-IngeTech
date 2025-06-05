@@ -136,3 +136,10 @@
 <!-- Opcional: Decoraciones visuales para el fondo -->
 <div class="absolute top-0 right-0 hidden h-64 w-64 transform translate-x-1/4 -translate-y-1/4 rounded-full bg-brand-blue opacity-10 blur-3xl lg:block"></div>
 <div class="absolute bottom-0 left-0 hidden h-64 w-64 transform -translate-x-1/4 translate-y-1/4 rounded-full bg-blue-500 opacity-10 blur-3xl lg:block"></div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+      
+        <script src="~/js/Usuario.js"></script>
+    }
+}

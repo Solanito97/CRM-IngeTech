@@ -284,30 +284,8 @@
 </div>
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            // Validación de contraseñas
-            $('#confirmarContrasena').on('keyup', function () {
-                var contrasena = $('#Contrasena').val();
-                var confirmarContrasena = $(this).val();
-
-                if (contrasena === confirmarContrasena) {
-                    $(this).removeClass('border-red-500').addClass('border-green-500');
-                } else {
-                    $(this).removeClass('border-green-500').addClass('border-red-500');
-                }
-            });
-
-            // Validación del formulario
-            $('form').submit(function (event) {
-                var contrasena = $('#Contrasena').val();
-                var confirmarContrasena = $('#confirmarContrasena').val();
-
-                if (contrasena !== confirmarContrasena) {
-                    event.preventDefault();
-                    alert('Las contraseñas no coinciden');
-                }
-            });
-        });
-    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+                <script src="~/js/Register.js"></script>
+    }
 }

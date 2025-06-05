@@ -328,8 +328,10 @@
 @section Scripts {
     <script>
         $(document).ready(function() {
-            // Configurar tooltip para las barras del gráfico
-            $(".tooltip-trigger").tooltip();
+            // Tooltip nativo sin Bootstrap
+            $(".tooltip-trigger").each(function() {
+                $(this).attr('title', $(this).attr('title'));
+            });
 
             // Configurar botón de impresión
             $("#btnImprimir").click(function() {
@@ -349,7 +351,7 @@
 
             $("#fechaInicio").change(function() {
                 var fechaInicio = new Date($(this).val());
-                var fechaFin = new Date($("#fechaFin").val());
+                var fechaFin = new Date($("#fechaInicio").val());
 
                 if (fechaFin < fechaInicio) {
                     $("#fechaFin").val($(this).val());

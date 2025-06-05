@@ -126,38 +126,49 @@
     <!-- Gráficos -->
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <!-- Comunicados por mes -->
+        
         <div class="overflow-hidden rounded-xl bg-white shadow-lg">
             <div class="bg-gradient-to-r from-red-500 to-pink-500 px-4 py-3 text-white">
                 <h2 class="font-bold">Comunicados por Mes</h2>
             </div>
             <div class="p-6">
                 <div class="h-64">
-                    <!-- Representación visual de comunicados por mes -->
                     @{
                         var comunicadosPorMes = Model
-                            .GroupBy(c => new { c.FECHA_ENVIO.Year, c.FECHA_ENVIO.Month })
-                            .Select(g => new {
-                                YearMonth = $"{g.Key.Year}-{g.Key.Month:D2}",
-                                YearMonthText = $"{g.Key.Month:D2}/{g.Key.Year}",
-                                Count = g.Count()
-                            })
-                            .OrderBy(x => x.YearMonth)
-                            .Take(12)
-                            .ToList();
-                        
+                        .GroupBy(c => new { c.FECHA_ENVIO.Year, c.FECHA_ENVIO.Month })
+                        .Select(g => new
+                        {
+                            YearMonth = $"{g.Key.Year}-{g.Key.Month:D2}",
+                            YearMonthText = $"{g.Key.Month:D2}/{g.Key.Year}",
+                            Count = g.Count()
+                        })
+                        .OrderBy(x => x.YearMonth)
+                        .Take(12)
+                        .ToList();
+
                         var maxComunicadosMes = comunicadosPorMes.Any() ? comunicadosPorMes.Max(c => c.Count) : 1;
                     }
-                    
+
                     @if (comunicadosPorMes.Any())
                     {
-                        <div class="flex h-48 items-end space-x-2">
+                        <div class="space-y-3">
                             @foreach (var mes in comunicadosPorMes)
                             {
-                                var altura = (int)(mes.Count * 100 / maxComunicadosMes);
-                                altura = Math.Max(altura, 5); // Mínimo 5% para que se vea
-                                <div class="flex flex-1 flex-col items-center">
-                                    <div class="w-full bg-red-500" style="height: @altura%"></div>
-                                    <div class="mt-2 text-xs text-gray-500">@mes.YearMonthText</div>
+                                var porcentaje = (int)(mes.Count * 100 / maxComunicadosMes);
+                                porcentaje = Math.Max(porcentaje, 8); // Mínimo 8% para que se vea
+
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-16 text-xs font-medium text-gray-600 text-right">
+                                        @mes.YearMonthText
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="h-6 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="h-full bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-end pr-2 transition-all duration-300"
+                                                 style="width: @porcentaje%">
+                                                <span class="text-xs font-medium text-white">@mes.Count</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             }
                         </div>
@@ -169,7 +180,8 @@
                     {
                         <div class="flex h-full items-center justify-center">
                             <div class="text-center text-gray-500">
-                                No hay suficientes datos para mostrar la distribución por mes
+                                <i class="fas fa-chart-bar text-4xl mb-4 text-gray-300"></i>
+                                <p>No hay suficientes datos para mostrar la distribución por mes</p>
                             </div>
                         </div>
                     }

@@ -1,4 +1,4 @@
-﻿// wwwroot/js/usuario.js - Versión corregida para móviles
+﻿// wwwroot/js/usuario.js - Versión híbrida optimizada para móviles y desktop
 
 // Función para prevenir la entrada de números en tiempo real (solo letras y tildes)
 function soloLetrasYTildes(event) {
@@ -299,35 +299,160 @@ function validarFormularioPerfil() {
     return esValido;
 }
 
-// ===== FUNCIONALIDAD MOSTRAR/OCULTAR CONTRASEÑA - SOLO DESKTOP =====
+// ===== DETECCIÓN DE DISPOSITIVO MEJORADA =====
 
-// Función para detectar si es un dispositivo móvil o tablet
-function esMobile() {
+// Variable global para almacenar el estado del dispositivo
+let estadoDispositivo = null;
+
+// Función para detectar tipo de dispositivo de manera más precisa
+function detectarTipoDispositivo() {
+    if (estadoDispositivo !== null) return estadoDispositivo;
+
     const userAgent = navigator.userAgent.toLowerCase();
-    const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini|mobile|tablet/i.test(userAgent);
-    const isSmallScreen = window.innerWidth <= 768;
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const ancho = window.innerWidth;
+    const alto = window.innerHeight;
 
-    return isMobileDevice || (isSmallScreen && isTouchDevice);
+    // Detección más específica
+    const esMobileUA = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+    const esTabletUA = /ipad|android.*tablet|kindle|silk/i.test(userAgent);
+    const esPantallaMovil = ancho <= 768;
+    const esPantallaTablet = ancho > 768 && ancho <= 1024;
+    const tieneTouch = 'ontouchstart' in window;
+
+    // Lógica de decisión
+    if (esMobileUA || (esPantallaMovil && tieneTouch)) {
+        estadoDispositivo = 'mobile';
+    } else if (esTabletUA || (esPantallaTablet && tieneTouch)) {
+        estadoDispositivo = 'tablet';
+    } else {
+        estadoDispositivo = 'desktop';
+    }
+
+    console.log(`Dispositivo detectado: ${estadoDispositivo} (${ancho}x${alto})`);
+    return estadoDispositivo;
 }
 
-// Función para agregar estilos CSS solo para desktop
+// ===== FUNCIONALIDAD MOSTRAR/OCULTAR CONTRASEÑA OPTIMIZADA =====
+
+// Función para agregar estilos CSS optimizados
 function agregarEstilosPersonalizados() {
-    // Verificar si ya se agregaron los estilos
     if (document.getElementById('custom-password-styles')) return;
 
-    // NO agregar estilos en móviles para evitar interferencias
-    if (esMobile()) {
-        console.log('Dispositivo móvil detectado - funcionalidad de mostrar/ocultar contraseña deshabilitada');
-        return;
-    }
+    const tipoDispositivo = detectarTipoDispositivo();
 
     const style = document.createElement('style');
     style.id = 'custom-password-styles';
-    style.textContent = `
-        /* Estilos SOLO para desktop */
-        @media (min-width: 769px) and (hover: hover) and (pointer: fine) {
-            /* Ocultar botones nativos del navegador en desktop */
+
+    let estilosCSS = `
+        /* Estilos base para todos los dispositivos */
+        .password-field-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 8px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            color: #6b7280;
+            transition: all 0.2s ease-in-out;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        .toggle-password:hover {
+            color: #4f46e5;
+            background-color: rgba(79, 70, 229, 0.1);
+        }
+        
+        .toggle-password:focus {
+            outline: 2px solid #4f46e5;
+            outline-offset: 1px;
+            color: #4f46e5;
+        }
+        
+        .toggle-password i {
+            pointer-events: none;
+            font-size: 14px;
+        }
+    `;
+
+    // Estilos específicos según el dispositivo
+    if (tipoDispositivo === 'mobile') {
+        estilosCSS += `
+            /* Estilos optimizados para móviles */
+            .toggle-password {
+                padding: 14px;
+                min-width: 48px;
+                min-height: 48px;
+                right: 4px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .toggle-password i {
+                font-size: 16px;
+            }
+            
+            .password-field-container input[type="password"],
+            .password-field-container input[type="text"] {
+                padding-right: 56px !important;
+                font-size: 16px !important; /* Evita zoom en iOS */
+            }
+            
+            /* Mejorar interacción táctil */
+            .toggle-password:active {
+                background-color: rgba(79, 70, 229, 0.2);
+                transform: translateY(-50%) scale(0.95);
+            }
+        `;
+    } else if (tipoDispositivo === 'tablet') {
+        estilosCSS += `
+            /* Estilos para tablets */
+            .toggle-password {
+                padding: 12px;
+                min-width: 44px;
+                min-height: 44px;
+                right: 6px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .toggle-password i {
+                font-size: 15px;
+            }
+            
+            .password-field-container input[type="password"],
+            .password-field-container input[type="text"] {
+                padding-right: 52px !important;
+            }
+        `;
+    } else {
+        estilosCSS += `
+            /* Estilos para desktop */
+            .toggle-password {
+                padding: 8px;
+                width: 32px;
+                height: 32px;
+                right: 8px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .password-field-container input[type="password"],
+            .password-field-container input[type="text"] {
+                padding-right: 48px !important;
+            }
+            
+            /* Ocultar botones nativos solo en desktop */
             input[type="password"]::-ms-reveal {
                 display: none !important;
             }
@@ -336,84 +461,42 @@ function agregarEstilosPersonalizados() {
                 display: none !important;
                 visibility: hidden !important;
             }
-            
-            /* Estilos para botón personalizado */
-            .toggle-password {
-                position: absolute;
-                right: 8px;
-                top: 50%;
-                transform: translateY(-50%);
-                padding: 6px;
-                cursor: pointer;
-                z-index: 10;
-                background: transparent;
-                border: none;
-                color: #6b7280;
-                transition: color 0.2s ease-in-out;
-                border-radius: 4px;
-                width: 32px;
-                height: 32px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .toggle-password:hover {
-                color: #4f46e5;
-                background-color: rgba(79, 70, 229, 0.1);
-            }
-            
-            .toggle-password:focus {
-                outline: 2px solid #4f46e5;
-                outline-offset: 1px;
-                color: #4f46e5;
-            }
-            
-            .toggle-password i {
-                font-size: 14px;
-                pointer-events: none;
-            }
-            
-            .password-field-container {
-                position: relative;
-            }
-            
-            .password-field-container input[type="password"],
-            .password-field-container input[type="text"] {
-                padding-right: 40px !important;
-            }
-        }
-    `;
+        `;
+    }
 
+    style.textContent = estilosCSS;
     document.head.appendChild(style);
 }
 
-// Función para crear el botón de mostrar/ocultar contraseña SOLO EN DESKTOP
+// Función para crear el botón de mostrar/ocultar contraseña
 function crearBotonMostrarContrasena(inputId) {
-    // NO crear botón en móviles
-    if (esMobile()) {
-        return;
-    }
-
     const input = document.getElementById(inputId);
     if (!input) return;
 
-    // Verificar si ya tiene el botón
     const container = input.parentElement;
     if (container.querySelector('.toggle-password')) return;
 
-    // Asegurarse de que el contenedor tenga posición relativa
+    // Configurar el contenedor
     if (!container.classList.contains('relative')) {
         container.classList.add('relative');
     }
-
-    // Agregar clase para identificar contenedores de contraseña
     container.classList.add('password-field-container');
 
-    // Configurar atributos del input
+    // Configurar el input
+    const tipoDispositivo = detectarTipoDispositivo();
     input.setAttribute('autocomplete', 'new-password');
+    input.setAttribute('spellcheck', 'false');
 
-    // Crear el botón de mostrar/ocultar
+    if (tipoDispositivo === 'mobile') {
+        input.setAttribute('autocorrect', 'off');
+        input.setAttribute('autocapitalize', 'none');
+        // Asegurar tamaño de fuente para evitar zoom en iOS
+        if (!input.style.fontSize || parseFloat(input.style.fontSize) < 16) {
+            input.style.fontSize = '16px';
+        }
+    }
+
+    // Crear el botón
     const toggleButton = document.createElement('button');
     toggleButton.type = 'button';
     toggleButton.className = 'toggle-password';
@@ -422,15 +505,29 @@ function crearBotonMostrarContrasena(inputId) {
     toggleButton.setAttribute('aria-label', 'Mostrar contraseña');
     toggleButton.setAttribute('tabindex', '0');
 
-    // Agregar el evento click
-    toggleButton.addEventListener('click', function (e) {
+    // Eventos del botón
+    const manejarToggle = function (e) {
         e.preventDefault();
         e.stopPropagation();
         togglePasswordVisibility(inputId);
+    };
+
+    // Agregar eventos según el tipo de dispositivo
+    if (tipoDispositivo === 'mobile') {
+        // En móviles, usar touchend para mejor respuesta
+        toggleButton.addEventListener('touchend', manejarToggle);
+        toggleButton.addEventListener('click', manejarToggle);
+    } else {
+        // En desktop, usar click normal
+        toggleButton.addEventListener('click', manejarToggle);
+    }
+
+    // Prevenir interferencia con el foco
+    toggleButton.addEventListener('mousedown', function (e) {
+        e.preventDefault();
     });
 
-    // Prevenir que el botón interfiera con el foco del input
-    toggleButton.addEventListener('mousedown', function (e) {
+    toggleButton.addEventListener('touchstart', function (e) {
         e.preventDefault();
     });
 
@@ -438,21 +535,15 @@ function crearBotonMostrarContrasena(inputId) {
     toggleButton.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            togglePasswordVisibility(inputId);
+            manejarToggle(e);
         }
     });
 
-    // Insertar el botón en el contenedor
     container.appendChild(toggleButton);
 }
 
-// Función para alternar la visibilidad de la contraseña SOLO EN DESKTOP
+// Función para alternar la visibilidad de la contraseña
 function togglePasswordVisibility(inputId) {
-    // NO funcionar en móviles
-    if (esMobile()) {
-        return;
-    }
-
     const input = document.getElementById(inputId);
     if (!input) return;
 
@@ -460,7 +551,11 @@ function togglePasswordVisibility(inputId) {
     if (!button) return;
 
     const icon = button.querySelector('i');
-    const cursorPosition = input.selectionStart;
+    const tipoDispositivo = detectarTipoDispositivo();
+
+    // Guardar posición del cursor
+    const cursorPosition = input.selectionStart || 0;
+    const valorActual = input.value;
 
     if (input.type === 'password') {
         // Mostrar contraseña
@@ -468,81 +563,75 @@ function togglePasswordVisibility(inputId) {
         icon.className = 'fas fa-eye-slash';
         button.setAttribute('title', 'Ocultar contraseña');
         button.setAttribute('aria-label', 'Ocultar contraseña');
-        input.setAttribute('autocomplete', 'off');
+
+        // En móviles, configuraciones especiales
+        if (tipoDispositivo === 'mobile') {
+            input.setAttribute('autocomplete', 'off');
+            input.setAttribute('readonly', 'true');
+            // Quitar readonly después de un pequeño delay
+            setTimeout(() => {
+                input.removeAttribute('readonly');
+                input.focus();
+                input.setSelectionRange(cursorPosition, cursorPosition);
+            }, 50);
+        }
     } else {
         // Ocultar contraseña
         input.type = 'password';
         icon.className = 'fas fa-eye';
         button.setAttribute('title', 'Mostrar contraseña');
         button.setAttribute('aria-label', 'Mostrar contraseña');
+
         input.setAttribute('autocomplete', 'new-password');
     }
 
-    // Restaurar la posición del cursor
+    // Restaurar valor y posición del cursor
+    input.value = valorActual;
+
     setTimeout(() => {
         input.focus();
         input.setSelectionRange(cursorPosition, cursorPosition);
-    }, 0);
+    }, 10);
 }
 
-// Función para inicializar todos los campos de contraseña SOLO EN DESKTOP
+// Función para inicializar todos los campos de contraseña
 function inicializarCamposContrasena() {
-    // NO inicializar en móviles
-    if (esMobile()) {
-        console.log('Funcionalidad de mostrar/ocultar contraseña deshabilitada en móviles');
-        return;
-    }
-
-    // Lista de IDs de campos de contraseña que pueden existir en las diferentes vistas
     const camposContrasena = [
-        'Contrasena',           // Campo principal de contraseña
+        'Contrasena',
         'contrasena',
-        'CONTRASENA',           // Variante en mayúsculas
-        'confirmarContrasena',  // Campo de confirmación
-        'nuevaContrasena',      // Campo de nueva contraseña (edición)
-        'NuevaContrasena',      // Variante para reset password
-        'ConfirmarContrasena'   // Variante para reset password
+        'CONTRASENA',
+        'confirmarContrasena',
+        'nuevaContrasena',
+        'NuevaContrasena',
+        'ConfirmarContrasena'
     ];
 
-    // Agregar el botón a cada campo que exista
     camposContrasena.forEach(function (campoId) {
         crearBotonMostrarContrasena(campoId);
     });
 }
 
-// Función para mejorar la experiencia en móviles sin interferir con la funcionalidad nativa
+// Función para mejorar la experiencia en móviles
 function mejorarExperienciaMovil() {
-    if (!esMobile()) return;
+    const tipoDispositivo = detectarTipoDispositivo();
+    if (tipoDispositivo !== 'mobile') return;
 
-    // Agregar un pequeño delay al hacer scroll cuando se enfoca un campo de contraseña
+    // Mejorar scroll cuando se enfoca un campo
     document.addEventListener('focusin', function (e) {
-        if (e.target.type === 'password') {
+        if (e.target.type === 'password' || e.target.type === 'email' || e.target.type === 'text') {
             setTimeout(() => {
-                // Solo hacer scroll si es necesario
                 const rect = e.target.getBoundingClientRect();
-                const isVisible = (
-                    rect.top >= 0 &&
-                    rect.left >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-                );
+                const margenSuperior = 80;
+                const margenInferior = 150;
 
-                if (!isVisible) {
+                if (rect.top < margenSuperior || rect.bottom > (window.innerHeight - margenInferior)) {
                     e.target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'center',
                         inline: 'nearest'
                     });
                 }
-            }, 100);
-        }
-    });
-
-    // Evitar zoom en iOS cuando se enfoca un input
-    const inputs = document.querySelectorAll('input[type="password"]');
-    inputs.forEach(input => {
-        if (input.style.fontSize === '' || parseFloat(input.style.fontSize) < 16) {
-            input.style.fontSize = '16px';
+            }, 300);
         }
     });
 }
@@ -551,78 +640,60 @@ function mejorarExperienciaMovil() {
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function () {
-    // Solo agregar estilos y funcionalidad en desktop
-    if (!esMobile()) {
-        agregarEstilosPersonalizados();
-        inicializarCamposContrasena();
-    } else {
-        // En móviles, solo mejorar la experiencia sin interferir
-        mejorarExperienciaMovil();
-    }
+    // Resetear detección de dispositivo
+    estadoDispositivo = null;
 
-    // Las validaciones siempre se inicializan
+    // Inicializar en orden
+    agregarEstilosPersonalizados();
+    inicializarCamposContrasena();
     inicializarValidacionesPerfil();
+    mejorarExperienciaMovil();
+
+    console.log('Usuario.js inicializado correctamente');
 });
 
-// También inicializar cuando jQuery esté listo (para compatibilidad)
+// Compatibilidad con jQuery
 if (typeof $ !== 'undefined') {
     $(document).ready(function () {
-        if (!esMobile()) {
-            agregarEstilosPersonalizados();
-            inicializarCamposContrasena();
-
-            // Reinicializar si se agregan campos dinámicamente
-            setTimeout(function () {
-                inicializarCamposContrasena();
-            }, 100);
-        } else {
-            mejorarExperienciaMovil();
-        }
-
+        estadoDispositivo = null;
+        agregarEstilosPersonalizados();
+        inicializarCamposContrasena();
         inicializarValidacionesPerfil();
+        mejorarExperienciaMovil();
+
+        // Reinicializar campos dinámicos
+        setTimeout(function () {
+            inicializarCamposContrasena();
+        }, 100);
     });
 }
 
-// Manejar cambios de tamaño de ventana
+// Manejar cambios de orientación/tamaño
 window.addEventListener('resize', function () {
-    // Si cambia de móvil a desktop o viceversa, reinicializar
+    // Reinicializar después de cambio de orientación
     setTimeout(() => {
-        const esMovilAhora = esMobile();
-        const tieneEstilos = document.getElementById('custom-password-styles');
-        const tieneBotones = document.querySelector('.toggle-password');
+        estadoDispositivo = null; // Forzar nueva detección
+        const nuevoTipo = detectarTipoDispositivo();
+        console.log(`Cambio de orientación detectado: ${nuevoTipo}`);
 
-        if (!esMovilAhora && !tieneEstilos) {
-            // Cambió a desktop y no tiene estilos
-            agregarEstilosPersonalizados();
-            inicializarCamposContrasena();
-        } else if (esMovilAhora && tieneBotones) {
-            // Cambió a móvil y tiene botones, removerlos
-            document.querySelectorAll('.toggle-password').forEach(btn => btn.remove());
-            document.querySelectorAll('.password-field-container').forEach(container => {
-                container.classList.remove('password-field-container');
-                const input = container.querySelector('input[type="password"], input[type="text"]');
-                if (input && input.style.paddingRight) {
-                    input.style.paddingRight = '';
-                }
-            });
+        // Remover estilos anteriores y reinicializar
+        const estilosAnteriores = document.getElementById('custom-password-styles');
+        if (estilosAnteriores) {
+            estilosAnteriores.remove();
         }
+
+        agregarEstilosPersonalizados();
     }, 100);
 });
 
-// ===== FUNCIONES PÚBLICAS PARA USO MANUAL =====
+// ===== FUNCIONES PÚBLICAS =====
 
-// Función que se puede llamar manualmente para agregar el botón a un campo específico
 function agregarMostrarContrasena(inputId) {
-    if (!esMobile()) {
-        crearBotonMostrarContrasena(inputId);
-    }
+    crearBotonMostrarContrasena(inputId);
 }
 
-// Función para agregar a múltiples campos
 function agregarMostrarContrasenaMultiple(arrayIds) {
-    if (!esMobile()) {
-        arrayIds.forEach(function (id) {
-            crearBotonMostrarContrasena(id);
-        });
-    }
+    arrayIds.forEach(function (id) {
+        crearBotonMostrarContrasena(id);
+    });
 }

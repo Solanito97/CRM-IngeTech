@@ -681,30 +681,16 @@ namespace IngeTechCRM.Controllers
             }
         }
 
+       
+
+        // Método VerComunicado corregido
         [Authorize]
-        public IActionResult MisComunicados()
+        public IActionResult VerComunicado(int id, int? usuarioId = null)
         {
-            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
-            if (!usuarioId.HasValue)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            var usuarioActualId = HttpContext.Session.GetInt32("UsuarioId");
+            var tipoUsuarioId = HttpContext.Session.GetInt32("TipoUsuarioId");
 
-            var comunicados = _context.EnviosComunicado
-                .Include(e => e.Comunicado)
-                .Where(e => e.ID_USUARIO_DESTINATARIO == usuarioId)
-                .OrderByDescending(e => e.FECHA_ENVIO)
-                .Select(e => e.Comunicado)
-                .ToList();
-
-            return View(comunicados);
-        }
-
-        [Authorize]
-        public IActionResult VerComunicado(int id)
-        {
-            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
-            if (!usuarioId.HasValue)
+            if (!usuarioActualId.HasValue)
             {
                 return RedirectToAction("Login", "Account");
             }
@@ -718,16 +704,117 @@ namespace IngeTechCRM.Controllers
                 return NotFound();
             }
 
-            // Verificar si este comunicado fue enviado al usuario actual
-            var envio = _context.EnviosComunicado
-                .FirstOrDefault(e => e.ID_COMUNICADO == id && e.ID_USUARIO_DESTINATARIO == usuarioId);
+            bool esAdministrador = tipoUsuarioId == 1;
 
-            if (envio == null)
+            if (!esAdministrador)
             {
-                return Forbid();
+                // Para usuarios regulares, verificar que el comunicado les fue enviado
+                var envio = _context.EnviosComunicado
+                    .FirstOrDefault(e => e.ID_COMUNICADO == id && e.ID_USUARIO_DESTINATARIO == usuarioActualId);
+
+                if (envio == null)
+                {
+                    return View("AccessDenied");
+                }
+            }
+
+            // Si es administrador, agregar información adicional al ViewBag
+            if (esAdministrador && usuarioId.HasValue)
+            {
+                var usuarioObjetivo = _context.Usuarios
+                    .Include(u => u.TipoUsuario)
+                    .FirstOrDefault(u => u.IDENTIFICACION == usuarioId);
+
+                ViewBag.UsuarioObjetivo = usuarioObjetivo;
+                ViewBag.ViendoComoAdmin = true;
             }
 
             return View(comunicado);
+        }
+
+        // Método nuevo para que administradores vean comunicados por usuario
+        [Authorize]
+        public IActionResult ComunicadosPorUsuario(int usuarioId)
+        {
+            var tipoUsuarioId = HttpContext.Session.GetInt32("TipoUsuarioId");
+
+            // Solo administradores pueden ver comunicados de otros usuarios
+            if (tipoUsuarioId != 1)
+            {
+                return View("AccessDenied");
+            }
+
+            var usuario = _context.Usuarios
+                .Include(u => u.TipoUsuario)
+                .Include(u => u.Provincia)
+                .FirstOrDefault(u => u.IDENTIFICACION == usuarioId);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            var comunicados = _context.EnviosComunicado
+                .Include(e => e.Comunicado)
+                .ThenInclude(c => c.UsuarioCreador)
+                .Where(e => e.ID_USUARIO_DESTINATARIO == usuarioId)
+                .OrderByDescending(e => e.FECHA_ENVIO)
+                .Select(e => e.Comunicado)
+                .ToList();
+
+            ViewBag.Usuario = usuario;
+            return View("MisComunicados", comunicados);
+        }
+
+        // Método mejorado MisComunicados para manejar vista de administrador
+        [Authorize]
+        public IActionResult MisComunicados(int? usuarioId = null)
+        {
+            var usuarioActualId = HttpContext.Session.GetInt32("UsuarioId");
+            var tipoUsuarioId = HttpContext.Session.GetInt32("TipoUsuarioId");
+
+            if (!usuarioActualId.HasValue)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Determinar de qué usuario mostrar los comunicados
+            int targetUsuarioId = usuarioActualId.Value;
+            bool viendoComoAdmin = false;
+
+            if (usuarioId.HasValue && tipoUsuarioId == 1)
+            {
+                // Es administrador viendo comunicados de otro usuario
+                targetUsuarioId = usuarioId.Value;
+                viendoComoAdmin = true;
+
+                var usuarioObjetivo = _context.Usuarios
+                    .Include(u => u.TipoUsuario)
+                    .FirstOrDefault(u => u.IDENTIFICACION == targetUsuarioId);
+
+                if (usuarioObjetivo == null)
+                {
+                    return NotFound();
+                }
+
+                ViewBag.UsuarioObjetivo = usuarioObjetivo;
+            }
+            else if (usuarioId.HasValue && tipoUsuarioId != 1)
+            {
+                // Usuario regular intentando ver comunicados de otro usuario
+                return View("AccessDenied");
+            }
+
+            var comunicados = _context.EnviosComunicado
+                .Include(e => e.Comunicado)
+                .ThenInclude(c => c.UsuarioCreador)
+                .Where(e => e.ID_USUARIO_DESTINATARIO == targetUsuarioId)
+                .OrderByDescending(e => e.FECHA_ENVIO)
+                .Select(e => e.Comunicado)
+                .ToList();
+
+            ViewBag.ViendoComoAdmin = viendoComoAdmin;
+            return View(comunicados);
         }
 
         private bool ComunicadoExists(int id)

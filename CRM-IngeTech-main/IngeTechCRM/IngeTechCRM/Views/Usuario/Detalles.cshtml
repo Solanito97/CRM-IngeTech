@@ -89,25 +89,25 @@
                 <div class="p-6">
                     @if (ViewBag.Pedidos != null && ViewBag.Pedidos.Count > 0)
                     {
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">ID</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Fecha</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Total</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Estado</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200 bg-white">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">ID</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Fecha</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Total</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Estado</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 bg-white">
                                     @foreach (var pedido in ViewBag.Pedidos)
                                     {
-                                        <tr class="hover:bg-gray-50">
-                                            <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">@pedido.ID_PEDIDO</td>
-                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@pedido.FECHA_PEDIDO.ToString("dd/MM/yyyy")</td>
-                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@pedido.TOTAL.ToString("C2")</td>
-                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                                <tr class="hover:bg-gray-50">
+                                                    <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">@pedido.ID_PEDIDO</td>
+                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@pedido.FECHA_PEDIDO.ToString("dd/MM/yyyy")</td>
+                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">@pedido.TOTAL.ToString("C2")</td>
+                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                                                 @{
                                                     string claseBadge = "bg-gray-100 text-gray-800";
 
@@ -124,25 +124,37 @@
                                                         claseBadge = "bg-red-100 text-red-800";
                                                     }
                                                 }
-                                                <span class="rounded-full @claseBadge px-3 py-1 text-xs font-medium">
+                                                        <span class="rounded-full @claseBadge px-3 py-1 text-xs font-medium">
                                                     @pedido.ESTADO
-                                                </span>
-                                            </td>
-                                            <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Ver detalles</a>
-                                            </td>
-                                        </tr>
+                                                        </span>
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
+                                                        <!-- CORREGIDO: Enlace a detalles del pedido -->
+                                                        <a href="@Url.Action("Detalles", "Pedido", new { id = pedido.ID_PEDIDO })" 
+                                                           class="text-indigo-600 hover:text-indigo-900 transition-colors">
+                                                            Ver detalles
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                     }
-                                </tbody>
-                            </table>
-                        </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Enlace para ver todos los pedidos del usuario -->
+                          @*   <div class="mt-4 text-center">
+                                <a href="@Url.Action("PedidosPorUsuario", "Pedido", new { usuarioId = Model.IDENTIFICACION })" 
+                                   class="inline-flex items-center text-indigo-600 hover:text-indigo-900 font-medium">
+                                    <i class="fas fa-list mr-2"></i>
+                                    Ver todos los pedidos de este usuario
+                                </a>
+                            </div> *@
                     }
                     else
                     {
-                        <div class="flex flex-col items-center justify-center py-8 text-center text-gray-500">
-                            <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-3"></i>
-                            <p>Este usuario no tiene pedidos recientes.</p>
-                        </div>
+                            <div class="flex flex-col items-center justify-center py-8 text-center text-gray-500">
+                                <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-3"></i>
+                                <p>Este usuario no tiene pedidos recientes.</p>
+                            </div>
                     }
                 </div>
             </div>
@@ -156,7 +168,7 @@
                     <h3 class="text-xl font-semibold text-gray-800">Acciones</h3>
                 </div>
                 <div class="divide-y divide-gray-100">
-                    <a href="@Url.Action("Editar", new { id = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50">
+                    <a href="@Url.Action("Editar", new { id = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
                         <div class="flex items-center">
                             <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
                                 <i class="fas fa-edit"></i>
@@ -165,7 +177,7 @@
                         </div>
                         <i class="fas fa-chevron-right text-gray-400"></i>
                     </a>
-                    <a href="@Url.Action("Eliminar", new { id = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50">
+                    <a href="@Url.Action("Eliminar", new { id = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
                         <div class="flex items-center">
                             <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-red-600">
                                 <i class="fas fa-trash"></i>
@@ -174,7 +186,8 @@
                         </div>
                         <i class="fas fa-chevron-right text-gray-400"></i>
                     </a>
-                    <a href="@Url.Action("EnviarCorreo", new { id = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50">
+                    <!-- CORREGIDO: Enlace para enviar correo -->
+                    <a href="@Url.Action("EnviarCorreo", "Usuario", new { id = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
                         <div class="flex items-center">
                             <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
                                 <i class="fas fa-envelope"></i>
@@ -183,12 +196,23 @@
                         </div>
                         <i class="fas fa-chevron-right text-gray-400"></i>
                     </a>
-                    <a href="@Url.Action("RestablecerContrasena", new { id = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50">
+                    <!-- CORREGIDO: Enlace para restablecer contraseña -->
+                    <a href="@Url.Action("RestablecerContrasena", "Usuario", new { id = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
                         <div class="flex items-center">
                             <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600">
                                 <i class="fas fa-key"></i>
                             </div>
                             <span class="font-medium">Restablecer Contraseña</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </a>
+                    <!-- NUEVO: Enlace para ver historial de comunicados -->
+                    <a href="@Url.Action("ComunicadosPorUsuario", "Comunicado", new { usuarioId = Model.IDENTIFICACION })" class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center">
+                            <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 text-purple-600">
+                                <i class="fas fa-envelope-open"></i>
+                            </div>
+                            <span class="font-medium">Ver Todos los Comunicados</span>
                         </div>
                         <i class="fas fa-chevron-right text-gray-400"></i>
                     </a>
@@ -203,29 +227,54 @@
                 <div class="p-6">
                     @if (ViewBag.Comunicados != null && ViewBag.Comunicados.Count > 0)
                     {
-                        <div class="space-y-4">
+                            <div class="space-y-4">
                             @foreach (var comunicado in ViewBag.Comunicados)
                             {
-                                <div class="rounded-lg border border-gray-200 p-4 hover:bg-gray-50">
-                                    <h4 class="mb-2 font-semibold text-gray-800">@comunicado.TITULO</h4>
-                                    <p class="text-sm text-gray-600 line-clamp-2">@comunicado.MENSAJE</p>
-                                    <div class="mt-2 flex justify-between text-xs text-gray-500">
-                                        <span>@comunicado.FECHA_CREACION.ToString("dd/MM/yyyy")</span>
-                                        <a href="#" class="text-indigo-600 hover:underline">Ver completo</a>
-                                    </div>
-                                </div>
+                                        <div class="rounded-lg border border-gray-200 p-4 hover:bg-gray-50 transition-colors">
+                                            <h4 class="mb-2 font-semibold text-gray-800">@comunicado.TITULO</h4>
+                                            <p class="text-sm text-gray-600 line-clamp-2">
+                                        @{
+                                            // Truncar el mensaje si es muy largo
+                                            string mensajeTruncado = comunicado.MENSAJE;
+                                            if (mensajeTruncado.Length > 100)
+                                            {
+                                                mensajeTruncado = mensajeTruncado.Substring(0, 100) + "...";
+                                            }
+                                            // Remover tags HTML para el preview
+                                            mensajeTruncado = System.Text.RegularExpressions.Regex.Replace(mensajeTruncado, "<.*?>", "");
+                                        }
+                                        @mensajeTruncado
+                                            </p>
+                                            <div class="mt-2 flex justify-between text-xs text-gray-500">
+                                                <span>@comunicado.FECHA_CREACION.ToString("dd/MM/yyyy")</span>
+                                                <!-- CORREGIDO: Enlace a ver comunicado completo -->
+                                                <a href="@Url.Action("VerComunicado", "Comunicado", new { id = comunicado.ID_COMUNICADO })" 
+                                                   class="text-indigo-600 hover:underline transition-colors">
+                                                    Ver completo
+                                                </a>
+                                            </div>
+                                        </div>
                             }
-                        </div>
+                            </div>
+                            <!-- NUEVO: Enlace para ver todos los comunicados del usuario -->
+                            <div class="mt-4 text-center">
+                                <a href="@Url.Action("ComunicadosPorUsuario", "Comunicado", new { usuarioId = Model.IDENTIFICACION })" 
+                                   class="inline-flex items-center text-indigo-600 hover:text-indigo-900 font-medium">
+                                    <i class="fas fa-envelope-open mr-2"></i>
+                                    Ver todos los comunicados de este usuario
+                                </a>
+                            </div>
                     }
                     else
                     {
-                        <div class="flex flex-col items-center justify-center py-8 text-center text-gray-500">
-                            <i class="fas fa-envelope-open text-4xl text-gray-300 mb-3"></i>
-                            <p>No hay comunicados recibidos por este usuario.</p>
-                        </div>
+                            <div class="flex flex-col items-center justify-center py-8 text-center text-gray-500">
+                                <i class="fas fa-envelope-open text-4xl text-gray-300 mb-3"></i>
+                                <p>No hay comunicados recibidos por este usuario.</p>
+                            </div>
                     }
                 </div>
             </div>
         </div>
     </div>
 </div>
+

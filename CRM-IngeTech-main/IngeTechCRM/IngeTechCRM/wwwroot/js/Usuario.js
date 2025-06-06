@@ -1,4 +1,4 @@
-﻿// wwwroot/js/usuario.js
+﻿// wwwroot/js/usuario.js - Versión corregida para móviles
 
 // Función para prevenir la entrada de números en tiempo real (solo letras y tildes)
 function soloLetrasYTildes(event) {
@@ -299,71 +299,116 @@ function validarFormularioPerfil() {
     return esValido;
 }
 
-// ===== FUNCIONALIDAD MOSTRAR/OCULTAR CONTRASEÑA =====
+// ===== FUNCIONALIDAD MOSTRAR/OCULTAR CONTRASEÑA - VERSIÓN MÓVIL OPTIMIZADA =====
 
-// Función para agregar estilos CSS automáticamente
+// Función para detectar si es un dispositivo móvil
+function esMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        (window.innerWidth <= 768);
+}
+
+// Función para agregar estilos CSS optimizados para móviles
 function agregarEstilosPersonalizados() {
     // Verificar si ya se agregaron los estilos
     if (document.getElementById('custom-password-styles')) return;
 
     const style = document.createElement('style');
     style.id = 'custom-password-styles';
+
+    // CSS optimizado para móviles
     style.textContent = `
-        /* Ocultar botones nativos del navegador */
-        input[type="password"]::-ms-reveal,
-        input[type="password"]::-webkit-credentials-auto-fill-button {
-            display: none !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
-        
-        input[type="password"]::-moz-reveal {
+        /* Estilos más conservadores para ocultar botones nativos */
+        input[type="password"]::-ms-reveal {
             display: none !important;
         }
         
-        input[type="password"]::-webkit-textfield-decoration-container {
-            visibility: hidden !important;
-            display: none !important;
-        }
-        
-        input[type="password"] {
-            -webkit-text-security: disc;
+        /* Solo ocultar botones específicos de Chrome en desktop */
+        @media (min-width: 769px) {
+            input[type="password"]::-webkit-credentials-auto-fill-button {
+                display: none !important;
+                visibility: hidden !important;
+            }
         }
         
         /* Estilos para botón personalizado */
         .toggle-password {
             position: absolute;
-            right: 0;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
-            padding: 0.5rem;
+            padding: 8px;
             cursor: pointer;
             z-index: 10;
             background: transparent;
             border: none;
             color: #6b7280;
             transition: color 0.2s ease-in-out;
-            border-radius: 0.25rem;
+            border-radius: 4px;
+            min-width: 40px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .toggle-password:hover {
             color: #4f46e5;
+            background-color: rgba(79, 70, 229, 0.1);
         }
         
         .toggle-password:focus {
-            outline: none;
+            outline: 2px solid #4f46e5;
+            outline-offset: 2px;
             color: #4f46e5;
-            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+            background-color: rgba(79, 70, 229, 0.1);
+        }
+        
+        .toggle-password:active {
+            background-color: rgba(79, 70, 229, 0.2);
         }
         
         .toggle-password i {
-            font-size: 1rem;
+            font-size: 16px;
             pointer-events: none;
+        }
+        
+        .password-field-container {
+            position: relative;
         }
         
         .password-field-container input[type="password"],
         .password-field-container input[type="text"] {
-            padding-right: 2.5rem !important;
+            padding-right: 48px !important;
+        }
+        
+        /* Asegurar que el campo sea accesible en móviles */
+        @media (max-width: 768px) {
+            .toggle-password {
+                right: 4px;
+                padding: 12px;
+                min-width: 44px;
+                min-height: 44px;
+            }
+            
+            .password-field-container input[type="password"],
+            .password-field-container input[type="text"] {
+                padding-right: 52px !important;
+            }
+            
+            /* Asegurar que los campos de contraseña funcionen en móviles */
+            input[type="password"] {
+                -webkit-text-security: disc;
+                font-family: text-security-disc, -apple-system, BlinkMacSystemFont, sans-serif;
+            }
+        }
+        
+        /* Mejorar accesibilidad táctil */
+        @media (hover: none) and (pointer: coarse) {
+            .toggle-password {
+                min-width: 48px;
+                min-height: 48px;
+                padding: 12px;
+            }
         }
     `;
 
@@ -387,24 +432,30 @@ function crearBotonMostrarContrasena(inputId) {
     // Agregar clase para identificar contenedores de contraseña
     container.classList.add('password-field-container');
 
-    // Asegurar que el input tenga el padding correcto para nuestro botón
-    if (!input.style.paddingRight) {
-        input.style.paddingRight = '2.5rem';
-    }
-
-    // Prevenir que aparezcan botones nativos del navegador
+    // Configurar atributos del input para móviles
     input.setAttribute('autocomplete', 'new-password');
+    input.setAttribute('spellcheck', 'false');
+    input.setAttribute('autocorrect', 'off');
+    input.setAttribute('autocapitalize', 'none');
 
     // Crear el botón de mostrar/ocultar
     const toggleButton = document.createElement('button');
     toggleButton.type = 'button';
     toggleButton.className = 'toggle-password';
-    toggleButton.innerHTML = '<i class="fas fa-eye"></i>';
+    toggleButton.innerHTML = '<i class="fas fa-eye" aria-hidden="true"></i>';
     toggleButton.setAttribute('title', 'Mostrar contraseña');
     toggleButton.setAttribute('aria-label', 'Mostrar contraseña');
+    toggleButton.setAttribute('tabindex', '0');
 
-    // Agregar el evento click
+    // Agregar el evento click con mejor manejo móvil
     toggleButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        togglePasswordVisibility(inputId);
+    });
+
+    // Agregar soporte para touch
+    toggleButton.addEventListener('touchend', function (e) {
         e.preventDefault();
         e.stopPropagation();
         togglePasswordVisibility(inputId);
@@ -415,6 +466,14 @@ function crearBotonMostrarContrasena(inputId) {
         e.preventDefault();
     });
 
+    // Soporte para navegación por teclado
+    toggleButton.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            togglePasswordVisibility(inputId);
+        }
+    });
+
     // Insertar el botón en el contenedor
     container.appendChild(toggleButton);
 }
@@ -422,7 +481,11 @@ function crearBotonMostrarContrasena(inputId) {
 // Función para alternar la visibilidad de la contraseña
 function togglePasswordVisibility(inputId) {
     const input = document.getElementById(inputId);
+    if (!input) return;
+
     const button = input.parentElement.querySelector('.toggle-password');
+    if (!button) return;
+
     const icon = button.querySelector('i');
 
     if (input.type === 'password') {
@@ -432,8 +495,15 @@ function togglePasswordVisibility(inputId) {
         button.setAttribute('title', 'Ocultar contraseña');
         button.setAttribute('aria-label', 'Ocultar contraseña');
 
-        // Asegurar que no aparezcan botones nativos cuando cambiamos a text
-        input.setAttribute('autocomplete', 'off');
+        // En móviles, mantener algunos atributos para evitar autocompletado
+        if (esMobile()) {
+            input.setAttribute('autocomplete', 'off');
+            input.setAttribute('readonly', 'true');
+            // Permitir escritura después de un pequeño delay
+            setTimeout(() => {
+                input.removeAttribute('readonly');
+            }, 100);
+        }
     } else {
         // Ocultar contraseña
         input.type = 'password';
@@ -441,9 +511,16 @@ function togglePasswordVisibility(inputId) {
         button.setAttribute('title', 'Mostrar contraseña');
         button.setAttribute('aria-label', 'Mostrar contraseña');
 
-        // Restaurar autocomplete para contraseñas
+        // Restaurar atributos de contraseña
         input.setAttribute('autocomplete', 'new-password');
     }
+
+    // Mantener el foco en el input después del toggle
+    const cursorPosition = input.selectionStart;
+    setTimeout(() => {
+        input.focus();
+        input.setSelectionRange(cursorPosition, cursorPosition);
+    }, 10);
 }
 
 // Función para inicializar todos los campos de contraseña
@@ -465,6 +542,19 @@ function inicializarCamposContrasena() {
     });
 }
 
+// Función para manejar problemas de enfoque en móviles
+function mejorarFocoMovil() {
+    // Agregar event listeners para mejorar la experiencia en móviles
+    document.addEventListener('focusin', function (e) {
+        if (e.target.type === 'password' || e.target.type === 'text') {
+            // Pequeño delay para asegurar que el campo esté completamente enfocado
+            setTimeout(() => {
+                e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+    });
+}
+
 // ===== INICIALIZACIÓN =====
 
 // Inicializar cuando el DOM esté listo
@@ -472,6 +562,11 @@ document.addEventListener('DOMContentLoaded', function () {
     agregarEstilosPersonalizados();
     inicializarCamposContrasena();
     inicializarValidacionesPerfil();
+
+    // Mejoras específicas para móviles
+    if (esMobile()) {
+        mejorarFocoMovil();
+    }
 });
 
 // También inicializar cuando jQuery esté listo (para compatibilidad)

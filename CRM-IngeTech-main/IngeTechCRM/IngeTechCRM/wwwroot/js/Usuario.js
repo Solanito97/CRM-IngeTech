@@ -22,11 +22,15 @@ function validarNombreCompleto(input) {
     if (!regex.test(valor)) {
         // Remover caracteres no válidos
         input.value = valor.replace(/[^a-zA-ZÀ-ÿ\u00f1\u00d1\s]/g, '');
-        errorDiv.classList.remove('hidden');
+        if (errorDiv) {
+            errorDiv.classList.remove('hidden');
+        }
         input.classList.add('border-red-500');
         input.classList.remove('border-gray-300');
     } else {
-        errorDiv.classList.add('hidden');
+        if (errorDiv) {
+            errorDiv.classList.add('hidden');
+        }
         input.classList.remove('border-red-500');
         input.classList.add('border-gray-300');
     }
@@ -53,11 +57,15 @@ function validarTelefono(input) {
     if (!regex.test(valor)) {
         // Remover caracteres no válidos (mantener solo números)
         input.value = valor.replace(/[^0-9]/g, '');
-        errorDiv.classList.remove('hidden');
+        if (errorDiv) {
+            errorDiv.classList.remove('hidden');
+        }
         input.classList.add('border-red-500');
         input.classList.remove('border-gray-300');
     } else {
-        errorDiv.classList.add('hidden');
+        if (errorDiv) {
+            errorDiv.classList.add('hidden');
+        }
         input.classList.remove('border-red-500');
         input.classList.add('border-gray-300');
     }
@@ -86,6 +94,209 @@ function validarPegado(event) {
     validarTelefono(input);
 
     return false;
+}
+
+// ===== VALIDACIONES ADICIONALES PARA FORMULARIO DE PERFIL =====
+
+// Función para validar campos vacíos
+function validarCampoVacio(elementoId, errorId, mensajeError) {
+    const elemento = document.getElementById(elementoId);
+    const errorDiv = document.getElementById(errorId);
+
+    if (!elemento) return true;
+
+    const valor = elemento.value.trim();
+
+    if (valor === '') {
+        elemento.classList.add('border-red-500');
+        elemento.classList.remove('border-gray-300');
+        if (errorDiv) {
+            if (mensajeError) errorDiv.textContent = mensajeError;
+            errorDiv.classList.remove('hidden');
+        }
+        return false;
+    } else {
+        elemento.classList.remove('border-red-500');
+        elemento.classList.add('border-gray-300');
+        if (errorDiv) {
+            errorDiv.classList.add('hidden');
+        }
+        return true;
+    }
+}
+
+// Función para validar longitud mínima
+function validarLongitudMinima(elementoId, longitudMinima, mensajeError) {
+    const elemento = document.getElementById(elementoId);
+    if (!elemento) return true;
+
+    const valor = elemento.value.trim();
+    const errorDiv = elemento.parentElement.querySelector('.text-red-600');
+
+    if (valor.length > 0 && valor.length < longitudMinima) {
+        elemento.classList.add('border-red-500');
+        elemento.classList.remove('border-gray-300');
+        if (errorDiv && mensajeError) {
+            errorDiv.textContent = mensajeError;
+            errorDiv.classList.remove('hidden');
+        }
+        return false;
+    }
+    return true;
+}
+
+// Función para inicializar validaciones del formulario de perfil
+function inicializarValidacionesPerfil() {
+    // Validación de nombre de usuario
+    const nombreUsuario = document.getElementById('NombreUsuario');
+    if (nombreUsuario) {
+        nombreUsuario.addEventListener('blur', function () {
+            validarCampoVacio('NombreUsuario', 'error-nombreUsuario', 'El nombre de usuario es obligatorio');
+            validarLongitudMinima('NombreUsuario', 3, 'El nombre de usuario debe tener al menos 3 caracteres');
+        });
+    }
+
+    // Validación de provincia
+    const provincia = document.getElementById('IdProvincia');
+    if (provincia) {
+        provincia.addEventListener('change', function () {
+            validarCampoVacio('IdProvincia', 'error-provincia', 'Debe seleccionar una provincia');
+        });
+    }
+
+    // Validación de dirección
+    const direccion = document.getElementById('DireccionCompleta');
+    if (direccion) {
+        direccion.addEventListener('blur', function () {
+            const valor = this.value.trim();
+            const errorDiv = document.getElementById('error-direccion');
+
+            if (valor === '') {
+                this.classList.add('border-red-500');
+                if (errorDiv) {
+                    errorDiv.textContent = 'La dirección es obligatoria';
+                    errorDiv.classList.remove('hidden');
+                }
+            } else if (valor.length < 10) {
+                this.classList.add('border-red-500');
+                if (errorDiv) {
+                    errorDiv.textContent = 'La dirección debe tener al menos 10 caracteres';
+                    errorDiv.classList.remove('hidden');
+                }
+            } else {
+                this.classList.remove('border-red-500');
+                if (errorDiv) {
+                    errorDiv.classList.add('hidden');
+                }
+            }
+        });
+    }
+
+    // Validación de confirmación de contraseña
+    const confirmarContrasena = document.getElementById('confirmarContrasena');
+    if (confirmarContrasena) {
+        confirmarContrasena.addEventListener('keyup', function () {
+            const contrasena = document.getElementById('Contrasena');
+            const errorDiv = document.getElementById('error-confirmar-contrasena');
+
+            if (!contrasena) return;
+
+            if (contrasena.value === this.value) {
+                this.classList.remove('border-red-500');
+                this.classList.add('border-green-500');
+                if (errorDiv) errorDiv.classList.add('hidden');
+            } else {
+                this.classList.remove('border-green-500');
+                this.classList.add('border-red-500');
+                if (errorDiv) errorDiv.classList.remove('hidden');
+            }
+        });
+    }
+
+    // Validación completa del formulario al enviar
+    const formularioPerfil = document.getElementById('perfilForm');
+    if (formularioPerfil) {
+        formularioPerfil.addEventListener('submit', function (event) {
+            if (!validarFormularioPerfil()) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    }
+}
+
+// Función para validar todo el formulario de perfil
+function validarFormularioPerfil() {
+    let esValido = true;
+    let primerCampoInvalido = null;
+
+    // Definir campos obligatorios con sus validaciones
+    const camposObligatorios = [
+        { id: 'NombreUsuario', min: 3, nombre: 'Nombre de Usuario' },
+        { id: 'NombreCompleto', min: 2, nombre: 'Nombre Completo' },
+        { id: 'Telefono', exact: 8, nombre: 'Teléfono' },
+        { id: 'IdProvincia', select: true, nombre: 'Provincia' },
+        { id: 'DireccionCompleta', min: 10, nombre: 'Dirección' }
+    ];
+
+    // Validar cada campo
+    camposObligatorios.forEach(function (campo) {
+        const elemento = document.getElementById(campo.id);
+        if (!elemento) return;
+
+        const valor = elemento.value.trim();
+        let valido = true;
+
+        if (valor === '') {
+            valido = false;
+        } else if (campo.exact && valor.length !== campo.exact) {
+            valido = false;
+        } else if (campo.min && valor.length < campo.min) {
+            valido = false;
+        }
+
+        if (!valido) {
+            elemento.classList.add('border-red-500');
+            esValido = false;
+            if (!primerCampoInvalido) primerCampoInvalido = elemento;
+        }
+    });
+
+    // Validar contraseñas si se proporcionan
+    const contrasena = document.getElementById('Contrasena');
+    const confirmarContrasena = document.getElementById('confirmarContrasena');
+
+    if (contrasena && confirmarContrasena) {
+        const valorContrasena = contrasena.value;
+        const valorConfirmar = confirmarContrasena.value;
+
+        if (valorContrasena !== '' || valorConfirmar !== '') {
+            if (valorContrasena.length < 6) {
+                contrasena.classList.add('border-red-500');
+                const errorContrasena = document.getElementById('error-contrasena');
+                if (errorContrasena) errorContrasena.classList.remove('hidden');
+                esValido = false;
+                if (!primerCampoInvalido) primerCampoInvalido = contrasena;
+            }
+
+            if (valorContrasena !== valorConfirmar) {
+                confirmarContrasena.classList.add('border-red-500');
+                const errorConfirmar = document.getElementById('error-confirmar-contrasena');
+                if (errorConfirmar) errorConfirmar.classList.remove('hidden');
+                esValido = false;
+                if (!primerCampoInvalido) primerCampoInvalido = confirmarContrasena;
+            }
+        }
+    }
+
+    if (!esValido) {
+        if (primerCampoInvalido) {
+            primerCampoInvalido.focus();
+        }
+        alert('Por favor complete todos los campos obligatorios correctamente.');
+    }
+
+    return esValido;
 }
 
 // ===== FUNCIONALIDAD MOSTRAR/OCULTAR CONTRASEÑA =====
@@ -254,24 +465,31 @@ function inicializarCamposContrasena() {
     });
 }
 
+// ===== INICIALIZACIÓN =====
+
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function () {
-    agregarEstilosPersonalizados(); // Agregar estilos CSS automáticamente
+    agregarEstilosPersonalizados();
     inicializarCamposContrasena();
+    inicializarValidacionesPerfil();
 });
 
 // También inicializar cuando jQuery esté listo (para compatibilidad)
-$(document).ready(function () {
-    agregarEstilosPersonalizados(); // Agregar estilos CSS automáticamente
-    inicializarCamposContrasena();
-
-    // Reinicializar si se agregan campos dinámicamente
-    setTimeout(function () {
+if (typeof $ !== 'undefined') {
+    $(document).ready(function () {
+        agregarEstilosPersonalizados();
         inicializarCamposContrasena();
-    }, 100);
-});
+        inicializarValidacionesPerfil();
 
-// ===== FUNCIÓN ADICIONAL PARA AGREGAR MANUALMENTE =====
+        // Reinicializar si se agregan campos dinámicamente
+        setTimeout(function () {
+            inicializarCamposContrasena();
+            inicializarValidacionesPerfil();
+        }, 100);
+    });
+}
+
+// ===== FUNCIONES PÚBLICAS PARA USO MANUAL =====
 
 // Función que se puede llamar manualmente para agregar el botón a un campo específico
 function agregarMostrarContrasena(inputId) {

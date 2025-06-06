@@ -18,9 +18,13 @@ namespace IngeTechCRM.Controllers
     {
         private readonly IngeTechDbContext _context;
 
-        public UsuarioController(IngeTechDbContext context)
+        private readonly IConfiguration _configuration;
+
+        
+        public UsuarioController(IngeTechDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // Acción para mostrar la lista de usuarios con filtros
@@ -462,50 +466,640 @@ namespace IngeTechCRM.Controllers
         // Método para aplicar hash a las contraseñas
         private string HashPassword(string password)
         {
-            // Generar salt aleatorio
-            byte[] salt = new byte[128 / 8];
+            // Generar una sal aleatoria
+            byte[] salt = new byte[16];
             using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(salt);
             }
 
-            // Derivar una subkey de 256 bits (usar HMACSHA256 con 10,000 iteraciones)
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
+            // Número de iteraciones (más iteraciones = más seguro pero más lento)
+            int iterations = 10000;
 
-            // Formato: {algorithm}${iterations}${base64salt}${base64hash}
-            return $"PBKDF2${10000}${Convert.ToBase64String(salt)}${hashed}";
+            // Derivar la clave usando PBKDF2
+            using (var deriveBytes = new Rfc2898DeriveBytes(
+                password,
+                salt,
+                iterations,
+                HashAlgorithmName.SHA256))
+            {
+                byte[] hash = deriveBytes.GetBytes(32); // 256 bits
+                string saltString = Convert.ToBase64String(salt);
+                string hashString = Convert.ToBase64String(hash);
+
+                // Formato: PBKDF2$iteraciones$salt==$hash (MISMO formato que AccountController)
+                return $"PBKDF2${iterations}${saltString}==${hashString}";
+            }
         }
 
-        // Método para verificar una contraseña hasheada
-        private bool VerifyPassword(string hashedPassword, string providedPassword)
+        // Método para verificar una contraseña hasheada (CORREGIDO - mismo que AccountController)
+        private bool VerifyPassword(string password, string hashedPassword)
         {
-            // Separar los componentes del hash almacenado
-            var parts = hashedPassword.Split('$');
-            if (parts.Length != 4)
+            // Verificar primero si la contraseña almacenada ya está hasheada
+            if (!hashedPassword.StartsWith("PBKDF2$"))
             {
-                return false; // Formato inválido
+                // Si la contraseña no está hasheada, comparar directamente (para usuarios antiguos)
+                return password == hashedPassword;
             }
 
-            var algorithm = parts[0];
-            var iterations = int.Parse(parts[1]);
-            var salt = Convert.FromBase64String(parts[2]);
-            var hash = parts[3];
+            // El formato es PBKDF2$iteraciones$salt==$hash
+            string[] parts = hashedPassword.Split('$');
+            if (parts.Length != 4)
+                return false;
 
-            // Calcular hash de la contraseña proporcionada
-            string newHash = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: providedPassword,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: iterations,
-                numBytesRequested: 256 / 8));
+            int iterations;
+            if (!int.TryParse(parts[1], out iterations))
+                return false;
 
-            // Comparar los hashes
-            return newHash == hash;
+            string saltBase64 = parts[2];
+            string storedHashBase64 = parts[3];
+
+            try
+            {
+                // Extraer la sal (puede tener '==' al final)
+                string actualSaltBase64 = saltBase64;
+                if (saltBase64.EndsWith("=="))
+                {
+                    actualSaltBase64 = saltBase64.Substring(0, saltBase64.Length - 2);
+                }
+
+                byte[] salt = Convert.FromBase64String(actualSaltBase64);
+
+                // Recrear el hash con la misma sal y el mismo número de iteraciones
+                using (var deriveBytes = new Rfc2898DeriveBytes(
+                    password,
+                    salt,
+                    iterations,
+                    HashAlgorithmName.SHA256))
+                {
+                    byte[] hash = deriveBytes.GetBytes(32); // 256 bits
+                    string computedHashBase64 = Convert.ToBase64String(hash);
+
+                    // Comparar el hash calculado con el hash almacenado
+                    return computedHashBase64 == storedHashBase64;
+                }
+            }
+            catch
+            {
+                // Si hay algún error en la conversión, la verificación falla
+                return false;
+            }
+        }
+
+        #endregion
+
+
+        #region Métodos auxiliares para correo
+
+        // Método para enviar correo personalizado desde administrador a usuario
+        private async Task<bool> EnviarCorreoPersonalizado(string destinatario, string nombreDestinatario, string asunto, string mensaje, string nombreAdmin)
+        {
+            try
+            {
+                using (var client = new System.Net.Mail.SmtpClient(_configuration["Email:SmtpServer"]))
+                {
+                    client.Port = int.Parse(_configuration["Email:Port"]);
+                    client.Credentials = new System.Net.NetworkCredential(
+                        _configuration["Email:Username"],
+                        _configuration["Email:Password"]);
+                    client.EnableSsl = true;
+
+                    var mailMessage = new System.Net.Mail.MailMessage
+                    {
+                        From = new System.Net.Mail.MailAddress(_configuration["Email:FromAddress"], "IngeTech CRM"),
+                        Subject = asunto,
+                        Body = $@"
+                    <html>
+                    <head>
+                        <style>
+                            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+                            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }}
+                            .header {{ background-color: #4f46e5; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }}
+                            .content {{ background-color: white; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+                            .mensaje {{ 
+                                background-color: #f8f9fa; 
+                                border-left: 4px solid #4f46e5; 
+                                padding: 20px; 
+                                margin: 20px 0; 
+                                border-radius: 4px;
+                            }}
+                            .footer {{ text-align: center; margin-top: 20px; font-size: 12px; color: #6b7280; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class='container'>
+                            <div class='header'>
+                                <h2>✉️ Mensaje de IngeTech CRM</h2>
+                            </div>
+                            <div class='content'>
+                                <p>Estimado/a <strong>{nombreDestinatario}</strong>,</p>
+                                
+                                <div class='mensaje'>
+                                    {mensaje.Replace("\n", "<br>")}
+                                </div>
+                                
+                                <p>Este mensaje fue enviado por: <strong>{nombreAdmin}</strong></p>
+                                
+                                <hr style='border: none; border-top: 1px solid #eee; margin: 20px 0;'>
+                                
+                                <p>Si tiene alguna pregunta o necesita asistencia adicional, no dude en contactarnos.</p>
+                                
+                                <p>Saludos cordiales,<br>
+                                <strong>Equipo IngeTech CRM</strong></p>
+                            </div>
+                            <div class='footer'>
+                                <p>Este es un correo automático enviado desde el panel de administración de IngeTech CRM.</p>
+                                <p>Fecha de envío: {DateTime.Now:dd/MM/yyyy HH:mm}</p>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                ",
+                        IsBodyHtml = true
+                    };
+
+                    mailMessage.To.Add(destinatario);
+                    await client.SendMailAsync(mailMessage);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log del error si tienes un sistema de logging configurado
+                Console.WriteLine($"Error al enviar correo personalizado: {ex.Message}");
+                return false;
+            }
+        }
+
+        // Método para enviar correo de notificación de cambio de contraseña
+        private async Task EnviarCorreoNotificacionCambioContrasena(string destinatario, string nombreUsuario)
+        {
+            try
+            {
+                using (var client = new System.Net.Mail.SmtpClient(_configuration["Email:SmtpServer"]))
+                {
+                    client.Port = int.Parse(_configuration["Email:Port"]);
+                    client.Credentials = new System.Net.NetworkCredential(
+                        _configuration["Email:Username"],
+                        _configuration["Email:Password"]);
+                    client.EnableSsl = true;
+
+                    var mailMessage = new System.Net.Mail.MailMessage
+                    {
+                        From = new System.Net.Mail.MailAddress(_configuration["Email:FromAddress"], "IngeTech CRM"),
+                        Subject = "🔐 Su contraseña ha sido restablecida",
+                        Body = $@"
+                    <html>
+                    <head>
+                        <style>
+                            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+                            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }}
+                            .header {{ background-color: #10b981; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }}
+                            .content {{ background-color: white; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+                            .alert {{ 
+                                background-color: #fef3cd; 
+                                border: 1px solid #ffeaa7; 
+                                color: #856404; 
+                                padding: 15px; 
+                                border-radius: 4px; 
+                                margin: 20px 0; 
+                            }}
+                            .footer {{ text-align: center; margin-top: 20px; font-size: 12px; color: #6b7280; }}
+                            .security-icon {{ font-size: 24px; color: #10b981; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class='container'>
+                            <div class='header'>
+                                <span class='security-icon'>🔐</span>
+                                <h2>Contraseña Restablecida</h2>
+                            </div>
+                            <div class='content'>
+                                <p>Estimado/a <strong>{nombreUsuario}</strong>,</p>
+                                
+                                <p>Le informamos que su contraseña ha sido <strong>restablecida exitosamente</strong> por un administrador del sistema.</p>
+                                
+                                <div class='alert'>
+                                    <strong>⚠️ Recomendación de seguridad:</strong><br>
+                                    Por su seguridad, le recomendamos cambiar su contraseña tan pronto como inicie sesión nuevamente en el sistema.
+                                </div>
+                                
+                                <p><strong>¿Qué hacer ahora?</strong></p>
+                                <ol>
+                                    <li>Inicie sesión con su nueva contraseña</li>
+                                    <li>Vaya a su perfil de usuario</li>
+                                    <li>Cambie su contraseña por una de su preferencia</li>
+                                    <li>Asegúrese de que sea segura (mínimo 6 caracteres, incluya letras y números)</li>
+                                </ol>
+                                
+                                <p>Si usted no solicitó este cambio o tiene alguna preocupación de seguridad, contacte inmediatamente al administrador del sistema.</p>
+                                
+                                <p>Saludos cordiales,<br>
+                                <strong>Equipo IngeTech CRM</strong></p>
+                            </div>
+                            <div class='footer'>
+                                <p>Este es un correo automático de seguridad. No responda a este mensaje.</p>
+                                <p>Fecha del cambio: {DateTime.Now:dd/MM/yyyy HH:mm}</p>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                ",
+                        IsBodyHtml = true
+                    };
+
+                    mailMessage.To.Add(destinatario);
+                    await client.SendMailAsync(mailMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al enviar correo de notificación: {ex.Message}");
+            }
+        }
+
+        // Método para enviar correo con contraseña temporal
+        private async Task EnviarCorreoContrasenaTemporal(string destinatario, string nombreUsuario, string contrasenaTemporal)
+        {
+            try
+            {
+                using (var client = new System.Net.Mail.SmtpClient(_configuration["Email:SmtpServer"]))
+                {
+                    client.Port = int.Parse(_configuration["Email:Port"]);
+                    client.Credentials = new System.Net.NetworkCredential(
+                        _configuration["Email:Username"],
+                        _configuration["Email:Password"]);
+                    client.EnableSsl = true;
+
+                    var mailMessage = new System.Net.Mail.MailMessage
+                    {
+                        From = new System.Net.Mail.MailAddress(_configuration["Email:FromAddress"], "IngeTech CRM"),
+                        Subject = "🔑 Su nueva contraseña temporal",
+                        Body = $@"
+                    <html>
+                    <head>
+                        <style>
+                            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+                            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }}
+                            .header {{ background-color: #f59e0b; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }}
+                            .content {{ background-color: white; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+                            .password-box {{ 
+                                background-color: #f3f4f6; 
+                                border: 2px solid #f59e0b; 
+                                padding: 20px; 
+                                text-align: center; 
+                                border-radius: 8px; 
+                                margin: 20px 0; 
+                            }}
+                            .password {{ 
+                                font-family: 'Courier New', monospace; 
+                                font-size: 24px; 
+                                font-weight: bold; 
+                                color: #1f2937; 
+                                letter-spacing: 2px;
+                            }}
+                            .alert {{ 
+                                background-color: #fee2e2; 
+                                border: 1px solid #fecaca; 
+                                color: #991b1b; 
+                                padding: 15px; 
+                                border-radius: 4px; 
+                                margin: 20px 0; 
+                            }}
+                            .footer {{ text-align: center; margin-top: 20px; font-size: 12px; color: #6b7280; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class='container'>
+                            <div class='header'>
+                                <span style='font-size: 24px;'>🔑</span>
+                                <h2>Contraseña Temporal Generada</h2>
+                            </div>
+                            <div class='content'>
+                                <p>Estimado/a <strong>{nombreUsuario}</strong>,</p>
+                                
+                                <p>Se ha generado una <strong>contraseña temporal</strong> para su cuenta en IngeTech CRM.</p>
+                                
+                                <div class='password-box'>
+                                    <p style='margin: 0; color: #f59e0b; font-weight: bold;'>Su nueva contraseña temporal es:</p>
+                                    <div class='password'>{contrasenaTemporal}</div>
+                                </div>
+                                
+                                <div class='alert'>
+                                    <strong>🚨 IMPORTANTE - Acción requerida:</strong><br>
+                                    Esta es una contraseña temporal. Por seguridad, debe cambiarla inmediatamente después de iniciar sesión.
+                                </div>
+                                
+                                <p><strong>Pasos a seguir:</strong></p>
+                                <ol>
+                                    <li>Inicie sesión con esta contraseña temporal</li>
+                                    <li>Vaya inmediatamente a su perfil</li>
+                                    <li>Cambie su contraseña por una nueva y segura</li>
+                                    <li>La nueva contraseña debe tener al menos 6 caracteres e incluir letras y números</li>
+                                </ol>
+                                
+                                <p><strong>⚠️ Consideraciones de seguridad:</strong></p>
+                                <ul>
+                                    <li>No comparta esta contraseña con nadie</li>
+                                    <li>Cámbiela tan pronto como sea posible</li>
+                                    <li>Si no solicitó este cambio, contacte al administrador inmediatamente</li>
+                                </ul>
+                                
+                                <p>Saludos cordiales,<br>
+                                <strong>Equipo IngeTech CRM</strong></p>
+                            </div>
+                            <div class='footer'>
+                                <p>Este es un correo automático de seguridad. No responda a este mensaje.</p>
+                                <p>Contraseña generada el: {DateTime.Now:dd/MM/yyyy HH:mm}</p>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                ",
+                        IsBodyHtml = true
+                    };
+
+                    mailMessage.To.Add(destinatario);
+                    await client.SendMailAsync(mailMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al enviar correo con contraseña temporal: {ex.Message}");
+            }
+        }
+
+        #endregion
+
+        #region Métodos para Restablecer Contraseña y Enviar Correo
+
+        // Acción para mostrar el formulario de restablecimiento de contraseña
+        public async Task<IActionResult> RestablecerContrasena(int id)
+        {
+            if (!EsUsuarioAdministrador())
+            {
+                return RedirectToAction("AccesoDenegado", "Home");
+            }
+
+            var usuario = await _context.Usuarios
+                .Select(u => new { u.IDENTIFICACION, u.NOMBRE_COMPLETO, u.CORREO_ELECTRONICO })
+                .FirstOrDefaultAsync(u => u.IDENTIFICACION == id);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Usuario = usuario;
+            return View();
+        }
+
+        // Acción para procesar el restablecimiento de contraseña
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestablecerContrasena(int id, string nuevaContrasena, string confirmarContrasena)
+        {
+            if (!EsUsuarioAdministrador())
+            {
+                return RedirectToAction("AccesoDenegado", "Home");
+            }
+
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            // Validaciones
+            if (string.IsNullOrWhiteSpace(nuevaContrasena))
+            {
+                ModelState.AddModelError("nuevaContrasena", "La nueva contraseña es requerida");
+            }
+            else if (nuevaContrasena.Length < 6)
+            {
+                ModelState.AddModelError("nuevaContrasena", "La contraseña debe tener al menos 6 caracteres");
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(nuevaContrasena, @"^(?=.*[a-zA-Z])(?=.*\d).+$"))
+            {
+                ModelState.AddModelError("nuevaContrasena", "La contraseña debe contener al menos una letra y un número");
+            }
+
+            if (nuevaContrasena != confirmarContrasena)
+            {
+                ModelState.AddModelError("confirmarContrasena", "Las contraseñas no coinciden");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Usuario = new
+                {
+                    usuario.IDENTIFICACION,
+                    usuario.NOMBRE_COMPLETO,
+                    usuario.CORREO_ELECTRONICO
+                };
+                return View();
+            }
+
+            try
+            {
+                // Actualizar la contraseña
+                usuario.CONTRASENA = HashPassword(nuevaContrasena);
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+
+                // Enviar correo notificando el cambio de contraseña
+                await EnviarCorreoNotificacionCambioContrasena(usuario.CORREO_ELECTRONICO, usuario.NOMBRE_COMPLETO);
+
+                TempData["Message"] = $"Contraseña restablecida exitosamente para {usuario.NOMBRE_COMPLETO}";
+                return RedirectToAction("Detalles", new { id = id });
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Ocurrió un error al restablecer la contraseña";
+                ViewBag.Usuario = new
+                {
+                    usuario.IDENTIFICACION,
+                    usuario.NOMBRE_COMPLETO,
+                    usuario.CORREO_ELECTRONICO
+                };
+                return View();
+            }
+        }
+
+        // Acción para mostrar el formulario de envío de correo
+        public async Task<IActionResult> EnviarCorreo(int id)
+        {
+            if (!EsUsuarioAdministrador())
+            {
+                return RedirectToAction("AccesoDenegado", "Home");
+            }
+
+            var usuario = await _context.Usuarios
+                .Select(u => new { u.IDENTIFICACION, u.NOMBRE_COMPLETO, u.CORREO_ELECTRONICO })
+                .FirstOrDefaultAsync(u => u.IDENTIFICACION == id);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Usuario = usuario;
+            return View();
+        }
+
+        // Acción para procesar el envío de correo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EnviarCorreo(int id, string asunto, string mensaje)
+        {
+            if (!EsUsuarioAdministrador())
+            {
+                return RedirectToAction("AccesoDenegado", "Home");
+            }
+
+            var usuario = await _context.Usuarios
+                .Select(u => new { u.IDENTIFICACION, u.NOMBRE_COMPLETO, u.CORREO_ELECTRONICO })
+                .FirstOrDefaultAsync(u => u.IDENTIFICACION == id);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            // Validaciones
+            if (string.IsNullOrWhiteSpace(asunto))
+            {
+                ModelState.AddModelError("asunto", "El asunto es requerido");
+            }
+            else if (asunto.Length > 200)
+            {
+                ModelState.AddModelError("asunto", "El asunto no puede tener más de 200 caracteres");
+            }
+
+            if (string.IsNullOrWhiteSpace(mensaje))
+            {
+                ModelState.AddModelError("mensaje", "El mensaje es requerido");
+            }
+            else if (mensaje.Length > 5000)
+            {
+                ModelState.AddModelError("mensaje", "El mensaje no puede tener más de 5000 caracteres");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Usuario = usuario;
+                return View();
+            }
+
+            try
+            {
+                // Obtener información del administrador que envía el correo
+                var adminId = HttpContext.Session.GetInt32("UsuarioId");
+                var adminNombre = HttpContext.Session.GetString("NombreUsuario") ?? "Administrador";
+
+                // Enviar el correo
+                bool correoEnviado = await EnviarCorreoPersonalizado(
+                    usuario.CORREO_ELECTRONICO,
+                    usuario.NOMBRE_COMPLETO,
+                    asunto,
+                    mensaje,
+                    adminNombre
+                );
+
+                if (correoEnviado)
+                {
+                    TempData["Message"] = $"Correo enviado exitosamente a {usuario.NOMBRE_COMPLETO} ({usuario.CORREO_ELECTRONICO})";
+                }
+                else
+                {
+                    TempData["Error"] = "Ocurrió un error al enviar el correo. Verifique la configuración del servidor de correo.";
+                }
+
+                return RedirectToAction("Detalles", new { id = id });
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = $"Error al enviar el correo: {ex.Message}";
+                ViewBag.Usuario = usuario;
+                return View();
+            }
+        }
+
+        // Acción para generar contraseña temporal automáticamente
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GenerarContrasenaTemp(int id)
+        {
+            if (!EsUsuarioAdministrador())
+            {
+                return RedirectToAction("AccesoDenegado", "Home");
+            }
+
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                // Generar contraseña temporal
+                var contrasenaTemporal = GenerarContrasenaTemporal();
+
+                // Actualizar en la base de datos
+                usuario.CONTRASENA = HashPassword(contrasenaTemporal);
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+
+                // Enviar correo con la contraseña temporal
+                await EnviarCorreoContrasenaTemporal(usuario.CORREO_ELECTRONICO, usuario.NOMBRE_COMPLETO, contrasenaTemporal);
+
+                // Mostrar la contraseña temporal al administrador
+                TempData["ContrasenaTemporal"] = contrasenaTemporal;
+                TempData["Message"] = $"Contraseña temporal generada y enviada por correo a {usuario.NOMBRE_COMPLETO}";
+
+                return RedirectToAction("Detalles", new { id = id });
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Ocurrió un error al generar la contraseña temporal";
+                return RedirectToAction("Detalles", new { id = id });
+            }
+        }
+
+        #endregion
+
+        #region Métodos auxiliares adicionales
+
+        // Método auxiliar para generar contraseña temporal
+        private string GenerarContrasenaTemporal()
+        {
+            // Usar caracteres que sean fáciles de distinguir (sin 0, O, l, I, etc.)
+            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+            var random = new Random();
+            var resultado = new char[8];
+
+            // Asegurar que tenga al menos una letra mayúscula, una minúscula y un número
+            resultado[0] = "ABCDEFGHJKLMNPQRSTUVWXYZ"[random.Next(23)]; // Mayúscula
+            resultado[1] = "abcdefghijkmnopqrstuvwxyz"[random.Next(23)]; // Minúscula  
+            resultado[2] = "23456789"[random.Next(8)]; // Número
+
+            // Llenar el resto aleatoriamente
+            for (int i = 3; i < resultado.Length; i++)
+            {
+                resultado[i] = chars[random.Next(chars.Length)];
+            }
+
+            // Mezclar el array para que no sea predecible
+            for (int i = resultado.Length - 1; i > 0; i--)
+            {
+                int j = random.Next(i + 1);
+                char temp = resultado[i];
+                resultado[i] = resultado[j];
+                resultado[j] = temp;
+            }
+
+            return new string(resultado);
         }
 
         #endregion
@@ -536,4 +1130,6 @@ namespace IngeTechCRM.Controllers
             return primerDigito == "2" || primerDigito == "6" || primerDigito == "7" || primerDigito == "8";
         }
     }
+
+
 }

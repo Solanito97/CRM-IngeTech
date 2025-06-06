@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "Restablecer Contraseña";
+    var usuario = ViewBag.Usuario;
+}
+
+<div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="mb-6 flex flex-wrap text-sm">
+        <a href="@Url.Action("Index", "Home")" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Index", "Usuario")" class="text-gray-600 hover:text-indigo-600">Gestión de Usuarios</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="@Url.Action("Detalles", new { id = usuario.IDENTIFICACION })" class="text-gray-600 hover:text-indigo-600">Detalles del Usuario</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="font-medium text-gray-800">Restablecer Contraseña</span>
+    </nav>
+
+    <!-- Encabezado -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Restablecer Contraseña</h1>
+        <p class="mt-2 text-gray-600">Restablecer la contraseña para: <strong>@usuario.NOMBRE_COMPLETO</strong></p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <!-- Formulario principal -->
+        <div class="lg:col-span-2">
+            <div class="overflow-hidden rounded-xl bg-white shadow-lg">
+                <div class="border-b border-gray-200 bg-indigo-600 p-6 text-white">
+                    <div class="flex items-center">
+                        <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-white bg-opacity-20 text-xl">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h2 class="text-xl font-bold">Nueva Contraseña</h2>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    <!-- Mostrar errores de validación -->
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="mb-6 rounded-lg bg-red-50 p-4 text-red-700">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-medium text-red-800">Hay errores en el formulario</h3>
+                                    <div class="mt-2 text-sm text-red-700">
+                                        <ul class="list-disc space-y-1 pl-5">
+                                            @foreach (var modelState in ViewData.ModelState.Values)
+                                            {
+                                                foreach (var error in modelState.Errors)
+                                                {
+                                                    <li>@error.ErrorMessage</li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Información del usuario -->
+                    <div class="mb-6 rounded-lg bg-gray-50 p-4">
+                        <div class="flex items-center">
+                            <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">@usuario.NOMBRE_COMPLETO</h3>
+                                <p class="text-sm text-gray-600">ID: @usuario.IDENTIFICACION</p>
+                                <p class="text-sm text-gray-600">@usuario.CORREO_ELECTRONICO</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulario de restablecimiento -->
+                    <form method="post" asp-action="RestablecerContrasena" asp-route-id="@usuario.IDENTIFICACION">
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <!-- Nueva Contraseña -->
+                            <div>
+                                <label for="nuevaContrasena" class="mb-2 block text-sm font-medium text-gray-700">Nueva Contraseña</label>
+                                <div class="relative">
+                                    <input type="password"
+                                           id="nuevaContrasena"
+                                           name="nuevaContrasena"
+                                           class="w-full rounded-lg border border-gray-300 px-4 py-2 pr-12 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                           placeholder="Ingrese la nueva contraseña"
+                                           autocomplete="new-password"
+                                           required>
+                                </div>
+                                <p class="mt-1 text-xs text-gray-500">Mínimo 6 caracteres, incluya letras y números</p>
+                            </div>
+
+                            <!-- Confirmar Contraseña -->
+                            <div>
+                                <label for="confirmarContrasena" class="mb-2 block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
+                                <div class="relative">
+                                    <input type="password"
+                                           id="confirmarContrasena"
+                                           name="confirmarContrasena"
+                                           class="w-full rounded-lg border border-gray-300 px-4 py-2 pr-12 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                           placeholder="Confirme la nueva contraseña"
+                                           autocomplete="new-password"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-end space-x-3">
+                            <a href="@Url.Action("Detalles", new { id = usuario.IDENTIFICACION })" class="rounded-lg border border-gray-300 px-5 py-2 font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2">
+                                Cancelar
+                            </a>
+                            <button type="submit" class="rounded-lg bg-indigo-600 px-5 py-2 font-medium text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                <i class="fas fa-save mr-2"></i>Restablecer Contraseña
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel lateral -->
+        <div class="space-y-6">
+            <!-- Opción de contraseña temporal -->
+            <div class="rounded-xl bg-white p-6 shadow-lg">
+                <h3 class="mb-4 text-lg font-semibold text-gray-800">Contraseña Temporal</h3>
+                <p class="mb-4 text-sm text-gray-600">Genere una contraseña temporal automáticamente para este usuario.</p>
+
+                <form method="post" asp-action="GenerarContrasenaTemp" asp-route-id="@usuario.IDENTIFICACION" class="inline">
+                    <button type="submit"
+                            class="w-full rounded-lg bg-yellow-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+                            onclick="return confirm('¿Está seguro de generar una contraseña temporal? Esto reemplazará la contraseña actual.')">
+                        <i class="fas fa-random mr-2"></i>Generar Temporal
+                    </button>
+                </form>
+            </div>
+
+            <!-- Notas importantes -->
+            <div class="rounded-xl bg-yellow-50 p-6 shadow-lg">
+                <div class="flex items-center">
+                    <div class="mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-yellow-800">Notas importantes</h3>
+                </div>
+                <ul class="mt-4 space-y-2 pl-12 text-sm text-yellow-700">
+                    <li class="list-disc">La nueva contraseña debe tener al menos 6 caracteres.</li>
+                    <li class="list-disc">Se recomienda incluir letras mayúsculas, minúsculas y números.</li>
+                    <li class="list-disc">El usuario deberá usar esta nueva contraseña en su próximo inicio de sesión.</li>
+                    <li class="list-disc">Considere informar al usuario sobre el cambio de contraseña.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Usuario.js"></script>
+}

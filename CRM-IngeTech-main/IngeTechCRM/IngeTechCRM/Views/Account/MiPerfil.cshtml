@@ -77,7 +77,7 @@
                     <h2 class="font-bold">Actualizar Datos</h2>
                 </div>
                 <div class="p-6">
-                    <form method="post" action="@Url.Action("ActualizarPerfil", "Account")">
+                    <form method="post" action="@Url.Action("ActualizarPerfil", "Account")" id="perfilForm">
                         <input type="hidden" name="Identificacion" value="@Model.IDENTIFICACION" />
                         <input type="hidden" name="CorreoElectronico" value="@Model.CORREO_ELECTRONICO" />
                         <input type="hidden" name="FechaRegistro" value="@Model.FECHA_REGISTRO" />
@@ -85,23 +85,70 @@
                         <input type="hidden" name="IdTipoUsuario" value="@Model.ID_TIPO_USUARIO" />
 
                         <div class="mb-4">
-                            <label for="NombreUsuario" class="mb-2 block text-sm font-medium text-gray-700">Nombre de Usuario</label>
-                            <input type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="NombreUsuario" name="NombreUsuario" value="@Model.NOMBRE_USUARIO" required>
+                            <label for="NombreUsuario" class="mb-2 block text-sm font-medium text-gray-700">
+                                Nombre de Usuario <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text"
+                                   class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                   id="NombreUsuario"
+                                   name="NombreUsuario"
+                                   value="@Model.NOMBRE_USUARIO"
+                                   required
+                                   minlength="3"
+                                   maxlength="50">
+                            <div id="error-nombreUsuario" class="hidden mt-1 text-xs text-red-600">
+                                El nombre de usuario es obligatorio (mínimo 3 caracteres)
+                            </div>
                         </div>
 
                         <div class="mb-4">
-                            <label for="NombreCompleto" class="mb-2 block text-sm font-medium text-gray-700">Nombre Completo</label>
-                            <input type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="NombreCompleto" name="NombreCompleto" value="@Model.NOMBRE_COMPLETO" required>
+                            <label for="NombreCompleto" class="mb-2 block text-sm font-medium text-gray-700">
+                                Nombre Completo <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text"
+                                   class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                   id="NombreCompleto"
+                                   name="NombreCompleto"
+                                   value="@Model.NOMBRE_COMPLETO"
+                                   onkeypress="return soloLetrasYTildes(event)"
+                                   oninput="validarNombreCompleto(this)"
+                                   required
+                                   minlength="2"
+                                   maxlength="100">
+                            <div id="error-nombre" class="hidden mt-1 text-xs text-red-600">
+                                Solo se permiten letras, tildes y espacios (mínimo 2 caracteres)
+                            </div>
                         </div>
 
                         <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
-                                <label for="Telefono" class="mb-2 block text-sm font-medium text-gray-700">Teléfono</label>
-                                <input type="tel" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="Telefono" name="Telefono" value="@Model.TELEFONO">
+                                <label for="Telefono" class="mb-2 block text-sm font-medium text-gray-700">
+                                    Teléfono <span class="text-red-500">*</span>
+                                </label>
+                                <input type="tel"
+                                       class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                       id="Telefono"
+                                       name="Telefono"
+                                       value="@Model.TELEFONO"
+                                       onkeypress="return soloNumeros(event)"
+                                       oninput="validarTelefono(this)"
+                                       onpaste="return validarPegado(event)"
+                                       required
+                                       minlength="8"
+                                       maxlength="8"
+                                       pattern="[0-9]{8}">
+                                <div id="error-telefono" class="hidden mt-1 text-xs text-red-600">
+                                    Solo se permiten números (8 dígitos)
+                                </div>
                             </div>
                             <div>
-                                <label for="IdProvincia" class="mb-2 block text-sm font-medium text-gray-700">Provincia</label>
-                                <select class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="IdProvincia" name="IdProvincia" required>
+                                <label for="IdProvincia" class="mb-2 block text-sm font-medium text-gray-700">
+                                    Provincia <span class="text-red-500">*</span>
+                                </label>
+                                <select class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                        id="IdProvincia"
+                                        name="IdProvincia"
+                                        required>
                                     <option value="">Seleccione una provincia</option>
                                     @foreach (var provincia in provincias)
                                     {
@@ -109,12 +156,26 @@
                                         @Html.Raw($"<option value='{provincia.ID_PROVINCIA}'{selectedAttribute}>{provincia.NOMBRE}</option>")
                                     }
                                 </select>
+                                <div id="error-provincia" class="hidden mt-1 text-xs text-red-600">
+                                    Debe seleccionar una provincia
+                                </div>
                             </div>
                         </div>
 
                         <div class="mb-4">
-                            <label for="DireccionCompleta" class="mb-2 block text-sm font-medium text-gray-700">Dirección Completa</label>
-                            <textarea class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="DireccionCompleta" name="DireccionCompleta" rows="3" required>@Model.DIRECCION_COMPLETA</textarea>
+                            <label for="DireccionCompleta" class="mb-2 block text-sm font-medium text-gray-700">
+                                Dirección Completa <span class="text-red-500">*</span>
+                            </label>
+                            <textarea class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                      id="DireccionCompleta"
+                                      name="DireccionCompleta"
+                                      rows="3"
+                                      required
+                                      minlength="10"
+                                      maxlength="250">@Model.DIRECCION_COMPLETA</textarea>
+                            <div id="error-direccion" class="hidden mt-1 text-xs text-red-600">
+                                La dirección es obligatoria (mínimo 10 caracteres)
+                            </div>
                         </div>
 
                         <div class="mb-4 mt-6 h-px w-full bg-gray-200"></div>
@@ -123,14 +184,30 @@
                         <p class="mb-4 text-sm text-gray-500">Deje estos campos en blanco si no desea cambiar su contraseña actual.</p>
 
                         <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <div>
+                            <div class="relative">
                                 <label for="Contrasena" class="mb-2 block text-sm font-medium text-gray-700">Nueva Contraseña</label>
-                                <input type="password" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="Contrasena" name="Contrasena">
+                                <input type="password"
+                                       class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                       id="Contrasena"
+                                       name="Contrasena"
+                                       minlength="6"
+                                       maxlength="50">
                                 <p class="mt-1 text-xs text-gray-500">Mínimo 6 caracteres</p>
+                                <div id="error-contrasena" class="hidden mt-1 text-xs text-red-600">
+                                    La contraseña debe tener al menos 6 caracteres
+                                </div>
                             </div>
-                            <div>
+                            <div class="relative">
                                 <label for="confirmarContrasena" class="mb-2 block text-sm font-medium text-gray-700">Confirmar Nueva Contraseña</label>
-                                <input type="password" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="confirmarContrasena" name="confirmarContrasena">
+                                <input type="password"
+                                       class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                       id="confirmarContrasena"
+                                       name="confirmarContrasena"
+                                       minlength="6"
+                                       maxlength="50">
+                                <div id="error-confirmar-contrasena" class="hidden mt-1 text-xs text-red-600">
+                                    Las contraseñas no coinciden
+                                </div>
                             </div>
                         </div>
 
@@ -178,30 +255,5 @@
 </div>
 
 @section Scripts {
-    <script>
-        $(document).ready(function() {
-            // Validación de contraseñas
-            $('#confirmarContrasena').on('keyup', function() {
-                var contrasena = $('#Contrasena').val();
-                var confirmarContrasena = $(this).val();
-
-                if (contrasena === confirmarContrasena) {
-                    $(this).removeClass('border-red-500').addClass('border-green-500');
-                } else {
-                    $(this).removeClass('border-green-500').addClass('border-red-500');
-                }
-            });
-
-            // Validación del formulario
-            $('form').submit(function(event) {
-                var contrasena = $('#Contrasena').val();
-                var confirmarContrasena = $('#confirmarContrasena').val();
-
-                if (contrasena !== '' && contrasena !== confirmarContrasena) {
-                    event.preventDefault();
-                    alert('Las contraseñas no coinciden');
-                }
-            });
-        });
-    </script>
+    <script src="~/js/Usuario.js"></script>
 }

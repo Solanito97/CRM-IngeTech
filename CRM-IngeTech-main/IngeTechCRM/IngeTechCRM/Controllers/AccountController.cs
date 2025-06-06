@@ -199,29 +199,59 @@ namespace IngeTechCRM.Controllers
         [Microsoft.AspNetCore.Authorization.Authorize]
         public async Task<IActionResult> MiPerfil()
         {
-            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
-            if (!usuarioId.HasValue)
+            try
             {
-                return RedirectToAction("Login");
+                var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+                if (!usuarioId.HasValue)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                var usuario = await _context.Usuarios
+                    .Include(u => u.Provincia)
+                    .Include(u => u.TipoUsuario)
+                    .FirstOrDefaultAsync(u => u.IDENTIFICACION == usuarioId.Value);
+
+                if (usuario == null)
+                {
+                    TempData["Error"] = "Usuario no encontrado";
+                    return RedirectToAction("Login");
+                }
+
+                // Cargar provincias para el dropdown
+                ViewBag.Provincias = await _context.Provincias.ToListAsync();
+
+                return View(usuario);
             }
-
-            var usuario = await _context.Usuarios
-                .Include(u => u.Provincia)
-                .Include(u => u.TipoUsuario)
-                .FirstOrDefaultAsync(u => u.IDENTIFICACION == usuarioId);
-
-            if (usuario == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                TempData["Error"] = "Error al cargar el perfil";
+                return RedirectToAction("Index", "Home");
             }
+        }
 
-            ViewBag.Provincias = _context.Provincias.ToList();
-            return View(usuario);
+        [Microsoft.AspNetCore.Authorization.Authorize]
+        public IActionResult ActualizarPerfil()
+        {
+            // Si alguien intenta acceder por GET, redirigir a MiPerfil
+            return RedirectToAction("MiPerfil");
         }
 
         [Microsoft.AspNetCore.Authorization.Authorize]
         [HttpPost]
-        public async Task<IActionResult> ActualizarPerfil(Usuario usuarioActualizado, string nuevaContrasena)
+        public async Task<IActionResult> ActualizarPerfil(
+    string NombreUsuario,
+    string NombreCompleto,
+    string Telefono,
+    string DireccionCompleta,
+    int IdProvincia,
+    string Contrasena,
+    string confirmarContrasena,
+    int Identificacion,
+    string CorreoElectronico,
+    DateTime FechaRegistro,
+    DateTime UltimoAcceso,
+    int IdTipoUsuario)
         {
             var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
             if (!usuarioId.HasValue)
@@ -229,31 +259,63 @@ namespace IngeTechCRM.Controllers
                 return RedirectToAction("Login");
             }
 
-            // Obtener el usuario actual
             var usuario = await _context.Usuarios.FindAsync(usuarioId.Value);
             if (usuario == null)
             {
-                return NotFound();
+                TempData["Error"] = "Usuario no encontrado";
+                return RedirectToAction("Login");
             }
 
-            // Actualizar solo los campos permitidos
-            usuario.NOMBRE_USUARIO = usuarioActualizado.NOMBRE_USUARIO;
-            usuario.NOMBRE_COMPLETO = usuarioActualizado.NOMBRE_COMPLETO;
-            usuario.TELEFONO = usuarioActualizado.TELEFONO;
-            usuario.DIRECCION_COMPLETA = usuarioActualizado.DIRECCION_COMPLETA;
-            usuario.ID_PROVINCIA = usuarioActualizado.ID_PROVINCIA;
-
-            // Actualizar la contraseña si se proporciona una nueva
-            if (!string.IsNullOrEmpty(nuevaContrasena))
+            try
             {
-                usuario.CONTRASENA = HashPassword(nuevaContrasena);
+                // Validar contraseña ANTES de actualizar
+                if (!string.IsNullOrEmpty(Contrasena))
+                {
+                    if (Contrasena.Length < 6)
+                    {
+                        TempData["Error"] = "La nueva contraseña debe tener al menos 6 caracteres";
+                        return RedirectToAction("MiPerfil");
+                    }
+
+                    // Validar que las contraseñas coincidan
+                    if (Contrasena != confirmarContrasena)
+                    {
+                        TempData["Error"] = "Las contraseñas no coinciden";
+                        return RedirectToAction("MiPerfil");
+                    }
+                }
+
+                // Actualizar campos
+                usuario.NOMBRE_USUARIO = NombreUsuario;
+                usuario.NOMBRE_COMPLETO = NombreCompleto;
+                usuario.TELEFONO = Telefono;
+                usuario.DIRECCION_COMPLETA = DireccionCompleta;
+                usuario.ID_PROVINCIA = IdProvincia;
+
+                // Actualizar contraseña si se proporciona
+                if (!string.IsNullOrEmpty(Contrasena))
+                {
+                    usuario.CONTRASENA = HashPassword(Contrasena);
+                }
+
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+
+                // Actualizar la sesión con el nuevo nombre de usuario
+                HttpContext.Session.SetString("NombreUsuario", usuario.NOMBRE_USUARIO);
+
+                TempData["Message"] = "Perfil actualizado correctamente";
+                return RedirectToAction("MiPerfil");
             }
+            catch (Exception ex)
+            {
+                // Log del error para debugging
+                Console.WriteLine($"Error al actualizar perfil: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
 
-            _context.Update(usuario);
-            await _context.SaveChangesAsync();
-
-            TempData["Message"] = "Perfil actualizado correctamente";
-            return RedirectToAction("MiPerfil");
+                TempData["Error"] = "Error al actualizar el perfil. Intente nuevamente.";
+                return RedirectToAction("MiPerfil");
+            }
         }
 
         public IActionResult AccessDenied()

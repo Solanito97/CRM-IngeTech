@@ -1,23 +1,24 @@
 ﻿@model IngeTechCRM.Models.LoginViewModel
 @{
-    ViewData["Title"] = "Iniciar Sesión";
+    ViewData["Title"] = "Iniciar Sesión - IngeTech";
 }
 
-<div class="flex min-h-[80vh] items-center justify-center bg-white px-4 py-12 sm:px-6 lg:px-8">
-    <div class="w-full max-w-md space-y-8">
+<div class="flex min-h-screen items-start justify-center bg-white px-4 pt-8 pb-8 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md space-y-4">
         <!-- Logo y encabezado -->
         <div class="text-center">
-            <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-brand-blue to-blue-500 text-white">
-                <i class="fas fa-laptop-code text-3xl"></i>
+            <div class="flex justify-center items-center">
+                <img src="~/images/productos/Logo SF.png" alt="IngeTech Logo" class="h-48" />
             </div>
-            <h2 class="mt-6 text-[35px] font-extrabold text-gray-dark">Bienvenido de nuevo</h2>
-            <p class="mt-2 text-sm text-gray-light">
+            <h1 class="text-[24px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-blue-500 -mt-16">IngeTech</h1>
+            <h2 class="mt-2 text-[35px] font-extrabold text-gray-dark">Bienvenido de nuevo</h2>
+            <p class="mt-1 text-sm text-gray-light">
                 Ingresa tus credenciales para acceder a tu cuenta
             </p>
         </div>
 
         <!-- Formulario con efecto de tarjeta flotante -->
-        <div class="rounded-xl bg-white p-8 shadow-xl ring-1 ring-gray-200">
+        <div class="rounded-xl bg-white p-6 shadow-xl ring-1 ring-gray-200">
             @if (ViewBag.Error != null)
             {
                 <div class="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-600">
@@ -28,7 +29,7 @@
                 </div>
             }
 
-            <form method="post" action="@Url.Action("Login", "Account")" class="space-y-6">
+            <form method="post" action="@Url.Action("Login", "Account")" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-dark" for="correo">
                         Correo electrónico
@@ -120,7 +121,7 @@
         <!-- Enlace de registro -->
         <div class="text-center">
             <div class="my-4 flex items-center justify-center">
-                <span class="text-sm text-gray-light">¿No tiene una cuenta?</span>
+                <span class="text-sm text-gray-light">¿No tiene una cuenta en IngeTech?</span>
                 <a href="@Url.Action("Register", "Account")" class="ml-2 rounded-md bg-brand-blue/10 px-3 py-1 text-sm font-medium text-brand-blue hover:bg-brand-blue/20">
                     ¡Regístrese ahora!
                 </a>
@@ -136,10 +137,10 @@
 <!-- Opcional: Decoraciones visuales para el fondo -->
 <div class="absolute top-0 right-0 hidden h-64 w-64 transform translate-x-1/4 -translate-y-1/4 rounded-full bg-brand-blue opacity-10 blur-3xl lg:block"></div>
 <div class="absolute bottom-0 left-0 hidden h-64 w-64 transform -translate-x-1/4 translate-y-1/4 rounded-full bg-blue-500 opacity-10 blur-3xl lg:block"></div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-      
         <script src="~/js/Usuario.js"></script>
     }
 }

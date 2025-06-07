@@ -125,6 +125,24 @@ namespace IngeTechCRM.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            // VALIDACIÓN 1: Verificar que el código del producto sea único
+            if (!string.IsNullOrEmpty(producto.CODIGO))
+            {
+                var codigoExiste = await _context.Productos
+                    .AnyAsync(p => p.CODIGO == producto.CODIGO);
+
+                if (codigoExiste)
+                {
+                    ModelState.AddModelError("CODIGO", "El código del producto ya existe. Por favor, ingrese un código único.");
+                }
+            }
+
+            // VALIDACIÓN 2: Si el producto está activo, debe tener al menos una imagen
+            if (producto.ACTIVO && (imagenes == null || !imagenes.Any(i => i.Length > 0)))
+            {
+                ModelState.AddModelError("", "Los productos activos deben tener al menos una imagen representativa.");
+            }
+
             ModelState.Remove("Marca");
             ModelState.Remove("Categoria");
             ModelState.Remove("Proveedor");
@@ -235,9 +253,51 @@ namespace IngeTechCRM.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            if (id != producto.ID_PRODUCTO) // Corregido: usar ID_PRODUCTO en lugar de ID_CATEGORIA
+            if (id != producto.ID_PRODUCTO)
             {
                 return NotFound();
+            }
+
+            // VALIDACIÓN 1: Verificar que el código del producto sea único (excluyendo el producto actual)
+            if (!string.IsNullOrEmpty(producto.CODIGO))
+            {
+                var codigoExiste = await _context.Productos
+                    .AnyAsync(p => p.CODIGO == producto.CODIGO && p.ID_PRODUCTO != id);
+
+                if (codigoExiste)
+                {
+                    ModelState.AddModelError("CODIGO", "El código del producto ya existe. Por favor, ingrese un código único.");
+                }
+            }
+
+            // VALIDACIÓN 2: Si el producto está activo, verificar que tenga imágenes
+            if (producto.ACTIVO)
+            {
+                // Contar imágenes existentes que no se van a eliminar
+                var imagenesExistentes = await _context.ImagenesProducto
+                    .Where(i => i.ID_PRODUCTO == id)
+                    .CountAsync();
+
+                // Si hay imágenes a eliminar, restarlas del conteo
+                if (imagenesAEliminar != null && imagenesAEliminar.Count > 0)
+                {
+                    imagenesExistentes -= imagenesAEliminar.Count;
+                }
+
+                // Contar nuevas imágenes válidas
+                var nuevasImagenesValidas = 0;
+                if (nuevasImagenes != null)
+                {
+                    nuevasImagenesValidas = nuevasImagenes.Count(i => i.Length > 0);
+                }
+
+                // Total de imágenes después de la operación
+                var totalImagenes = imagenesExistentes + nuevasImagenesValidas;
+
+                if (totalImagenes == 0)
+                {
+                    ModelState.AddModelError("", "Los productos activos deben tener al menos una imagen representativa.");
+                }
             }
 
             // Excluir propiedades de navegación del ModelState
@@ -327,7 +387,7 @@ namespace IngeTechCRM.Controllers
                                 // Guardar referencia en la base de datos
                                 var imagenProducto = new ImagenProducto
                                 {
-                                    ID_PRODUCTO = productoOriginal.ID_PRODUCTO, // Usar ID del producto original
+                                    ID_PRODUCTO = productoOriginal.ID_PRODUCTO,
                                     RUTA_IMAGEN = "/images/productos/" + fileName
                                 };
 
@@ -354,13 +414,13 @@ namespace IngeTechCRM.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Corregir los nombres de las propiedades en los SelectList
             ViewBag.Categorias = new SelectList(_context.Categorias, "ID_CATEGORIA", "NOMBRE", producto.ID_CATEGORIA);
             ViewBag.Marcas = new SelectList(_context.Marcas, "ID_MARCA", "NOMBRE", producto.ID_MARCA);
             ViewBag.Proveedores = new SelectList(_context.Proveedores, "ID_PROVEEDOR", "NOMBRE", producto.ID_PROVEEDOR);
 
             return View(producto);
         }
+
         [Authorize]
         public IActionResult Eliminar(int id)
         {

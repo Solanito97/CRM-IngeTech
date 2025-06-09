@@ -32,11 +32,17 @@ namespace IngeTechCRM.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            // Verificar si hay un correo recordado
+            if (Request.Cookies.ContainsKey("RememberedEmail"))
+            {
+                ViewBag.RememberedEmail = Request.Cookies["RememberedEmail"];
+            }
+
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string correo, string contrasena)
+        public async Task<IActionResult> Login(string correo, string contrasena, bool recordarme = false)
         {
             if (string.IsNullOrEmpty(correo) || string.IsNullOrEmpty(contrasena))
             {
@@ -69,18 +75,22 @@ namespace IngeTechCRM.Controllers
 
             // Crear claims para la autenticación
             var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, usuario.NOMBRE_USUARIO),
-                new Claim(ClaimTypes.Email, usuario.CORREO_ELECTRONICO),
-                new Claim(ClaimTypes.NameIdentifier, usuario.IDENTIFICACION.ToString()),
-                new Claim(ClaimTypes.Role, usuario.TipoUsuario.DESCRIPCION)
-            };
+    {
+        new Claim(ClaimTypes.Name, usuario.NOMBRE_USUARIO),
+        new Claim(ClaimTypes.Email, usuario.CORREO_ELECTRONICO),
+        new Claim(ClaimTypes.NameIdentifier, usuario.IDENTIFICACION.ToString()),
+        new Claim(ClaimTypes.Role, usuario.TipoUsuario.DESCRIPCION)
+    };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Configurar propiedades de autenticación basadas en "recordarme"
             var authProperties = new AuthenticationProperties
             {
-                IsPersistent = true,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(7)
+                IsPersistent = recordarme, // Aquí está la clave
+                ExpiresUtc = recordarme
+                    ? DateTimeOffset.UtcNow.AddDays(30) // 30 días si marca "recordarme"
+                    : DateTimeOffset.UtcNow.AddHours(12) // 12 horas si no
             };
 
             await HttpContext.SignInAsync(
@@ -93,6 +103,24 @@ namespace IngeTechCRM.Controllers
             HttpContext.Session.SetString("NombreUsuario", usuario.NOMBRE_USUARIO);
             HttpContext.Session.SetInt32("TipoUsuarioId", usuario.ID_TIPO_USUARIO);
             HttpContext.Session.SetString("TipoUsuario", usuario.TipoUsuario.DESCRIPCION);
+
+            // Si marcó recordarme, guardar en cookie adicional para prellenar el formulario
+            if (recordarme)
+            {
+                var cookieOptions = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(30),
+                    HttpOnly = false, // Permitir acceso desde JavaScript
+                    Secure = true, // Solo HTTPS en producción
+                    SameSite = SameSiteMode.Strict
+                };
+                Response.Cookies.Append("RememberedEmail", correo, cookieOptions);
+            }
+            else
+            {
+                // Eliminar cookie si existe
+                Response.Cookies.Delete("RememberedEmail");
+            }
 
             // Redirigir según el tipo de usuario
             if (usuario.ID_TIPO_USUARIO == 1) // Administrador
@@ -346,7 +374,7 @@ namespace IngeTechCRM.Controllers
                 byte[] hash = deriveBytes.GetBytes(32); // 256 bits
                 string saltString = Convert.ToBase64String(salt);
                 string hashString = Convert.ToBase64String(hash);
-                
+
                 // Formato: PBKDF2$iteraciones$salt==$hash
                 return $"PBKDF2${iterations}${saltString}==${hashString}";
             }
@@ -394,7 +422,7 @@ namespace IngeTechCRM.Controllers
                 {
                     byte[] hash = deriveBytes.GetBytes(32); // 256 bits
                     string computedHashBase64 = Convert.ToBase64String(hash);
-                    
+
                     // Comparar el hash calculado con el hash almacenado
                     return computedHashBase64 == storedHashBase64;
                 }
@@ -618,6 +646,185 @@ namespace IngeTechCRM.Controllers
                 // Registrar el error (puedes usar un sistema de logging apropiado)
                 Console.WriteLine($"Error al enviar correo de recuperación: {ex.Message}");
             }
+        }
+
+
+
+
+
+
+
+
+        [HttpGet]
+        public IActionResult LoginGoogle()
+        {
+            var redirectUrl = Url.Action("GoogleCallback", "Account");
+            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+            return Challenge(properties, "Google");
+        }
+
+        [HttpGet]
+        public IActionResult LoginFacebook()
+        {
+            var redirectUrl = Url.Action("FacebookCallback", "Account");
+            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+            return Challenge(properties, "Facebook");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GoogleCallback()
+        {
+            return await ExternalLoginCallback("Google");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FacebookCallback()
+        {
+            return await ExternalLoginCallback("Facebook");
+        }
+
+        private async Task<IActionResult> ExternalLoginCallback(string provider)
+        {
+            var authenticateResult = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            if (!authenticateResult.Succeeded)
+            {
+                TempData["Error"] = $"Error al autenticar con {provider}";
+                return RedirectToAction("Login");
+            }
+
+            // Obtener información del usuario externo
+            var externalUser = authenticateResult.Principal;
+            var email = externalUser.FindFirst(ClaimTypes.Email)?.Value;
+            var name = externalUser.FindFirst(ClaimTypes.Name)?.Value;
+            var externalId = externalUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var picture = externalUser.FindFirst("picture")?.Value; // Foto de perfil de Google
+
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["Error"] = "No se pudo obtener el correo electrónico";
+                return RedirectToAction("Login");
+            }
+
+            // Variable para rastrear si es usuario nuevo
+            bool esUsuarioNuevo = false;
+
+            // Buscar si el usuario ya existe en la base de datos
+            var usuario = await _context.Usuarios
+                .Include(u => u.TipoUsuario)
+                .FirstOrDefaultAsync(u => u.CORREO_ELECTRONICO == email);
+
+            if (usuario == null)
+            {
+                // ✅ USUARIO NUEVO - Crear automáticamente
+                esUsuarioNuevo = true;
+
+                usuario = new Usuario
+                {
+                    CORREO_ELECTRONICO = email,
+                    NOMBRE_USUARIO = name ?? email.Split('@')[0],
+                    NOMBRE_COMPLETO = name ?? "",
+                    ID_TIPO_USUARIO = 2, // Cliente por defecto
+                    FECHA_REGISTRO = DateTime.Now,
+                    ULTIMO_ACCESO = DateTime.Now,
+                    CONTRASENA = HashPassword(GenerateRandomPassword()), // Contraseña aleatoria
+                    TELEFONO = "",
+                    DIRECCION_COMPLETA = "",
+                    ID_PROVINCIA = 1, // Valor por defecto
+                                      // Si quieres guardar la foto de Google:
+                                      // FOTO_PERFIL = picture 
+                };
+
+                // Generar ID único
+                var random = new Random();
+                do
+                {
+                    usuario.IDENTIFICACION = random.Next(100000000, 999999999);
+                } while (await _context.Usuarios.AnyAsync(u => u.IDENTIFICACION == usuario.IDENTIFICACION));
+
+                _context.Usuarios.Add(usuario);
+                await _context.SaveChangesAsync();
+
+                // Crear carrito inicial
+                var carrito = new Carrito
+                {
+                    ID_USUARIO = usuario.IDENTIFICACION,
+                    FECHA_CREACION = DateTime.Now,
+                    ACTIVO = true
+                };
+                _context.Carritos.Add(carrito);
+                await _context.SaveChangesAsync();
+
+                // Cargar el tipo de usuario
+                usuario = await _context.Usuarios
+                    .Include(u => u.TipoUsuario)
+                    .FirstOrDefaultAsync(u => u.IDENTIFICACION == usuario.IDENTIFICACION);
+
+                // MENSAJE DE BIENVENIDA PARA NUEVO USUARIO
+                TempData["WelcomeMessage"] = $"¡Bienvenido {usuario.NOMBRE_USUARIO}! Tu cuenta ha sido creada exitosamente con {provider}.";
+                TempData["IsNewUser"] = true;
+            }
+            else
+            {
+                // ✅ USUARIO EXISTENTE - Solo actualizar último acceso
+                usuario.ULTIMO_ACCESO = DateTime.Now;
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+
+                TempData["Message"] = $"¡Bienvenido de nuevo, {usuario.NOMBRE_USUARIO}!";
+            }
+
+            // Crear claims para la autenticación interna
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, usuario.NOMBRE_USUARIO),
+        new Claim(ClaimTypes.Email, usuario.CORREO_ELECTRONICO),
+        new Claim(ClaimTypes.NameIdentifier, usuario.IDENTIFICACION.ToString()),
+        new Claim(ClaimTypes.Role, usuario.TipoUsuario.DESCRIPCION)
+    };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(7)
+            };
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
+
+            // Guardar información del usuario en sesión
+            HttpContext.Session.SetInt32("UsuarioId", usuario.IDENTIFICACION);
+            HttpContext.Session.SetString("NombreUsuario", usuario.NOMBRE_USUARIO);
+            HttpContext.Session.SetInt32("TipoUsuarioId", usuario.ID_TIPO_USUARIO);
+            HttpContext.Session.SetString("TipoUsuario", usuario.TipoUsuario.DESCRIPCION);
+
+            // REDIRECCIÓN ESPECIAL PARA NUEVOS USUARIOS
+            if (esUsuarioNuevo)
+            {
+                TempData["InfoMessage"] = "Te recomendamos completar tu perfil para una mejor experiencia.";
+                return RedirectToAction("MiPerfil", "Account");
+            }
+
+            // Redirigir según el tipo de usuario (usuarios existentes)
+            if (usuario.ID_TIPO_USUARIO == 1)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        private string GenerateRandomPassword()
+        {
+            var random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+            return new string(Enumerable.Repeat(chars, 12)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
 

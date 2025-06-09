@@ -44,6 +44,7 @@
                                required
                                autocomplete="email"
                                placeholder="Ingrese su correo electrónico"
+                               value="@ViewBag.RememberedEmail"
                                class="block w-full rounded-lg border border-gray-300 py-3 pl-10 pr-3 text-gray-dark placeholder-gray-light focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:ring-opacity-50" />
                     </div>
                 </div>
@@ -71,7 +72,10 @@
                         <input id="recordarme"
                                name="recordarme"
                                type="checkbox"
+                               value="true"
+                        @(ViewBag.RememberedEmail != null ? "checked" : "")
                                class="h-4 w-4 rounded border-gray-300 text-brand-blue focus:ring-brand-blue/30" />
+                        <input name="recordarme" type="hidden" value="false" />
                         <label for="recordarme" class="ml-2 block text-sm text-gray-dark">
                             Recordarme
                         </label>
@@ -107,11 +111,11 @@
 
             <!-- Botones de redes sociales -->
             <div class="mt-6 grid grid-cols-2 gap-3">
-                <a href="#" class="inline-flex items-center justify-center rounded-lg border border-gray-light/50 bg-white py-2 px-4 text-sm font-medium text-gray-dark shadow-sm transition hover:bg-gray-light/10">
+                <a href="@Url.Action("LoginGoogle", "Account")" class="inline-flex items-center justify-center rounded-lg border border-gray-light/50 bg-white py-2 px-4 text-sm font-medium text-gray-dark shadow-sm transition hover:bg-gray-light/10">
                     <i class="fab fa-google text-red-500 mr-2"></i>
                     Google
                 </a>
-                <a href="#" class="inline-flex items-center justify-center rounded-lg border border-gray-light/50 bg-white py-2 px-4 text-sm font-medium text-gray-dark shadow-sm transition hover:bg-gray-light/10">
+                <a href="@Url.Action("LoginFacebook", "Account")" class="inline-flex items-center justify-center rounded-lg border border-gray-light/50 bg-white py-2 px-4 text-sm font-medium text-gray-dark shadow-sm transition hover:bg-gray-light/10">
                     <i class="fab fa-facebook text-blue-600 mr-2"></i>
                     Facebook
                 </a>
